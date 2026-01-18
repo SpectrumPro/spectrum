@@ -136,7 +136,7 @@ func load_auto_config(component: EngineComponent) -> void:
 				slider.deserialize(config)
 				
 		
-		set_label(component.name)
+		set_label(component.name())
 
 
 ## Saves this PlayBack row into a dict

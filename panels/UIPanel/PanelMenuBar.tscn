@@ -23,7 +23,7 @@ flat = true
 layout_mode = 2
 size_flags_horizontal = 3
 horizontal_scroll_mode = 3
-vertical_scroll_mode = 3
+vertical_scroll_mode = 0
 
 [node name="EditControls" parent="HBoxContainer" instance=ExtResource("3_fnf3r")]
 layout_mode = 2

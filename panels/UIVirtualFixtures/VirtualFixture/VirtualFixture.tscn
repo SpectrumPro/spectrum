@@ -102,6 +102,7 @@ text = "Name"
 label_settings = SubResource("LabelSettings_6gdxf")
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 clip_text = true
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]

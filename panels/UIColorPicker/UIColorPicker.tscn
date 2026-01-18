@@ -1,0 +1,110 @@
+[gd_scene load_steps=8 format=3 uid="uid://dhp8aa07tyxbf"]
+
+[ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://assets/styles/UIPanelBase.tres" id="1_vgwxr"]
+[ext_resource type="Script" uid="uid://bltvgq1jnaqgt" path="res://panels/UIColorPicker/UIColorPicker.gd" id="2_ogrry"]
+[ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://panels/UIPanel/PanelMenuBar.tscn" id="3_g582g"]
+[ext_resource type="Texture2D" uid="uid://clt2djtbul2kf" path="res://assets/icons/ColorPalett.svg" id="4_ara1c"]
+[ext_resource type="Texture2D" uid="uid://2p7ffb5yq0hx" path="res://assets/asset_scripts/color_picker.png" id="6_3j0ua"]
+[ext_resource type="Texture2D" uid="uid://b7q628ocmror7" path="res://assets/icons/Crosshair.svg" id="7_b53g6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7y88r"]
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="UIColorPicker" type="PanelContainer" node_paths=PackedStringArray("_pad", "_crosshair", "_value_slider", "_mix_mode", "edit_controls", "menu_bar")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("1_vgwxr")
+script = ExtResource("2_ogrry")
+_pad = NodePath("VBoxContainer/HBoxContainer/Picker/HBoxContainer/PanelContainer/Pad")
+_crosshair = NodePath("VBoxContainer/HBoxContainer/Picker/HBoxContainer/PanelContainer/Pad/Crosshair")
+_value_slider = NodePath("VBoxContainer/HBoxContainer/Picker/HBoxContainer/PanelContainer2/VBoxContainer/PadValueSlider")
+_mix_mode = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/PanelContainer/MixMode")
+edit_controls = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/EditControls")
+menu_bar = NodePath("VBoxContainer/PanelMenuBar")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="PanelMenuBar" parent="VBoxContainer" instance=ExtResource("3_g582g")]
+layout_mode = 2
+
+[node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="0"]
+text = "ColorPicker"
+icon = ExtResource("4_ara1c")
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="2"]
+layout_mode = 2
+
+[node name="MixMode" type="OptionButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer/PanelContainer"]
+layout_mode = 2
+selected = 0
+item_count = 2
+popup/item_0/text = "Additive"
+popup/item_0/id = 0
+popup/item_1/text = "Subtractive"
+popup/item_1/id = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Picker" type="PanelContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/Picker"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer/Picker/HBoxContainer"]
+clip_children = 1
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_7y88r")
+
+[node name="Pad" type="TextureRect" parent="VBoxContainer/HBoxContainer/Picker/HBoxContainer/PanelContainer"]
+layout_mode = 2
+texture = ExtResource("6_3j0ua")
+expand_mode = 1
+
+[node name="Crosshair" type="TextureRect" parent="VBoxContainer/HBoxContainer/Picker/HBoxContainer/PanelContainer/Pad"]
+modulate = Color(0.0475577, 0.0475576, 0.0475576, 1)
+layout_mode = 1
+offset_right = 24.0
+offset_bottom = 24.0
+texture = ExtResource("7_b53g6")
+stretch_mode = 2
+
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/HBoxContainer/Picker/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/Picker/HBoxContainer/PanelContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/Picker/HBoxContainer/PanelContainer2/VBoxContainer"]
+layout_mode = 2
+text = "Value"
+horizontal_alignment = 1
+
+[node name="PadValueSlider" type="VSlider" parent="VBoxContainer/HBoxContainer/Picker/HBoxContainer/PanelContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+max_value = 1.0
+step = 0.001
+value = 1.0
+tick_count = 10
+ticks_on_borders = true
+
+[connection signal="gui_input" from="VBoxContainer/HBoxContainer/Picker/HBoxContainer/PanelContainer/Pad" to="." method="_on_texture_rect_gui_input"]
+[connection signal="resized" from="VBoxContainer/HBoxContainer/Picker/HBoxContainer/PanelContainer/Pad" to="." method="_update_pad"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/Picker/HBoxContainer/PanelContainer2/VBoxContainer/PadValueSlider" to="." method="_on_pad_value_slider_value_changed"]
+
+[editable path="VBoxContainer/PanelMenuBar"]

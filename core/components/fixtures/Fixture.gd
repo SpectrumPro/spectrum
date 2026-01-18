@@ -23,6 +23,17 @@ signal override_erased(zone: String, parameter: String)
 signal all_override_removed()
 
 
+## Enum for ControlType
+enum ControlType {
+	INTENSITY,  # % based, blackout/full
+	POSITION,   # homeable, spatial
+	SELECT,     # discrete choices
+	VALUE,      # continuous, non-% 
+	SPEED,      # rate-based
+	SYSTEM      # non-show controls
+}
+
+
 ## Root Zone
 static var RootZone: String = "root"
 
@@ -98,6 +109,11 @@ func get_parameter_functions(p_zone: String, p_parameter: String) -> Array:
 	return []
 
 
+## Gets all the parameter functions
+func get_function_control_type(p_zone: String, p_parameter: String, p_function: String) -> ControlType:
+	return ControlType.VALUE
+
+
 ## Gets the default value of a parameter
 func get_default(p_zone: String, p_parameter: String, p_function: String = "", p_raw_dmx: bool = false) -> float:
 	return 0.0
@@ -109,17 +125,17 @@ func get_default_function(p_zone: String, p_parameter: String) -> String:
 
 
 ## Gets the current value, or the default
-func get_current_value(p_zone: String, p_parameter: String, p_allow_default: bool = true) -> float:
+func get_current_value(p_zone: String, p_parameter: String, p_allow_default: bool = true, p_allow_override: bool = true) -> float:
 	return 0.0
 
 
-## Gets a value from the given layer id, parameter, and zone
-func get_current_value_layered(p_zone: String, p_parameter: String, p_layer_id: String, p_function: String = "", p_allow_default: bool = true) -> float:
-	return 0.0
+## Gets the current value, or the default
+func get_current_function(p_zone: String, p_parameter: String, p_allow_default: bool = true, p_allow_override: bool = true) -> String:
+	return ""
 
 
-## Gets the current value from a given layer ID, the default is none is present, or 0 if p_parameter is not a force default
-func get_current_value_layered_or_force_default(p_zone: String, p_parameter: String, p_layer_id: String, p_function: String = "") -> float:
+## Gets the current value, or the default
+func get_current_value_or_force_default(p_zone: String, p_parameter: String) -> float:
 	return 0.0
 
 
@@ -130,6 +146,11 @@ func get_zones() -> Array[String]:
 
 ## Checks if this Fixture has any overrides
 func has_overrides() -> bool:
+	return false
+
+
+## Returns true if this Fixture has an override value
+func has_override(p_zone: String, p_parameter: String) -> bool:
 	return false
 
 
@@ -148,7 +169,17 @@ func function_can_fade(p_zone: String, p_parameter: String, p_function: String) 
 	return false
 
 
-## Internal: Sets a parameter to a float value
+## Subscribes to a parameter on the given zone
+func subscribe_to_parameter(p_zone: String, p_parameter: String, p_callable: Callable) -> bool:
+	return false
+
+
+## Removes a subscription from the parameter in the given zone
+func remove_subscription(p_zone: String, p_parameter: String, p_callable: Callable) -> bool:
+	return false
+
+
+## Internal: Sets a parameter to a float values
 func _set_parameter(p_zone: String, p_parameter: String, p_function: String, p_value: Variant) -> void:
 	return 
 

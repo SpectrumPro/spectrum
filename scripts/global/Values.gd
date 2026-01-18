@@ -78,13 +78,13 @@ func set_selection_value(value_name: String, value: Array, no_signal: bool = fal
 	selection_values[value_name] = value
 	
 	if not no_signal:
-		emit_signal(value_name + "_selection_value_callback", selection_values[value_name])
+		emit_signal(value_name + "_selection_value_callback", selection_values[value_name].duplicate())
 
 
 ## Emits a selection value signal
 func emit_selection_value(value_name: String) -> void:
 	if value_name in selection_values:
-		emit_signal(value_name + "_selection_value_callback", selection_values[value_name])
+		emit_signal(value_name + "_selection_value_callback", selection_values[value_name].duplicate())
 
 
 ## Add an array of items to a selection value

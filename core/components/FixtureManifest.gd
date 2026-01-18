@@ -10,6 +10,7 @@ class_name FixtureManifest extends EngineComponent
 ## Info: This FixtureManifest contains basic info for a given manifest file.
 enum Type {Manifest, Info}
 
+
 ## Current type of this FixtureManifest
 var type: Type = Type.Manifest
 
@@ -37,7 +38,7 @@ func _init(p_uuid: String = UUID_Util.v4(), p_name: String = _name) -> void:
 	super._init(p_uuid, p_name)
 	
 	_set_self_class("FixtureManifest")
-	_set_name("FixtureManifest")
+	set_name("FixtureManifest")
 
 
 ## Creates a new mode
@@ -65,13 +66,14 @@ func create_zone(p_mode: String, p_zone: String) -> bool:
 
 
 ## Creates a parameter in the given mode and zone
-func add_parameter(p_mode: String, p_zone: String, p_parameter: String, p_channels: Array[int], p_category: String = "") -> bool:
+func add_parameter(p_mode: String, p_zone: String, p_parameter: String, p_channels: Array[int], p_category: String = "", p_default_function: String = "") -> bool:
 	if not _modes.has(p_mode) or not _modes[p_mode].zones.has(p_zone):
 		return false
 	
 	_modes[p_mode].zones[p_zone][p_parameter] = {
 		"attribute": p_parameter,
 		"offsets": p_channels.duplicate(),
+		"default_function": p_default_function,
 		"functions": {}
 	}
 	
@@ -103,7 +105,7 @@ func remove_parameter(p_mode: String, p_zone: String, p_parameter: String) -> bo
 
 
 ## Adds a funtion to the given parameter
-func add_parameter_function(p_mode: String, p_zone: String, p_parameter: String, p_function: String, p_name: String, p_default: int, p_range: Array[int], p_can_fade: bool, p_vdim_effected: bool) -> bool:
+func add_parameter_function(p_mode: String, p_zone: String, p_parameter: String, p_function: String, p_name: String, p_default: int, p_range: Array[int], p_can_fade: bool, p_vdim_effected: bool, p_control_type: Fixture.ControlType) -> bool:
 	if not _modes.has(p_mode) or not _modes[p_mode].zones.has(p_zone) or not _modes[p_mode].zones[p_zone].has(p_parameter):
 		return false
 	
@@ -113,6 +115,7 @@ func add_parameter_function(p_mode: String, p_zone: String, p_parameter: String,
 		"default": p_default,
 		"can_fade": p_can_fade,
 		"vdim_effected": p_vdim_effected,
+		"control_type": p_control_type,
 		"dmx_range": p_range.duplicate(),
 		"sets": []
 	}
@@ -168,9 +171,14 @@ func function_can_vdim(p_mode: String, p_zone: String, p_parameter: String, p_fu
 	return _modes.get(p_mode, {}).get("zones", {}).get(p_zone, {}).get(p_parameter, {}).get("functions", {}).get(p_function, {}).get("vdim_effected", false)
 
 
+## Checks if this FixtureManifest has a function that can vdim
+func function_control_type(p_mode: String, p_zone: String, p_parameter: String, p_function: String) -> Fixture.ControlType:
+	return _modes.get(p_mode, {}).get("zones", {}).get(p_zone, {}).get(p_parameter, {}).get("functions", {}).get(p_function, {}).get("control_type", Fixture.ControlType.VALUE)
+
+
 ## Returns the given mode
 func get_mode(p_mode: String) -> Dictionary:
-	return _modes.get(p_mode, {}).duplicate(true)
+	return _modes.get(p_mode, {})
 
 
 ## Returns all the modes in this manifest
@@ -245,7 +253,7 @@ func deserialize(p_serialized_data: Dictionary) -> void:
 	manufacturer = type_convert(p_serialized_data.get("manufacturer"), TYPE_STRING)
 	importer = type_convert(p_serialized_data.get("importer"), TYPE_STRING)
 	file_path = type_convert(p_serialized_data.get("file_path"), TYPE_STRING)
-
+	
 	_modes = type_convert(p_serialized_data.get("modes"), TYPE_DICTIONARY)
 	_categorys = type_convert(p_serialized_data.get("categorys"), TYPE_DICTIONARY)
 	_force_defaults = Array(type_convert(p_serialized_data.get("force_defaults"), TYPE_ARRAY), TYPE_STRING, "", null)

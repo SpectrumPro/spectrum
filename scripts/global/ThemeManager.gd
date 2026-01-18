@@ -31,6 +31,7 @@ class Colors:
 		static var Caution				= Color.YELLOW
 		static var Error				= Color.RED
 		static var UnsavedData			= Color.ORANGE
+		static var ProgrammerOverride	= Color("ff8400ff")
 	
 	static var UIPanelFlashColor		= Color.WHITE * 1.5
 	static var UICorePrimarySideBarTabModulate			= Color(0.51, 0.51, 0.51)
@@ -60,6 +61,7 @@ class StyleBoxes:
 class Constants:
 	class Times:
 		static var InterfaceFadeTime 	= 0.15
+		static var InterfaceFadeFast 	= 0.08
 		static var DeskItemMoveTime		= 0.1
 		static var DeskAreaMoveTime		= 0.06
 		static var SelectBoxMoceTime	= 0.06
