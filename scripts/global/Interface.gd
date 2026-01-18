@@ -718,6 +718,15 @@ func exit_resolve_mode() -> bool:
 	return true
 
 
+## Takes a screenshot of all screens
+func take_screenshot() -> void:
+	for window: UIWindow in _windows.get_right():
+		var file_name: String = "user://" + str(Time.get_datetime_string_from_system())
+		
+		window.get_viewport().get_texture().get_image().save_png(file_name)
+		print("Screenshot saved as: ", file_name)
+
+
 ## Returns the SettingsManager object for ClientInterface
 func settings() -> SettingsManager:
 	return settings_manager
