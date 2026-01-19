@@ -7,7 +7,7 @@
    version="1.1"
    id="svg1"
    sodipodi:docname="PlayAlt.svg"
-   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -24,15 +24,15 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="48.833333"
-     inkscape:cx="12"
+     inkscape:cx="11.989761"
      inkscape:cy="12"
      inkscape:window-width="2560"
-     inkscape:window-height="1372"
-     inkscape:window-x="1920"
-     inkscape:window-y="29"
+     inkscape:window-height="1360"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg1" />
   <path
-     d="m 760,-200 v -560 l -440,280 z m -80,-280 z m 0,134 -210,-134 210,-134 z"
+     d="m 700,-200 v -560 l -440,280 z m -80,-280 z m 0,134 -210,-134 210,-134 z"
      id="path1" />
 </svg>

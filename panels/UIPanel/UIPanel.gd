@@ -91,15 +91,19 @@ func _init() -> void:
 
 
 ## Disables all the buttons in the given array
-static func disable_button_array(buttons: Array[Button]) -> void:
-	for button: Button in buttons:
-		button.disabled = true
+static func disable_button_array(p_buttons: Array[Button]) -> void:
+	set_button_array_enabled(p_buttons, true)
 
 
 ## Enables all the buttons in the given array
-static func enable_button_array(buttons: Array[Button]) -> void:
-	for button: Button in buttons:
-		button.disabled = false
+static func enable_button_array(p_buttons: Array[Button]) -> void:
+	set_button_array_enabled(p_buttons, false)
+
+
+## Sets an array of buttons enabled or disabled
+static func set_button_array_enabled(p_buttons: Array, p_disabled: bool) -> void:
+	for button: Button in p_buttons:
+		button.disabled = p_disabled
 
 
 ## Sets the move and resize handle
@@ -308,13 +312,16 @@ func serialize() -> Dictionary:
 		button_actions[button.name] = actions
 	
 	return super.serialize().merged({
-		"button_actions": button_actions
+		"button_actions": button_actions,
+		"show_menu_bar": get_menu_bar_visible()
 	})
 
 
 ## Loads this UIPanel from dictionary
 func deserialize(p_serialized_data: Dictionary) -> void:
 	super.deserialize(p_serialized_data)
+	
+	set_menu_bar_visible(type_convert(p_serialized_data.get("show_menu_bar", get_menu_bar_visible()), TYPE_BOOL))
 	
 	var button_actions: Dictionary = type_convert(p_serialized_data.get("button_actions"), TYPE_DICTIONARY)
 	

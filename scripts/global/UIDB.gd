@@ -1,4 +1,4 @@
-# Copyright (c) 2025 Liam Sherwin, All rights reserved.
+# Copyright (c) 2026 Liam Sherwin, All rights reserved.
 # This file is part of the Spectrum Lighting Engine, licensed under the GPL v3.
 
 class_name ClientUIDB extends Node
@@ -34,7 +34,10 @@ var _panels: Dictionary[String, PackedScene] = {
 	"UICore":				load(_p("UICore")),
 	"UIDebug":				load(_p("UIDebug")),
 	"UIVirtualFixtures":	load(_p("UIVirtualFixtures")),
-	"UIProgrammer":			load(_p("UIProgrammer"))
+	"UIProgrammer":			load(_p("UIProgrammer")),
+	"UIColorPicker":		load(_p("UIColorPicker")),
+	"UIClock":				load(_p("UIClock")),
+	"UIWindowManager":		load(_p("UIWindowManager"))
 }
 
 
@@ -62,6 +65,7 @@ var _data_inputs: Dictionary[Data.Type, PackedScene] = {
 	Data.Type.FLOAT:			load(_d("DataInputFloat")),
 	Data.Type.VECTOR2:			load(_d("DataInputVector2")),
 	Data.Type.VECTOR2I:			load(_d("DataInputVector2")),
+	Data.Type.COLOR:			load(_d("DataInputColor")),
 	Data.Type.ENUM:				load(_d("DataInputEnum")),
 	Data.Type.BITFLAGS:			load(_d("DataInputBitFlags")),
 	Data.Type.NAME:				load(_d("DataInputString")),
@@ -78,14 +82,18 @@ var _data_inputs: Dictionary[Data.Type, PackedScene] = {
 
 ## All UIPanels sorted by category
 var _panels_by_category: Dictionary[String, Array] = {
-	"Panels": [
-		"UIDesk",
-		"UIPlaybacks",
+	"System": [
 		"UISettings",
 		"UISaveLoad",
-		"UIDebug",
 		"UICore",
-		"UIProgrammer"
+		"UIWindowManager",
+	],
+	"Playbacks": [
+		"UIPlaybacks",
+	],
+	"Programming": [
+		"UIProgrammer",
+		"UIColorPicker"
 	],
 	"Components": [
 		"UIUniverses",
@@ -94,7 +102,12 @@ var _panels_by_category: Dictionary[String, Array] = {
 		"UIFixtureGroups"
 	],
 	"Views": [
-		"UIVirtualFixtures"
+		"UIVirtualFixtures",
+		"UIDesk",
+	],
+	"Utils": [
+		"UIClock",
+		"UIDebug",
 	]
 }
 

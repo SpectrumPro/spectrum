@@ -371,8 +371,6 @@ func _update_selection_box() -> void:
 	_selection_rect.position = Vector2(x, y)
 	_selection_rect.size = Vector2(w, h)
 	
-	var selection_changed: bool = false
-	
 	for fixture: Fixture in _virtual_fixtures.get_left():
 		var vf: VirtualFixture = _virtual_fixtures.left(fixture)
 		var just_selected: bool = _selection_rect.intersection(Rect2(vf.position, vf.size)).size != Vector2.ZERO
@@ -380,14 +378,10 @@ func _update_selection_box() -> void:
 		
 		if just_selected and fixture not in current_selected:
 			Values.add_to_selection_value("selected_fixtures", [fixture], false)
-			selection_changed = true
 			
 		elif not just_selected and fixture in current_selected and not Input.is_key_pressed(KEY_SHIFT):
 			Values.remove_from_selection_value("selected_fixtures", [fixture], false)
-			selection_changed = true
-	
-	if selection_changed:
-		Values.emit_selection_value("selected_fixtures")
+
 #endregion
 
 

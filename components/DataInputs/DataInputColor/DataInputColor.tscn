@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://rac2xe1lsdhe"]
+
+[ext_resource type="Script" uid="uid://cgohncgxj4a8f" path="res://components/DataInputs/DataInputColor/DataInputColor.gd" id="1_0hx11"]
+[ext_resource type="StyleBox" uid="uid://cftl4b5dnt57b" path="res://assets/styles/ResolveBoxBGLess.tres" id="2_v7583"]
+
+[node name="DataInputColor" type="PanelContainer"]
+custom_minimum_size = Vector2(0, 50)
+offset_right = 86.5625
+offset_bottom = 49.0
+script = ExtResource("1_0hx11")
+
+[node name="HBox" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBox"]
+visible = false
+layout_mode = 2
+
+[node name="Button" type="ColorPickerButton" parent="HBox"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="Outline" type="Panel" parent="HBox/Button"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_top = 721.0
+offset_right = 298.0
+offset_bottom = 721.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = ExtResource("2_v7583")
+
+[connection signal="color_changed" from="HBox/Button" to="." method="_on_button_color_changed"]

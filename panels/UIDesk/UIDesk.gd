@@ -318,12 +318,15 @@ func _on_edit_pressed() -> void:
 
 ## Called when the copy button is pressed
 func _on_copy_pressed() -> void:
-	var nodes_to_copy: Array = _selected_items.duplicate()
+	var nodes_to_copy: Array[UIDeskItemContainer] = _selected_items.duplicate()
 	select_none()
 	
-	for panel_container: Control in nodes_to_copy:
+	for panel_container: UIDeskItemContainer in nodes_to_copy:
+		var new_panel: UIPanel = UIDB.instance_panel(panel_container.get_panel().get_class_name())
+		
+		new_panel.deserialize(panel_container.get_panel().serialize())
 		select_item(add_panel(
-			panel_container.get_panel().duplicate(),
+			new_panel,
 			panel_container.position,
 			panel_container.size
 		))

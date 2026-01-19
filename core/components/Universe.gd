@@ -167,7 +167,7 @@ func _remove_output(p_output: DMXOutput, p_no_signal: bool = false, p_delete: bo
 		outputs_removed.emit([p_output])
 	
 	if p_delete:
-		p_output.local_delete()
+		p_output.delete()
 	
 	return true
 

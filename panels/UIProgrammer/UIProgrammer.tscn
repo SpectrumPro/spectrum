@@ -1,17 +1,43 @@
-[gd_scene load_steps=10 format=3 uid="uid://dnyj8vnwwbi2v"]
+[gd_scene load_steps=20 format=3 uid="uid://dnyj8vnwwbi2v"]
 
 [ext_resource type="Theme" uid="uid://cyua45ur0ijqo" path="res://assets/Main.theme" id="1_8omv0"]
 [ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://assets/styles/UIPanelBase.tres" id="2_y0ly3"]
 [ext_resource type="Script" uid="uid://ckvl7eb5awy56" path="res://panels/UIProgrammer/UIProgrammer.gd" id="3_sp6ey"]
 [ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://panels/UIPanel/PanelMenuBar.tscn" id="4_rdv1j"]
 [ext_resource type="Texture2D" uid="uid://dt0khkr0ltw70" path="res://assets/icons/Programmer.svg" id="5_fc45e"]
+[ext_resource type="Texture2D" uid="uid://c1cl6qetwg8st" path="res://assets/icons/Arrow_back.svg" id="6_sp6ey"]
 [ext_resource type="Texture2D" uid="uid://dlikb8or3xepr" path="res://assets/icons/Reset.svg" id="6_xrr4a"]
 [ext_resource type="StyleBox" uid="uid://csle20exwqtti" path="res://assets/styles/PanelMenuBar.tres" id="7_7jywt"]
-[ext_resource type="Texture2D" uid="uid://cjx13jidaqjyf" path="res://assets/icons/Scene.svg" id="8_3huj7"]
+[ext_resource type="Texture2D" uid="uid://kkblmodueva1" path="res://assets/icons/Arrow_foward.svg" id="7_rdv1j"]
+[ext_resource type="Texture2D" uid="uid://bc0acgx0we044" path="res://assets/icons/Zone.svg" id="8_fc45e"]
+[ext_resource type="Texture2D" uid="uid://cfdxexemm7766" path="res://assets/icons/RandomMode.svg" id="9_xrr4a"]
+[ext_resource type="FontFile" uid="uid://crlak6jhg5jy2" path="res://assets/font/RubikMonoOne-Regular.ttf" id="10_ikse1"]
+[ext_resource type="Texture2D" uid="uid://crxgau8v7k3yh" path="res://assets/icons/PlayAlt.svg" id="12_ikse1"]
+[ext_resource type="Texture2D" uid="uid://bf4227ei83gh1" path="res://assets/icons/play.svg" id="13_qpens"]
+[ext_resource type="Texture2D" uid="uid://huxujb0ev1gk" path="res://assets/icons/Loop.svg" id="14_qpens"]
+[ext_resource type="Texture2D" uid="uid://3r1jb0q1v7ri" path="res://assets/icons/AdvancedTime.svg" id="15_qwc1o"]
 
-[sub_resource type="ButtonGroup" id="ButtonGroup_alch7"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fc45e"]
+bg_color = Color(0.12941177, 0.12941177, 0.12941177, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.16206557, 0.1620656, 0.16206554, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
-[node name="UIProgrammer" type="PanelContainer" node_paths=PackedStringArray("_dimmer_tab_button", "_color_tab_button", "_gobo_tab_button", "_position_tab_button", "_beam_tab_button", "_focus_tab_button", "_shapers_tab_button", "_control_tab_button", "_parameter_container", "save_to_scene", "zone_select", "edit_controls", "menu_bar")]
+[sub_resource type="LabelSettings" id="LabelSettings_3huj7"]
+font = ExtResource("10_ikse1")
+font_size = 100
+font_color = Color(0.15, 0.15, 0.15, 1)
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_qwc1o"]
+allow_unpress = true
+
+[node name="UIProgrammer" type="PanelContainer" node_paths=PackedStringArray("tab_button_container", "layer_button_container", "controler_container", "zone_select", "random_mode", "template_placeholder", "page_select_option", "prev_page_button", "next_page_button", "edit_controls", "menu_bar")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -20,18 +46,15 @@ grow_vertical = 2
 theme = ExtResource("1_8omv0")
 theme_override_styles/panel = ExtResource("2_y0ly3")
 script = ExtResource("3_sp6ey")
-_dimmer_tab_button = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/TabButtons/HBoxContainer/DimmerTabButton")
-_color_tab_button = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/TabButtons/HBoxContainer/ColorTabButton")
-_gobo_tab_button = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/TabButtons/HBoxContainer/GoboTabButton")
-_position_tab_button = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/TabButtons/HBoxContainer/PositionTabButton")
-_beam_tab_button = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/TabButtons/HBoxContainer/BeamTabButton")
-_focus_tab_button = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/TabButtons/HBoxContainer/FocusTabButton")
-_shapers_tab_button = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/TabButtons/HBoxContainer/ShapersTabButton")
-_control_tab_button = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/TabButtons/HBoxContainer/ControlTabButton")
-_parameter_container = NodePath("VBoxContainer/ScrollContainer/HBoxContainer")
-button_group = SubResource("ButtonGroup_alch7")
-save_to_scene = NodePath("VBoxContainer/PanelContainer2/HBoxContainer/SaveToScene")
-zone_select = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/ViewButtons/HBoxContainer/ZoneSelect")
+tab_button_container = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/TabButtons/TabButtonContainer")
+layer_button_container = NodePath("VBoxContainer/PanelContainer2/HBoxContainer/LayerControls/LayerButtonContainer")
+controler_container = NodePath("VBoxContainer/ScrollContainer/HBoxContainer")
+zone_select = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ViewButtons/HBoxContainer/ZoneSelect")
+random_mode = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ViewButtons/HBoxContainer/ValueMode")
+template_placeholder = NodePath("VBoxContainer/ScrollContainer/HBoxContainer/TemplatePlaceholder")
+page_select_option = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/PageButtons/HBoxContainer/PageSelect")
+prev_page_button = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/PageButtons/HBoxContainer/PageBack")
+next_page_button = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/PageButtons/HBoxContainer/PageFowards")
 edit_controls = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/EditControls")
 menu_bar = NodePath("VBoxContainer/PanelMenuBar")
 
@@ -45,113 +68,72 @@ layout_mode = 2
 text = "Programmer"
 icon = ExtResource("5_fc45e")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer" index="0"]
+[node name="PageButtons" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="1"]
 layout_mode = 2
-size_flags_horizontal = 3
 
-[node name="TabButtons" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/PageButtons"]
+layout_mode = 2
+
+[node name="PageBack" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/PageButtons/HBoxContainer"]
+layout_mode = 2
+disabled = true
+icon = ExtResource("6_sp6ey")
+
+[node name="PageSelect" type="OptionButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer/PageButtons/HBoxContainer"]
+custom_minimum_size = Vector2(51, 0)
+layout_mode = 2
+selected = 0
+item_count = 1
+popup/item_0/text = "0"
+popup/item_0/id = 0
+
+[node name="PageFowards" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/PageButtons/HBoxContainer"]
+layout_mode = 2
+icon = ExtResource("7_rdv1j")
+
+[node name="TabButtons" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer" index="0"]
 layout_mode = 2
 size_flags_horizontal = 6
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/TabButtons"]
+[node name="TabButtonContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/TabButtons"]
 layout_mode = 2
 
-[node name="DimmerTabButton" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/TabButtons/HBoxContainer"]
-custom_minimum_size = Vector2(80, 0)
-layout_mode = 2
-toggle_mode = true
-button_pressed = true
-button_group = SubResource("ButtonGroup_alch7")
-text = "Dimmer"
-
-[node name="ColorTabButton" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/TabButtons/HBoxContainer"]
-custom_minimum_size = Vector2(80, 0)
-layout_mode = 2
-disabled = true
-toggle_mode = true
-button_group = SubResource("ButtonGroup_alch7")
-text = "Color"
-
-[node name="GoboTabButton" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/TabButtons/HBoxContainer"]
-custom_minimum_size = Vector2(80, 0)
-layout_mode = 2
-disabled = true
-toggle_mode = true
-button_group = SubResource("ButtonGroup_alch7")
-text = "Gobo"
-
-[node name="PositionTabButton" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/TabButtons/HBoxContainer"]
-custom_minimum_size = Vector2(80, 0)
-layout_mode = 2
-disabled = true
-toggle_mode = true
-button_group = SubResource("ButtonGroup_alch7")
-text = "Position"
-
-[node name="BeamTabButton" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/TabButtons/HBoxContainer"]
-custom_minimum_size = Vector2(80, 0)
-layout_mode = 2
-disabled = true
-toggle_mode = true
-button_group = SubResource("ButtonGroup_alch7")
-text = "Beam"
-
-[node name="FocusTabButton" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/TabButtons/HBoxContainer"]
-custom_minimum_size = Vector2(80, 0)
-layout_mode = 2
-disabled = true
-toggle_mode = true
-button_group = SubResource("ButtonGroup_alch7")
-text = "Focus
-"
-
-[node name="ShapersTabButton" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/TabButtons/HBoxContainer"]
-custom_minimum_size = Vector2(80, 0)
-layout_mode = 2
-disabled = true
-toggle_mode = true
-button_group = SubResource("ButtonGroup_alch7")
-text = "Shapers"
-
-[node name="ControlTabButton" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/TabButtons/HBoxContainer"]
-custom_minimum_size = Vector2(80, 0)
-layout_mode = 2
-disabled = true
-toggle_mode = true
-button_group = SubResource("ButtonGroup_alch7")
-text = "Control"
-
-[node name="ViewButtons" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer"]
+[node name="ViewButtons" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="3"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/ViewButtons"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ViewButtons"]
 layout_mode = 2
 
-[node name="ZoneSelect" type="OptionButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/ViewButtons/HBoxContainer"]
-custom_minimum_size = Vector2(150, 0)
+[node name="ZoneSelect" type="OptionButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ViewButtons/HBoxContainer"]
+custom_minimum_size = Vector2(93, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 tooltip_text = "Zone Select"
+clip_text = true
 selected = 0
+fit_to_longest_item = false
 item_count = 1
-popup/item_0/text = "Zone"
+popup/item_0/text = "root"
+popup/item_0/icon = ExtResource("8_fc45e")
 popup/item_0/id = 0
 popup/item_0/separator = true
 
-[node name="RandomMode" type="OptionButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/ViewButtons/HBoxContainer"]
+[node name="ValueMode" type="OptionButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ViewButtons/HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(137, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 tooltip_text = "Random Mode"
+clip_text = true
 selected = 0
+fit_to_longest_item = false
 item_count = 2
 popup/item_0/text = "All"
+popup/item_0/icon = ExtResource("9_xrr4a")
 popup/item_0/id = 0
-popup/item_1/text = "Individual"
+popup/item_1/text = "Relative"
+popup/item_1/icon = ExtResource("9_xrr4a")
 popup/item_1/id = 1
-
-[node name="Erace" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/ViewButtons/HBoxContainer"]
-layout_mode = 2
-icon = ExtResource("6_xrr4a")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -159,26 +141,79 @@ size_flags_vertical = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="TemplatePlaceholder" type="PanelContainer" parent="VBoxContainer/ScrollContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_fc45e")
+
+[node name="Label" type="Label" parent="VBoxContainer/ScrollContainer/HBoxContainer/TemplatePlaceholder"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "1"
+label_settings = SubResource("LabelSettings_3huj7")
+
 [node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer"]
-visible = false
 layout_mode = 2
 theme_override_styles/panel = ExtResource("7_7jywt")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer2"]
 layout_mode = 2
 
-[node name="SaveToScene" type="Button" parent="VBoxContainer/PanelContainer2/HBoxContainer"]
+[node name="LayerControls" type="PanelContainer" parent="VBoxContainer/PanelContainer2/HBoxContainer"]
+visible = false
 layout_mode = 2
-tooltip_text = "Save To Scene
-"
-disabled = true
-icon = ExtResource("8_3huj7")
 
-[connection signal="item_selected" from="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/ViewButtons/HBoxContainer/ZoneSelect" to="." method="_on_zone_select_item_selected"]
-[connection signal="item_selected" from="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/ViewButtons/HBoxContainer/RandomMode" to="." method="_on_random_mode_item_selected"]
-[connection signal="pressed" from="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/ViewButtons/HBoxContainer/Erace" to="." method="_on_erace_pressed"]
-[connection signal="pressed" from="VBoxContainer/PanelContainer2/HBoxContainer/SaveToScene" to="." method="_on_save_to_scene_pressed"]
+[node name="LayerButtonContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer2/HBoxContainer/LayerControls"]
+layout_mode = 2
+
+[node name="TransportControls" type="PanelContainer" parent="VBoxContainer/PanelContainer2/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer2/HBoxContainer/TransportControls"]
+layout_mode = 2
+
+[node name="PlayBackwards" type="Button" parent="VBoxContainer/PanelContainer2/HBoxContainer/TransportControls/HBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_qwc1o")
+icon = ExtResource("12_ikse1")
+
+[node name="PlayFowards" type="Button" parent="VBoxContainer/PanelContainer2/HBoxContainer/TransportControls/HBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_qwc1o")
+icon = ExtResource("13_qpens")
+
+[node name="Loop" type="Button" parent="VBoxContainer/PanelContainer2/HBoxContainer/TransportControls/HBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+icon = ExtResource("14_qpens")
+
+[node name="SetSpeed" type="Button" parent="VBoxContainer/PanelContainer2/HBoxContainer/TransportControls/HBoxContainer"]
+layout_mode = 2
+icon = ExtResource("15_qwc1o")
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer2/HBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Clear" type="Button" parent="VBoxContainer/PanelContainer2/HBoxContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+icon = ExtResource("6_xrr4a")
+
+[connection signal="pressed" from="VBoxContainer/PanelMenuBar/HBoxContainer/PageButtons/HBoxContainer/PageBack" to="." method="_on_page_back_pressed"]
+[connection signal="item_selected" from="VBoxContainer/PanelMenuBar/HBoxContainer/PageButtons/HBoxContainer/PageSelect" to="." method="set_page"]
+[connection signal="pressed" from="VBoxContainer/PanelMenuBar/HBoxContainer/PageButtons/HBoxContainer/PageFowards" to="." method="_on_page_fowards_pressed"]
+[connection signal="item_selected" from="VBoxContainer/PanelMenuBar/HBoxContainer/ViewButtons/HBoxContainer/ZoneSelect" to="." method="_on_zone_select_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/PanelMenuBar/HBoxContainer/ViewButtons/HBoxContainer/ValueMode" to="." method="_on_random_mode_item_selected"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer2/HBoxContainer/PanelContainer/HBoxContainer/Clear" to="." method="_on_clear_pressed"]
 
 [editable path="VBoxContainer/PanelMenuBar"]

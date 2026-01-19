@@ -39,6 +39,9 @@ var _raw_override_layers: Dictionary[String, Dictionary] = {}
 ## The FixtureManifest for this fixture
 var _manifest: FixtureManifest = null
 
+## Stores all parameter subscriptions { "zone": { "parameter": Array[Callable] } }
+var _parameter_subscriptions: Dictionary[String, Dictionary]
+
 
 ## init
 func _init(p_uuid: String = UUID_Util.v4(), p_name: String = _name) -> void:
@@ -119,6 +122,11 @@ func get_parameter_functions(p_zone: String, p_parameter: String) -> Array:
 	return _manifest.get_parameter_functions(_mode, p_zone, p_parameter)
 
 
+## Gets all the parameter functions
+func get_function_control_type(p_zone: String, p_parameter: String, p_function: String) -> ControlType:
+	return _manifest.function_control_type(_mode, p_zone, p_parameter, p_function)
+
+
 ## Gets the default value of a parameter
 func get_default(p_zone: String, p_parameter: String, p_function: String = "", p_raw_dmx: bool = false) -> float:
 	if p_function == "":
@@ -126,7 +134,7 @@ func get_default(p_zone: String, p_parameter: String, p_function: String = "", p
 	
 	var dmx_value: int = _manifest.get_mode(_mode).zones[p_zone][p_parameter].functions[p_function].default
 	var range: Array = _manifest.get_mode(_mode).zones[p_zone][p_parameter].functions[p_function].dmx_range
-
+	
 	if p_raw_dmx:
 		return dmx_value
 	else:
@@ -145,8 +153,32 @@ func get_default_function(p_zone: String, p_parameter: String) -> String:
 
 
 ## Gets the current value, or the default
-func get_current_value(p_zone: String, p_parameter: String, p_allow_default: bool = true) -> float:
-	return _active_values.get(p_zone, {}).get(p_parameter, {}).get("value", get_default(p_zone, p_parameter) if p_allow_default else 0.0)
+func get_current_value(p_zone: String, p_parameter: String, p_allow_default: bool = true, p_allow_override: bool = true) -> float:
+	if has_override(p_zone, p_parameter):
+		return _raw_override_layers[p_zone][p_parameter].value
+	else:
+		return _active_values.get(p_zone, {}).get(p_parameter, {}).get("value", get_default(p_zone, p_parameter) if p_allow_default else 0.0)
+
+
+## Gets the current function, or the default
+func get_current_function(p_zone: String, p_parameter: String, p_allow_default: bool = true, p_allow_override: bool = true) -> String:
+	if has_override(p_zone, p_parameter):
+		return _raw_override_layers[p_zone][p_parameter].function
+	else:
+		return _active_values.get(p_zone, {}).get(p_parameter, {}).get("function", get_default_function(p_zone, p_parameter) if p_allow_default else "")
+
+
+## Gets the current value, or the default
+func get_current_value_or_force_default(p_zone: String, p_parameter: String) -> float:
+	var value: float = _active_values.get(p_zone, {}).get(p_parameter, {}).get("value", -1)
+
+	if value == -1:
+		if has_force_default(p_parameter):
+			return get_default(p_zone, p_parameter)
+		else:
+			return 0.0
+	else:
+		return value
 
 
 ## Gets all the zones
@@ -160,6 +192,11 @@ func get_zones() -> Array[String]:
 ## Checks if this DMXFixture has any overrides
 func has_overrides() -> bool:
 	return _raw_override_layers != {}
+
+
+## Returns true if this Fixture has an override value
+func has_override(p_zone: String, p_parameter: String) -> bool:
+	return _raw_override_layers.has(p_zone) and _raw_override_layers[p_zone].has(p_parameter)
 
 
 ## Checks if this fixture has a parameter
@@ -178,9 +215,32 @@ func has_force_default(p_parameter: String) -> bool:
 	return _manifest.has_force_default(p_parameter)
 
 
+## Returns True if the given callable is subscribed to the given parameter
+func has_parameter_subscription(p_zone: String, p_parameter: String, p_callable: Callable) -> bool:
+	return _parameter_subscriptions.get(p_zone, {}).get(p_parameter, {}).has(p_callable)
+
+
 ## Checks if this DMXFixture has a function that can fade
 func function_can_fade(p_zone: String, p_parameter: String, p_function: String) -> bool:
 	return _manifest.function_can_fade(_mode, p_zone, p_parameter, p_function)
+
+
+## Subscribes to a parameter on the given zone
+func subscribe_to_parameter(p_zone: String, p_parameter: String, p_callable: Callable) -> bool:
+	if has_parameter_subscription(p_zone, p_parameter, p_callable):
+		return false
+	
+	_parameter_subscriptions.get_or_add(p_zone, {}).get_or_add(p_parameter, []).append(p_callable)
+	return true
+
+
+## Removes a subscription from the parameter in the given zone
+func remove_subscription(p_zone: String, p_parameter: String, p_callable: Callable) -> bool:
+	if not has_parameter_subscription(p_zone, p_parameter, p_callable):
+		return false
+	
+	_parameter_subscriptions[p_zone][p_parameter].erase(p_callable)
+	return true
 
 
 ## Internl: Sets the channel
@@ -220,18 +280,30 @@ func _set_manifest(p_manifest: Variant, p_mode: String, p_no_signal: bool = fals
 func _set_parameter(p_zone: String, p_parameter: String, p_function: String, p_value: Variant) -> void:
 	_active_values.get_or_add(p_zone, {})[p_parameter] = {"value": p_value, "function": p_function}
 	parameter_changed.emit(p_zone, p_parameter, p_function, p_value)
+	
+	if has_override(p_zone, p_parameter):
+		return
+	
+	_emit_parameter_subs(p_zone, p_parameter, p_function, p_value, false)
 
 
 ## Internal: Erases the parameter on the given layer
 func _erase_parameter(p_zone: String, p_parameter: String) -> void:
 	_active_values.get_or_add(p_zone, {}).erase(p_parameter)
 	parameter_erased.emit(p_parameter, p_zone)
+	
+	if has_override(p_zone, p_parameter):
+		return
+	
+	_emit_parameter_subs(p_zone, p_parameter, get_default_function(p_zone, p_parameter), get_default(p_zone, p_parameter), false)
 
 
 ## Internal: Sets a parameter override to a float value
 func _set_override(p_zone: String, p_parameter: String, p_function: String, p_value: float) -> void:
 	_raw_override_layers.get_or_add(p_zone, {})[p_parameter] = {"value": p_value, "function": p_function}
 	override_changed.emit(p_zone, p_parameter, p_function, p_value)
+	
+	_emit_parameter_subs(p_zone, p_parameter, p_function, p_value, true)
 
 
 ## Internal: Erases the parameter override 
@@ -240,6 +312,17 @@ func _erase_override(p_zone: String, p_parameter: String) -> void:
 		_raw_override_layers.erase(p_zone)
 		
 	override_erased.emit(p_zone, p_parameter)
+	
+	_emit_parameter_subs(p_zone, p_parameter, get_current_function(p_zone, p_parameter), get_current_value(p_zone, p_parameter), false)
+
+
+## Calls back all parameter subscripptions
+func _emit_parameter_subs(p_zone: String, p_parameter: String, p_function: String, p_value: float, p_override: bool) -> void:
+	for callable: Callable in _parameter_subscriptions.get(p_zone, {}).get(p_parameter, []).duplicate():
+		if not callable.is_valid():
+			_parameter_subscriptions[p_zone][p_parameter].erase(callable)
+		else:
+			callable.call(p_value, p_function, p_override)
 
 
 ## Internal: Erases all overrides

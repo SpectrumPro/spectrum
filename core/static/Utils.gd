@@ -16,6 +16,47 @@ class_name Utils extends Object
 ##	}
 static var _signal_connections: Dictionary
 
+## Removes numbers regex
+static var number_regex := RegEx.new()
+
+
+## init
+static func _static_init() -> void:
+	number_regex.compile("\\d+")
+
+
+## Formats a 12 hour time from an 24 hour interger
+static func format_12_hour(p_hour_24: int) -> String:
+	var period: String = "AM"
+	var hour_12: int = p_hour_24
+
+	if p_hour_24 == 0:
+		hour_12 = 12
+		period = "AM"
+	elif p_hour_24 == 12:
+		hour_12 = 12
+		period = "PM"
+	elif p_hour_24 > 12:
+		hour_12 = p_hour_24 - 12
+		period = "PM"
+	
+	return str("%02d" % hour_12) + period
+
+
+## Removes numbers from a string
+static func remove_numbers(p_string: String) -> Dictionary:
+	var matches: Array[RegExMatch] = number_regex.search_all(p_string)
+	var numbers: Array[int] = []
+	
+	for m: RegExMatch in matches:
+		numbers.append(int(m.get_string()))
+	
+	var cleaned: String = number_regex.sub(p_string, "", true)
+	
+	return {
+		"string": cleaned,
+		"numbers": numbers
+	}
 
 
 ## Saves a JSON valid dictonary to a file, creates the file and folder if it does not exist

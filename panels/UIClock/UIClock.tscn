@@ -1,13 +1,13 @@
 [gd_scene load_steps=5 format=3 uid="uid://8mfy3g85o3g5"]
 
-[ext_resource type="Script" uid="uid://dt5d0ib35v1w4" path="res://panels/TO_BE_SORTED/Clock/Clock.gd" id="1_8tr61"]
-[ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://assets/styles/UIPanelBase.tres" id="1_r82tc"]
-[ext_resource type="FontFile" uid="uid://crlak6jhg5jy2" path="res://assets/font/RubikMonoOne-Regular.ttf" id="2_546b1"]
+[ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://assets/styles/UIPanelBase.tres" id="1_r3wuq"]
+[ext_resource type="Script" uid="uid://dt5d0ib35v1w4" path="res://panels/UIClock/UIClock.gd" id="2_xjxwu"]
+[ext_resource type="FontFile" uid="uid://crlak6jhg5jy2" path="res://assets/font/RubikMonoOne-Regular.ttf" id="3_bm64l"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2atlb"]
-font = ExtResource("2_546b1")
+font = ExtResource("3_bm64l")
 
-[node name="Clock" type="PanelContainer"]
+[node name="UIClock" type="PanelContainer" node_paths=PackedStringArray("label")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -15,8 +15,9 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_styles/panel = ExtResource("1_r82tc")
-script = ExtResource("1_8tr61")
+theme_override_styles/panel = ExtResource("1_r3wuq")
+script = ExtResource("2_xjxwu")
+label = NodePath("Control/Label")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 2
@@ -28,9 +29,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -75.0
+offset_left = -80.0
 offset_top = -10.0
-offset_right = 75.0
+offset_right = 80.0
 offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -40,4 +41,4 @@ label_settings = SubResource("LabelSettings_2atlb")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="resized" from="." to="." method="_set_font_size"]
+[connection signal="resized" from="." to="." method="_update_font_size"]

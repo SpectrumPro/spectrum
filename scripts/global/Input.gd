@@ -28,6 +28,7 @@ var _internal_actions: Dictionary[String, Callable] = {
 	"store_mode": _handle_store_mode_action,
 	"ui_cancel": Interface.hide_all_popup_panels,
 	"command_palette": Interface.toggle_popup_visable.bind(Interface.WindowPopup.COMMAND_PALETTE, self),
+	"screenshot": Interface.take_screenshot,
 }
 
 ## Allowed input events for shortcuts
