@@ -1,12 +1,10 @@
 name: Build and Release Spectrum Client
 
 on:
-  # Scheduled nightly dev build (~4 AM NZ)
   schedule:
     # UTC 15:00 = NZDT 4:00 AM (NZST ~3 AM)
     - cron: "0 15 * * *"
 
-  # Manual trigger for both dev and release builds
   workflow_dispatch:
     inputs:
       build_type:
@@ -29,7 +27,6 @@ jobs:
     permissions:
       contents: write
 
-    # Only manual workflow_dispatch + build_type=release may create release/tag
     env:
       IS_RELEASE: ${{ github.event_name == 'workflow_dispatch' && inputs.build_type == 'release' }}
 
@@ -55,7 +52,6 @@ jobs:
               echo "VERSION=dev-${DATE}-${SHA}" >> $GITHUB_OUTPUT
           fi
 
-
       - name: Export Spectrum
         id: export
         uses: firebelley/godot-export@v7.0.0
@@ -74,7 +70,6 @@ jobs:
           mv windows.x86_64.zip SpectrumClient.x86_64.windows.${{ steps.version.outputs.VERSION }}.zip
           mv macOS.universal.zip SpectrumClient.universal.macOS.${{ steps.version.outputs.VERSION }}.zip
 
-      # --- Dev builds: tag commit and update "Latest dev build" release ---
       - name: Tag current commit for Latest Dev Build
         if: env.IS_RELEASE != 'true'
         run: |
@@ -93,21 +88,19 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: latest-dev-build
-          name: Latest dev build
+          name: latest-dev-release
           prerelease: true
           allowUpdates: true
           removeArtifacts: true
           replacesArtifacts: true
           artifacts: ${{ steps.export.outputs.archive_directory }}/*
 
-      # --- Release builds: create version tag ---
       - name: Create git tag
         if: env.IS_RELEASE == 'true'
         run: |
           git tag ${{ steps.version.outputs.VERSION }}
           git push origin ${{ steps.version.outputs.VERSION }}
 
-      # --- Release builds: create release ---
       - name: Create GitHub Release
         if: env.IS_RELEASE == 'true'
         uses: ncipollo/release-action@v1.14.0
