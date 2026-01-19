@@ -179,6 +179,7 @@ func _init() -> void:
 	settings_manager.register_control("OpenSaveLoad", Data.Type.ACTION, set_popup_visable.bind(WindowPopup.SAVE_LOAD, self, true), Callable(), [])
 	settings_manager.register_control("OpenWindowManager", Data.Type.ACTION, set_popup_visable.bind(WindowPopup.WINDOW_MANAGER, self, true), Callable(), [])
 	settings_manager.register_control("AddWindow", Data.Type.ACTION, add_window, Callable(), [])
+	settings_manager.register_control("SaveUI", Data.Type.ACTION, save_ui, Callable(), [])
 
 
 ## Ready ClientInterface
