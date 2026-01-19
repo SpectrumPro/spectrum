@@ -66,7 +66,6 @@ window/size/viewport_height=1080
 window/size/initial_position_type=4
 window/subwindows/embed_subwindows=false
 window/per_pixel_transparency/allowed=true
-display_server/driver.linuxbsd="x11"
 window/vsync/vsync_mode=0
 window/ios/hide_home_indicator=false
 window/ios/hide_status_bar=false
