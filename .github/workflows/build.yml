@@ -1,11 +1,25 @@
 name: Build and Release Spectrum Client
 
 on:
+  # Scheduled nightly dev build (~4 AM NZ)
+  schedule:
+    # UTC 15:00 = NZDT 4:00 AM (NZST ~3 AM)
+    - cron: "0 15 * * *"
+
+  # Manual trigger for both dev and release builds
   workflow_dispatch:
     inputs:
-      version:
-        description: "Version tag to release (e.g. v1.2.3)"
+      build_type:
+        description: "Build type"
         required: true
+        default: dev
+        type: choice
+        options:
+          - dev
+          - release
+      version:
+        description: "Version tag (required for release builds, e.g. v1.2.3)"
+        required: false
         type: string
 
 jobs:
@@ -15,12 +29,30 @@ jobs:
     permissions:
       contents: write
 
+    # Only manual workflow_dispatch + build_type=release may create release/tag
+    env:
+      IS_RELEASE: ${{ github.event_name == 'workflow_dispatch' && inputs.build_type == 'release' }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
         with:
           lfs: true
           fetch-depth: 0
+
+      - name: Compute build version
+        id: version
+        run: |
+          if [[ "${{ env.IS_RELEASE }}" == "true" ]]; then
+            if [[ -z "${{ inputs.version }}" ]]; then
+              echo "❌ Release builds require a version"
+              exit 1
+            fi
+            echo "VERSION=${{ inputs.version }}" >> $GITHUB_OUTPUT
+          else
+            DATE=$(date -u +"%Y%m%d")
+            SHA=$(git rev-parse --short HEAD)
+            echo "VERSION=dev-${DATE}-${SHA}" >> $GITHUB_OUTPUT
 
       - name: Export Spectrum
         id: export
@@ -29,29 +61,57 @@ jobs:
           godot_executable_download_url: https://github.com/not-my-username/godot/releases/download/4.5.2-so_reusraddr/godot.linuxbsd.editor.x86_64.zip
           godot_export_templates_download_url: https://github.com/not-my-username/godot/releases/download/4.5.2-so_reusraddr/4.5.2.stablereuseaddr.zip
           relative_project_path: ./
-          archive_output: true 
+          archive_output: true
           cache: true
           presets_to_export: windows.x86_64, macOS.universal, linux.x86_64
 
       - name: Rename Archives
         run: |
           cd ${{ steps.export.outputs.archive_directory }}
+          mv linux.x86_64.zip SpectrumClient.x86_64.linux.${{ steps.version.outputs.VERSION }}.zip
+          mv windows.x86_64.zip SpectrumClient.x86_64.windows.${{ steps.version.outputs.VERSION }}.zip
+          mv macOS.universal.zip SpectrumClient.universal.macOS.${{ steps.version.outputs.VERSION }}.zip
 
-          mv linux.x86_64.zip SpectrumClient.x86_64.linux.${{inputs.version}}.zip
-          mv windows.x86_64.zip SpectrumClient.x86_64.windows.${{inputs.version}}.zip
-          mv macOS.universal.zip SpectrumClient.universal.macOS.${{inputs.version}}.zip
-
-      - name: Create git tag
+      # --- Dev builds: tag commit and update "Latest dev build" release ---
+      - name: Tag current commit for Latest Dev Build
+        if: env.IS_RELEASE != 'true'
         run: |
-          git tag ${{ inputs.version }}
-          git push origin ${{ inputs.version }}
+          TAG_NAME=latest-dev-build
+          # Delete local tag if it exists
+          git tag -d $TAG_NAME || true
+          # Delete remote tag if it exists
+          git push origin :refs/tags/$TAG_NAME || true
+          # Tag the current commit
+          git tag $TAG_NAME $GITHUB_SHA
+          git push origin $TAG_NAME
 
-      - name: Create GitHub Release
+      - name: Update "Latest dev build" release
+        if: env.IS_RELEASE != 'true'
         uses: ncipollo/release-action@v1.14.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ inputs.version }}
-          name: ${{ inputs.version }}
-          generateReleaseNotes: true
+          tag: latest-dev-build
+          name: Latest dev build
+          prerelease: true
+          allowUpdates: true
+          removeArtifacts: true
+          replacesArtifacts: true
           artifacts: ${{ steps.export.outputs.archive_directory }}/*
 
+      # --- Release builds: create version tag ---
+      - name: Create git tag
+        if: env.IS_RELEASE == 'true'
+        run: |
+          git tag ${{ steps.version.outputs.VERSION }}
+          git push origin ${{ steps.version.outputs.VERSION }}
+
+      # --- Release builds: create release ---
+      - name: Create GitHub Release
+        if: env.IS_RELEASE == 'true'
+        uses: ncipollo/release-action@v1.14.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ steps.version.outputs.VERSION }}
+          name: ${{ steps.version.outputs.VERSION }}
+          generateReleaseNotes: true
+          artifacts: ${{ steps.export.outputs.archive_directory }}/*
