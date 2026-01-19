@@ -39,20 +39,22 @@ jobs:
         with:
           lfs: true
           fetch-depth: 0
-
+      
       - name: Compute build version
         id: version
         run: |
           if [[ "${{ env.IS_RELEASE }}" == "true" ]]; then
-            if [[ -z "${{ inputs.version }}" ]]; then
-              echo "❌ Release builds require a version"
-              exit 1
-            fi
-            echo "VERSION=${{ inputs.version }}" >> $GITHUB_OUTPUT
+              if [[ -z "${{ inputs.version }}" ]]; then
+                  echo "❌ Release builds require a version"
+                  exit 1
+              fi
+              echo "VERSION=${{ inputs.version }}" >> $GITHUB_OUTPUT
           else
-            DATE=$(date -u +"%Y%m%d")
-            SHA=$(git rev-parse --short HEAD)
-            echo "VERSION=dev-${DATE}-${SHA}" >> $GITHUB_OUTPUT
+              DATE=$(date -u +"%Y%m%d")
+              SHA=$(git rev-parse --short HEAD)
+              echo "VERSION=dev-${DATE}-${SHA}" >> $GITHUB_OUTPUT
+          fi
+
 
       - name: Export Spectrum
         id: export
