@@ -107,10 +107,10 @@ func _load_command_tree() -> void:
 			tree_item.set_custom_color(1, Color(0x919191ff))
 			
 			match module.get_type():
-				SettingsModule.Type.SETTING, SettingsModule.Type.CONTROL when module.get_data_type() == Data.Type.NULL:
+				SettingsModule.Type.SETTING, SettingsModule.Type.CONTROL when module.get_data_type() == Data.Type.ACTION:
 					tree_item.set_text(1, "Run")
 					
-				SettingsModule.Type.SETTING, SettingsModule.Type.CONTROL when module.get_data_type() != Data.Type.NULL:
+				SettingsModule.Type.SETTING, SettingsModule.Type.CONTROL when module.get_data_type() != Data.Type.ACTION:
 					tree_item.set_text(1, "Edit")
 				
 				SettingsModule.Type.STATUS:

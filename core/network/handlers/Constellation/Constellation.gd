@@ -180,6 +180,7 @@ func start_node() -> Error:
 	_set_network_state(NetworkState.INITIALIZING)
 	
 	_known_nodes[get_node_id()] = _local_node
+	_local_node._set_node_ip(ConstellationConfig.bind_address)
 	_bind_network()
 	
 	if _network_state != NetworkState.BOUND:
