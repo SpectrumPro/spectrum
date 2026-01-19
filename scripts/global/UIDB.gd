@@ -35,7 +35,9 @@ var _panels: Dictionary[String, PackedScene] = {
 	"UIDebug":				load(_p("UIDebug")),
 	"UIVirtualFixtures":	load(_p("UIVirtualFixtures")),
 	"UIProgrammer":			load(_p("UIProgrammer")),
-	"UIColorPicker":		load(_p("UIColorPicker"))
+	"UIColorPicker":		load(_p("UIColorPicker")),
+	"UIClock":				load(_p("UIClock")),
+	"UIWindowManager":		load(_p("UIWindowManager"))
 }
 
 
@@ -80,13 +82,14 @@ var _data_inputs: Dictionary[Data.Type, PackedScene] = {
 
 ## All UIPanels sorted by category
 var _panels_by_category: Dictionary[String, Array] = {
-	"Panels": [
-		"UIDesk",
-		"UIPlaybacks",
+	"System": [
 		"UISettings",
 		"UISaveLoad",
-		"UIDebug",
 		"UICore",
+		"UIWindowManager",
+	],
+	"Playbacks": [
+		"UIPlaybacks",
 	],
 	"Programming": [
 		"UIProgrammer",
@@ -99,7 +102,12 @@ var _panels_by_category: Dictionary[String, Array] = {
 		"UIFixtureGroups"
 	],
 	"Views": [
-		"UIVirtualFixtures"
+		"UIVirtualFixtures",
+		"UIDesk",
+	],
+	"Utils": [
+		"UIClock",
+		"UIDebug",
 	]
 }
 
