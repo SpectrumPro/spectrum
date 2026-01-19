@@ -1,4 +1,4 @@
-# Copyright (c) 2025 Liam Sherwin, All rights reserved.
+# Copyright (c) 2026 Liam Sherwin, All rights reserved.
 # This file is part of the Spectrum Lighting Engine, licensed under the GPL v3.
 
 class_name ClientUIDB extends Node
@@ -63,6 +63,7 @@ var _data_inputs: Dictionary[Data.Type, PackedScene] = {
 	Data.Type.FLOAT:			load(_d("DataInputFloat")),
 	Data.Type.VECTOR2:			load(_d("DataInputVector2")),
 	Data.Type.VECTOR2I:			load(_d("DataInputVector2")),
+	Data.Type.COLOR:			load(_d("DataInputColor")),
 	Data.Type.ENUM:				load(_d("DataInputEnum")),
 	Data.Type.BITFLAGS:			load(_d("DataInputBitFlags")),
 	Data.Type.NAME:				load(_d("DataInputString")),
