@@ -52,6 +52,14 @@ jobs:
               echo "VERSION=dev-${DATE}-${SHA}" >> $GITHUB_OUTPUT
           fi
 
+      - name: install wine
+        id: wine_install
+        run: |
+          sudo dpkg --add-architecture i386
+          sudo apt update
+          sudo apt install -y wine64 wine32
+          echo "WINE_PATH=$(which wine)" >> $GITHUB_OUTPUT
+
       - name: Export Spectrum
         id: export
         uses: firebelley/godot-export@v7.0.0
@@ -62,6 +70,8 @@ jobs:
           archive_output: true
           cache: true
           presets_to_export: windows.x86_64, macOS.universal, linux.x86_64
+          wine_path: ${{ steps.wine_install.outputs.WINE_PATH }} # set the wine path here which is the output of the wine_install step
+
 
       - name: Rename Archives
         run: |
