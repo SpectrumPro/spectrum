@@ -1,4 +1,4 @@
-# Copyright (c) 2025 Liam Sherwin. All rights reserved.
+# Copyright (c) 2026 Liam Sherwin. All rights reserved.
 # This file is part of the Spectrum Lighting Controller, licensed under the GPL v3.0 or later.
 # See the LICENSE file for details.
 
@@ -48,20 +48,20 @@ func _ready() -> void:
 
 
 ## Sets the select object
-func set_component(o_component: EngineComponent) -> void:
+func set_component(p_component: EngineComponent) -> void:
 	_signal_group.disconnect_object(_component)
-	
-	if not is_instance_valid(o_component):
-		_component = null
-		underline.set_modulate(ThemeManager.Colors.Statuses.Standby)
-		return
-	
-	_component = o_component
+	_component = p_component
 	_signal_group.connect_object(_component)
 	
-	set_text(_component.name())
-	underline.set_modulate(ThemeManager.Colors.Statuses.Normal)
+	if not is_instance_valid(_component):
+		set_text(_orignal_text)
+		underline.set_modulate(ThemeManager.Colors.Statuses.Standby)
 	
+	else:
+		set_text(_component.name())
+		underline.set_modulate(ThemeManager.Colors.Statuses.Normal)
+	
+	remove_look_for()
 	object_selected.emit(_component)
 
 
@@ -70,13 +70,26 @@ func get_component() -> EngineComponent:
 	return _component
 
 
-## Looks for an object, or waits untill is added
-func look_for(p_uuid: String) -> void:
+## Returns the UUID of the component, or ""
+func get_component_uuid() -> String:
+	return _component.uuid() if is_instance_valid(_component) else ""
+
+
+## Removes the ComponentDB request for the object
+func remove_look_for() -> void:
 	if _look_for_component:
 		ComponentDB.remove_request(_look_for_component, _on_component_found)
+
+
+## Looks for an object, or waits untill is added
+func look_for(p_uuid: String) -> void:
+	remove_look_for()
+	_look_for_component = p_uuid
+	
+	if not p_uuid:
+		return
 	
 	underline.set_modulate(ThemeManager.Colors.Statuses.Caution)
-	_look_for_component = p_uuid
 	ComponentDB.request_component(_look_for_component, _on_component_found)
 
 
