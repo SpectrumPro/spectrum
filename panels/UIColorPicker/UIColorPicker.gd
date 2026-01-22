@@ -41,6 +41,7 @@ func _init() -> void:
 	
 	_set_class_name("UIColorPicker")
 	Values.connect_to_selection_value("selected_fixtures", _on_selected_fixture_changed)
+	_on_selected_fixture_changed(Values.get_selection_value("selected_fixtures"))
 
 
 ## Called when the color is changed, will only output CoreEngine.call_interval times per second to avoid overloading the server
