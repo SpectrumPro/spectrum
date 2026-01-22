@@ -55,8 +55,8 @@ func _init(p_uuid: String = UUID_Util.v4(), p_name: String = _name) -> void:
 	_settings_manager.register_setting("qid", Data.Type.STRING, set_qid, get_qid, [qid_changed])
 	_settings_manager.register_setting("trigger_mode", Data.Type.ENUM, set_trigger_mode, get_trigger_mode, [trigger_mode_changed]).set_enum_dict(TriggerMode)
 	_settings_manager.register_setting("tracking_mode", Data.Type.ENUM, set_tracking_mode, get_tracking_mode, [tracking_mode_changed]).set_enum_dict(TrackingMode)
-	_settings_manager.register_control("fade_time", Data.Type.FLOAT, set_fade_time, get_fade_time, [fade_time_changed])
-	_settings_manager.register_control("pre_wait", Data.Type.FLOAT, set_pre_wait, get_pre_wait, [pre_wait_time_changed])
+	_settings_manager.register_control("fade_time", Data.Type.FLOAT, set_fade_time, get_fade_time, [fade_time_changed]).set_min_max(0, INF)
+	_settings_manager.register_control("pre_wait", Data.Type.FLOAT, set_pre_wait, get_pre_wait, [pre_wait_time_changed]).set_min_max(0, INF)
 	
 	_settings_manager.register_networked_callbacks({
 		"on_qid_changed": _set_qid,
