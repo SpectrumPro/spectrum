@@ -542,6 +542,13 @@ func _on_zone_select_item_selected(index: int) -> void:
 	set_zone(zone_select.get_item_text(index))
 
 
+## Called when the store button is pressed
+func _on_store_pressed() -> void:
+	Interface.prompt_object_picker(self, EngineComponent, Function).then(func (p_function: Function):
+		Programmer.store_into(p_function)
+	)
+
+
 ## Called when the clear button is pressed
 func _on_clear_pressed() -> void:
 	Programmer.clear()

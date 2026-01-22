@@ -98,6 +98,8 @@ func _init(p_uuid: String = UUID_Util.v4(), p_name: String = _name) -> void:
 		"on_cues_removed": _remove_cues,
 		"on_cue_order_changed": _set_cue_position,
 	})
+	
+	_settings_manager.set_callback_allow_deserialize("on_cues_added")
 
 
 ## Server: Adds a cue to the list
