@@ -37,7 +37,8 @@ var _look_for_component: String
 
 ## Signal connections for the EngineComponent
 var _signal_group: SignalGroup = SignalGroup.new([
-	_on_name_changed
+	_on_name_changed,
+	_on_delete_requested,
 ])
 
 
@@ -49,6 +50,9 @@ func _ready() -> void:
 
 ## Sets the select object
 func set_component(p_component: EngineComponent) -> void:
+	if p_component == _component:
+		return
+	
 	_signal_group.disconnect_object(_component)
 	_component = p_component
 	_signal_group.connect_object(_component)
@@ -114,8 +118,13 @@ func _on_component_found(p_component: EngineComponent) -> void:
 
 
 ## Called when the components name is changed
-func _on_name_changed(new_name: String) -> void:
-	text = new_name
+func _on_name_changed(p_new_name: String) -> void:
+	text = p_new_name
+
+
+## Called when the component is to be deleted
+func _on_delete_requested() -> void:
+	set_component(null)
 
 
 ## Called when the button is pressed
