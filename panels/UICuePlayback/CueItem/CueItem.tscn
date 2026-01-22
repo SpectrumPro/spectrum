@@ -65,7 +65,7 @@ bg_color = Color(0, 0.513726, 1, 1)
 corner_radius_top_left = 4
 corner_radius_bottom_left = 4
 
-[node name="CueItem" type="PanelContainer"]
+[node name="CueItem" type="PanelContainer" node_paths=PackedStringArray("status_bar", "name_label", "qid_label", "fade_time_label", "pre_wait_label", "trigger_mode_manual", "trigger_mode_after_last", "trigger_mode_with_last")]
 offset_right = 304.0
 offset_bottom = 100.0
 size_flags_horizontal = 3
@@ -73,6 +73,14 @@ mouse_filter = 1
 theme = ExtResource("1_t3b7b")
 theme_override_styles/panel = SubResource("StyleBoxFlat_lrd3y")
 script = ExtResource("2_aostn")
+status_bar = NodePath("VBoxContainer/ProgressBar")
+name_label = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/CueName")
+qid_label = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer2/HBoxContainer/CueNumber")
+fade_time_label = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer3/HBoxContainer/FadeTime")
+pre_wait_label = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer4/HBoxContainer/PreWait")
+trigger_mode_manual = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer/VBoxContainer/Manual")
+trigger_mode_after_last = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer/VBoxContainer/AfterLast")
+trigger_mode_with_last = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer/VBoxContainer/WithLast")
 
 [node name="StoreMode" type="Panel" parent="."]
 visible = false

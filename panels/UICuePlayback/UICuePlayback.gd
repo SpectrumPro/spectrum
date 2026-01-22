@@ -81,6 +81,7 @@ func _add_cues(p_cues: Array) -> void:
 		cue_container.move_child(cue_item, _cue_list.get_cue_position(cue))
 		
 		cue_item.clicked.connect(_on_cue_item_clicked.bind(cue_item))
+		cue_item.right_clicked.connect(_on_cue_item_right_clicked.bind(cue_item))
 		cue_item.double_clicked.connect(_on_cue_item_double_clicked.bind(cue_item))
 		
 		_cues.map(cue, cue_item)
@@ -150,6 +151,11 @@ func _on_delete_requested() -> void:
 ## Called when a CueItem is clicked
 func _on_cue_item_clicked(p_cue_item: CueItem) -> void:
 	pass
+
+
+## Called when a CueItem is right clicked
+func _on_cue_item_right_clicked(p_cue_item: CueItem) -> void:
+	Interface.prompt_component_settings(self, _cues.right(p_cue_item))
 
 
 ## Called when a CueItem is double clicked

@@ -9,6 +9,9 @@ class_name CueItem extends PanelContainer
 ## Emitted when this CueItem clicked
 signal clicked()
 
+## Emitted when this CueItem is right clicked
+signal right_clicked()
+
 ## Emitted when this CueItem double clicked
 signal double_clicked()
 
@@ -135,10 +138,15 @@ func set_trigger_mode(p_trigger_mode: Cue.TriggerMode) -> void:
 
 ## Called when an input event is decected in the panel
 func _on_gui_input(p_event: InputEvent) -> void:
-	if p_event is InputEventMouseButton and p_event.button_index == MOUSE_BUTTON_LEFT:
+	if p_event is InputEventMouseButton and p_event.is_pressed():
 		p_event = p_event as InputEventMouseButton
 		
-		if p_event.is_double_click(): 
-			double_clicked.emit()
-		else:
-			clicked.emit()
+		match p_event.button_index:
+			MOUSE_BUTTON_LEFT:
+				if p_event.is_double_click(): 
+					double_clicked.emit()
+				else:
+					clicked.emit()
+			
+			MOUSE_BUTTON_RIGHT:
+				right_clicked.emit()
