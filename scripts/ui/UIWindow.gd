@@ -56,7 +56,6 @@ var _position_no_signal: bool = false
 
 ## Init
 func _init() -> void:
-	print(DisplayServer.get_name())
 	settings_manager.set_owner(self)
 	settings_manager.set_inheritance_array(["UIWindow"])
 	
