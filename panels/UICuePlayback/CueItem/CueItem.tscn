@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://cyua45ur0ijqo" path="res://assets/Main.theme" id="1_t3b7b"]
 [ext_resource type="Texture2D" uid="uid://cxtdx7cj44nk" path="res://assets/icons/Touch.svg" id="1_yeptw"]
 [ext_resource type="Texture2D" uid="uid://gntqv7ddcqvv" path="res://assets/icons/Fade.svg" id="2_2p1lo"]
-[ext_resource type="Script" uid="uid://dhbb4w3i6cv8f" path="res://components/TO_BE_SORTED/CueItem/CueItem.gd" id="2_aostn"]
+[ext_resource type="Script" uid="uid://dhbb4w3i6cv8f" path="res://panels/UICuePlayback/CueItem/CueItem.gd" id="2_aostn"]
 [ext_resource type="Texture2D" uid="uid://txqtfrlvm3r7" path="res://assets/icons/ReturnFlipped.svg" id="2_dbt18"]
 [ext_resource type="Texture2D" uid="uid://doaysnonvo60k" path="res://assets/icons/PreWait.svg" id="3_ns1ii"]
 [ext_resource type="Texture2D" uid="uid://03gtlskodjas" path="res://assets/icons/Cue.svg" id="3_u1n7c"]
@@ -65,7 +65,7 @@ bg_color = Color(0, 0.513726, 1, 1)
 corner_radius_top_left = 4
 corner_radius_bottom_left = 4
 
-[node name="CueItem" type="PanelContainer" node_paths=PackedStringArray("_status_bar", "_name_label", "_qid_label", "_fade_time_label", "_pre_wait_label", "_trigger_mode_manual", "_trigger_mode_after_last", "_trigger_mode_with_last")]
+[node name="CueItem" type="PanelContainer"]
 offset_right = 304.0
 offset_bottom = 100.0
 size_flags_horizontal = 3
@@ -73,14 +73,6 @@ mouse_filter = 1
 theme = ExtResource("1_t3b7b")
 theme_override_styles/panel = SubResource("StyleBoxFlat_lrd3y")
 script = ExtResource("2_aostn")
-_status_bar = NodePath("VBoxContainer/ProgressBar")
-_name_label = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/Name")
-_qid_label = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer2/HBoxContainer/CueNumber")
-_fade_time_label = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer3/HBoxContainer/FadeTime")
-_pre_wait_label = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer4/HBoxContainer/PreWait")
-_trigger_mode_manual = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer/VBoxContainer/Manual")
-_trigger_mode_after_last = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer/VBoxContainer/AfterLast")
-_trigger_mode_with_last = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer/VBoxContainer/WithLast")
 
 [node name="StoreMode" type="Panel" parent="."]
 visible = false
@@ -105,7 +97,7 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Name" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="CueName" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 mouse_filter = 1
 text = "Cue Name"

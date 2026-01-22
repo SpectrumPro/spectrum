@@ -1,5 +1,6 @@
-# Copyright (c) 2026 Liam Sherwin, All rights reserved.
-# This file is part of the Spectrum Lighting Engine, licensed under the GPL v3.
+# Copyright (c) 2026 Liam Sherwin. All rights reserved.
+# This file is part of the Spectrum Lighting Controller, licensed under the GPL v3.0 or later.
+# See the LICENSE file for details.
 
 class_name ClientUIDB extends Node
 ## Contains a list of all the UIPanel classes
@@ -37,7 +38,8 @@ var _panels: Dictionary[String, PackedScene] = {
 	"UIProgrammer":			load(_p("UIProgrammer")),
 	"UIColorPicker":		load(_p("UIColorPicker")),
 	"UIClock":				load(_p("UIClock")),
-	"UIWindowManager":		load(_p("UIWindowManager"))
+	"UIWindowManager":		load(_p("UIWindowManager")),
+	"UICuePlayback":		load(_p("UICuePlayback"))
 }
 
 
@@ -90,6 +92,7 @@ var _panels_by_category: Dictionary[String, Array] = {
 	],
 	"Playbacks": [
 		"UIPlaybacks",
+		"UICuePlayback",
 	],
 	"Programming": [
 		"UIProgrammer",
