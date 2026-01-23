@@ -51,6 +51,7 @@ func _ready() -> void:
 ## Sets the select object
 func set_component(p_component: EngineComponent) -> void:
 	if p_component == _component:
+		underline.set_modulate(ThemeManager.Colors.Statuses.Standby)
 		return
 	
 	_signal_group.disconnect_object(_component)
