@@ -66,6 +66,17 @@ func set_enabled(p_state: bool) -> void:
 	progress_bar.set_show_percentage(p_state)
 
 
+
+## Called when the intensity changes on the function
+func _on_intensity_changed(p_intensity: float) -> void:
+	progress_bar.set_value_no_signal(p_intensity)
+
+
+## Called when the function is to be deleted
+func _on_delete_requested() -> void:
+	set_function(null)
+
+
 ## Called when the button is pressed
 func _on_button_down() -> void: 
 	set_enabled(true)
@@ -76,11 +87,14 @@ func _on_button_up() -> void:
 	set_enabled(false)
 
 
-## Called when the intensity changes on the function
-func _on_intensity_changed(p_intensity: float) -> void:
-	progress_bar.set_value_no_signal(p_intensity)
-
-
-## Called when the function is to be deleted
-func _on_delete_requested() -> void:
-	set_function(null)
+## Called for each GUI input on the button
+func _on_gui_input(p_event: InputEvent) -> void:
+	if p_event is InputEventMouseButton and p_event.is_pressed():
+		p_event = p_event as InputEventMouseButton
+		 
+		match p_event.get_button_index():
+			MOUSE_BUTTON_RIGHT when is_instance_valid(_function):
+				if _function.get_intensity() == 1:
+					_function.blackout()
+				else:
+					_function.full()
