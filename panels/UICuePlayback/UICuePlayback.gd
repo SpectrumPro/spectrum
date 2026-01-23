@@ -18,6 +18,9 @@ class_name UICuePlayback extends UIPanel
 ## The IntensityButton
 @export var intensity_button: IntensityButton
 
+## The Go button
+@export var go_button: Button
+
 ## All the buttons that need to be disabled / enabled when there is no cue list
 @export var control_buttons: Array[Button]
 
@@ -30,6 +33,9 @@ var _cues: RefMap = RefMap.new()
 
 ## The current active CueItem
 var _active_cue: CueItem
+
+## The current selected CueItem
+var _selected_cue: CueItem
 
 ## Signals to connect to the CueList
 var _signal_connections: SignalGroup = SignalGroup.new([], {
@@ -60,7 +66,10 @@ func set_cue_list(p_cue_list: CueList) -> void:
 	
 	var is_valid: bool = is_instance_valid(p_cue_list)
 	set_button_array_enabled(control_buttons, not is_valid)
+	
 	_remove_cues(_cues.get_left())
+	_set_selected_cue(null)
+	_set_active_cue(null)
 	
 	if not is_valid:
 		return
@@ -102,17 +111,32 @@ func _remove_cues(p_cues: Array) -> void:
 
 ## Called when the active cue is changed
 func _set_active_cue(p_cue: Cue, p_speed_override: float = 1.0) -> void:
-	if not _cues.has_left(p_cue):
-		return
-	
-	var cue_item: CueItem = _cues.left(p_cue)
-	Interface.fade_property(scroll_container, "scroll_vertical", cue_item.position.y - cue_item.size.y, Callable(), ThemeManager.Constants.Times.InterfaceFadeFast)
-	
 	if is_instance_valid(_active_cue):
 		_active_cue.set_status_bar(false, 0.0)
 	
-	cue_item.set_status_bar(true, p_cue.get_fade_time() if p_speed_override == -1.0 else p_speed_override)
-	_active_cue = cue_item
+	if not _cues.has_left(p_cue):
+		_active_cue = null
+		return
+	
+	_active_cue = _cues.left(p_cue)
+	_active_cue.set_status_bar(true, p_cue.get_fade_time() if p_speed_override == -1.0 else p_speed_override)
+	Interface.fade_property(scroll_container, "scroll_vertical", _active_cue.position.y - _active_cue.size.y, Callable(), ThemeManager.Constants.Times.InterfaceFadeFast)
+
+
+## Sets the given cue selected
+func _set_selected_cue(p_cue: Cue) -> void:
+	if is_instance_valid(_selected_cue):
+		_selected_cue.set_selected(false)
+		go_button.set_disabled(true)
+	
+	if not _cues.has_left(p_cue):
+		_selected_cue = null
+		return
+	
+	_selected_cue = _cues.left(p_cue)
+	_selected_cue.set_selected(true)
+	
+	go_button.set_disabled(false)
 
 
 ## Called when a cue is moved in the list
@@ -151,7 +175,7 @@ func _on_delete_requested() -> void:
 
 ## Called when a CueItem is clicked
 func _on_cue_item_clicked(p_cue_item: CueItem) -> void:
-	pass
+	_set_selected_cue(_cues.right(p_cue_item))
 
 
 ## Called when a CueItem is right clicked
@@ -172,6 +196,11 @@ func _on_previous_pressed() -> void:
 ## Called when the Go Next button is pressed
 func _on_next_pressed() -> void: 
 	_cue_list.go_next()
+
+
+## Called when the Go button is presse
+func _on_go_to_pressed() -> void:
+	_cue_list.seek_to(_cues.right(_selected_cue))
 
 
 ## Called when the Play / Pause button is pressed
@@ -196,3 +225,14 @@ func deserialize(p_serialized_data: Dictionary) -> void:
 	super.deserialize(p_serialized_data)
 	
 	component_button.look_for(type_convert(p_serialized_data.get("cue_list", ""), TYPE_STRING))
+
+
+## Called for each GUI input on the CueContainer
+func _on_cue_container_gui_input(p_event: InputEvent) -> void:
+	if p_event is InputEventMouseButton and p_event.is_pressed():
+		p_event = p_event as InputEventMouseButton
+		
+		match p_event.get_button_index():
+			MOUSE_BUTTON_LEFT:
+				_set_selected_cue(null)
+				pass

@@ -44,7 +44,7 @@ draw_center = false
 border_width_left = 3
 border_width_top = 3
 border_width_right = 3
-border_width_bottom = 4
+border_width_bottom = 3
 border_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 1
 corner_radius_top_right = 1
@@ -65,11 +65,10 @@ bg_color = Color(0, 0.513726, 1, 1)
 corner_radius_top_left = 4
 corner_radius_bottom_left = 4
 
-[node name="CueItem" type="PanelContainer" node_paths=PackedStringArray("status_bar", "name_label", "qid_label", "fade_time_label", "pre_wait_label", "trigger_mode_manual", "trigger_mode_after_last", "trigger_mode_with_last")]
+[node name="CueItem" type="PanelContainer" node_paths=PackedStringArray("status_bar", "name_label", "qid_label", "fade_time_label", "pre_wait_label", "trigger_mode_manual", "trigger_mode_after_last", "trigger_mode_with_last", "selection_outline")]
 offset_right = 304.0
 offset_bottom = 100.0
 size_flags_horizontal = 3
-mouse_filter = 1
 theme = ExtResource("1_t3b7b")
 theme_override_styles/panel = SubResource("StyleBoxFlat_lrd3y")
 script = ExtResource("2_aostn")
@@ -81,6 +80,7 @@ pre_wait_label = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContai
 trigger_mode_manual = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer/VBoxContainer/Manual")
 trigger_mode_after_last = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer/VBoxContainer/AfterLast")
 trigger_mode_with_last = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer/VBoxContainer/WithLast")
+selection_outline = NodePath("Selected")
 
 [node name="StoreMode" type="Panel" parent="."]
 visible = false
@@ -89,7 +89,6 @@ mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_vgny8")
 
 [node name="Selected" type="Panel" parent="."]
-visible = false
 layout_mode = 2
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_osi16")

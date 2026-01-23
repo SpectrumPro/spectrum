@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://c1cl6qetwg8st" path="res://assets/icons/Arrow_back.svg" id="11_5iwye"]
 [ext_resource type="Texture2D" uid="uid://kkblmodueva1" path="res://assets/icons/Arrow_foward.svg" id="12_dwiu4"]
 
-[node name="UICuePlayback" type="PanelContainer" node_paths=PackedStringArray("cue_container", "scroll_container", "component_button", "intensity_button", "control_buttons", "edit_controls", "buttons", "menu_bar")]
+[node name="UICuePlayback" type="PanelContainer" node_paths=PackedStringArray("cue_container", "scroll_container", "component_button", "intensity_button", "go_button", "control_buttons", "edit_controls", "buttons", "menu_bar")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -26,7 +26,8 @@ cue_container = NodePath("VBoxContainer/PanelContainer/ScrollContainer/CueContai
 scroll_container = NodePath("VBoxContainer/PanelContainer/ScrollContainer")
 component_button = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ComponentButton")
 intensity_button = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/CuePlaybackControls/HBoxContainer/IntensityButton")
-control_buttons = [NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/CuePlaybackControls/HBoxContainer/PlayPause"), NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/CuePlaybackControls/HBoxContainer/Stop"), NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/CuePlaybackControls/HBoxContainer/IntensityButton"), NodePath("VBoxContainer/Controls/HBoxContainer/Previous"), NodePath("VBoxContainer/Controls/HBoxContainer/GoTo"), NodePath("VBoxContainer/Controls/HBoxContainer/Next")]
+go_button = NodePath("VBoxContainer/Controls/HBoxContainer/GoTo")
+control_buttons = [NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/CuePlaybackControls/HBoxContainer/PlayPause"), NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/CuePlaybackControls/HBoxContainer/Stop"), NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/CuePlaybackControls/HBoxContainer/IntensityButton"), NodePath("VBoxContainer/Controls/HBoxContainer/Previous"), NodePath("VBoxContainer/Controls/HBoxContainer/Next")]
 edit_controls = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/EditControls")
 buttons = [NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/CuePlaybackControls/HBoxContainer/PlayPause"), NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/CuePlaybackControls/HBoxContainer/Stop"), NodePath("VBoxContainer/Controls/HBoxContainer/Previous"), NodePath("VBoxContainer/Controls/HBoxContainer/GoTo"), NodePath("VBoxContainer/Controls/HBoxContainer/Next")]
 menu_bar = NodePath("VBoxContainer/PanelMenuBar")
@@ -76,6 +77,7 @@ size_flags_vertical = 3
 [node name="CueContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="Controls" type="PanelContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 60)
@@ -108,7 +110,9 @@ icon_alignment = 1
 [connection signal="object_selected" from="VBoxContainer/PanelMenuBar/HBoxContainer/ComponentButton" to="." method="set_cue_list"]
 [connection signal="pressed" from="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/CuePlaybackControls/HBoxContainer/PlayPause" to="." method="_on_play_pause_pressed"]
 [connection signal="pressed" from="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/CuePlaybackControls/HBoxContainer/Stop" to="." method="_on_stop_pressed"]
+[connection signal="gui_input" from="VBoxContainer/PanelContainer/ScrollContainer/CueContainer" to="." method="_on_cue_container_gui_input"]
 [connection signal="pressed" from="VBoxContainer/Controls/HBoxContainer/Previous" to="." method="_on_previous_pressed"]
+[connection signal="pressed" from="VBoxContainer/Controls/HBoxContainer/GoTo" to="." method="_on_go_to_pressed"]
 [connection signal="pressed" from="VBoxContainer/Controls/HBoxContainer/Next" to="." method="_on_next_pressed"]
 
 [editable path="VBoxContainer/PanelMenuBar"]

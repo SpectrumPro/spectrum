@@ -40,12 +40,18 @@ signal double_clicked()
 ## Icon for Cue.TriggerMode.WITH_LAST
 @export var trigger_mode_with_last: TextureRect
 
+## The Panel for the selection outline
+@export var selection_outline: Panel
+
 
 ## The cue
 var _cue: Cue
 
 ## The current animating tween
 var _current_tween: Tween
+
+## True if this CueItem is selected
+var _selected: bool = false
 
 ## Signals to connect to the Cue
 var _cue_signals: SignalGroup = SignalGroup.new([], {
@@ -134,6 +140,17 @@ func set_trigger_mode(p_trigger_mode: Cue.TriggerMode) -> void:
 		
 		Cue.TriggerMode.WITH_LAST: 
 			trigger_mode_with_last.show()
+
+
+## Sets this cue selected
+func set_selected(p_selected: bool) -> void:
+	_selected = p_selected
+	selection_outline.set_visible(_selected)
+
+
+## Returns the selected state
+func is_selected() -> bool:
+	return _selected
 
 
 ## Called when an input event is decected in the panel
