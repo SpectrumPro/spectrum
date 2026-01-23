@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cnqivpcpimlwc"]
+[gd_scene load_steps=13 format=3 uid="uid://cnqivpcpimlwc"]
 
 [ext_resource type="Theme" uid="uid://cyua45ur0ijqo" path="res://assets/Main.theme" id="1_rr313"]
 [ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://assets/styles/UIPanelBase.tres" id="2_3fmy2"]
@@ -9,13 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://dnfqijjcnit7c" path="res://assets/icons/CueList.svg" id="6_gheyh"]
 [ext_resource type="Texture2D" uid="uid://dghhvu27mcp3u" path="res://assets/icons/PlayPause.svg" id="7_pq040"]
 [ext_resource type="Texture2D" uid="uid://qporw0h5fc8b" path="res://assets/icons/Stop.svg" id="8_tmmdv"]
-[ext_resource type="PackedScene" uid="uid://c30mlwfrsxbcl" path="res://components/TO_BE_SORTED/IntensityButton/IntensityButton.tscn" id="9_e1yjr"]
+[ext_resource type="PackedScene" uid="uid://c30mlwfrsxbcl" path="res://components/IntensityButton/IntensityButton.tscn" id="9_e1yjr"]
 [ext_resource type="Texture2D" uid="uid://c1cl6qetwg8st" path="res://assets/icons/Arrow_back.svg" id="11_5iwye"]
 [ext_resource type="Texture2D" uid="uid://kkblmodueva1" path="res://assets/icons/Arrow_foward.svg" id="12_dwiu4"]
-[ext_resource type="FontFile" uid="uid://crlak6jhg5jy2" path="res://assets/font/RubikMonoOne-Regular.ttf" id="13_xkopr"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_fuler"]
-font = ExtResource("13_xkopr")
 
 [node name="UICuePlayback" type="PanelContainer" node_paths=PackedStringArray("cue_container", "scroll_container", "component_button", "intensity_button", "control_buttons", "edit_controls", "buttons", "menu_bar")]
 anchors_preset = 15
@@ -82,6 +78,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Controls" type="PanelContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("4_iouh4")
 
@@ -107,24 +104,6 @@ size_flags_horizontal = 3
 disabled = true
 icon = ExtResource("12_dwiu4")
 icon_alignment = 1
-
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/Controls/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Controls/HBoxContainer/PanelContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="Label" type="Label" parent="VBoxContainer/Controls/HBoxContainer/PanelContainer/HBoxContainer"]
-layout_mode = 2
-text = "On Cue: "
-
-[node name="CueNumber" type="Label" parent="VBoxContainer/Controls/HBoxContainer/PanelContainer/HBoxContainer"]
-layout_mode = 2
-text = "
-"
-label_settings = SubResource("LabelSettings_fuler")
 
 [connection signal="object_selected" from="VBoxContainer/PanelMenuBar/HBoxContainer/ComponentButton" to="." method="set_cue_list"]
 [connection signal="pressed" from="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/CuePlaybackControls/HBoxContainer/PlayPause" to="." method="_on_play_pause_pressed"]

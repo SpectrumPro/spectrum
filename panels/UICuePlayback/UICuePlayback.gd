@@ -66,6 +66,7 @@ func set_cue_list(p_cue_list: CueList) -> void:
 		return
 	
 	_add_cues(_cue_list.get_cues())
+	_set_active_cue(_cue_list.get_active_cue(), 0.0)
 
 
 ## Called when cues are added
@@ -100,7 +101,7 @@ func _remove_cues(p_cues: Array) -> void:
 
 
 ## Called when the active cue is changed
-func _set_active_cue(p_cue: Cue) -> void:
+func _set_active_cue(p_cue: Cue, p_speed_override: float = 1.0) -> void:
 	if not _cues.has_left(p_cue):
 		return
 	
@@ -110,7 +111,7 @@ func _set_active_cue(p_cue: Cue) -> void:
 	if is_instance_valid(_active_cue):
 		_active_cue.set_status_bar(false, 0.0)
 	
-	cue_item.set_status_bar(true, p_cue.get_fade_time())
+	cue_item.set_status_bar(true, p_cue.get_fade_time() if p_speed_override == -1.0 else p_speed_override)
 	_active_cue = cue_item
 
 

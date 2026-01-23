@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://cyua45ur0ijqo" path="res://assets/Main.theme" id="1_hvov7"]
 [ext_resource type="Texture2D" uid="uid://c8wnnqs5lxs4j" path="res://assets/icons/Brightness.svg" id="1_x0k6q"]
-[ext_resource type="Script" uid="uid://cgvf0fd6rg2sl" path="res://components/TO_BE_SORTED/IntensityButton/IntensityButton.gd" id="2_5y0g3"]
+[ext_resource type="Script" uid="uid://cgvf0fd6rg2sl" path="res://components/IntensityButton/IntensityButton.gd" id="2_5y0g3"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tolaf"]
 
@@ -11,12 +11,14 @@ bg_color = Color(0, 0.513726, 1, 0.364706)
 corner_radius_top_left = 4
 corner_radius_bottom_left = 4
 
-[node name="IntensityButton" type="Button"]
+[node name="IntensityButton" type="Button" node_paths=PackedStringArray("progress_bar", "button_icon")]
 custom_minimum_size = Vector2(40, 38)
 mouse_default_cursor_shape = 10
 theme = ExtResource("1_hvov7")
 keep_pressed_outside = true
 script = ExtResource("2_5y0g3")
+progress_bar = NodePath("ProgressBar")
+button_icon = NodePath("Icon")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 layout_mode = 1
@@ -25,7 +27,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 1
+mouse_filter = 2
 theme_override_styles/background = SubResource("StyleBoxEmpty_tolaf")
 theme_override_styles/fill = SubResource("StyleBoxFlat_jdfeq")
 max_value = 1.0
@@ -44,6 +46,7 @@ offset_right = 12.0
 offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("1_x0k6q")
 
 [connection signal="button_down" from="." to="." method="_on_button_down"]
