@@ -81,13 +81,13 @@ func set_cue(p_cue: Cue) -> void:
 
 ## Pauses the tween for the status bar
 func pause_status_bar() -> void:
-	if is_instance_valid(_current_tween):
+	if is_instance_valid(_current_tween) and _current_tween.is_valid():
 		_current_tween.pause()
 
 
 ## Plays the tween for the status bar
 func play_status_bar() -> void:
-	if is_instance_valid(_current_tween):
+	if is_instance_valid(_current_tween) and _current_tween.is_valid():
 		_current_tween.play()
 
 
