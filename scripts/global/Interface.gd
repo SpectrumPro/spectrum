@@ -182,6 +182,7 @@ func _init() -> void:
 	settings_manager.register_control("OpenWindowManager", Data.Type.ACTION, set_popup_visable.bind(WindowPopup.WINDOW_MANAGER, self, true), Callable(), [])
 	settings_manager.register_control("AddWindow", Data.Type.ACTION, add_window, Callable(), [])
 	settings_manager.register_control("SaveUI", Data.Type.ACTION, save_ui, Callable(), [])
+	settings_manager.register_control("ComponentSettings", Data.Type.ACTION, prompt_component_settings_search.bind(self))
 
 
 ## Ready ClientInterface
@@ -298,6 +299,13 @@ func prompt_panel_settings(p_source: Node, p_panel: UIPanel) -> Promise:
 ## Promps the user with UIComponentSettings
 func prompt_component_settings(p_source: Node, p_component: EngineComponent) -> Promise:
 	return _show_window_popup(WindowPopup.COMPONENT_SETTINGS, p_source, p_component)
+
+
+## Prompts the user with UIObjectPicker to search for a component to view settings for
+func prompt_component_settings_search(p_source: Node) -> Promise:
+	return prompt_object_picker(p_source, EngineComponent, EngineComponent).then(func (p_component: EngineComponent):
+		prompt_component_settings(p_source, p_component)
+	)
 
 
 ## Promps the user with UIPaneSettings
