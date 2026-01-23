@@ -183,6 +183,7 @@ func _init() -> void:
 	settings_manager.register_control("AddWindow", Data.Type.ACTION, add_window, Callable(), [])
 	settings_manager.register_control("SaveUI", Data.Type.ACTION, save_ui, Callable(), [])
 	settings_manager.register_control("ComponentSettings", Data.Type.ACTION, prompt_component_settings_search.bind(self))
+	settings_manager.register_control("CreateComponent", Data.Type.ACTION, prompt_create_component_rename.bind(self))
 
 
 ## Ready ClientInterface
@@ -338,7 +339,7 @@ func prompt_interface_selector(p_source: Node) -> Promise:
 	return promise
 
 
-## Promps the user with UIPaneSettings
+## Promps the user with UIObjectPicker
 func prompt_create_component(p_source: Node, p_class_filter: String) -> Promise:
 	var promise: Promise = _show_window_popup(WindowPopup.OBJECT_PICKER, p_source, null)
 	var object_picker: UIObjectPicker = promise.get_object_refernce()
@@ -347,6 +348,15 @@ func prompt_create_component(p_source: Node, p_class_filter: String) -> Promise:
 	object_picker.set_index(EngineComponent, p_class_filter)
 	
 	return promise
+
+
+## Prompts the user with UIObjectPicker, creates the component, and Prompts the user with the name dialog
+func prompt_create_component_rename(p_source: Node) -> Promise:
+	return prompt_create_component(p_source, "EngineComponent").then(func (p_classname: String):
+		Core.create_component(p_classname).then(func (p_component: EngineComponent):
+			prompt_settings_module(p_source, p_component.settings().get_entry("name"))
+		)
+	)
 
 
 ## Promps the user with SettingsModule
