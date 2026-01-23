@@ -210,7 +210,7 @@ func seek_to(cue: Cue) -> Promise:
 ## Called when this CueList is to be deleted
 func delete() -> void:
 	for cue: Cue in _cues.duplicate():
-		cue.local_delete()
+		cue.delete()
 	
 	super.delete()
 
