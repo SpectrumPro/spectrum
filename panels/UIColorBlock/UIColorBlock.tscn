@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfrvydwbfduet"]
+
+[ext_resource type="Script" uid="uid://b3v12eodc4twb" path="res://panels/UIColorBlock/UIColorBlock.gd" id="1_7guwk"]
+[ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://assets/styles/UIPanelBase.tres" id="1_r6y6h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jtr56"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="UIColorBlock" type="PanelContainer" node_paths=PackedStringArray("panel")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("1_r6y6h")
+script = ExtResource("1_7guwk")
+panel = NodePath("ColorRect")
+
+[node name="ColorRect" type="Panel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_jtr56")
