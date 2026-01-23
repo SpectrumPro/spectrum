@@ -89,6 +89,7 @@ mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_vgny8")
 
 [node name="Selected" type="Panel" parent="."]
+visible = false
 layout_mode = 2
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_osi16")
