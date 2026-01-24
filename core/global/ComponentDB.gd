@@ -53,7 +53,7 @@ func register_component(p_component: EngineComponent) -> bool:
 		_components_by_classname[classname].append(p_component)
 	
 	if p_component.uuid() in _component_requests:
-		for callback: Callable in _component_requests[p_component.uuid()]:
+		for callback: Callable in _component_requests[p_component.uuid()].duplicate():
 			if callback.is_valid(): 
 				callback.call(p_component)
 		_component_requests.erase(p_component.uuid())
