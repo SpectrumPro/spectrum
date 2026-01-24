@@ -76,8 +76,8 @@ func get_component() -> EngineComponent:
 
 
 ## Returns the UUID of the component, or ""
-func get_component_uuid() -> String:
-	return _component.uuid() if is_instance_valid(_component) else ""
+func get_component_uuid(p_allow_resolve_uuid: bool = true) -> String:
+	return _component.uuid() if is_instance_valid(_component) else _look_for_component if p_allow_resolve_uuid else ""
 
 
 ## Removes the ComponentDB request for the object
