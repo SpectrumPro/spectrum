@@ -15,8 +15,8 @@ class_name UICuePlayback extends UIPanel
 ## The ComponentButton
 @export var component_button: ComponentButton
 
-## The IntensityButton
-@export var intensity_button: IntensityButton
+## The FunctionPlaybackControls
+@export var function_playback_controls: FunctionPlaybackControls
 
 ## The Go button
 @export var go_button: Button
@@ -61,7 +61,7 @@ func set_cue_list(p_cue_list: CueList) -> void:
 	_signal_connections.disconnect_object(_cue_list)
 	_cue_list = p_cue_list
 	
-	intensity_button.set_function(_cue_list)
+	function_playback_controls.set_function(_cue_list)
 	_signal_connections.connect_object(_cue_list)
 	
 	var is_valid: bool = is_instance_valid(p_cue_list)
@@ -110,7 +110,7 @@ func _remove_cues(p_cues: Array) -> void:
 
 
 ## Called when the active cue is changed
-func _set_active_cue(p_cue: Cue, p_speed_override: float = 1.0) -> void:
+func _set_active_cue(p_cue: Cue, p_speed_override: float = -1.0) -> void:
 	if is_instance_valid(_active_cue):
 		_active_cue.set_status_bar(false, 0.0)
 	
