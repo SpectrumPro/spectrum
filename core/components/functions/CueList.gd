@@ -280,7 +280,7 @@ func _remove_cue(p_cue: Cue, p_no_signal: bool = false) -> bool:
 		return false
 	 
 	_cues.erase(p_cue)
-	Network.deregister_component(p_cue.settings())
+	Network.deregister_network_object(p_cue.settings())
 
 	if not p_no_signal:
 		cues_removed.emit([p_cue])
