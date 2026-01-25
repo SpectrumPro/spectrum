@@ -12,6 +12,8 @@ class_name IntensityButton extends Button
 ## Multiplier of the value
 @export var multiplier: float = 0.2
 
+@export_group("Nodes")
+
 ## The ProgressBar
 @export var progress_bar: ProgressBar
 
@@ -64,7 +66,6 @@ func set_enabled(p_state: bool) -> void:
 	set_process(p_state)
 	button_icon.set_visible(not p_state)
 	progress_bar.set_show_percentage(p_state)
-
 
 
 ## Called when the intensity changes on the function
