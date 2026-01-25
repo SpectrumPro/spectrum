@@ -83,8 +83,8 @@ func _init(p_uuid: String = UUID_Util.v4(), p_name: String = _name) -> void:
 	
 	_settings_manager.register_control("go_previous", Data.Type.ACTION, go_previous)
 	_settings_manager.register_control("go_next", Data.Type.ACTION, go_next)
-	_settings_manager.register_control("global_fade_speed", Data.Type.FLOAT, set_global_fade_speed, get_global_fade_speed, [global_fade_changed])
-	_settings_manager.register_control("global_pre_wait_speed", Data.Type.FLOAT, set_global_pre_wait_speed, get_global_pre_wait_speed, [global_pre_wait_changed])
+	_settings_manager.register_control("global_fade_speed", Data.Type.FLOAT, set_global_fade_speed, get_global_fade_speed, [global_fade_changed]).set_min_max(0, INF)
+	_settings_manager.register_control("global_pre_wait_speed", Data.Type.FLOAT, set_global_pre_wait_speed, get_global_pre_wait_speed, [global_pre_wait_changed]).set_min_max(0, INF)
 	
 	_settings_manager.register_networked_callbacks({
 		"on_active_cue_changed": _on_active_cue_changed,
