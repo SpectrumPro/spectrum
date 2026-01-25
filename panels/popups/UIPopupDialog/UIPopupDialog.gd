@@ -46,7 +46,7 @@ var _preset_config: Dictionary[Preset, Callable] = {
 	Preset.DELETE: (func (p_label: String):
 		title(p_label if p_label else "Confirm deletion? This action can't be undone.")
 		button("Cancel", false)
-		button("Delete", true, Color.INDIAN_RED)
+		button("Delete", true, Color.RED)
 		),
 }
 
