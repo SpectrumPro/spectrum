@@ -118,8 +118,16 @@ func _set_active_cue(p_cue: Cue, p_speed_override: float = -1.0) -> void:
 		_active_cue = null
 		return
 	
+	var fade_time: float = p_cue.get_fade_time()
+	
+	if _cue_list.get_global_fade_state():
+		fade_time = _cue_list.get_global_fade_speed()
+	
+	if p_speed_override != -1:
+		fade_time = p_speed_override
+	
 	_active_cue = _cues.left(p_cue)
-	_active_cue.set_status_bar(true, p_cue.get_fade_time() if p_speed_override == -1.0 else p_speed_override)
+	_active_cue.set_status_bar(true, fade_time)
 	Interface.fade_property(scroll_container, "scroll_vertical", _active_cue.position.y - _active_cue.size.y, Callable(), ThemeManager.Constants.Times.InterfaceFadeFast)
 
 
