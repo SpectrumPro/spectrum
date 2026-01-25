@@ -1,13 +1,98 @@
-[gd_scene load_steps=4 format=3 uid="uid://bf3cbsyaotnnq"]
+[gd_scene load_steps=14 format=3 uid="uid://bf3cbsyaotnnq"]
 
 [ext_resource type="Script" uid="uid://hmhku2rcmd4j" path="res://components/Table/Table.gd" id="1_bfqnh"]
+[ext_resource type="Script" uid="uid://cqqewrymh5k55" path="res://components/Table/TableTitleButton.gd" id="2_xi7fw"]
+[ext_resource type="PackedScene" uid="uid://b6eijsxlis7r3" path="res://components/SelectBox/SelectBox.tscn" id="3_6x34v"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bfqnh"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+bg_color = Color(0.11372549, 0.11372549, 0.11372549, 1)
+border_color = Color(0.16924527, 0.1692453, 0.16924527, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xi7fw"]
+content_margin_left = 4.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6x34v"]
+content_margin_left = 4.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.13725491, 0.13725491, 0.13725491, 1)
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.27451, 0.27451, 0.27451, 1)
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qom68"]
+content_margin_left = 4.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.17283267, 0.17283267, 0.17283261, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.30323282, 0.30323285, 0.30323276, 1)
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iqbhn"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.07)
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jhp4g"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.03)
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k6emn"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.4)
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m8sci"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.4)
+corner_detail = 5
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bfqnh"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xi7fw"]
 
-[node name="Table" type="Control"]
-layout_mode = 3
+[node name="Table" type="PanelContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -15,21 +100,76 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_bfqnh")
 
-[node name="Tree" type="Tree" parent="."]
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+
+[node name="TitleScroll" type="ScrollContainer" parent="Control"]
+unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/TitleScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_bfqnh")
+
+[node name="TitleContainer" type="HBoxContainer" parent="Control/TitleScroll/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TemplateTitleButton" type="Button" parent="Control/TitleScroll/PanelContainer/TitleContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_xi7fw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_6x34v")
+theme_override_styles/hover = SubResource("StyleBoxFlat_qom68")
+text = "Column Name"
+alignment = 0
+script = ExtResource("2_xi7fw")
+
+[node name="Tree" type="Tree" parent="Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 43.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0.886262, 0.886261, 0.886262, 1)
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.7962427, 0.7962432, 0.7962428, 1)
 theme_override_colors/font_selected_color = Color(1, 1, 1, 1)
+theme_override_constants/h_separation = 4
 theme_override_constants/v_separation = 9
+theme_override_styles/panel = SubResource("StyleBoxFlat_bfqnh")
+theme_override_styles/hovered = SubResource("StyleBoxFlat_iqbhn")
+theme_override_styles/hovered_dimmed = SubResource("StyleBoxFlat_jhp4g")
+theme_override_styles/hovered_selected = SubResource("StyleBoxFlat_k6emn")
+theme_override_styles/hovered_selected_focus = SubResource("StyleBoxFlat_m8sci")
 theme_override_styles/cursor = SubResource("StyleBoxEmpty_bfqnh")
 theme_override_styles/cursor_unfocused = SubResource("StyleBoxEmpty_xi7fw")
-column_titles_visible = true
+hide_folding = true
 hide_root = true
 select_mode = 2
 
-[connection signal="gui_input" from="Tree" to="." method="_on_tree_gui_input"]
-[connection signal="multi_selected" from="Tree" to="." method="_on_tree_multi_selected"]
+[node name="SelectBox" parent="Control/Tree" node_paths=PackedStringArray("event_control") instance=ExtResource("3_6x34v")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+event_control = NodePath("..")
+
+[connection signal="resized" from="." to="." method="_update_column_min_size"]
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="button_down" from="Control/TitleScroll/PanelContainer/TitleContainer/TemplateTitleButton" to="Control/TitleScroll/PanelContainer/TitleContainer/TemplateTitleButton" method="_on_button_down"]
+[connection signal="button_up" from="Control/TitleScroll/PanelContainer/TitleContainer/TemplateTitleButton" to="Control/TitleScroll/PanelContainer/TitleContainer/TemplateTitleButton" method="_on_button_up"]
+[connection signal="gui_input" from="Control/Tree" to="." method="_on_tree_gui_input"]
+[connection signal="gui_input" from="Control/Tree" to="Control/Tree/SelectBox" method="_on_event_control_gui_input"]
+[connection signal="multi_selected" from="Control/Tree" to="." method="_on_tree_multi_selected"]
+[connection signal="nothing_selected" from="Control/Tree" to="." method="_on_tree_nothing_selected"]
+[connection signal="selection_updated" from="Control/Tree/SelectBox" to="." method="_on_select_box_selection_updated"]

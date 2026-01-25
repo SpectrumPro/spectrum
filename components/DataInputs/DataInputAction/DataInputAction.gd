@@ -39,10 +39,11 @@ func _set_editable(p_editable: bool) -> void:
 
 ## Called when the button is pressed down
 func _on_button_button_down() -> void:
-	_update_outline_feedback(_module.get_setter().call())
+	set_value()
 
 
 ## Called when the button is pressed up
 func _on_button_button_up() -> void:
-	if _module.get_action_mode() == SettingsModule.ActionMode.HOLD and _module.get_hold_release_callable().is_valid():
-		_update_outline_feedback(_module.get_hold_release_callable().call())
+	for module: SettingsModule in _modules:
+		if module.get_action_mode() == SettingsModule.ActionMode.HOLD and module.get_hold_release_callable().is_valid():
+			module.get_hold_release_callable().call()

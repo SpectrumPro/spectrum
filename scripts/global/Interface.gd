@@ -360,8 +360,8 @@ func prompt_create_component_rename(p_source: Node) -> Promise:
 
 
 ## Promps the user with SettingsModule
-func prompt_settings_module(p_source: Node, p_module: SettingsModule) -> Promise:
-	return _show_window_popup(WindowPopup.SETTINGS_MODULE, p_source, p_module)
+func prompt_settings_module(p_source: Node, p_modules: Variant) -> Promise:
+	return _show_window_popup(WindowPopup.SETTINGS_MODULE, p_source, p_modules)
 
 
 ## Promps the user with a DataInput
@@ -419,6 +419,27 @@ func prompt_popup_dialog(p_source: Node, p_title: String = "") -> UIPopupDialog:
 	show_and_fade(new_dialog, new_dialog.focus)
 	_open_popup_dialogs[p_source] = new_dialog
 	return new_dialog
+
+
+## Prompts the user to delete the given engine components
+func prompt_delete_components(p_source: Node, p_components: Array) -> Promise:
+	var title: PackedStringArray
+	title.append("Delete")
+	
+	if p_components.size() > 1:
+		title.append(": " + str(p_components.size()) + " Components?")
+	elif p_components.size() and p_components[0] is EngineComponent:
+		title.append(" Selected " + p_components[0].classname() + "?")
+	else:
+		return
+	
+	return prompt_popup_dialog(p_source, "").preset(UIPopupDialog.Preset.DELETE, "".join(title)).promise().then(func ():
+		for component: Variant in p_components:
+			if not component is EngineComponent:
+				continue
+			
+			component.delete_rpc()
+	)
 
 
 ## Prompts the user with a custom panel popup

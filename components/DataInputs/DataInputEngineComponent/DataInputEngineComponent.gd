@@ -42,5 +42,5 @@ func _set_editable(p_editable: bool) -> void:
 ## Called when the button is pressed
 func _on_button_pressed() -> void:
 	Interface.prompt_object_picker(self, EngineComponent, _module.get_class_filter().get_global_name()).then(func (p_component: EngineComponent):
-		_update_outline_feedback(_module.get_setter().call(p_component))
+		set_value(p_component)
 	)

@@ -45,4 +45,4 @@ func _set_editable(p_editable: bool) -> void:
 
 ## Called when an item is selected
 func _on_button_item_selected(p_index: int) -> void:
-	_update_outline_feedback(_module.get_setter().call(_module.get_enum_dict().values()[p_index]))
+	set_value(_module.get_enum_dict().values()[p_index])

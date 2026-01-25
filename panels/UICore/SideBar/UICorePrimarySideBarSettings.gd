@@ -47,7 +47,7 @@ func _ready() -> void:
 	for column: String in Column:
 		table.add_column(column.capitalize(), _column_data_types[Column[column]])
 	
-	table.get_column(Column.INDEX).set_expand(false)
+	table.get_column(Column.INDEX).set_allow_expand(false)
 
 
 ## Sets the side bar

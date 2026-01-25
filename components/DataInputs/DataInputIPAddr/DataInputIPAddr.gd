@@ -38,5 +38,5 @@ func _set_editable(p_editable: bool) -> void:
 ## Called when the button is pressed
 func _on_button_pressed() -> void:
 	Interface.prompt_interface_selector(self).then(func (p_address: IPAddr):
-		_update_outline_feedback(_module.get_setter().call(p_address))
+		set_value(p_address)
 	)

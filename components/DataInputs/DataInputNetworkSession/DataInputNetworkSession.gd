@@ -37,5 +37,5 @@ func _set_editable(p_editable: bool) -> void:
 ## Called when the button is pressed
 func _on_button_pressed() -> void:
 	Interface.prompt_object_picker(self, NetworkItem, _module.get_class_filter().get_global_name()).then(func (p_session: NetworkSession):
-		_update_outline_feedback(_module.get_setter().call(p_session))
+		set_value(p_session)
 	)
