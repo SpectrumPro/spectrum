@@ -1,0 +1,97 @@
+[gd_scene load_steps=11 format=3 uid="uid://5wsmpnnijdd4"]
+
+[ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://assets/styles/UIPanelBase.tres" id="1_3uf7h"]
+[ext_resource type="Script" uid="uid://poawc6x4w6po" path="res://panels/UICueSheet/UICueSheet.gd" id="2_cng42"]
+[ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://panels/UIPanel/PanelMenuBar.tscn" id="3_kypdf"]
+[ext_resource type="Texture2D" uid="uid://dnfqijjcnit7c" path="res://assets/icons/CueList.svg" id="5_ew5bc"]
+[ext_resource type="Script" uid="uid://hutvrbbo10e6" path="res://core/components/functions/CueList.gd" id="5_npvjf"]
+[ext_resource type="Texture2D" uid="uid://c1cl6qetwg8st" path="res://assets/icons/Arrow_back.svg" id="6_xv7bu"]
+[ext_resource type="Texture2D" uid="uid://kkblmodueva1" path="res://assets/icons/Arrow_foward.svg" id="7_r6ku8"]
+[ext_resource type="PackedScene" uid="uid://bnbr5mq5sb6gt" path="res://components/FunctionPlaybackControls/FunctionPlaybackControls.tscn" id="8_kypdf"]
+[ext_resource type="PackedScene" uid="uid://bf3cbsyaotnnq" path="res://components/Table/Table.tscn" id="10_npvjf"]
+[ext_resource type="Texture2D" uid="uid://dfrrs2dnvlvsu" path="res://assets/icons/Delete.svg" id="11_pa88r"]
+
+[node name="UICueSheet" type="PanelContainer" node_paths=PackedStringArray("component_button", "previous_button", "go_button", "next_button", "function_playback_controls", "delete_button", "table", "edit_controls", "menu_bar")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("1_3uf7h")
+script = ExtResource("2_cng42")
+component_button = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ComponentButton")
+previous_button = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/CueSeekControls/HBoxContainer/Previous")
+go_button = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/CueSeekControls/HBoxContainer/Go")
+next_button = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/CueSeekControls/HBoxContainer/Next")
+function_playback_controls = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/FunctionPlaybackControls")
+delete_button = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer/DeleteCue")
+table = NodePath("VBoxContainer/Table")
+edit_controls = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/EditControls")
+menu_bar = NodePath("VBoxContainer/PanelMenuBar")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="PanelMenuBar" parent="VBoxContainer" instance=ExtResource("3_kypdf")]
+layout_mode = 2
+
+[node name="HBoxContainer" parent="VBoxContainer/PanelMenuBar" index="0"]
+theme_override_constants/separation = 4
+
+[node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="0"]
+text = "CueSheet"
+icon = ExtResource("5_ew5bc")
+class_filter = ExtResource("5_npvjf")
+enable_resolve_mode = true
+enabled = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer" index="0"]
+layout_mode = 2
+
+[node name="CueSeekControls" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/CueSeekControls"]
+layout_mode = 2
+
+[node name="Previous" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/CueSeekControls/HBoxContainer"]
+layout_mode = 2
+disabled = true
+icon = ExtResource("6_xv7bu")
+
+[node name="Go" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/CueSeekControls/HBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "GO"
+
+[node name="Next" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/CueSeekControls/HBoxContainer"]
+layout_mode = 2
+disabled = true
+icon = ExtResource("7_r6ku8")
+
+[node name="FunctionPlaybackControls" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer" instance=ExtResource("8_kypdf")]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="DeleteCue" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+disabled = true
+icon = ExtResource("11_pa88r")
+
+[node name="Table" parent="VBoxContainer" instance=ExtResource("10_npvjf")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[connection signal="object_selected" from="VBoxContainer/PanelMenuBar/HBoxContainer/ComponentButton" to="." method="set_cue_list"]
+[connection signal="pressed" from="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/CueSeekControls/HBoxContainer/Previous" to="." method="_on_previous_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/CueSeekControls/HBoxContainer/Go" to="." method="_on_go_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/CueSeekControls/HBoxContainer/Next" to="." method="_on_next_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer/DeleteCue" to="." method="_on_delete_cue_pressed"]
+[connection signal="selection_changed" from="VBoxContainer/Table" to="." method="_on_table_selection_changed"]
+
+[editable path="VBoxContainer/PanelMenuBar"]

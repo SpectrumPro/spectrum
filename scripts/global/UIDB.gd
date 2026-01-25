@@ -42,6 +42,7 @@ var _panels: Dictionary[String, PackedScene] = {
 	"UICuePlayback":		load(_p("UICuePlayback")),
 	"UIComponentSettings":	load(_p("UIComponentSettings")),
 	"UIColorBlock":			load(_p("UIColorBlock")),
+	"UICueSheet":			load(_p("UICueSheet")),
 }
 
 
@@ -99,7 +100,8 @@ var _panels_by_category: Dictionary[String, Array] = {
 	],
 	"Programming": [
 		"UIProgrammer",
-		"UIColorPicker"
+		"UIColorPicker",
+		"UICueSheet",
 	],
 	"Components": [
 		"UIUniverses",
