@@ -280,7 +280,7 @@ func _deregister_item(p_item: NetworkItem) -> void:
 
 ## Emitted when a command is recieved
 func _on_command_recieved(p_from: NetworkNode, p_type: Variant.Type, p_command: Variant) -> void:
-	print("Got command: ", p_command, " from: ", p_from.get_node_name())
+	print_verbose("Got command: ", p_command, " from: ", p_from.get_node_name())
 	
 	if p_command is Dictionary:
 		var object_id: String = type_convert(p_command.get("for", ""), TYPE_STRING)
