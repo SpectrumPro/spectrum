@@ -6,6 +6,10 @@ class_name UIColorPicker extends UIPanel
 ## UI Panel for showing a color picker
 
 
+## Emitted when the show value slider state is changed
+signal show_value_slider_changed(show_value_slider)
+
+
 ## The TextureRect for the Pad
 @export var _pad: TextureRect
 
@@ -17,6 +21,9 @@ class_name UIColorPicker extends UIPanel
 
 ## Mix Mode selection
 @export var _mix_mode: OptionButton
+
+## The Control to contain the slider
+@export var slider_container: Control
 
 
 ## The current color
@@ -34,6 +41,9 @@ var _fixtures: Array
 ## The refernce fixture
 var _refernce_fixture: Fixture
 
+## Shows or hides the value slider
+var _show_value_slider: bool = true
+
 
 ## init
 func _init() -> void:
@@ -42,6 +52,36 @@ func _init() -> void:
 	_set_class_name("UIColorPicker")
 	Values.connect_to_selection_value("selected_fixtures", _on_selected_fixture_changed)
 	_on_selected_fixture_changed(Values.get_selection_value("selected_fixtures"))
+	
+	settings_manager.register_setting("ShowValueSlider", Data.Type.BOOL, set_show_value_slider, get_show_value_slider, [show_value_slider_changed])
+
+
+## Shows or hides the value slider
+func set_show_value_slider(p_show_value_slider: bool, p_no_signal: bool = false) -> void:
+	_show_value_slider = p_show_value_slider
+	slider_container.set_visible(_show_value_slider)
+	
+	if not p_no_signal:
+		show_value_slider_changed.emit(_show_value_slider)
+
+
+## Gets the show value slider state
+func get_show_value_slider() -> bool:
+	return _show_value_slider
+
+
+## Serializes this UIColorPicker
+func serialize() -> Dictionary:
+	return super.serialize().merged({
+		"show_value_slider": _show_value_slider
+	})
+
+
+## Deserializes this UIColorPicker
+func deserialize(p_serialized_data: Dictionary) -> void:
+	super.deserialize(p_serialized_data)
+	
+	set_show_value_slider(type_convert(p_serialized_data.get("show_value_slider", _show_value_slider), TYPE_BOOL), true)
 
 
 ## Called when the color is changed, will only output CoreEngine.call_interval times per second to avoid overloading the server

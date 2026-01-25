@@ -13,7 +13,7 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[node name="UIColorPicker" type="PanelContainer" node_paths=PackedStringArray("_pad", "_crosshair", "_value_slider", "_mix_mode", "edit_controls", "menu_bar")]
+[node name="UIColorPicker" type="PanelContainer" node_paths=PackedStringArray("_pad", "_crosshair", "_value_slider", "_mix_mode", "slider_container", "edit_controls", "menu_bar")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -23,8 +23,9 @@ theme_override_styles/panel = ExtResource("1_vgwxr")
 script = ExtResource("2_ogrry")
 _pad = NodePath("VBoxContainer/HBoxContainer/Picker/HBoxContainer/PanelContainer/Pad")
 _crosshair = NodePath("VBoxContainer/HBoxContainer/Picker/HBoxContainer/PanelContainer/Pad/Crosshair")
-_value_slider = NodePath("VBoxContainer/HBoxContainer/Picker/HBoxContainer/PanelContainer2/VBoxContainer/PadValueSlider")
+_value_slider = NodePath("VBoxContainer/HBoxContainer/Picker/HBoxContainer/SliderContainer/VBoxContainer/PadValueSlider")
 _mix_mode = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/PanelContainer/MixMode")
+slider_container = NodePath("VBoxContainer/HBoxContainer/Picker/HBoxContainer/SliderContainer")
 edit_controls = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/EditControls")
 menu_bar = NodePath("VBoxContainer/PanelMenuBar")
 
@@ -81,19 +82,19 @@ offset_bottom = 24.0
 texture = ExtResource("7_b53g6")
 stretch_mode = 2
 
-[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/HBoxContainer/Picker/HBoxContainer"]
+[node name="SliderContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer/Picker/HBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/Picker/HBoxContainer/PanelContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/Picker/HBoxContainer/SliderContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/Picker/HBoxContainer/PanelContainer2/VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/Picker/HBoxContainer/SliderContainer/VBoxContainer"]
 layout_mode = 2
 text = "Value"
 horizontal_alignment = 1
 
-[node name="PadValueSlider" type="VSlider" parent="VBoxContainer/HBoxContainer/Picker/HBoxContainer/PanelContainer2/VBoxContainer"]
+[node name="PadValueSlider" type="VSlider" parent="VBoxContainer/HBoxContainer/Picker/HBoxContainer/SliderContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
@@ -105,6 +106,6 @@ ticks_on_borders = true
 
 [connection signal="gui_input" from="VBoxContainer/HBoxContainer/Picker/HBoxContainer/PanelContainer/Pad" to="." method="_on_texture_rect_gui_input"]
 [connection signal="resized" from="VBoxContainer/HBoxContainer/Picker/HBoxContainer/PanelContainer/Pad" to="." method="_update_pad"]
-[connection signal="value_changed" from="VBoxContainer/HBoxContainer/Picker/HBoxContainer/PanelContainer2/VBoxContainer/PadValueSlider" to="." method="_on_pad_value_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/HBoxContainer/Picker/HBoxContainer/SliderContainer/VBoxContainer/PadValueSlider" to="." method="_on_pad_value_slider_value_changed"]
 
 [editable path="VBoxContainer/PanelMenuBar"]
