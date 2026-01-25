@@ -1,4 +1,4 @@
-# Copyright (c) 2025 Liam Sherwin. All rights reserved.
+# Copyright (c) 2026 Liam Sherwin. All rights reserved.
 # This file is part of the Spectrum Lighting Controller, licensed under the GPL v3.0 or later.
 # See the LICENSE file for details.
 
@@ -37,7 +37,8 @@ var _look_for_component: String
 
 ## Signal connections for the EngineComponent
 var _signal_group: SignalGroup = SignalGroup.new([
-	_on_name_changed
+	_on_name_changed,
+	_on_delete_requested,
 ])
 
 
@@ -48,20 +49,24 @@ func _ready() -> void:
 
 
 ## Sets the select object
-func set_component(o_component: EngineComponent) -> void:
-	_signal_group.disconnect_object(_component)
-	
-	if not is_instance_valid(o_component):
-		_component = null
+func set_component(p_component: EngineComponent) -> void:
+	if p_component == _component:
 		underline.set_modulate(ThemeManager.Colors.Statuses.Standby)
 		return
 	
-	_component = o_component
+	_signal_group.disconnect_object(_component)
+	_component = p_component
 	_signal_group.connect_object(_component)
 	
-	set_text(_component.name())
-	underline.set_modulate(ThemeManager.Colors.Statuses.Normal)
+	if not is_instance_valid(_component):
+		set_text(_orignal_text)
+		underline.set_modulate(ThemeManager.Colors.Statuses.Standby)
 	
+	else:
+		set_text(_component.name())
+		underline.set_modulate(ThemeManager.Colors.Statuses.Normal)
+	
+	remove_look_for()
 	object_selected.emit(_component)
 
 
@@ -70,13 +75,26 @@ func get_component() -> EngineComponent:
 	return _component
 
 
-## Looks for an object, or waits untill is added
-func look_for(p_uuid: String) -> void:
+## Returns the UUID of the component, or ""
+func get_component_uuid(p_allow_resolve_uuid: bool = true) -> String:
+	return _component.uuid() if is_instance_valid(_component) else _look_for_component if p_allow_resolve_uuid else ""
+
+
+## Removes the ComponentDB request for the object
+func remove_look_for() -> void:
 	if _look_for_component:
 		ComponentDB.remove_request(_look_for_component, _on_component_found)
+
+
+## Looks for an object, or waits untill is added
+func look_for(p_uuid: String) -> void:
+	remove_look_for()
+	_look_for_component = p_uuid
+	
+	if not p_uuid:
+		return
 	
 	underline.set_modulate(ThemeManager.Colors.Statuses.Caution)
-	_look_for_component = p_uuid
 	ComponentDB.request_component(_look_for_component, _on_component_found)
 
 
@@ -101,8 +119,13 @@ func _on_component_found(p_component: EngineComponent) -> void:
 
 
 ## Called when the components name is changed
-func _on_name_changed(new_name: String) -> void:
-	text = new_name
+func _on_name_changed(p_new_name: String) -> void:
+	text = p_new_name
+
+
+## Called when the component is to be deleted
+func _on_delete_requested() -> void:
+	set_component(null)
 
 
 ## Called when the button is pressed

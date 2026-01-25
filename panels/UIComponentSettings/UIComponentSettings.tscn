@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://b4sabjg5utge2"]
+
+[ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://assets/styles/UIPanelBase.tres" id="1_hycm7"]
+[ext_resource type="Script" uid="uid://b1xqk8j41uia1" path="res://panels/UIComponentSettings/UIComponentSettings.gd" id="2_2jjai"]
+[ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://panels/UIPanel/PanelMenuBar.tscn" id="3_mnque"]
+[ext_resource type="PackedScene" uid="uid://kjup3yrjifr5" path="res://components/SettingsManagerView/SettingsManagerView.tscn" id="4_7pvrr"]
+[ext_resource type="Texture2D" uid="uid://c6xnsmttojanx" path="res://assets/icons/Settings.svg" id="4_mnque"]
+[ext_resource type="Script" uid="uid://ctnse5muj3sti" path="res://core/components/EngineComponent.gd" id="5_7pvrr"]
+
+[node name="UIComponentSettings" type="PanelContainer" node_paths=PackedStringArray("component_button", "settings_manager_view", "edit_controls", "menu_bar")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("1_hycm7")
+script = ExtResource("2_2jjai")
+component_button = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ComponentButton")
+settings_manager_view = NodePath("VBoxContainer/ScrollContainer/SettingsManagerView")
+edit_controls = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/EditControls")
+menu_bar = NodePath("VBoxContainer/PanelMenuBar")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="PanelMenuBar" parent="VBoxContainer" instance=ExtResource("3_mnque")]
+layout_mode = 2
+
+[node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="0"]
+text = "ComponentSettings"
+icon = ExtResource("4_mnque")
+class_filter = ExtResource("5_7pvrr")
+enable_resolve_mode = true
+enabled = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SettingsManagerView" parent="VBoxContainer/ScrollContainer" instance=ExtResource("4_7pvrr")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[connection signal="object_selected" from="VBoxContainer/PanelMenuBar/HBoxContainer/ComponentButton" to="." method="set_component"]
+
+[editable path="VBoxContainer/PanelMenuBar"]

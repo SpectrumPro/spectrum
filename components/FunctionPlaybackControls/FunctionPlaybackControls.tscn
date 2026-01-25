@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://bnbr5mq5sb6gt"]
+
+[ext_resource type="Texture2D" uid="uid://dghhvu27mcp3u" path="res://assets/icons/PlayPause.svg" id="1_4as44"]
+[ext_resource type="Script" uid="uid://4xxil4p2hli0" path="res://components/FunctionPlaybackControls/FunctionPlaybackControls.gd" id="1_smfx3"]
+[ext_resource type="Texture2D" uid="uid://qporw0h5fc8b" path="res://assets/icons/Stop.svg" id="2_smfx3"]
+[ext_resource type="PackedScene" uid="uid://c30mlwfrsxbcl" path="res://components/IntensityButton/IntensityButton.tscn" id="3_v5hs8"]
+
+[node name="FunctionPlaybackControls" type="PanelContainer" node_paths=PackedStringArray("play_pause_button", "stop_button", "intensity_button")]
+script = ExtResource("1_smfx3")
+play_pause_button = NodePath("HBoxContainer/PlayPause")
+stop_button = NodePath("HBoxContainer/Stop")
+intensity_button = NodePath("HBoxContainer/IntensityButton")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="PlayPause" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+disabled = true
+toggle_mode = true
+icon = ExtResource("1_4as44")
+
+[node name="Stop" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+disabled = true
+icon = ExtResource("2_smfx3")
+
+[node name="IntensityButton" parent="HBoxContainer" instance=ExtResource("3_v5hs8")]
+layout_mode = 2
+disabled = true
+
+[connection signal="toggled" from="HBoxContainer/PlayPause" to="." method="_on_play_pause_toggled"]
+[connection signal="pressed" from="HBoxContainer/Stop" to="." method="_on_stop_pressed"]

@@ -78,7 +78,7 @@ func _on_button_toggled(p_toggled_on: bool, p_mask: int) -> void:
 	else:
 		value &= ~p_mask
 	
-	_update_outline_feedback(_module.get_setter().call(value))
+	set_value(value)
 
 
 ## Called when the expand button is pressed

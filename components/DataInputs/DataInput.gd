@@ -22,6 +22,9 @@ var _focus_node: Control = self
 ## The currentl SettingsModle
 var _module: SettingsModule
 
+## All settings modules when multi editing
+var _modules: Array[SettingsModule]
+
 ## Currently value unsaved state
 var _unsaved: bool = false
 
@@ -42,6 +45,7 @@ func reset() -> void:
 	
 	_unsaved = false
 	_module = null
+	_modules = []
 	
 	_reset()
 
@@ -52,13 +56,24 @@ func focus() -> void:
 		_focus_node.grab_focus()
 
 
-## Sets the SettingsMoudle to edit
-func set_module(p_module: SettingsModule) -> bool:
-	if not Data.do_types_match_base(p_module.get_data_type(), _data_type):
-		return false
-	
+## Sets the SettingsMoudle to edit, accepts either a SettingsModule or Array[SettingsModule]
+func set_module(p_modules: Variant) -> bool:
 	reset()
-	_module = p_module
+	
+	if p_modules is Array and p_modules[0] is SettingsModule:
+		_module = p_modules[0]
+		
+		for module: Variant in p_modules:
+			if module is SettingsModule and Data.do_types_match_base(module.get_data_type(), _data_type):
+				_modules.append(module)
+		
+		if not _modules:
+			return false
+		
+	elif p_modules is SettingsModule and is_instance_valid(p_modules):
+		_module = p_modules
+	else:
+		return false
 	
 	_module.subscribe(_module_value_changed)
 	_settings_module_changed(_module)
@@ -86,6 +101,14 @@ func set_label_text(p_label_text: String) -> void:
 func set_editable(p_editable: bool) -> void:
 	_editable = p_editable
 	_set_editable(_editable)
+
+
+## Sets the value on the settings modules
+func set_value(...p_args: Array) -> void:
+	_update_outline_feedback(_module.get_setter().callv(p_args))
+	
+	for module: SettingsModule in _modules:
+		module.get_setter().callv(p_args)
 
 
 ## Gets the SettingsMoudle

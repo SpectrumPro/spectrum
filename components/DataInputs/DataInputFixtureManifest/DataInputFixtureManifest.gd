@@ -42,5 +42,5 @@ func _set_editable(p_editable: bool) -> void:
 ## Called when the button is pressed
 func _on_button_pressed() -> void:
 	Interface.prompt_manifest_picker(self).then(func (p_manifest: String, p_mode: String):
-		_update_outline_feedback(_module.get_setter().call(p_manifest, p_mode))
+		set_value(p_manifest, p_manifest)
 	)

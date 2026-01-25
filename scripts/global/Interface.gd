@@ -62,6 +62,7 @@ enum WindowPopup {
 	WINDOW_ID,			## UIWindowID
 	MANIFEST_PICKER,	## UIManifestPicker
 	INTERFACE_SELECTOR,	## UIInterfaceSelector
+	COMPONENT_SETTINGS,	## UIComponentSettings
 }
 
 
@@ -134,7 +135,8 @@ var _window_popup_config: Dictionary[WindowPopup, PopupConfig] = {
 	WindowPopup.WINDOW_MANAGER:		PopupConfig.new("UIWindowManager", ""),
 	WindowPopup.WINDOW_ID:			PopupConfig.new("UIWindowID", ""),
 	WindowPopup.MANIFEST_PICKER:	PopupConfig.new("UIManifestPicker"),
-	WindowPopup.INTERFACE_SELECTOR: PopupConfig.new("UIInterfaceSelector")
+	WindowPopup.INTERFACE_SELECTOR: PopupConfig.new("UIInterfaceSelector"),
+	WindowPopup.COMPONENT_SETTINGS: PopupConfig.new("UIComponentSettings", "set_component")
 }
 
 ## All windows by UUID RefMap for UUID: Window
@@ -180,6 +182,8 @@ func _init() -> void:
 	settings_manager.register_control("OpenWindowManager", Data.Type.ACTION, set_popup_visable.bind(WindowPopup.WINDOW_MANAGER, self, true), Callable(), [])
 	settings_manager.register_control("AddWindow", Data.Type.ACTION, add_window, Callable(), [])
 	settings_manager.register_control("SaveUI", Data.Type.ACTION, save_ui, Callable(), [])
+	settings_manager.register_control("ComponentSettings", Data.Type.ACTION, prompt_component_settings_search.bind(self))
+	settings_manager.register_control("CreateComponent", Data.Type.ACTION, prompt_create_component_rename.bind(self))
 
 
 ## Ready ClientInterface
@@ -293,10 +297,27 @@ func prompt_panel_settings(p_source: Node, p_panel: UIPanel) -> Promise:
 	return _show_window_popup(WindowPopup.PANEL_SETTINGS, p_source, p_panel)
 
 
+## Promps the user with UIComponentSettings
+func prompt_component_settings(p_source: Node, p_component: EngineComponent) -> Promise:
+	return _show_window_popup(WindowPopup.COMPONENT_SETTINGS, p_source, p_component)
+
+
+## Prompts the user with UIObjectPicker to search for a component to view settings for
+func prompt_component_settings_search(p_source: Node) -> Promise:
+	return prompt_object_picker(p_source, EngineComponent, EngineComponent).then(func (p_component: EngineComponent):
+		prompt_component_settings(p_source, p_component)
+	)
+
+
 ## Promps the user with UIPaneSettings
-func prompt_object_picker(p_source: Node, p_index: Script, p_class_filter: String) -> Promise:
+func prompt_object_picker(p_source: Node, p_index: Script, p_class_filter: Variant) -> Promise:
 	var promise: Promise = _show_window_popup(WindowPopup.OBJECT_PICKER, p_source, null)
 	var object_picker: UIObjectPicker = promise.get_object_refernce()
+	
+	if p_class_filter is Script:
+		p_class_filter = p_class_filter.get_global_name()
+	
+	p_class_filter = type_convert(p_class_filter, TYPE_STRING)
 	
 	object_picker.set_select_mode(UIObjectPicker.SelectMode.OBJECT)
 	object_picker.set_index(p_index, p_class_filter)
@@ -318,7 +339,7 @@ func prompt_interface_selector(p_source: Node) -> Promise:
 	return promise
 
 
-## Promps the user with UIPaneSettings
+## Promps the user with UIObjectPicker
 func prompt_create_component(p_source: Node, p_class_filter: String) -> Promise:
 	var promise: Promise = _show_window_popup(WindowPopup.OBJECT_PICKER, p_source, null)
 	var object_picker: UIObjectPicker = promise.get_object_refernce()
@@ -329,9 +350,18 @@ func prompt_create_component(p_source: Node, p_class_filter: String) -> Promise:
 	return promise
 
 
+## Prompts the user with UIObjectPicker, creates the component, and Prompts the user with the name dialog
+func prompt_create_component_rename(p_source: Node) -> Promise:
+	return prompt_create_component(p_source, "EngineComponent").then(func (p_classname: String):
+		Core.create_component(p_classname).then(func (p_component: EngineComponent):
+			prompt_settings_module(p_source, p_component.settings().get_entry("name"))
+		)
+	)
+
+
 ## Promps the user with SettingsModule
-func prompt_settings_module(p_source: Node, p_module: SettingsModule) -> Promise:
-	return _show_window_popup(WindowPopup.SETTINGS_MODULE, p_source, p_module)
+func prompt_settings_module(p_source: Node, p_modules: Variant) -> Promise:
+	return _show_window_popup(WindowPopup.SETTINGS_MODULE, p_source, p_modules)
 
 
 ## Promps the user with a DataInput
@@ -389,6 +419,27 @@ func prompt_popup_dialog(p_source: Node, p_title: String = "") -> UIPopupDialog:
 	show_and_fade(new_dialog, new_dialog.focus)
 	_open_popup_dialogs[p_source] = new_dialog
 	return new_dialog
+
+
+## Prompts the user to delete the given engine components
+func prompt_delete_components(p_source: Node, p_components: Array) -> Promise:
+	var title: PackedStringArray
+	title.append("Delete")
+	
+	if p_components.size() > 1:
+		title.append(": " + str(p_components.size()) + " Components?")
+	elif p_components.size() and p_components[0] is EngineComponent:
+		title.append(" Selected " + p_components[0].classname() + "?")
+	else:
+		return
+	
+	return prompt_popup_dialog(p_source, "").preset(UIPopupDialog.Preset.DELETE, "".join(title)).promise().then(func ():
+		for component: Variant in p_components:
+			if not component is EngineComponent:
+				continue
+			
+			component.delete_rpc()
+	)
 
 
 ## Prompts the user with a custom panel popup

@@ -1,0 +1,97 @@
+[gd_scene load_steps=11 format=3 uid="uid://cnqivpcpimlwc"]
+
+[ext_resource type="Theme" uid="uid://cyua45ur0ijqo" path="res://assets/Main.theme" id="1_rr313"]
+[ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://assets/styles/UIPanelBase.tres" id="2_3fmy2"]
+[ext_resource type="Script" uid="uid://b014dpwwf0a4j" path="res://panels/UICuePlayback/UICuePlayback.gd" id="3_wkadf"]
+[ext_resource type="StyleBox" uid="uid://csle20exwqtti" path="res://assets/styles/PanelMenuBar.tres" id="4_iouh4"]
+[ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://panels/UIPanel/PanelMenuBar.tscn" id="4_rr313"]
+[ext_resource type="Script" uid="uid://hutvrbbo10e6" path="res://core/components/functions/CueList.gd" id="6_3fmy2"]
+[ext_resource type="Texture2D" uid="uid://dnfqijjcnit7c" path="res://assets/icons/CueList.svg" id="6_gheyh"]
+[ext_resource type="PackedScene" uid="uid://bnbr5mq5sb6gt" path="res://components/FunctionPlaybackControls/FunctionPlaybackControls.tscn" id="7_kkuxk"]
+[ext_resource type="Texture2D" uid="uid://c1cl6qetwg8st" path="res://assets/icons/Arrow_back.svg" id="11_5iwye"]
+[ext_resource type="Texture2D" uid="uid://kkblmodueva1" path="res://assets/icons/Arrow_foward.svg" id="12_dwiu4"]
+
+[node name="UICuePlayback" type="PanelContainer" node_paths=PackedStringArray("cue_container", "scroll_container", "component_button", "function_playback_controls", "go_button", "control_buttons", "edit_controls", "buttons", "menu_bar")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_rr313")
+theme_override_styles/panel = ExtResource("2_3fmy2")
+script = ExtResource("3_wkadf")
+cue_container = NodePath("VBoxContainer/PanelContainer/ScrollContainer/CueContainer")
+scroll_container = NodePath("VBoxContainer/PanelContainer/ScrollContainer")
+component_button = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ComponentButton")
+function_playback_controls = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/FunctionPlaybackControls")
+go_button = NodePath("VBoxContainer/Controls/HBoxContainer/GoTo")
+control_buttons = [NodePath("VBoxContainer/Controls/HBoxContainer/Previous"), NodePath("VBoxContainer/Controls/HBoxContainer/Next")]
+edit_controls = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/EditControls")
+buttons = [NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/FunctionPlaybackControls/HBoxContainer/PlayPause"), NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/FunctionPlaybackControls/HBoxContainer/Stop"), NodePath("VBoxContainer/Controls/HBoxContainer/Previous"), NodePath("VBoxContainer/Controls/HBoxContainer/GoTo"), NodePath("VBoxContainer/Controls/HBoxContainer/Next")]
+menu_bar = NodePath("VBoxContainer/PanelMenuBar")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="PanelMenuBar" parent="VBoxContainer" instance=ExtResource("4_rr313")]
+layout_mode = 2
+
+[node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="0"]
+text = "CuePlayback"
+icon = ExtResource("6_gheyh")
+class_filter = ExtResource("6_3fmy2")
+enable_resolve_mode = true
+enabled = true
+
+[node name="FunctionPlaybackControls" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer" index="0" instance=ExtResource("7_kkuxk")]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CueContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Controls" type="PanelContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_iouh4")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Controls"]
+layout_mode = 2
+
+[node name="Previous" type="Button" parent="VBoxContainer/Controls/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+icon = ExtResource("11_5iwye")
+icon_alignment = 1
+
+[node name="GoTo" type="Button" parent="VBoxContainer/Controls/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+text = "GO"
+
+[node name="Next" type="Button" parent="VBoxContainer/Controls/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+icon = ExtResource("12_dwiu4")
+icon_alignment = 1
+
+[connection signal="object_selected" from="VBoxContainer/PanelMenuBar/HBoxContainer/ComponentButton" to="." method="set_cue_list"]
+[connection signal="gui_input" from="VBoxContainer/PanelContainer/ScrollContainer/CueContainer" to="." method="_on_cue_container_gui_input"]
+[connection signal="pressed" from="VBoxContainer/Controls/HBoxContainer/Previous" to="." method="_on_previous_pressed"]
+[connection signal="pressed" from="VBoxContainer/Controls/HBoxContainer/GoTo" to="." method="_on_go_to_pressed"]
+[connection signal="pressed" from="VBoxContainer/Controls/HBoxContainer/Next" to="." method="_on_next_pressed"]
+
+[editable path="VBoxContainer/PanelMenuBar"]
+[editable path="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/FunctionPlaybackControls"]

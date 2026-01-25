@@ -10,11 +10,17 @@ class_name CoreProgrammer extends Node
 signal cleared()
 
 
-## Save Modes
-enum SaveMode {
-	MODIFIED,		## Only save fixtures that have been changed in the programmer
-	ALL,			## Save all values of the fixtures
-	ALL_NONE_ZERO	## Save all values of the fixtures, as long as they are not the zero value for that channel
+## Enum for StoreMode
+enum StoreMode {
+	INSERT,			## Insets data into the container
+	ERASE,			## Erases data from the container
+}
+
+## Enum for StoreFilter
+enum StoreFilter {
+	MODIFIED,
+	ALL,
+	NONE_DEFAULT,
 }
 
 ## Random parameter modes
@@ -132,6 +138,11 @@ func erase_parameter(p_fixtures: Array, p_parameter: String, p_zone: String) -> 
 ## Shortcut to set the color of fixtures
 func shortcut_set_color(p_fixtures: Array, p_color: Color, p_mode: MixMode) -> Promise:
 	return Network.send_command("Programmer", "shortcut_set_color", [p_fixtures, p_color, p_mode])
+
+
+## Attempts to store the current data into the given component the best way possable
+func store_into(p_function: Function, p_store_mode: StoreMode = StoreMode.INSERT, p_store_filter: StoreFilter = StoreFilter.MODIFIED) -> Promise:
+	return Network.send_command("Programmer", "store_into", [p_function, p_store_mode, p_store_filter])
 
 
 ## Converts the parameter order array to a dictonary for faster lookup

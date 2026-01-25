@@ -37,4 +37,4 @@ func _set_editable(p_editable: bool) -> void:
 
 ## Called when the text is submitted in the LineEdit
 func _on_line_edit_text_submitted(new_text: String) -> void:
-	_update_outline_feedback(_module.get_setter().call(new_text))
+	set_value(new_text)

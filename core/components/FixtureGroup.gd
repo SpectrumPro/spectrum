@@ -104,22 +104,19 @@ func serialize() -> Dictionary:
 func deserialize(p_serialized_data: Dictionary) -> void:
 	super.deserialize(p_serialized_data)
 	
-	var just_added_fixtures: Array[FixtureGroupItem] = []
-	
 	if p_serialized_data.get("fixtures") is Dictionary: 
 		var fixtures: Dictionary = p_serialized_data.fixtures
 		
 		for fixture_uuid: Variant in fixtures:
-			if ComponentDB.get_component(fixture_uuid) is Fixture:
+			ComponentDB.request_component(fixture_uuid, func (p_fixture: EngineComponent):
+				if not p_fixture is Fixture:
+					return
 				
 				var new_group_item: FixtureGroupItem = FixtureGroupItem.new()
 				new_group_item.deserialize(fixtures[fixture_uuid])
 				
-				if _add_group_item(new_group_item, true):
-					just_added_fixtures.append(new_group_item)
-	
-	if just_added_fixtures:
-		fixtures_added.emit(just_added_fixtures)
+				_add_group_item(new_group_item, true)
+			)
 
 
 ## Internal: Adds a fixture to this FixtureGroup

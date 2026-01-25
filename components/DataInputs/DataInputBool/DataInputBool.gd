@@ -43,4 +43,4 @@ func _set_editable(p_editable: bool) -> void:
 
 ## Called when the button is toggled
 func _on_button_toggled(p_toggled_on: bool) -> void:
-	_update_outline_feedback(_module.get_setter().call(p_toggled_on))
+	set_value(p_toggled_on)

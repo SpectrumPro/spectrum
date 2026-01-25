@@ -1,0 +1,219 @@
+[gd_scene load_steps=16 format=3 uid="uid://owx4rxrtg50d"]
+
+[ext_resource type="Theme" uid="uid://cyua45ur0ijqo" path="res://assets/Main.theme" id="1_t3b7b"]
+[ext_resource type="Texture2D" uid="uid://cxtdx7cj44nk" path="res://assets/icons/Touch.svg" id="1_yeptw"]
+[ext_resource type="Texture2D" uid="uid://gntqv7ddcqvv" path="res://assets/icons/Fade.svg" id="2_2p1lo"]
+[ext_resource type="Script" uid="uid://dhbb4w3i6cv8f" path="res://panels/UICuePlayback/CueItem/CueItem.gd" id="2_aostn"]
+[ext_resource type="Texture2D" uid="uid://txqtfrlvm3r7" path="res://assets/icons/ReturnFlipped.svg" id="2_dbt18"]
+[ext_resource type="Texture2D" uid="uid://doaysnonvo60k" path="res://assets/icons/PreWait.svg" id="3_ns1ii"]
+[ext_resource type="Texture2D" uid="uid://03gtlskodjas" path="res://assets/icons/Cue.svg" id="3_u1n7c"]
+[ext_resource type="Texture2D" uid="uid://chjhgm2c7y36o" path="res://assets/icons/ArrowDownAlt.svg" id="3_woprv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lrd3y"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.0627451, 0.0627451, 0.0627451, 0.192157)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.223103, 0.223103, 0.223103, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vgny8"]
+bg_color = Color(0.701961, 0.0156863, 1, 0.156863)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.701961, 0.0156863, 1, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_osi16"]
+bg_color = Color(1, 1, 1, 0.156863)
+draw_center = false
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[sub_resource type="LabelSettings" id="LabelSettings_odw3y"]
+font_color = Color(0.707967, 0.707967, 0.707967, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_i6drb"]
+font_color = Color(0.707967, 0.707967, 0.707967, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_7f8dc"]
+font_color = Color(0.707967, 0.707967, 0.707967, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_resti"]
+bg_color = Color(0, 0.513726, 1, 1)
+corner_radius_top_left = 4
+corner_radius_bottom_left = 4
+
+[node name="CueItem" type="PanelContainer" node_paths=PackedStringArray("status_bar", "name_label", "qid_label", "fade_time_label", "pre_wait_label", "trigger_mode_manual", "trigger_mode_after_last", "trigger_mode_with_last", "selection_outline")]
+offset_right = 304.0
+offset_bottom = 100.0
+size_flags_horizontal = 3
+theme = ExtResource("1_t3b7b")
+theme_override_styles/panel = SubResource("StyleBoxFlat_lrd3y")
+script = ExtResource("2_aostn")
+status_bar = NodePath("VBoxContainer/ProgressBar")
+name_label = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/CueName")
+qid_label = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer2/HBoxContainer/CueNumber")
+fade_time_label = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer3/HBoxContainer/FadeTime")
+pre_wait_label = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer4/HBoxContainer/PreWait")
+trigger_mode_manual = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer/VBoxContainer/Manual")
+trigger_mode_after_last = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer/VBoxContainer/AfterLast")
+trigger_mode_with_last = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer/VBoxContainer/WithLast")
+selection_outline = NodePath("Selected")
+
+[node name="StoreMode" type="Panel" parent="."]
+visible = false
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_vgny8")
+
+[node name="Selected" type="Panel" parent="."]
+visible = false
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_osi16")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CueName" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+mouse_filter = 1
+text = "Cue Name"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 10
+mouse_filter = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer2"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer2/HBoxContainer"]
+modulate = Color(0.792157, 0.792157, 0.792157, 1)
+layout_mode = 2
+texture = ExtResource("3_u1n7c")
+
+[node name="CueNumber" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer2/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+text = "1.4"
+label_settings = SubResource("LabelSettings_odw3y")
+
+[node name="PanelContainer3" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+mouse_filter = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer3"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer3/HBoxContainer"]
+modulate = Color(0.792157, 0.792157, 0.792157, 1)
+layout_mode = 2
+texture = ExtResource("2_2p1lo")
+
+[node name="FadeTime" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer3/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+mouse_filter = 1
+text = "5.0"
+label_settings = SubResource("LabelSettings_i6drb")
+
+[node name="PanelContainer4" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+mouse_filter = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer4"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer4/HBoxContainer"]
+modulate = Color(0.791999, 0.791999, 0.791999, 1)
+layout_mode = 2
+texture = ExtResource("3_ns1ii")
+
+[node name="PreWait" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer4/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+text = "1.5"
+label_settings = SubResource("LabelSettings_7f8dc")
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 10
+mouse_filter = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+alignment = 2
+
+[node name="Manual" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer/VBoxContainer"]
+visible = false
+modulate = Color(0.792157, 0.792157, 0.792157, 1)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("1_yeptw")
+
+[node name="AfterLast" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer/VBoxContainer"]
+visible = false
+modulate = Color(0.792157, 0.792157, 0.792157, 1)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("2_dbt18")
+
+[node name="WithLast" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer/VBoxContainer"]
+visible = false
+modulate = Color(0.792157, 0.792157, 0.792157, 1)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("3_woprv")
+
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+mouse_filter = 1
+theme_override_styles/fill = SubResource("StyleBoxFlat_resti")
+max_value = 1.0
+show_percentage = false
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

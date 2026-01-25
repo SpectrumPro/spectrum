@@ -85,5 +85,5 @@ func _on_axis_gui_input(p_event: InputEvent) -> void:
 			else:
 				value = Vector2i(x_axis.get_value(), y_axis.get_value())
 			
-			_update_outline_feedback(_module.get_setter().call(value))
+			set_value(_module.get_setter().call(value))
 		).call_deferred()

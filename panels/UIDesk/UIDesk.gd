@@ -219,6 +219,7 @@ func deserialize(p_serialized_data: Dictionary) -> void:
 			continue
 		
 		var container: UIDeskItemContainer = add_panel(panel, Vector2.ZERO, Vector2.ZERO)
+		container.deserialize(serialized_container)
 		
 		container.set_anchor(SIDE_LEFT, panel_anchor_left, true, true)
 		container.set_anchor(SIDE_RIGHT, panel_anchor_right, true, true)

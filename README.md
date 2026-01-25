@@ -52,29 +52,29 @@
 
 <p align="center">
   <table align="left">
-    <tr>
-      <td align="center" width="200">
-        <a href="https://github.com/not-my-username">
-          <img src="https://github.com/not-my-username.png" width="80" height="80" alt="not-my-username" /><br>
-          <strong>Liam Sherwin</strong><br>
-          <sub>Core Architecture and Development</sub>
-        </a>
-      </td>
-      <td align="center" width="200">
-        <a href="https://github.com/huskynz">
-          <img src="https://github.com/huskynz.png" width="80" height="80" alt="husky-devel" /><br>
-          <strong>Peter Gallwas</strong><br>
-          <sub>Github Actions and Network Testing</sub>
-        </a>
-      </td>
-      <td align="center" width="200">
-        <a href="https://github.com/fazented">
-          <img src="https://github.com/fazented.png" width="80" height="80" alt="fazented" /><br>
-          <strong>Finn Masters</strong><br>
-          <sub>User Interface and Functionally Testing</sub>
-        </a>
-      </td>
-    </tr>
+	<tr>
+	  <td align="center" width="200">
+		<a href="https://github.com/not-my-username">
+		  <img src="https://github.com/not-my-username.png" width="80" height="80" alt="not-my-username" /><br>
+		  <strong>Liam Sherwin</strong><br>
+		  <sub>Core Architecture and Development</sub>
+		</a>
+	  </td>
+	  <td align="center" width="200">
+		<a href="https://github.com/huskynz">
+		  <img src="https://github.com/huskynz.png" width="80" height="80" alt="husky-devel" /><br>
+		  <strong>Peter Gallwas</strong><br>
+		  <sub>Github Actions and Network Testing</sub>
+		</a>
+	  </td>
+	  <td align="center" width="200">
+		<a href="https://github.com/fazented">
+		  <img src="https://github.com/fazented.png" width="80" height="80" alt="fazented" /><br>
+		  <strong>Finn Masters</strong><br>
+		  <sub>User Interface and Functionally Testing</sub>
+		</a>
+	  </td>
+	</tr>
   </table>
 </p>
 
@@ -89,5 +89,5 @@
 
 ---
 
-Copyright © 2025  
+Copyright © 2026
 [Liam Sherwin](https://liamsherwin.com)

@@ -70,5 +70,5 @@ func _on_spin_box_value_changed(value: float) -> void:
 		_ignore_next_update = false
 		return
 	
-	_update_outline_feedback(_module.get_setter().call(value))
+	set_value(value)
 	_ignore_next_update = false

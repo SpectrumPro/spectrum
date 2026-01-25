@@ -41,4 +41,4 @@ func _on_button_button_down() -> void:
 
 ## Called when the color is changed on the color picker
 func _on_button_color_changed(p_color: Color) -> void:
-	_update_outline_feedback(_module.get_setter().call(p_color))
+	set_value(p_color)
