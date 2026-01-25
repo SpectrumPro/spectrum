@@ -99,10 +99,13 @@ func set_status_bar(p_state: bool, p_time: float) -> void:
 	if not is_inside_tree():
 		return
 	
-	var tween: Tween = get_tree().create_tween()
-	tween.tween_method(status_bar.set_value_no_signal, status_bar.value, int(p_state), p_time)
-	
-	_current_tween = tween
+	if p_time <= 0:
+		status_bar.set_value_no_signal(int(p_state))
+	else:
+		var tween: Tween = get_tree().create_tween()
+		tween.tween_method(status_bar.set_value_no_signal, status_bar.value, int(p_state), p_time)
+		
+		_current_tween = tween
 
 
 ## Functions for changing all the labels
