@@ -21,6 +21,9 @@ signal trigger_mode_changed(trigger_mode: TriggerMode)
 ## Emitted when the tracking state is changed
 signal tracking_mode_changed(tracking_mode: TrackingMode)
 
+## Emitted when the position of this cue is changed
+signal position_changed(position: int)
+
 
 ## Enumeration for the trigger modes
 enum TriggerMode { MANUAL, AFTER_LAST, WITH_LAST }
@@ -29,7 +32,7 @@ enum TriggerMode { MANUAL, AFTER_LAST, WITH_LAST }
 enum TrackingMode { TRACKING, RESET }
 
 
-## the QID of this Cue
+## The QID of this Cue
 var _qid: String = ""
 
 ## Fade in time in seconds
@@ -44,6 +47,12 @@ var _trigger_mode: TriggerMode = TriggerMode.MANUAL
 ## Tracking flag, indicates if this cue tracks changes
 var _tracking_mode: TrackingMode = TrackingMode.TRACKING
 
+## The position of this cue
+var _position: int = -1
+
+## The CueList that contains this cue
+var _cue_list: CueList
+
 
 ## init
 func _init(p_uuid: String = UUID_Util.v4(), p_name: String = _name) -> void:
@@ -52,6 +61,7 @@ func _init(p_uuid: String = UUID_Util.v4(), p_name: String = _name) -> void:
 	_set_name("Cue")
 	_set_self_class("Cue")
 	
+	_settings_manager.register_setting("position", Data.Type.INT, set_position, get_position, [position_changed]).set_min_max(0, INF)
 	_settings_manager.register_setting("qid", Data.Type.STRING, set_qid, get_qid, [qid_changed])
 	_settings_manager.register_setting("trigger_mode", Data.Type.ENUM, set_trigger_mode, get_trigger_mode, [trigger_mode_changed]).set_enum_dict(TriggerMode)
 	_settings_manager.register_setting("tracking_mode", Data.Type.ENUM, set_tracking_mode, get_tracking_mode, [tracking_mode_changed]).set_enum_dict(TrackingMode)
@@ -92,6 +102,11 @@ func set_tracking_mode(p_tracking_mode: TrackingMode) -> Promise:
 	return rpc("set_tracking_mode", [p_tracking_mode])
 
 
+## Sets the position of this cue
+func set_position(p_position: int) -> Promise:
+	return _cue_list.set_cue_position(self, p_position)
+ 
+
 ## Returns the QID
 func get_qid() -> String:
 	return _qid
@@ -115,6 +130,11 @@ func get_trigger_mode() -> TriggerMode:
 ## Gets the tracking mode
 func get_tracking_mode() -> TrackingMode:
 	return _tracking_mode
+
+
+## Gets the position of this cue
+func get_position() -> int:
+	return _position
 
 
 ## Internal: Sets this Cue's QID
@@ -160,6 +180,17 @@ func _set_tracking_mode(p_tracking_mode: TrackingMode) -> void:
 	
 	_tracking_mode = p_tracking_mode
 	tracking_mode_changed.emit(_tracking_mode)
+
+
+## Sets the position of this cue
+func _set_position(p_position: int) -> void:
+	_position = p_position
+	position_changed.emit(_position)
+
+
+## Sets the cuelist this Cue belongs to
+func _set_cue_list(p_cue_list: CueList) -> void:
+	_cue_list = p_cue_list
 
 
 ## Returnes a serialized copy of this cue

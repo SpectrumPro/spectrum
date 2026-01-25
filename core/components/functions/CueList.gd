@@ -255,7 +255,10 @@ func _add_cue(p_cue: Cue, p_no_signal: bool = false) -> bool:
 	_cues.append(p_cue)
 	p_cue.delete_requested.connect(_remove_cue.bind(p_cue))
 	ComponentDB.register_component(p_cue)
-
+	
+	p_cue._set_cue_list(self)
+	p_cue._set_position(get_cue_position(p_cue))
+	
 	if not p_no_signal:
 		cues_added.emit([p_cue])
 	
@@ -307,7 +310,10 @@ func _set_cue_position(p_cue: Cue, p_position: int) -> void:
 	var old_index: int = _cues.find(p_cue)
 	_cues.remove_at(old_index)
 	_cues.insert(p_position, p_cue)
-
+	
+	for index: int in range(0, _cues.size()):
+		_cues[index]._set_position(index)
+	
 	cue_order_changed.emit(p_cue, p_position)
 
 
