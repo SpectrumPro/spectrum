@@ -24,7 +24,7 @@ func _ready() -> void:
 
 ## Calculates the mouse distance from the button, and adusts the intensity
 func _process(delta: float) -> void:
-	var current_size: int = get_custom_minimum_size().x
+	var current_size: int = get_combined_minimum_size().x
 	var new_size: int = current_size + (get_global_mouse_position().x - _previous_pos)
 	
 	if new_size == current_size:
@@ -36,7 +36,7 @@ func _process(delta: float) -> void:
 
 ## Sets the min width
 func set_min_width(p_width: int) -> void:
-	if p_width <= get_minimum_size().x:
+	if p_width < get_minimum_size().x:
 		return
 	
 	set_custom_minimum_size(Vector2(p_width, 0))
