@@ -172,6 +172,9 @@ func load_config(p_config: ClassTreeConfig) -> void:
 	var inheritance_map: Dictionary = p_config.get_inheritance_map()
 	
 	for parent_class: String in inheritance_map.keys():
+		if _config.is_class_hidden(parent_class):
+			continue
+		
 		var parent_branch = searchable_inheritance_tree.create_item()
 		
 		parent_branch.set_text(0, parent_class)
@@ -181,6 +184,9 @@ func load_config(p_config: ClassTreeConfig) -> void:
 		parent_branch.set_text(1, "Enter")
 		
 		for child_class: String in inheritance_map[parent_class]:
+			if _config.is_class_hidden(child_class):
+				continue
+			
 			var child_branch = parent_branch.create_child()
 			
 			child_branch.set_text(0, child_class)
@@ -222,8 +228,11 @@ func search_mode_object(p_classname: String) -> void:
 	_object_items.clear()
 	
 	for object: Object in _config.get_objects_by_classname(p_classname):
-		var item: TreeItem = object_tree.create_item()
 		var classname: String = _config.get_object_classname(object)
+		if _config.is_class_hidden(classname):
+			continue
+		
+		var item: TreeItem = object_tree.create_item()
 		
 		item.set_text(0, _config.get_object_name(object))
 		item.set_icon(0, UIDB.get_class_icon(classname))
