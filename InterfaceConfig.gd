@@ -31,11 +31,11 @@ var scale_factor: float = 1
 ## Default items in the UICommandPalette
 var command_palette_default_items: Array[CommandPaletteEntry] = [
 		CommandPaletteEntry.new(
-			Interface.settings_manager,
+			Interface.settings(),
 			"Interface",
 		),
 		CommandPaletteEntry.new(
-			Network.settings_manager,
+			Network.settings(),
 			"Network",
 		),
 		CommandPaletteEntry.new(

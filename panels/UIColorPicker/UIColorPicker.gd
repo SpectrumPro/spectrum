@@ -53,7 +53,7 @@ func _init() -> void:
 	Values.connect_to_selection_value("selected_fixtures", _on_selected_fixture_changed)
 	_on_selected_fixture_changed(Values.get_selection_value("selected_fixtures"))
 	
-	settings_manager.register_setting("ShowValueSlider", Data.Type.BOOL, set_show_value_slider, get_show_value_slider, [show_value_slider_changed])
+	_settings_manager.register_setting("ShowValueSlider", Data.Type.BOOL, set_show_value_slider, get_show_value_slider, [show_value_slider_changed])
 
 
 ## Shows or hides the value slider

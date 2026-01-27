@@ -23,18 +23,23 @@ var _manifest_requests: Dictionary
 var _is_loaded: bool = false
 
 ## The SettingsManager
-var settings_manager: SettingsManager = SettingsManager.new()
+var _settings_manager: SettingsManager = SettingsManager.new()
 
 
 ## Init
 func _init() -> void:
-	settings_manager.set_owner(self)
-	settings_manager.set_inheritance_array(["CoreFixtureLibrary"])
+	_settings_manager.set_owner(self)
+	_settings_manager.set_inheritance_array(["CoreFixtureLibrary"])
 
 
 ## Ready
 func _ready() -> void:
 	Core.synchronizing.connect(_synchronize)
+
+
+## Gets the SettingsManager
+func settings() -> SettingsManager:
+	return _settings_manager
 
 
 ## Creates a new fixture from a manifest

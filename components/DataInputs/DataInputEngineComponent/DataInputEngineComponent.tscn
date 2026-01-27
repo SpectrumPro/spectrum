@@ -20,6 +20,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 10
+theme_override_colors/font_color = Color(0.8745098, 0.8745098, 0.8745098, 0.5019608)
 
 [node name="Outline" type="Panel" parent="HBox/Button"]
 modulate = Color(1, 1, 1, 0)

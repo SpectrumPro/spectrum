@@ -77,19 +77,24 @@ var _store_mode_state: bool = false
 var _store_mode_callback: Callable
 
 ## The SettingsManager for this Programmer
-var settings_manager: SettingsManager = SettingsManager.new()
+var _settings_manager: SettingsManager = SettingsManager.new()
 
 
 ## init
 func _init() -> void:
-	settings_manager.set_owner(self)
-	settings_manager.set_inheritance_array(["Programmer"])
+	_settings_manager.set_owner(self)
+	_settings_manager.set_inheritance_array(["Programmer"])
 	
-	settings_manager.register_networked_callbacks({
+	_settings_manager.register_networked_callbacks({
 		"on_cleared": _clear,
 	})
 	
 	_convert_order_array_to_dict()
+
+
+## Gets the SettingsManager
+func settings() -> SettingsManager:
+	return _settings_manager
 
 
 ## Gets a Category enum as a string

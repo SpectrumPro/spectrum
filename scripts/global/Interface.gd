@@ -164,26 +164,26 @@ var _object_picker_index: Dictionary[Script, ClassTreeConfig]
 var _config: InterfaceConfig = null
 
 ## The settings manager for ClientInterface
-var settings_manager: SettingsManager = SettingsManager.new()
+var _settings_manager: SettingsManager = SettingsManager.new()
 
 
 ## Init
 func _init() -> void:
-	settings_manager.set_owner(self)
-	settings_manager.set_inheritance_array(["Interface"])
+	_settings_manager.set_owner(self)
+	_settings_manager.set_inheritance_array(["Interface"])
 	
-	settings_manager.register_setting("ScaleFactor", Data.Type.FLOAT, set_scale_factor, get_scale_factor, [scale_factor_changed]).set_min_max(0.2, 2)
-	settings_manager.register_setting("SaveUIOnQuit", Data.Type.BOOL, set_save_ui_on_quit, get_save_ui_on_quit, [save_ui_on_quit_changed])
+	_settings_manager.register_setting("ScaleFactor", Data.Type.FLOAT, set_scale_factor, get_scale_factor, [scale_factor_changed]).set_min_max(0.2, 2)
+	_settings_manager.register_setting("SaveUIOnQuit", Data.Type.BOOL, set_save_ui_on_quit, get_save_ui_on_quit, [save_ui_on_quit_changed])
 	
-	settings_manager.register_control("HideAllPopups", Data.Type.ACTION, hide_all_popup_panels, Callable(), [])
-	settings_manager.register_control("OpenMainMenu", Data.Type.ACTION, set_popup_visable.bind(WindowPopup.MAIN_MENU, self, true), Callable(), [])
-	settings_manager.register_control("OpenSettings", Data.Type.ACTION, set_popup_visable.bind(WindowPopup.SETTINGS, self, true), Callable(), [])
-	settings_manager.register_control("OpenSaveLoad", Data.Type.ACTION, set_popup_visable.bind(WindowPopup.SAVE_LOAD, self, true), Callable(), [])
-	settings_manager.register_control("OpenWindowManager", Data.Type.ACTION, set_popup_visable.bind(WindowPopup.WINDOW_MANAGER, self, true), Callable(), [])
-	settings_manager.register_control("AddWindow", Data.Type.ACTION, add_window, Callable(), [])
-	settings_manager.register_control("SaveUI", Data.Type.ACTION, save_ui, Callable(), [])
-	settings_manager.register_control("ComponentSettings", Data.Type.ACTION, prompt_component_settings_search.bind(self))
-	settings_manager.register_control("CreateComponent", Data.Type.ACTION, prompt_create_component_rename.bind(self))
+	_settings_manager.register_control("HideAllPopups", Data.Type.ACTION, hide_all_popup_panels, Callable(), [])
+	_settings_manager.register_control("OpenMainMenu", Data.Type.ACTION, set_popup_visable.bind(WindowPopup.MAIN_MENU, self, true), Callable(), [])
+	_settings_manager.register_control("OpenSettings", Data.Type.ACTION, set_popup_visable.bind(WindowPopup.SETTINGS, self, true), Callable(), [])
+	_settings_manager.register_control("OpenSaveLoad", Data.Type.ACTION, set_popup_visable.bind(WindowPopup.SAVE_LOAD, self, true), Callable(), [])
+	_settings_manager.register_control("OpenWindowManager", Data.Type.ACTION, set_popup_visable.bind(WindowPopup.WINDOW_MANAGER, self, true), Callable(), [])
+	_settings_manager.register_control("AddWindow", Data.Type.ACTION, add_window, Callable(), [])
+	_settings_manager.register_control("SaveUI", Data.Type.ACTION, save_ui, Callable(), [])
+	_settings_manager.register_control("ComponentSettings", Data.Type.ACTION, prompt_component_settings_search.bind(self))
+	_settings_manager.register_control("CreateComponent", Data.Type.ACTION, prompt_create_component_rename.bind(self))
 
 
 ## Ready ClientInterface
@@ -781,7 +781,7 @@ func take_screenshot() -> void:
 
 ## Returns the SettingsManager object for ClientInterface
 func settings() -> SettingsManager:
-	return settings_manager
+	return _settings_manager
 
 
 ## Returns the InterfaceConfig object

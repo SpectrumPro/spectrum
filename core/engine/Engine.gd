@@ -32,7 +32,7 @@ var _current_file_name: String = ""
 var _config: EngineConfig
 
 ## The SettingsManager for CoreEngine
-var settings_manager: SettingsManager = SettingsManager.new()
+var _settings_manager: SettingsManager = SettingsManager.new()
 
 
 ## Internal engine config options
@@ -50,10 +50,6 @@ class EngineConfig extends Object:
 		{
 			"object": (FixtureLibrary),
 			"name": "FixtureLibrary"
-		},
-		{
-			"object": (ClassList),
-			"name": "classlist"
 		},
 		{
 			"object": (CIDManager),
@@ -76,16 +72,16 @@ func _init() -> void:
 	OS.set_low_processor_usage_mode(false)
 	Details.print_startup_detils()
 	
-	settings_manager.set_owner(self)
-	settings_manager.set_inheritance_array(["CoreEngine"])
-	settings_manager.register_networked_callbacks({
+	_settings_manager.set_owner(self)
+	_settings_manager.set_inheritance_array(["CoreEngine"])
+	_settings_manager.register_networked_callbacks({
 		"on_components_added": _add_components,
 		"on_components_removed": _remove_components,
 		"on_resetting": _reset,
 		"on_file_name_changed": _set_file_name,
 	})
 	
-	settings_manager.set_callback_allow_deserialize("on_components_added")
+	_settings_manager.set_callback_allow_deserialize("on_components_added")
 
 
 ## Init
@@ -96,6 +92,11 @@ func _ready() -> void:
 	
 	(Network.get_active_handler_by_name("Constellation").get_local_node() as ConstellationNode).connected_to_session_master.connect(_load_from_server)
 	_add_auto_network_classes.call_deferred()
+
+
+## Gets the SettingsManager
+func settings() -> SettingsManager:
+	return _settings_manager
 
 
 ## Returns a serialized copy of the engine from the server
@@ -242,7 +243,7 @@ func _remove_components(p_components: Array, p_no_signal: bool = false) -> void:
 ## Adds all objects from _config.network_objects to the Network
 func _add_auto_network_classes() -> void:
 	for config: Dictionary in _config.network_objects:
-		Network.register_network_object(config.name, config.object.get("settings_manager"))
+		Network.register_network_object(config.name, config.object.settings())
 
 
 ## Requests the current state from the server and loads it localy

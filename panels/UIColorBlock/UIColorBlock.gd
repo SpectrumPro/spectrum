@@ -47,11 +47,11 @@ func _init() -> void:
 	
 	_set_class_name("UIColorBlock")
 	
-	settings_manager.register_setting("Color", Data.Type.COLOR, set_color, get_color, [color_changed])
-	settings_manager.register_setting("BorderColor", Data.Type.COLOR, set_border_color, get_border_color, [border_color_changed])
-	settings_manager.register_setting("BorderWidth", Data.Type.INT, set_border_width, get_border_width, [border_width_changed]).set_min_max(0, INF)
-	settings_manager.register_setting("CornerRadius", Data.Type.INT, set_corner_radius, get_corner_radius, [corner_radius_changed]).set_min_max(0, INF)
-	settings_manager.register_setting("ShowPanelBorder", Data.Type.BOOL, set_show_panel_border, get_show_panel_border, [show_panel_border_changed])
+	_settings_manager.register_setting("Color", Data.Type.COLOR, set_color, get_color, [color_changed])
+	_settings_manager.register_setting("BorderColor", Data.Type.COLOR, set_border_color, get_border_color, [border_color_changed])
+	_settings_manager.register_setting("BorderWidth", Data.Type.INT, set_border_width, get_border_width, [border_width_changed]).set_min_max(0, INF)
+	_settings_manager.register_setting("CornerRadius", Data.Type.INT, set_corner_radius, get_corner_radius, [corner_radius_changed]).set_min_max(0, INF)
+	_settings_manager.register_setting("ShowPanelBorder", Data.Type.BOOL, set_show_panel_border, get_show_panel_border, [show_panel_border_changed])
 
 
 ## ready

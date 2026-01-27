@@ -53,7 +53,7 @@ func _ready() -> void:
 ## Called when a window is added
 func _add_window(p_window: UIWindow) -> void:
 	_window_rows.map(window_table.add_row({
-		Columns.NAME:	p_window.settings_manager.get_entry("title"),
+		Columns.NAME:	p_window.settings().get_entry("title"),
 	}), p_window)
 
 
@@ -83,7 +83,7 @@ func _on_table_selection_changed() -> void:
 		return
 	
 	_selected_window = _window_rows.left(window_table.get_selected_row())
-	settings_manager_view.set_manager(_selected_window.settings_manager)
+	settings_manager_view.set_manager(_selected_window.settings())
 	_update_buttons()
 
 

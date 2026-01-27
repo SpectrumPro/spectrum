@@ -14,9 +14,9 @@ signal grid_size_changed(grid_size: GridSize)
 
 ## Enum for GridSize
 enum GridSize {
-	SMALL = 24,
+	SMALL = 25,
 	MEDIUM = 10,
-	LARGE = 6
+	LARGE = 5
 }
 
 
@@ -67,7 +67,7 @@ func _init() -> void:
 	
 	_set_class_name("UIDesk")
 	
-	settings_manager.register_setting("GridSize", Data.Type.ENUM, set_grid_size, get_grid_size, [grid_size_changed]).set_enum_dict(GridSize)
+	_settings_manager.register_setting("GridSize", Data.Type.ENUM, set_grid_size, get_grid_size, [grid_size_changed]).set_enum_dict(GridSize)
 
 
 ## Process

@@ -21,8 +21,12 @@ func _ready() -> void:
 
 ## Called when the orignal value is changed
 func _module_value_changed(p_value: Variant, ...p_args) -> void:
-	_button.set_text(p_value.get_session_name() if p_value is NetworkSession else "")
-
+	if p_value is NetworkSession and is_instance_valid(p_value):
+		_button.set_text(p_value.get_session_name() if p_value is NetworkSession else "")
+		_button.add_theme_color_override("font_color", ThemeManager.Colors.FontColor)
+	else:
+		_button.set_text("null")
+		_button.add_theme_color_override("font_color", ThemeManager.Colors.FontDisabledColor)
 
 ## Resets this DataInputString
 func _reset() -> void:

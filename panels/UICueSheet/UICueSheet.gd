@@ -71,7 +71,7 @@ func _ready() -> void:
 		var column: Columns = Columns[column_name]
 		table.add_column(column_name.capitalize(), _column_config[column])
 	
-	settings_manager.require("Table", table.settings_manager)
+	_settings_manager.require("Table", table.settings())
 
 
 ## Sets the CueList

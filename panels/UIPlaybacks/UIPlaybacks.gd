@@ -56,7 +56,7 @@ func _init() -> void:
 	super._init()
 	_set_class_name("UIPlaybacks")
 	
-	settings_manager.register_setting("columns", Data.Type.INT, set_columns_ui, get_columns, [columns_changed]
+	_settings_manager.register_setting("columns", Data.Type.INT, set_columns_ui, get_columns, [columns_changed]
 	).display("UIPlaybacks", 1).set_min_max(0, 100)
 
 

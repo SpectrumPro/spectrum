@@ -1,5 +1,6 @@
-# Copyright (c) 2024 Liam Sherwin, All rights reserved.
-# This file is part of the Spectrum Lighting Engine, licensed under the GPL v3.
+# Copyright (c) 2026 Liam Sherwin. All rights reserved.
+# This file is part of the Spectrum Lighting Controller, licensed under the GPL v3.0 or later.
+# See the LICENSE file for details.
 
 class_name NetworkItemClassList extends ClassListDB
 ## Contains a list of all the classes that can be networked, stored here so they can be found when deserializing a network request

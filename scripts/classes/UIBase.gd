@@ -35,15 +35,15 @@ var _queue_call_defered: bool = false
 var _queue_is_calling: bool = false
 
 ## Settings for this component
-var settings_manager: SettingsManager = SettingsManager.new()
+var _settings_manager: SettingsManager = SettingsManager.new()
 
 
 ## Init
 func _init() -> void:
-	settings_manager.set_owner(self)
-	settings_manager.set_inheritance_array(_class_tree)
+	_settings_manager.set_owner(self)
+	_settings_manager.set_inheritance_array(_class_tree)
 	
-	settings_manager.register_setting("name", Data.Type.STRING, set_ui_name, get_ui_name, [ui_name_changed])
+	_settings_manager.register_setting("name", Data.Type.STRING, set_ui_name, get_ui_name, [ui_name_changed])
 	
 	(func ():
 		if _ui_name == "UIBase":
@@ -54,6 +54,11 @@ func _init() -> void:
 ## Gets the uuid
 func uuid() -> String:
 	return _uuid
+
+
+## Gets the SettingsManager
+func settings() -> SettingsManager:
+	return _settings_manager
 
 
 ## Queues a callable for execution, will only all it to be called once per frame. Uses call_defered
