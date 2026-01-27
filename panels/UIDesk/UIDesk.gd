@@ -14,9 +14,9 @@ signal grid_size_changed(grid_size: GridSize)
 
 ## Enum for GridSize
 enum GridSize {
-	SMALL = 24,
+	SMALL = 25,
 	MEDIUM = 10,
-	LARGE = 6
+	LARGE = 5
 }
 
 
