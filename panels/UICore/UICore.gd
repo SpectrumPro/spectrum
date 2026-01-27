@@ -29,7 +29,7 @@ func _init() -> void:
 
 ## Ready
 func _ready() -> void:
-	settings_manager.require("side_bar_settings", _side_bar.settings_manager)
+	_settings_manager.require("side_bar_settings", _side_bar.settings())
 	
 	_startup_bg.show()
 	

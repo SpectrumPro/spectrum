@@ -67,8 +67,8 @@ func set_side_bar(p_side_bar: UICorePrimarySideBar) -> void:
 ## Adds a tab item
 func _add_tab_item(p_tab_item: UICorePrimarySideBar.TabItem) -> void:
 	_table_rows.map(table.add_row({
-		Column.TITLE: p_tab_item.settings_manager.get_entry("title"),
-		Column.INDEX: p_tab_item.settings_manager.get_entry("index"),
+		Column.TITLE: p_tab_item.settings().get_entry("title"),
+		Column.INDEX: p_tab_item.settings().get_entry("index"),
 	}), p_tab_item)
 
 
@@ -81,7 +81,7 @@ func _remove_tab_item(p_tab_item: UICorePrimarySideBar.TabItem) -> void:
 ## Called when an item is selected in the table
 func _update_selection() -> void:
 	if table.is_any_selected():
-		settings_manager_view.set_manager(_table_rows.left(table.get_selected_row()).settings_manager)
+		settings_manager_view.set_manager(_table_rows.left(table.get_selected_row()).settings())
 	else:
 		settings_manager_view.reset()
 	

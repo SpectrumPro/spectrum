@@ -85,17 +85,17 @@ func _init() -> void:
 	
 	_set_class_name("UIClock")
 	
-	settings_manager.register_setting("ShowYear", Data.Type.BOOL, set_show_year, get_show_year, [show_year_changed])
-	settings_manager.register_setting("ShowMonth", Data.Type.BOOL, set_show_month, get_show_month, [show_month_changed])
-	settings_manager.register_setting("ShowDay", Data.Type.BOOL, set_show_day, get_show_day, [show_day_changed])
-	settings_manager.register_setting("ShowHour", Data.Type.BOOL, set_show_hour, get_show_hour, [show_hour_changed])
-	settings_manager.register_setting("ShowMinute", Data.Type.BOOL, set_show_minute, get_show_minute, [show_minute_changed])
-	settings_manager.register_setting("ShowSecond", Data.Type.BOOL, set_show_second, get_show_second, [show_second_changed])
-	settings_manager.register_setting("ShowMillisecond", Data.Type.BOOL, set_show_millisecond, get_show_millisecond, [show_millisecond_changed])
+	_settings_manager.register_setting("ShowYear", Data.Type.BOOL, set_show_year, get_show_year, [show_year_changed])
+	_settings_manager.register_setting("ShowMonth", Data.Type.BOOL, set_show_month, get_show_month, [show_month_changed])
+	_settings_manager.register_setting("ShowDay", Data.Type.BOOL, set_show_day, get_show_day, [show_day_changed])
+	_settings_manager.register_setting("ShowHour", Data.Type.BOOL, set_show_hour, get_show_hour, [show_hour_changed])
+	_settings_manager.register_setting("ShowMinute", Data.Type.BOOL, set_show_minute, get_show_minute, [show_minute_changed])
+	_settings_manager.register_setting("ShowSecond", Data.Type.BOOL, set_show_second, get_show_second, [show_second_changed])
+	_settings_manager.register_setting("ShowMillisecond", Data.Type.BOOL, set_show_millisecond, get_show_millisecond, [show_millisecond_changed])
 	
-	settings_manager.register_setting("UseTwelveHour", Data.Type.BOOL, set_use_twelve_hour, get_use_twelve_hour, [use_twelve_hour_changed])
-	settings_manager.register_setting("FontScaleMultiplier", Data.Type.FLOAT, set_font_scale_multiplier, get_font_scale_multiplier, [font_scale_multiplier_changed]).set_min_max(0.1, 5.0)
-	settings_manager.register_setting("FontColor", Data.Type.COLOR, set_font_color, get_font_color, [font_color_changed])
+	_settings_manager.register_setting("UseTwelveHour", Data.Type.BOOL, set_use_twelve_hour, get_use_twelve_hour, [use_twelve_hour_changed])
+	_settings_manager.register_setting("FontScaleMultiplier", Data.Type.FLOAT, set_font_scale_multiplier, get_font_scale_multiplier, [font_scale_multiplier_changed]).set_min_max(0.1, 5.0)
+	_settings_manager.register_setting("FontColor", Data.Type.COLOR, set_font_color, get_font_color, [font_color_changed])
 
 ## ready
 func _ready() -> void:

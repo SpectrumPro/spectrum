@@ -50,15 +50,15 @@ var _networked_objects_signal_connections: Dictionary[SettingsManager, Dictionar
 var _awaiting_responces: Dictionary[String, Promise]
 
 ## The SettingsManager for NetworkManager
-var settings_manager: SettingsManager = SettingsManager.new()
+var _settings_manager: SettingsManager = SettingsManager.new()
 
 
 ## Init
 func _init() -> void:
-	settings_manager.set_owner(self)
-	settings_manager.set_inheritance_array(["NetworkManager"])
-	settings_manager.register_control("StartAll", Data.Type.ACTION, start_all, Callable(), [])
-	settings_manager.register_control("StopAll", Data.Type.ACTION, stop_all, Callable(), [])
+	_settings_manager.set_owner(self)
+	_settings_manager.set_inheritance_array(["NetworkManager"])
+	_settings_manager.register_control("StartAll", Data.Type.ACTION, start_all, Callable(), [])
+	_settings_manager.register_control("StopAll", Data.Type.ACTION, stop_all, Callable(), [])
 
 
 ## Ready
@@ -84,6 +84,11 @@ func _process(_p_delta: float) -> void:
 		if Time.get_unix_time_from_system() - promise.get_created_time() >= ResponseMaxWaitTime:
 			promise.reject([ERR_TIMEOUT])
 			_awaiting_responces.erase(msg_id)
+
+
+## Gets the SettingsManager
+func settings() -> SettingsManager:
+	return _settings_manager
 
 
 ## Starts all the NetworkHandlers

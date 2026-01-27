@@ -87,18 +87,18 @@ var _button_group: ButtonGroup = ButtonGroup.new()
 var _use_scroll: bool = false
 
 ## The SettingsManager for this UICorePrimarySideBar
-var settings_manager: SettingsManager = SettingsManager.new()
+var _settings_manager: SettingsManager = SettingsManager.new()
 
 
 ## Init
 func _init() -> void:
-	settings_manager.set_owner(self)
-	settings_manager.set_inheritance_array(["UICorePrimarySideBar"])
+	_settings_manager.set_owner(self)
+	_settings_manager.set_inheritance_array(["UICorePrimarySideBar"])
 	
-	settings_manager.register_setting("use_scroll", Data.Type.BOOL, set_use_scroll, get_use_scroll, [use_scroll_changed])\
+	_settings_manager.register_setting("use_scroll", Data.Type.BOOL, set_use_scroll, get_use_scroll, [use_scroll_changed])\
 	.display("UICorePrimarySideBar", 1)
 	
-	settings_manager.register_custom_panel("tabs", load("res://panels/UICore/SideBar/UICorePrimarySideBarSettings.tscn"), "set_side_bar")\
+	_settings_manager.register_custom_panel("tabs", load("res://panels/UICore/SideBar/UICorePrimarySideBarSettings.tscn"), "set_side_bar")\
 	.display("UICorePrimarySideBar", 2)
 
 
@@ -113,6 +113,11 @@ func _ready() -> void:
 	_main_menu.visibility_changed.connect(func ():
 		_menu_button.set_pressed_no_signal(_main_menu.visible)
 	)
+
+
+## Gets the SettingsManager
+func settings() -> SettingsManager:
+	return _settings_manager
 
 
 ## Creates a new tab in an empty spot
@@ -447,7 +452,7 @@ class TabItem extends RefCounted:
 	var _bound_set_index_callable: Callable = Callable()
 	
 	## SettingsManager for this TabItem
-	var settings_manager: SettingsManager = SettingsManager.new()
+	var _settings_manager: SettingsManager = SettingsManager.new()
 	
 	
 	## Init
@@ -456,11 +461,16 @@ class TabItem extends RefCounted:
 		_label = p_label
 		_index = p_index
 		
-		settings_manager.set_owner(self)
-		settings_manager.set_inheritance_array(["TabItem"])
-		settings_manager.register_setting("title", Data.Type.STRING, set_title, get_title, [title_changed])
-		settings_manager.register_setting("panel", Data.Type.UIPANEL, set_panel, get_panel, [panel_changed])
-		settings_manager.register_setting("index", Data.Type.INT, set_index, get_index, [index_changed]).set_min_max(0, 65535)
+		_settings_manager.set_owner(self)
+		_settings_manager.set_inheritance_array(["TabItem"])
+		_settings_manager.register_setting("title", Data.Type.STRING, set_title, get_title, [title_changed])
+		_settings_manager.register_setting("panel", Data.Type.UIPANEL, set_panel, get_panel, [panel_changed])
+		_settings_manager.register_setting("index", Data.Type.INT, set_index, get_index, [index_changed]).set_min_max(0, 65535)
+	
+	
+	## Gets the SettingsManager
+	func settings() -> SettingsManager:
+		return _settings_manager
 	
 	
 	## Sets the title
@@ -761,4 +771,4 @@ class TabItem extends RefCounted:
 ### Called for each GUI input on the edit button
 #func _on_edit_gui_input(event: InputEvent) -> void:
 	#if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.is_pressed():
-		#Interface.prompt_settings_module(self, settings_manager.get_entry("tabs"))
+		#Interface.prompt_settings_module(self, _settings_manager.get_entry("tabs"))

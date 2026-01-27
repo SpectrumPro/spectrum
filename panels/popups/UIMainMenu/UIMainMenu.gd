@@ -94,7 +94,7 @@ func _on_save_load_toggled(p_toggled_on: bool) -> void:
 
 ## Called when the SaveFile button is pressed
 func _on_save_file_pressed() -> void:
-	Core.save()
+	Core.save_to_file()
 
 
 ## Called when the WindowManager button is pressed
@@ -110,4 +110,4 @@ func _on_new_window_pressed() -> void:
 
 ## Called when the SetDisplayMode button is pressed
 func _on_set_display_mode_pressed() -> void:
-	Interface.prompt_settings_module(self, Interface.get_window_node(self).settings_manager.get_entry("display_mode"))
+	Interface.prompt_settings_module(self, Interface.get_window_node(self).settings().get_entry("display_mode"))

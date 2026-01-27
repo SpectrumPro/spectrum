@@ -107,7 +107,7 @@ func _init() -> void:
 	super._init()
 	_set_class_name("UIProgrammer")
 	
-	settings_manager.register_setting("ControlersPerPage", Data.Type.INT, set_controlers_per_page, get_controlers_per_page, [controlers_per_page_changed]).set_min_max(1, 10)
+	_settings_manager.register_setting("ControlersPerPage", Data.Type.INT, set_controlers_per_page, get_controlers_per_page, [controlers_per_page_changed]).set_min_max(1, 10)
 
 
 ## ready

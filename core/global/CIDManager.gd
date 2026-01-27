@@ -25,6 +25,11 @@ func _ready() -> void:
 	Core.resetting.connect(func (): _cids_by_classname.clear())
 
 
+## Gets the SettingsManager
+func settings() -> SettingsManager:
+	return null
+
+
 ## Sets a component's CID, returning false if it was alreay taken
 func set_component_id(cid: int, p_component: EngineComponent) -> Promise:
 	return Network.send_command("CIDManager", "set_component_id", [cid, p_component])

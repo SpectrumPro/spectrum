@@ -60,7 +60,7 @@ func _init() -> void:
 	
 	_set_class_name("Table")
 	
-	settings_manager.register_setting("Expand", Data.Type.BOOL, set_expand, get_expand, [expand_changed])
+	_settings_manager.register_setting("Expand", Data.Type.BOOL, set_expand, get_expand, [expand_changed])
 
 
 ## Ready
