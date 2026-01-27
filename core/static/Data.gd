@@ -128,3 +128,23 @@ static func custom_type_to_string(p_variant: Variant, p_origin_type: Type) -> St
 		
 		_:
 			return type_convert(p_variant, TYPE_STRING)
+
+
+## Returns the signal emitted when the name of an object is changed
+static func get_object_name_changed_signal(p_module: SettingsModule) -> Signal:
+	var object: Variant = p_module.get_getter().call()
+	
+	if not typeof(object) == TYPE_OBJECT and not is_instance_valid(object):
+		return Signal()
+	
+	match p_module.get_data_type():
+		Type.ENGINECOMPONENT:
+			return object.name_changed
+		
+		Type.NETWORKNODE:
+			return object.node_name_changed
+		
+		_:
+			return Signal()
+
+	

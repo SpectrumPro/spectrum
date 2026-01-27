@@ -9,6 +9,9 @@ class_name DataInputEngineComponent extends DataInput
 ## The LineEdit
 var _button: Button
 
+## The current EngineComponent
+var _current_component: EngineComponent
+
 
 ## Ready
 func _ready() -> void:
@@ -21,9 +24,17 @@ func _ready() -> void:
 
 ## Called when the orignal value is changed
 func _module_value_changed(p_value: Variant, ...p_args) -> void:
-	if p_value is EngineComponent:
-		_button.set_text(p_value.name())
+	if is_instance_valid(_current_component):
+		_current_component.name_changed.disconnect(_on_component_name_changed)
+	
+	_current_component = p_value
+	
+	if _current_component is EngineComponent and is_instance_valid(_current_component):
+		_current_component.node_name_changed.connect(_on_component_name_changed)
+		
+		_button.set_text(_current_component.get_node_name())
 		_button.add_theme_color_override("font_color", ThemeManager.Colors.FontColor)
+		
 	else:
 		_button.set_text("null")
 		_button.add_theme_color_override("font_color", ThemeManager.Colors.FontDisabledColor)
@@ -37,6 +48,11 @@ func _reset() -> void:
 ## Called when the editable state is changed
 func _set_editable(p_editable: bool) -> void:
 	_button.set_disabled(not p_editable)
+
+
+## Called when the component name is changed
+func _on_component_name_changed(p_name: String) -> void:
+	_button.set_text(p_name)
 
 
 ## Called when the button is pressed

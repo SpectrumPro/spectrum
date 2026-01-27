@@ -417,8 +417,11 @@ class Row extends Object:
 	## Data for each cell in this row
 	var _cells: Dictionary[int, Variant]
 	
-	## All bound callables for a SettingsModule
-	var _module_bound_methods: Dictionary[int, Callable]
+	## All bound callables for when a SettingsModule's data is changed
+	var _module_bound_change_methods: Dictionary[int, Callable]
+	
+	## All bound methods when using a SettingsMoudle with Data.Type.OBJECT
+	var _module_bound_name_methods: Dictionary[int, Callable]
 	
 	
 	## Init
@@ -437,18 +440,22 @@ class Row extends Object:
 		if p_column > len(_columns):
 			return
 		
-		if _module_bound_methods.has(p_column):
-			(_cells[p_column] as SettingsModule).unsubscribe(_module_bound_methods[p_column])
-			_module_bound_methods.erase(p_column)
+		if _module_bound_change_methods.has(p_column):
+			(_cells[p_column] as SettingsModule).unsubscribe(_module_bound_change_methods[p_column])
+			_module_bound_change_methods.erase(p_column)
+		
+		if _module_bound_name_methods.has(p_column):
+			(_cells[p_column] as SettingsModule).disconnect_name_signal(_module_bound_name_methods[p_column])
+			_module_bound_name_methods.erase(p_column)
 		
 		if p_value is SettingsModule:
 			if p_value.get_data_type() != _columns[p_column]._data_type:
 				_cells.erase(p_column)
 				_item.set_text(p_column, "")
-				
 				return
 			
-			_module_bound_methods[p_column] = p_value.subscribe(_set_cell_data_module.bind(p_column))
+			_module_bound_name_methods[p_column] = p_value.connect_name_signal(_on_cell_data_object_name_changed.bind(p_column))
+			_module_bound_change_methods[p_column] = p_value.subscribe(_set_cell_data_module.bind(p_column))
 			
 			_cells[p_column] = p_value
 			_item.set_text(p_column, p_value.get_value_string())
@@ -493,6 +500,11 @@ class Row extends Object:
 	func _set_cell_data_module(p_data: Variant, p_column: int) -> void:
 		if is_instance_valid(_item):
 			_item.set_text(p_column, _cells[p_column].get_value_string())
+	
+	
+	## Called when an Object's name is changed on a SettingsModule with Data.Type.OBJECT
+	func _on_cell_data_object_name_changed(p_name: String, p_column: int) -> void:
+		_item.set_text(p_column, p_name)
 
 
 ## Class to repersent a column in the tree

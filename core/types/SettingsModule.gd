@@ -102,7 +102,6 @@ func _init(p_id: String, p_name: String, p_data_type: Data.Type, p_type: Type, p
 
 ## Gets the value of this SettingsModule as a String
 func get_value_string() -> String:
-	
 	match _data_type:
 		Data.Type.ENUM:
 			return _enum_dict.keys()[_getter.call()]
@@ -112,6 +111,11 @@ func get_value_string() -> String:
 		
 		_:
 			return Data.custom_type_to_string(_getter.call(), _data_type)
+
+
+## Gets the signal emitted when the name of an object is changed when using Data.Type.OBJECT
+func get_object_name_changed_signal() -> Signal:
+	return Data.get_object_name_changed_signal(self)
 
 
 ## Returns the ID of this SettingsModule
@@ -340,6 +344,26 @@ func subscribe(p_callable: Callable) -> Callable:
 func unsubscribe(p_callable: Callable) -> void:
 	for p_signal: Signal in _signals:
 		p_signal.disconnect(p_callable)
+
+
+## Connects the name changed signal to the given method
+func connect_name_signal(p_callable: Callable) -> Callable:
+	var name_signal: Signal = get_object_name_changed_signal()
+	
+	if not name_signal.is_null() and not name_signal.is_connected(p_callable):
+		name_signal.connect(p_callable)
+	
+	return p_callable
+
+
+## Disconnects the name changed signal from the given method
+func disconnect_name_signal(p_callable: Callable) -> Callable:
+	var name_signal: Signal = get_object_name_changed_signal()
+	
+	if not name_signal.is_null() and name_signal.is_connected(p_callable):
+		name_signal.disconnect(p_callable)
+	
+	return p_callable
 
 
 ## Sets the category and line
