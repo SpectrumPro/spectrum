@@ -154,7 +154,7 @@ func get_value() -> float:
 func get_function() -> String:
 	var selected: int = _function_list.get_selected_id() == -1
 	
-	if selected:
+	if selected == -1:
 		return ""
 	else:
 		return _function_list.get_item_text(selected)
@@ -205,6 +205,7 @@ func clear() -> void:
 	_functions.clear()
 	_function_list.clear()
 	_slider.set_value_no_signal(0)
+	_refernce_fixture = null
 	
 	remove_subscription()
 	set_override_bg(false)
@@ -271,7 +272,7 @@ func _on_default_pressed() -> void:
 
 ## Called when a function is selected
 func _on_function_list_item_selected(index: int) -> void:
-	function_selected.emit(get_function())
+	function_selected.emit(_function_list.get_item_text(index))
 
 
 ## Called for each GUI input on the value label
