@@ -75,15 +75,15 @@ func _ready() -> void:
 
 ## Process
 func _process(delta: float) -> void:
-	var pos_speed: float = max(position.distance_to(_target_position) / ThemeManager.Constants.Times.DeskItemMoveTime, 0.1)
-	var size_speed: float = max(size.distance_to(_target_size) / ThemeManager.Constants.Times.DeskItemMoveTime, 0.1)
+	var pos_speed: float = max(position.distance_to(_target_position) / ThemeManager.Constants.Times.DeskItemMoveTime, 10)
+	var size_speed: float = max(size.distance_to(_target_size) / ThemeManager.Constants.Times.DeskItemMoveTime, 10)
 	
 	_moved_on_process = true
 	
 	position = position.move_toward(_target_position, pos_speed * delta)
 	size = size.move_toward(_target_size, size_speed * delta)
 	
-	if position == _target_position and size == _target_size:
+	if position.is_equal_approx(_target_position) and size.is_equal_approx(_target_size):
 		_moved_on_process = false
 		_set_anchors_to_current_size()
 		set_process(false)
