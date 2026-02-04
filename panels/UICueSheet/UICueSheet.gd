@@ -25,6 +25,9 @@ enum Columns {IDX, QID, NAME, FADE_TIME, PRE_WAIT, TRIGGER_MODE}
 ## The FunctionPlaybackControls
 @export var function_playback_controls: FunctionPlaybackControls
 
+## The AddCue Button
+@export var add_cue_button: Button
+
 ## The Delete Button
 @export var delete_button: Button
 
@@ -86,6 +89,7 @@ func set_cue_list(p_cue_list: CueList) -> void:
 	
 	previous_button.set_disabled(not is_valid)
 	next_button.set_disabled(not is_valid)
+	add_cue_button.set_disabled(not is_valid)
 	delete_button.set_disabled(true)
 	
 	_cues.clear()
@@ -188,6 +192,16 @@ func _on_table_selection_changed() -> void:
 func _on_go_pressed() -> void:
 	var cue: Cue = _cues.right(table.get_selected_row())
 	_cue_list.seek_to(cue)
+
+
+## Called when the AddCue button is pressed
+func _on_add_cue_pressed() -> void:
+	_cue_list.create_cue().then(func (p_cue: Cue):
+		if not is_instance_valid(p_cue):
+			return
+		
+		Interface.prompt_settings_module(self, p_cue.settings().get_entry("name"))
+	)
 
 
 ## Called when then DeleteCue button is pressed

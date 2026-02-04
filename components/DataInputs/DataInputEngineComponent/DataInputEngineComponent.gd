@@ -30,9 +30,9 @@ func _module_value_changed(p_value: Variant, ...p_args) -> void:
 	_current_component = p_value
 	
 	if _current_component is EngineComponent and is_instance_valid(_current_component):
-		_current_component.node_name_changed.connect(_on_component_name_changed)
+		_current_component.name_changed.connect(_on_component_name_changed)
 		
-		_button.set_text(_current_component.get_node_name())
+		_button.set_text(_current_component.name())
 		_button.add_theme_color_override("font_color", ThemeManager.Colors.FontColor)
 		
 	else:
@@ -42,7 +42,7 @@ func _module_value_changed(p_value: Variant, ...p_args) -> void:
 
 ## Resets this DataInputString
 func _reset() -> void:
-	_module_value_changed("")
+	_module_value_changed(null)
 
 
 ## Called when the editable state is changed

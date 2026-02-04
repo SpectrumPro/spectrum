@@ -43,6 +43,7 @@ var _panels: Dictionary[String, PackedScene] = {
 	"UIComponentSettings":	load(_p("UIComponentSettings")),
 	"UIColorBlock":			load(_p("UIColorBlock")),
 	"UICueSheet":			load(_p("UICueSheet")),
+	"UIDataEditor":			load(_p("UIDataEditor")),
 }
 
 
@@ -102,6 +103,7 @@ var _panels_by_category: Dictionary[String, Array] = {
 		"UIProgrammer",
 		"UIColorPicker",
 		"UICueSheet",
+		"UIDataEditor",
 	],
 	"Components": [
 		"UIUniverses",

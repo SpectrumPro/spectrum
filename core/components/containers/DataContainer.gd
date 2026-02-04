@@ -32,7 +32,7 @@ signal items_stop_changed(items: Array, stop: float)
 var _items: Array[ContainerItem]
 
 ## All fixtures stored as { Fixture: { zone: { parameter: ContainerItem } } }
-var _fixture: Dictionary[Fixture, Dictionary]
+var _fixtures: Dictionary[Fixture, Dictionary]
 
 
 ## init
@@ -58,14 +58,38 @@ func get_items() -> Array[ContainerItem]:
 	return _items.duplicate()
 
 
-## Gets all the fixture data
-func get_fixtures() -> Dictionary[Fixture, Dictionary]:
-	return _fixture.duplicate(true)
+## Returns all fixture in this DataContainer
+func get_fixtures() -> Array[Fixture]:
+	var result: Array[Fixture]
+	result.assign(_fixtures.keys())
+	
+	return result
 
 
-## Gets a list of all fixtures in this DataContainer
-func get_stored_fixtures() -> Array:
-	return _fixture.keys()
+## Returns all the data
+func get_data() -> Dictionary[Fixture, Dictionary]:
+	return _fixtures
+
+
+## Gets an item by fixture, zone, and parameter
+func get_item(p_fixture: Fixture, p_zone: String, p_parameter: String) -> ContainerItem:
+	if not _fixtures.has(p_fixture):
+		return null
+	
+	var container: ContainerItem = _fixtures.get(p_fixture, {}).get(p_zone, {}).get(p_parameter, null)
+
+	if not is_instance_valid(container):
+		return null
+	
+	return container
+
+
+## Gets all the data for a given fixture, stored as { zone: { parameter: ContainerItem } }
+func get_data_for(p_fixture: Fixture) -> Dictionary[String, Dictionary]:
+	var result: Dictionary[String, Dictionary]
+	result.assign(_fixtures.get(p_fixture, {}).duplicate(true))
+	
+	return result
 
 
 ## Stores data into this DataContainer
@@ -149,7 +173,7 @@ func _store_item(p_item: ContainerItem, no_signal: bool = false) -> bool:
 		return false
 	
 	_items.append(p_item)
-	_fixture.get_or_add(p_item.get_fixture(), {}).get_or_add(p_item.get_zone(), {})[p_item.get_parameter()] = p_item
+	_fixtures.get_or_add(p_item.get_fixture(), {}).get_or_add(p_item.get_zone(), {})[p_item.get_parameter()] = p_item
 
 	ComponentDB.register_component(p_item)
 	p_item.delete_requested.connect(_erase_item.bind(p_item))
@@ -179,7 +203,7 @@ func _erase_item(p_item: ContainerItem, no_signal: bool = false) -> bool:
 		return false
 	
 	_items.erase(p_item)
-	_fixture[p_item.get_fixture()][p_item.get_zone()].erase(p_item.get_parameter())
+	_fixtures[p_item.get_fixture()][p_item.get_zone()].erase(p_item.get_parameter())
 	
 	if not no_signal:
 		items_erased.emit([p_item])

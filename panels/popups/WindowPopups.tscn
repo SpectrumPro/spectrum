@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ds42t8h4nusm4"]
+[gd_scene load_steps=15 format=3 uid="uid://ds42t8h4nusm4"]
 
 [ext_resource type="PackedScene" uid="uid://bojo5mnmadf4j" path="res://panels/popups/UIPanelPicker/UIPanelPicker.tscn" id="1_e0vty"]
 [ext_resource type="PackedScene" uid="uid://cgkb6rh0joakn" path="res://panels/UIPanelSettings/UIPanelSettings.tscn" id="2_m68sf"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bcksw5esp2mib" path="res://panels/popups/UIManifestPicker/UIManifestPicker.tscn" id="11_jcwaf"]
 [ext_resource type="PackedScene" uid="uid://dpbusafl685o6" path="res://panels/popups/UIInterfaceSelector/UIInterfaceSelector.tscn" id="12_jcqk3"]
 [ext_resource type="PackedScene" uid="uid://b4sabjg5utge2" path="res://panels/UIComponentSettings/UIComponentSettings.tscn" id="13_7kxgq"]
+[ext_resource type="PackedScene" uid="uid://w4jjpcc5ej1o" path="res://panels/popups/UIParameterFunctionList/UIParameterFunctionList.tscn" id="14_rie3b"]
 
 [node name="WindowPopups" type="Control"]
 layout_mode = 3
@@ -194,4 +195,20 @@ offset_left = -412.0
 offset_top = -229.0
 offset_right = 412.0
 offset_bottom = 229.0
+display_mode = 1
+
+[node name="UIParameterFunctionList" parent="." instance=ExtResource("14_rie3b")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -318.0
+offset_top = -46.5
+offset_right = 318.0
+offset_bottom = 46.5
+grow_horizontal = 2
+grow_vertical = 2
 display_mode = 1

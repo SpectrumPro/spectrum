@@ -63,6 +63,7 @@ enum WindowPopup {
 	MANIFEST_PICKER,	## UIManifestPicker
 	INTERFACE_SELECTOR,	## UIInterfaceSelector
 	COMPONENT_SETTINGS,	## UIComponentSettings
+	FUNCTION_LIST,		## UIParameterFunctionList
 }
 
 
@@ -136,7 +137,8 @@ var _window_popup_config: Dictionary[WindowPopup, PopupConfig] = {
 	WindowPopup.WINDOW_ID:			PopupConfig.new("UIWindowID", ""),
 	WindowPopup.MANIFEST_PICKER:	PopupConfig.new("UIManifestPicker"),
 	WindowPopup.INTERFACE_SELECTOR: PopupConfig.new("UIInterfaceSelector"),
-	WindowPopup.COMPONENT_SETTINGS: PopupConfig.new("UIComponentSettings", "set_component")
+	WindowPopup.COMPONENT_SETTINGS: PopupConfig.new("UIComponentSettings", "set_component"),
+	WindowPopup.FUNCTION_LIST:		PopupConfig.new("UIParameterFunctionList", "set_fixtures"),
 }
 
 ## All windows by UUID RefMap for UUID: Window
@@ -335,6 +337,16 @@ func prompt_manifest_picker(p_source: Node) -> Promise:
 ## Prompts the user with UIInterfaceSelector
 func prompt_interface_selector(p_source: Node) -> Promise:
 	var promise: Promise = _show_window_popup(WindowPopup.INTERFACE_SELECTOR, p_source, null)
+	
+	return promise
+
+
+## Prompts the user with UIParameterFunctionList
+func prompt_function_list(p_source: Node, p_fixtures: Array[Fixture], p_parameter: String) -> Promise:
+	var promise: Promise = _show_window_popup(WindowPopup.FUNCTION_LIST, p_source, null)
+	var function_list: UIParameterFunctionList = promise.get_object_refernce()
+	
+	function_list.set_fixtures(p_fixtures, p_parameter)
 	
 	return promise
 

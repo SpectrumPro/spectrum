@@ -1,0 +1,294 @@
+[gd_scene load_steps=16 format=3 uid="uid://bk280hh4f1sbc"]
+
+[ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://assets/styles/UIPanelBase.tres" id="1_pxtb2"]
+[ext_resource type="Script" uid="uid://dtpmr3p1f8vf0" path="res://panels/UIDataEditor/UIDataEditor.gd" id="2_lbtkl"]
+[ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://panels/UIPanel/PanelMenuBar.tscn" id="3_66500"]
+[ext_resource type="Texture2D" uid="uid://dfi7uhhle4irm" path="res://assets/icons/DataContainer.svg" id="4_yj1cb"]
+[ext_resource type="Script" uid="uid://se24iiujvm2g" path="res://core/components/functions/Function.gd" id="5_dft08"]
+[ext_resource type="Texture2D" uid="uid://bbennjke0ioen" path="res://assets/icons/Add.svg" id="6_v023y"]
+[ext_resource type="Texture2D" uid="uid://dfrrs2dnvlvsu" path="res://assets/icons/Delete.svg" id="7_0ny1a"]
+[ext_resource type="Texture2D" uid="uid://c35w1rgvcgdt0" path="res://assets/icons/Dice.svg" id="8_7jru4"]
+[ext_resource type="Script" uid="uid://ca0v066nkb8v1" path="res://panels/UIDataEditor/TimeLine.gd" id="9_ndlaa"]
+[ext_resource type="PackedScene" uid="uid://bf3cbsyaotnnq" path="res://components/Table/Table.tscn" id="9_t58bb"]
+[ext_resource type="Texture2D" uid="uid://bwhtkajekd4o3" path="res://assets/icons/Auto.svg" id="10_wsg5a"]
+[ext_resource type="Texture2D" uid="uid://dee78hal6ympb" path="res://assets/icons/Grid_On.svg" id="11_fafqp"]
+[ext_resource type="Texture2D" uid="uid://dvj551fd4wb7o" path="res://assets/icons/Handle.svg" id="12_ovyrj"]
+[ext_resource type="Script" uid="uid://ixt8obmja63p" path="res://panels/UIDataEditor/Grid.gd" id="13_ubmdu"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_jpmer"]
+font_size = 11
+font_color = Color(0.529067, 0.529067, 0.529067, 1)
+
+[node name="UIDataEditor" type="PanelContainer" node_paths=PackedStringArray("table", "component_button", "add_items_button", "remove_items_button", "view_layer_option", "edit_controls", "menu_bar")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("1_pxtb2")
+script = ExtResource("2_lbtkl")
+table = NodePath("VBoxContainer/Table")
+component_button = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ComponentButton")
+add_items_button = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer2/HBoxContainer/AddItem")
+remove_items_button = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer2/HBoxContainer/RemoveItem")
+view_layer_option = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/ViewLayer")
+edit_controls = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/EditControls")
+menu_bar = NodePath("VBoxContainer/PanelMenuBar")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="PanelMenuBar" parent="VBoxContainer" instance=ExtResource("3_66500")]
+layout_mode = 2
+
+[node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="0"]
+text = "DataEditor"
+icon = ExtResource("4_yj1cb")
+class_filter = ExtResource("5_dft08")
+enable_resolve_mode = true
+enabled = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer" index="0"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer2"]
+layout_mode = 2
+
+[node name="AddItem" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer2/HBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "Add Items"
+icon = ExtResource("6_v023y")
+
+[node name="RemoveItem" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer2/HBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "Remove Items"
+icon = ExtResource("7_0ny1a")
+
+[node name="PanelContainer3" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer3"]
+layout_mode = 2
+
+[node name="DeSelectRandom" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer3/HBoxContainer"]
+layout_mode = 2
+tooltip_text = "DeSelect Random"
+disabled = true
+icon = ExtResource("8_7jru4")
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 3
+
+[node name="ViewLayer" type="OptionButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+disabled = true
+
+[node name="Table" parent="VBoxContainer" instance=ExtResource("9_t58bb")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TimeLine" type="PanelContainer" parent="VBoxContainer" node_paths=PackedStringArray("_start_spin_box", "_stop_spin_box", "_value_spin_box", "_can_fade_button", "_data_editor", "_time_line_container", "_line", "_start_handle", "_stop_handle")]
+visible = false
+custom_minimum_size = Vector2(0, 77.92)
+layout_mode = 2
+script = ExtResource("9_ndlaa")
+_start_spin_box = NodePath("HBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer/Start")
+_stop_spin_box = NodePath("HBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2/Stop")
+_value_spin_box = NodePath("HBoxContainer/PanelContainer3/VBoxContainer2/HBoxContainer/Value")
+_can_fade_button = NodePath("HBoxContainer/PanelContainer3/VBoxContainer2/HBoxContainer2/CanFade")
+_data_editor = NodePath("../..")
+_time_line_container = NodePath("HBoxContainer/PanelContainer/TimeLineContainer")
+_line = NodePath("HBoxContainer/PanelContainer/Templates/Line2D")
+_start_handle = NodePath("HBoxContainer/PanelContainer/Templates/StartHandle")
+_stop_handle = NodePath("HBoxContainer/PanelContainer/Templates/StopHandle")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TimeLine"]
+layout_mode = 2
+
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/TimeLine/HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer2"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Start: "
+
+[node name="Start" type="SpinBox" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+max_value = 1.0
+step = 0.001
+select_all_on_focus = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Stop: "
+
+[node name="Stop" type="SpinBox" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 10
+max_value = 1.0
+step = 0.001
+select_all_on_focus = true
+
+[node name="PanelContainer4" type="PanelContainer" parent="VBoxContainer/TimeLine/HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer4"]
+layout_mode = 2
+
+[node name="Presets" type="Button" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer4/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Presets"
+icon = ExtResource("10_wsg5a")
+
+[node name="ToggleGrid" type="Button" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer4/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Toggle Grid"
+toggle_mode = true
+button_pressed = true
+icon = ExtResource("11_fafqp")
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/TimeLine/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Templates" type="Control" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Line2D" type="Line2D" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer/Templates"]
+position = Vector2(0, -6)
+width = 3.0
+default_color = Color(0, 0.311883, 0.577555, 1)
+
+[node name="StartHandle" type="TextureRect" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer/Templates"]
+modulate = Color(0, 0.556863, 1, 1)
+layout_mode = 0
+offset_right = 14.0
+offset_bottom = 14.0
+grow_vertical = 0
+texture = ExtResource("12_ovyrj")
+expand_mode = 1
+
+[node name="Capture" type="Control" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer/Templates/StartHandle"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 13
+
+[node name="StopHandle" type="TextureRect" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer/Templates"]
+modulate = Color(0, 0.556863, 1, 1)
+layout_mode = 1
+offset_right = 14.0
+offset_bottom = 14.0
+texture = ExtResource("12_ovyrj")
+expand_mode = 1
+flip_v = true
+
+[node name="Capture" type="Control" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer/Templates/StopHandle"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 13
+
+[node name="Label" type="Label" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "0%"
+label_settings = SubResource("LabelSettings_jpmer")
+
+[node name="Label2" type="Label" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "100%"
+label_settings = SubResource("LabelSettings_jpmer")
+
+[node name="Grid" type="Control" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer"]
+layout_mode = 2
+script = ExtResource("13_ubmdu")
+
+[node name="TimeLineContainer" type="Control" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="PanelContainer3" type="PanelContainer" parent="VBoxContainer/TimeLine/HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer3"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer3/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer3/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+text = "Value: "
+
+[node name="Value" type="SpinBox" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer3/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+max_value = 1.0
+step = 0.001
+select_all_on_focus = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer3/VBoxContainer2"]
+layout_mode = 2
+
+[node name="CanFade" type="CheckButton" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer3/VBoxContainer2/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Can Fade"
+
+[connection signal="object_selected" from="VBoxContainer/PanelMenuBar/HBoxContainer/ComponentButton" to="." method="set_function"]
+[connection signal="pressed" from="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer2/HBoxContainer/AddItem" to="." method="_on_add_item_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer2/HBoxContainer/RemoveItem" to="." method="_on_remove_item_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer3/HBoxContainer/DeSelectRandom" to="." method="_on_de_select_random_pressed"]
+[connection signal="item_selected" from="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/ViewLayer" to="." method="set_view_layer"]
+[connection signal="edit_request_none_module" from="VBoxContainer/Table" to="." method="_on_table_edit_request_none_module"]
+[connection signal="value_changed" from="VBoxContainer/TimeLine/HBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer/Start" to="VBoxContainer/TimeLine" method="_on_start_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/TimeLine/HBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2/Stop" to="VBoxContainer/TimeLine" method="_on_stop_value_changed"]
+[connection signal="toggled" from="VBoxContainer/TimeLine/HBoxContainer/PanelContainer4/VBoxContainer/ToggleGrid" to="VBoxContainer/TimeLine" method="_on_toggle_grid_toggled"]
+[connection signal="value_changed" from="VBoxContainer/TimeLine/HBoxContainer/PanelContainer3/VBoxContainer2/HBoxContainer/Value" to="VBoxContainer/TimeLine" method="_on_value_value_changed"]
+[connection signal="toggled" from="VBoxContainer/TimeLine/HBoxContainer/PanelContainer3/VBoxContainer2/HBoxContainer2/CanFade" to="VBoxContainer/TimeLine" method="_on_can_fade_toggled"]
+
+[editable path="VBoxContainer/PanelMenuBar"]

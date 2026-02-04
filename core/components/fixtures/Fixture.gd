@@ -100,6 +100,11 @@ func get_all_values() -> Dictionary:
 
 
 ## Gets all the parameters and there category from a zone
+func get_parameter_category(p_zone: String, p_parameter: String) -> String:
+	return ""
+
+
+## Gets all the parameters and there category from a zone
 func get_parameter_categories(p_zone: String) -> Dictionary:
 	return {}
 

@@ -113,17 +113,34 @@ func get_all_values() -> Dictionary:
 
 
 ## Gets all the parameters and there category from a zone
+func get_parameter_category(p_zone: String, p_parameter: String) -> String:
+	if not is_instance_valid(_manifest):
+		return ""
+	
+	return _manifest.get_categorys(_mode, p_zone).get(p_parameter, "")
+
+
+## Gets all the parameters and there category from a zone
 func get_parameter_categories(p_zone: String) -> Dictionary:
+	if not is_instance_valid(_manifest):
+		return {}
+	
 	return _manifest.get_categorys(_mode, p_zone)
 
 
 ## Gets all the parameter functions
 func get_parameter_functions(p_zone: String, p_parameter: String) -> Array:
+	if not is_instance_valid(_manifest):
+		return []
+	
 	return _manifest.get_parameter_functions(_mode, p_zone, p_parameter)
 
 
 ## Gets all the parameter functions
 func get_function_control_type(p_zone: String, p_parameter: String, p_function: String) -> ControlType:
+	if not is_instance_valid(_manifest):
+		return ControlType.VALUE
+	
 	return _manifest.function_control_type(_mode, p_zone, p_parameter, p_function)
 
 

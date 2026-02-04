@@ -70,6 +70,7 @@ static var custom_type_map: Dictionary[Type, Variant.Type] = {
 	Type.BITFLAGS: 			TYPE_INT,
 	Type.NAME: 				TYPE_STRING,
 	Type.IP:				TYPE_STRING,
+	Type.CID:				TYPE_STRING,
 	Type.NETWORKSESSION: 	TYPE_OBJECT,
 	Type.NETWORKNODE: 		TYPE_OBJECT,
 	Type.NETWORKHANDLER: 	TYPE_OBJECT,

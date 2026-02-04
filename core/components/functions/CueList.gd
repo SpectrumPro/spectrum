@@ -102,6 +102,11 @@ func _init(p_uuid: String = UUID_Util.v4(), p_name: String = _name) -> void:
 	_settings_manager.set_callback_allow_deserialize("on_cues_added")
 
 
+## Creates a new cue
+func create_cue() -> Promise:
+	return rpc("create_cue")
+
+
 ## Server: Adds a cue to the list
 func add_cue(cue: Cue) -> Promise:
 	return rpc("add_cue", [cue])

@@ -53,7 +53,8 @@ enum Layer {
 	VALUE,
 	START,
 	STOP,
-	CANFADE
+	CANFADE,
+	FUNCTION,
 }
 
 
