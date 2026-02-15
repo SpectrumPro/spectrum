@@ -77,6 +77,9 @@ var _selected_items: Dictionary[Row, Array]
 ## History of current selected items
 var _selection_history: Dictionary[Array, Variant]
 
+## A 320bit hash of the previous selection
+var _previous_selection_hash: int = -1
+
 ## All TreeItems that have a theme select color tint for a selection
 var _active_row_tints: Array[Row]
 
@@ -296,6 +299,11 @@ func get_selected_rows() -> Array:
 	return result.keys()
 
 
+## Returns the current selection
+func get_selection() -> Dictionary[Row, Array]:
+	return _selected_items.duplicate(true)
+
+
 ## Gets the column from an ID
 func get_column(p_id) -> Column:
 	if p_id > _columns.size():
@@ -367,6 +375,12 @@ func _set_item_selected(p_row: Row, p_column: Column, p_selected: bool) -> void:
 
 ## Updates all the row selection, adding a light blue tint to selected rows
 func _update_selection() -> void:
+	var current_selection_hash: int = _selected_items.hash()
+	
+	if current_selection_hash == _previous_selection_hash:
+		return
+	
+	_previous_selection_hash = current_selection_hash
 	var rows_to_reset: Array[Row] = _active_row_tints.duplicate()
 	_active_row_tints.clear()
 	
