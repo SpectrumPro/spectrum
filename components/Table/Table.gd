@@ -674,13 +674,21 @@ class Row extends Object:
 	
 	
 	## Selects this row
-	func select(p_column: Column) -> void:
-		_table._set_item_selected(self, p_column, true)
+	func select(p_column: Column = null) -> void:
+		if is_instance_valid(p_column):
+			_table._set_item_selected(self, p_column, true)
+		else:
+			for column: Column in _columns:
+				_table._set_item_selected(self, column, true)
 	
 	
 	## Deselects a column in this row
-	func deselect(p_column: Column) -> void:
-		_table._set_item_selected(self, p_column, false)
+	func deselect(p_column: Column = null) -> void:
+		if is_instance_valid(p_column):
+			_table._set_item_selected(self, p_column, false)
+		else:
+			for column: Column in _columns:
+				_table._set_item_selected(self, column, false)
 	
 	
 	## Sets the data with in a cell

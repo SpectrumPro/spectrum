@@ -46,13 +46,15 @@ var _function_connections: SignalGroup = SignalGroup.new([
 
 ## SignalGroup for DataContainer
 var _container_connections: SignalGroup = SignalGroup.new([
+	_on_container_items_stored,
+	_on_container_items_erased,
 	_on_container_delete_request,
-	on_container_items_function_changed,
-	on_container_items_value_changed,
-	on_container_items_can_fade_changed,
-	on_container_items_start_changed,
-	on_container_items_stop_changed,
-]).set_prefix("on_container_")
+	_on_container_items_function_changed,
+	_on_container_items_value_changed,
+	_on_container_items_can_fade_changed,
+	_on_container_items_start_changed,
+	_on_container_items_stop_changed,
+]).set_prefix("_on_container_")
 
 
 ## init
@@ -84,8 +86,7 @@ func set_function(p_function: Function) -> void:
 	
 	var is_valid: bool = is_instance_valid(_function)
 	
-	#add_items_button.set_disabled(not is_valid)
-	#remove_items_button.set_disabled(not is_valid)
+	add_items_button.set_disabled(not is_valid)
 	view_layer_option.set_disabled(not is_valid)
 	
 	if not is_valid:
@@ -130,12 +131,10 @@ func deserialize(p_serialized_data: Dictionary) -> void:
 
 ## Sets the DataContainer to display
 func _set_container(p_container: DataContainer) -> void:
-	if p_container == _container:
-		return
-	
-	_container_connections.disconnect_object(_container)
-	_container = p_container
-	_container_connections.connect_object(_container)
+	if p_container != _container:
+		_container_connections.disconnect_object(_container)
+		_container = p_container
+		_container_connections.connect_object(_container)
 	
 	var is_valid: bool = is_instance_valid(_container)
 	
@@ -150,11 +149,11 @@ func _set_container(p_container: DataContainer) -> void:
 	
 	if not is_valid:
 		return
-	
+
 	var sorted_columns: Dictionary[Programmer.Category, RefMap]
-	var unsorted_columns: Dictionary[Programmer.Category, Array]
+	var unsorted_columns: Dictionary[Programmer.Category, Set]
 	
-	for item: ContainerItem in p_container.get_items():
+	for item: ContainerItem in _container.get_items():
 		var parameter: String = item.get_parameter()
 		var category: Programmer.Category = Programmer.get_category_from_string(item.get_fixture().get_parameter_category(item.get_zone(), parameter))
 		var parameter_index: int = Programmer.get_parameter_index(category, parameter)
@@ -162,7 +161,7 @@ func _set_container(p_container: DataContainer) -> void:
 		if parameter_index != -1:
 			sorted_columns.get_or_add(category, RefMap.new()).map(parameter, parameter_index)
 		else:
-			unsorted_columns.get_or_add(category, []).append(parameter)
+			unsorted_columns.get_or_add(category, Set.new()).add(parameter)
 	
 	for category: Programmer.Category in Programmer.Category.values():
 		if sorted_columns.has(category):
@@ -174,7 +173,7 @@ func _set_container(p_container: DataContainer) -> void:
 				_columns.map(parameter, table.add_column(parameter, Data.Type.NULL))
 		
 		if unsorted_columns.has(category):
-			for parameter: String in unsorted_columns[category]:
+			for parameter: String in unsorted_columns[category].get_as_array():
 				_columns.map(parameter, table.add_column(parameter, Data.Type.NULL))
 	
 	var data: Dictionary[Fixture, Dictionary] = _container.get_data()
@@ -219,9 +218,43 @@ func _get_item_value(p_item: ContainerItem) -> Variant:
 			return null
 
 
+## Returns all the ContainerItems from the selected items in the table. de-selecting any none of type
+func _get_items_from_table_selection(p_selection: Dictionary[Table.Row, Array], p_allow_auto_deselect: bool = true) -> Dictionary[String, Variant]:
+	var items: Array[ContainerItem]
+	var fixtures: Array[Fixture]
+	
+	for row: Table.Row in p_selection:
+		var fixture: Fixture = _rows.right(row)
+		fixtures.append(fixture)
+		
+		for column: Table.Column in p_selection[row]:
+			var parameter: String = type_convert(_columns.right(column), TYPE_STRING)
+			var item: ContainerItem = _container.get_item(fixture, Fixture.RootZone, parameter)
+			
+			if is_instance_valid(item):
+				items.append(item)
+			elif p_allow_auto_deselect:
+				row.deselect(column)
+	
+	return {
+		"items": items,
+		"fixtures": fixtures
+	}
+
+
 ## Called when the function is to be deleted
 func _on_function_delete_requested() -> void:
 	set_function(null)
+
+
+## Called when items are stored into the DataContainer
+func _on_container_items_stored(p_items: Array) -> void:
+	_set_container(_container)
+
+
+## Called when items are erased from the DataContainer
+func _on_container_items_erased(p_items: Array) -> void:
+	_set_container(_container)
 
 
 ## Called when the DataContainer is to be deleted
@@ -230,31 +263,31 @@ func _on_container_delete_request() -> void:
 
 
 ## Called when the X is changed on the given items
-func on_container_items_value_changed(p_items: Array, p_value: float) -> void:
+func _on_container_items_value_changed(p_items: Array, p_value: float) -> void:
 	if _view_layer == Programmer.Layer.VALUE:
 		_reload_item_data(p_items)
 
 
 ## Called when the X is changed on the given items
-func on_container_items_can_fade_changed(p_items: Array, p_can_fade: bool) -> void:
+func _on_container_items_can_fade_changed(p_items: Array, p_can_fade: bool) -> void:
 	if _view_layer == Programmer.Layer.CANFADE:
 		_reload_item_data(p_items)
 
 
 ## Called when the X is changed on the given items
-func on_container_items_start_changed(p_items: Array, p_start: float) -> void:
+func _on_container_items_start_changed(p_items: Array, p_start: float) -> void:
 	if _view_layer == Programmer.Layer.START:
 		_reload_item_data(p_items)
 
 
 ## Called when the X is changed on the given items
-func on_container_items_stop_changed(p_items: Array, p_stop: float) -> void:
+func _on_container_items_stop_changed(p_items: Array, p_stop: float) -> void:
 	if _view_layer == Programmer.Layer.STOP:
 		_reload_item_data(p_items)
 
 
 ## Called when the X is changed on the given items
-func on_container_items_function_changed(p_items: Array, p_function: String) -> void:
+func _on_container_items_function_changed(p_items: Array, p_function: String) -> void:
 	if _view_layer == Programmer.Layer.FUNCTION:
 		_reload_item_data(p_items)
 
@@ -264,23 +297,19 @@ func _on_cuelist_active_cue_changed(p_cue: Cue) -> void:
 	_set_container(p_cue)
 
 
+## Called when the selection is changed on the table
+func _on_table_selection_changed() -> void:
+	var items: Array[ContainerItem] = _get_items_from_table_selection(table.get_selection(), false).items
+	var is_valid: bool = bool(items.size())
+	
+	remove_items_button.set_disabled(not is_valid)
+
+
 ## Called when an edit is requested on the table
 func _on_table_edit_request_none_module(p_selected_items: Dictionary[Table.Row, Array]) -> void:
-	var items: Array[ContainerItem]
-	var fixtures: Array[Fixture]
-	
-	for row: Table.Row in p_selected_items:
-		var fixture: Fixture = _rows.right(row)
-		fixtures.append(fixture)
-		
-		for column: Table.Column in p_selected_items[row]:
-			var parameter: String = type_convert(_columns.right(column), TYPE_STRING)
-			var item: ContainerItem = _container.get_item(fixture, Fixture.RootZone, parameter)
-			
-			if is_instance_valid(item):
-				items.append(item)
-			else:
-				row.deselect(column)
+	var result: Dictionary[String, Variant] = _get_items_from_table_selection(p_selected_items)
+	var items: Array[ContainerItem] = result.items
+	var fixtures: Array[Fixture] = result.fixtures
 	
 	if not items:
 		return
@@ -303,6 +332,28 @@ func _on_table_edit_request_none_module(p_selected_items: Dictionary[Table.Row, 
 				if is_instance_valid(_container): _container.set_can_fade(items, p_value)
 			)
 		Programmer.Layer.FUNCTION:
-			Interface.prompt_function_list(self, fixtures, items[0].get_parameter()).then(func (p_value: String):
-				if is_instance_valid(_container): _container.set_function(items, p_value)
+			Interface.prompt_parameter_list_function(self, fixtures, Fixture.RootZone, items[0].get_parameter()).then(func (p_function: String):
+				if is_instance_valid(_container): _container.set_function(items, p_function)
 			)
+
+
+## Called when the add item button is pressed
+func _on_add_item_pressed() -> void:
+	Interface.prompt_object_picker(self, EngineComponent, Fixture).then(func (p_fixture: Fixture):
+		Interface.prompt_parameter_list_combined(self, [p_fixture]).then(func (p_zone: String, p_parameter: String, p_function: String):
+			_container.store_data(
+				p_fixture, 
+				p_zone, 
+				p_parameter, 
+				p_function, 
+				p_fixture.get_default(p_zone, p_parameter))
+		)
+	)
+
+
+## Called when the RemoveItem button is pressed
+func _on_remove_item_pressed() -> void:
+	var items: Array[ContainerItem] = _get_items_from_table_selection(table.get_selection()).items
+	Interface.prompt_delete_components(self, items, false).then(func ():
+		_container.erase_items(items)
+	)
