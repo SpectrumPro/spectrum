@@ -87,6 +87,11 @@ class PopupConfig:
 	## Maps each window to its Promise
 	var promises: Dictionary[Window, Promise]
 	
+	## Callables connected to the panels resolve signal
+	var resolve_connections: Dictionary[Window, Callable]
+	
+	## Callables connected to the panels reject signal
+	var reject_connections: Dictionary[Window, Callable]
 	
 	## Constructor
 	func _init(p_node_name: String = "", p_setter: String = "") -> void:
@@ -228,29 +233,13 @@ func _register_popup(p_window_popup: WindowPopup, p_window_popups: Control, p_wi
 	var config: PopupConfig = _window_popup_config[p_window_popup]
 	var popup: UIBase = p_window_popups.get_node(config.node_name)
 	var setter: Callable
-	var resolve_signal: Signal = popup.get_custom_signal_or_default() if popup is UIPopup else Signal()
-	var reject_signal: Signal = popup.canceled if popup is UIPopup else popup.close_request
-	var promise: Promise = Promise.new()
 	
 	if config.setter:
 		setter = Callable(popup, config.setter)
 	
-	if not resolve_signal.is_null():
-		resolve_signal.connect(func (...p_args):
-			promise.resolve(p_args)
-			_hide_window_popup(p_window_popup, p_window)
-		)
-	
-	if not reject_signal.is_null():
-		reject_signal.connect(func (...p_args):
-			promise.reject(p_args)
-			_hide_window_popup(p_window_popup, p_window)
-		)
-	
 	config.nodes[p_window] = popup
 	config.setter_callables[p_window] = setter
 	config.active_state[p_window] = false
-	config.promises[p_window] = promise
 	popup.hide()
 
 
@@ -258,22 +247,53 @@ func _register_popup(p_window_popup: WindowPopup, p_window_popups: Control, p_wi
 func _show_window_popup(p_popup_type: WindowPopup, p_source: Node, p_setter_arg: Variant) -> Promise:
 	var window = p_source.get_window()
 	var config: PopupConfig = _window_popup_config[p_popup_type]
+	
 	var popup: UIPanel = config.nodes[window]
-	var promise: Promise = config.promises[window]
+	var promise: Promise = Promise.new()
+	
+	var resolve_signal: Signal = popup.get_custom_signal_or_default() if popup is UIPopup else Signal()
+	var reject_signal: Signal = popup.canceled if popup is UIPopup else popup.close_request
 	
 	if config.active_state[window]:
-		config.promises[window].clear()
+		config.promises[window].reject()
+		config.promises.erase(window)
 	
 	if p_setter_arg:
 		config.setter_callables[window].call(p_setter_arg)
 	
+	if not resolve_signal.is_null():
+		if config.resolve_connections.has(window) and resolve_signal.is_connected(config.resolve_connections[window]):
+			resolve_signal.disconnect(config.resolve_connections[window])
+		
+		config.resolve_connections[window] = (func (...p_args: Array):
+			_hide_window_popup(p_popup_type, window)
+			resolve_signal.disconnect(config.resolve_connections[window])
+			config.promises[window].resolve(p_args)
+		)
+		
+		resolve_signal.connect(config.resolve_connections[window])
+	
+	if not reject_signal.is_null():
+		if config.reject_connections.has(window) and reject_signal.is_connected(config.reject_connections[window]):
+			reject_signal.disconnect(config.reject_connections[window])
+		
+		config.reject_connections[window] = (func (...p_args: Array):
+			_hide_window_popup(p_popup_type, window)
+			reject_signal.disconnect(config.reject_connections[window])
+			config.promises[window].resolve(p_args)
+		)
+		
+		reject_signal.connect(config.reject_connections[window])
+	
 	config.active_state[window] = true
+	config.promises[window] = promise
 	show_and_fade(popup)
 	
 	popup.move_to_front()
 	popup.focus()
 	
 	promise.set_object_refernce(popup)
+	promise.set_clear_on_call(true)
 	return promise
 
 
@@ -286,7 +306,6 @@ func _hide_window_popup(p_popup_type: WindowPopup, p_window: Window) -> void:
 	
 	config.active_state[p_window] = false
 	fade_and_hide(config.nodes[p_window])
-	config.promises[p_window].clear()
 
 
 ## Prompts the user to select a UIPanel
