@@ -63,7 +63,7 @@ enum WindowPopup {
 	MANIFEST_PICKER,	## UIManifestPicker
 	INTERFACE_SELECTOR,	## UIInterfaceSelector
 	COMPONENT_SETTINGS,	## UIComponentSettings
-	FUNCTION_LIST,		## UIParameterFunctionList
+	PARAMETER_LIST,		## UIParameterList
 }
 
 
@@ -143,7 +143,7 @@ var _window_popup_config: Dictionary[WindowPopup, PopupConfig] = {
 	WindowPopup.MANIFEST_PICKER:	PopupConfig.new("UIManifestPicker"),
 	WindowPopup.INTERFACE_SELECTOR: PopupConfig.new("UIInterfaceSelector"),
 	WindowPopup.COMPONENT_SETTINGS: PopupConfig.new("UIComponentSettings", "set_component"),
-	WindowPopup.FUNCTION_LIST:		PopupConfig.new("UIParameterFunctionList", "set_fixtures"),
+	WindowPopup.PARAMETER_LIST:		PopupConfig.new("UIParameterList", "set_fixtures"),
 }
 
 ## All windows by UUID RefMap for UUID: Window
@@ -361,13 +361,33 @@ func prompt_interface_selector(p_source: Node) -> Promise:
 
 
 ## Prompts the user with UIParameterFunctionList
-func prompt_function_list(p_source: Node, p_fixtures: Array[Fixture], p_parameter: String) -> Promise:
-	var promise: Promise = _show_window_popup(WindowPopup.FUNCTION_LIST, p_source, null)
-	var function_list: UIParameterFunctionList = promise.get_object_refernce()
-	
-	function_list.set_fixtures(p_fixtures, p_parameter)
-	
-	return promise
+func prompt_parameter_list_combined(p_source: Node, p_fixtures: Array[Fixture]) -> Promise:
+	(get_window_popup(WindowPopup.PARAMETER_LIST, p_source) as UIParameterList).search_mode_combined(p_fixtures)
+	return _show_window_popup(WindowPopup.PARAMETER_LIST, p_source, null)
+
+
+## Prompts the user with UIParameterFunctionList
+func prompt_parameter_list_zone(p_source: Node, p_fixtures: Array[Fixture]) -> Promise:
+	(get_window_popup(WindowPopup.PARAMETER_LIST, p_source) as UIParameterList).search_mode_zone(p_fixtures)
+	return _show_window_popup(WindowPopup.PARAMETER_LIST, p_source, null)
+
+
+## Prompts the user with UIParameterFunctionList
+func prompt_parameter_list_zone_parameter(p_source: Node, p_fixtures: Array[Fixture]) -> Promise:
+	(get_window_popup(WindowPopup.PARAMETER_LIST, p_source) as UIParameterList).search_mode_zone_parameter(p_fixtures)
+	return _show_window_popup(WindowPopup.PARAMETER_LIST, p_source, null)
+
+
+## Prompts the user with UIParameterFunctionList
+func prompt_parameter_list_parameter(p_source: Node, p_fixtures: Array[Fixture], p_zone: String) -> Promise:
+	(get_window_popup(WindowPopup.PARAMETER_LIST, p_source) as UIParameterList).search_mode_parameter(p_fixtures, p_zone)
+	return _show_window_popup(WindowPopup.PARAMETER_LIST, p_source, null)
+
+
+## Prompts the user with UIParameterFunctionList
+func prompt_parameter_list_function(p_source: Node, p_fixtures: Array[Fixture], p_zone: String, p_parameter: String) -> Promise:
+	(get_window_popup(WindowPopup.PARAMETER_LIST, p_source) as UIParameterList).search_mode_function(p_fixtures, p_zone, p_parameter)
+	return _show_window_popup(WindowPopup.PARAMETER_LIST, p_source, null)
 
 
 ## Promps the user with UIObjectPicker
