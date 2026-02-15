@@ -206,6 +206,22 @@ func get_zones() -> Array[String]:
 	return _manifest.get_zones(_mode)
 
 
+## Gets all the parameters
+func get_parameters(p_zone: String) -> Array[String]:
+	if not is_instance_valid(_manifest):
+		return []
+	
+	return _manifest.get_parameters(_mode, p_zone)
+
+
+## Returns an uuid defining the type of this fixture or device. two fixtures of the same type should have the same type id
+func get_type_id() -> String:
+	if not is_instance_valid(_manifest):
+		return ""
+	
+	return _manifest.uuid()
+
+
 ## Checks if this DMXFixture has any overrides
 func has_overrides() -> bool:
 	return _raw_override_layers != {}

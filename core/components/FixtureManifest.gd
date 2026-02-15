@@ -187,8 +187,13 @@ func get_modes() -> Array[String]:
 
 
 ## Returns all zones in this manifest
-func get_zones(p_mode) -> Array[String]:
+func get_zones(p_mode: String) -> Array[String]:
 	return Array(_modes[p_mode].zones.keys(), TYPE_STRING, "", null)
+
+
+## Returns all zones in this manifest
+func get_parameters(p_mode: String, p_zone: String) -> Array[String]:
+	return Array(_modes[p_mode].zones[p_zone].keys(), TYPE_STRING, "", null)
 
 
 ## Gets all the categorys in a mode and zone

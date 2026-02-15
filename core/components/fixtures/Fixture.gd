@@ -149,6 +149,16 @@ func get_zones() -> Array[String]:
 	return []
 
 
+## Gets all the parameters
+func get_parameters(p_zone: String) -> Array[String]:
+	return []
+
+
+## Returns an uuid defining the type of this fixture or device. two fixtures of the same type should have the same type id
+func get_type_id() -> String:
+	return ""
+
+
 ## Checks if this Fixture has any overrides
 func has_overrides() -> bool:
 	return false
