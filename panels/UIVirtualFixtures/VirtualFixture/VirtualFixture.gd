@@ -95,6 +95,16 @@ func render_color():
 		base_color.b = parameters["ColorAdd_B"].value
 	
 	
+	if _fixture.has_parameter("root", "ColorRGB_Red") and "ColorRGB_Red" in parameters:
+		base_color.r = parameters["ColorRGB_Red"].value
+	
+	if _fixture.has_parameter("root", "ColorRGB_Green") and "ColorRGB_Green" in parameters:
+		base_color.g = parameters["ColorRGB_Green"].value
+	
+	if _fixture.has_parameter("root", "ColorRGB_Blue") and "ColorRGB_Blue" in parameters:
+		base_color.b = parameters["ColorRGB_Blue"].value
+	
+	
 	if _fixture.has_parameter("root", "ColorAdd_W") and "ColorAdd_W" in parameters:
 		base_color = Utils.blend_color_additive(base_color, Color.WHITE * parameters["ColorAdd_W"].value)
 	
