@@ -434,7 +434,7 @@ func prompt_popup_dialog(p_source: Node, p_title: String = "") -> UIPopupDialog:
 
 
 ## Prompts the user to delete the given engine components
-func prompt_delete_components(p_source: Node, p_components: Array) -> Promise:
+func prompt_delete_components(p_source: Node, p_components: Array, p_auto_delete: bool = true) -> Promise:
 	var title: PackedStringArray
 	title.append("Delete")
 	
@@ -446,6 +446,9 @@ func prompt_delete_components(p_source: Node, p_components: Array) -> Promise:
 		return
 	
 	return prompt_popup_dialog(p_source, "").preset(UIPopupDialog.Preset.DELETE, "".join(title)).promise().then(func ():
+		if not p_auto_delete:
+			return
+		
 		for component: Variant in p_components:
 			if not component is EngineComponent:
 				continue
