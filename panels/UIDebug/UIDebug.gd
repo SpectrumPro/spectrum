@@ -38,6 +38,28 @@ func set_output(output: Variant) -> void:
 	$VBoxContainer/PanelContainer/HBoxContainer/Output.text = result
 
 
+## Saves this panel into a dictonary
+func serialize() -> Dictionary:
+	return super.serialize().merged({
+		"message": {
+			"for": message_for.text,
+			"method": message_method.text,
+			"args": message_args.text
+		}
+	})
+
+
+## Loads this panel from a dictonary
+func deserialize(p_serialized_data: Dictionary) -> void:
+	super.deserialize(p_serialized_data)
+	
+	var message: Dictionary = type_convert(p_serialized_data.get("message", {}), TYPE_DICTIONARY)
+	
+	message_for.text = type_convert(message.get("for", {}), TYPE_STRING)
+	message_method.text = type_convert(message.get("method", {}), TYPE_STRING)
+	message_args.text = type_convert(message.get("args", {}), TYPE_STRING)
+
+
 ## Resets the engine
 func _on_reset_pressed() -> void: Network.send_command("debug", "reset")
 
@@ -126,23 +148,47 @@ func _on_send_message_to_server_pressed() -> void:
 					set_output(result)
 			)
 
-## Saves this panel into a dictonary
-func serialize() -> Dictionary:
-	return super.serialize().merged({
-		"message": {
-			"for": message_for.text,
-			"method": message_method.text,
-			"args": message_args.text
-		}
-	})
+
+## Called when the prompt parameter list button is pressed
+func _on_prompt_parameter_list_pressed() -> void:
+	Interface.prompt_object_picker(self, EngineComponent, Fixture).then(func (p_fixture: Fixture):
+		Interface.prompt_parameter_list_combined(self, [p_fixture]).then(func (p_zone: String, p_parameter: String, p_function: String):
+			set_output([p_zone, p_parameter, p_function])
+		)
+	)
 
 
-## Loads this panel from a dictonary
-func deserialize(p_serialized_data: Dictionary) -> void:
-	super.deserialize(p_serialized_data)
-	
-	var message: Dictionary = type_convert(p_serialized_data.get("message", {}), TYPE_DICTIONARY)
-	
-	message_for.text = type_convert(message.get("for", {}), TYPE_STRING)
-	message_method.text = type_convert(message.get("method", {}), TYPE_STRING)
-	message_args.text = type_convert(message.get("args", {}), TYPE_STRING)
+func _on_prompt_parameter_list_zone_pressed() -> void:
+	Interface.prompt_object_picker(self, EngineComponent, Fixture).then(func (p_fixture: Fixture):
+		Interface.prompt_parameter_list_zone(self, [p_fixture]).then(func (p_zone: String):
+			set_output(p_zone)
+		)
+	)
+
+
+func _on_prompt_parameter_list_zone_parameter_pressed() -> void:
+	Interface.prompt_object_picker(self, EngineComponent, Fixture).then(func (p_fixture: Fixture):
+		Interface.prompt_parameter_list_zone_parameter(self, [p_fixture]).then(func (p_zone: String, p_parameter: String):
+			set_output([p_zone, p_parameter])
+		)
+	)
+
+
+func _on_prompt_parameter_list_parameter_pressed() -> void:
+	Interface.prompt_object_picker(self, EngineComponent, Fixture).then(func (p_fixture: Fixture):
+		Interface.prompt_parameter_list_zone(self, [p_fixture]).then(func (p_zone: String):
+			Interface.prompt_parameter_list_parameter(self, [p_fixture], p_zone).then(func (p_parameter: String):
+				set_output(p_parameter)
+			)
+		)
+	)
+
+
+func _on_prompt_parameter_list_function_pressed() -> void:
+	Interface.prompt_object_picker(self, EngineComponent, Fixture).then(func (p_fixture: Fixture):
+		Interface.prompt_parameter_list_zone_parameter(self, [p_fixture]).then(func (p_zone: String, p_parameter: String):
+			Interface.prompt_parameter_list_function(self, [p_fixture], p_zone, p_parameter).then(func (p_function: String):
+				set_output(p_function)
+			)
+		)
+	)

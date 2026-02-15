@@ -145,6 +145,28 @@ layout_mode = 2
 disabled = true
 text = "Get Serialized Component Local"
 
+[node name="PromptParameterListCombined" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+text = "Prompt Parameter List Combined
+"
+
+[node name="PromptParameterListZone" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+text = "Prompt Parameter List Zone
+"
+
+[node name="PromptParameterListZoneParameter" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+text = "Prompt Parameter List Zone Parameter"
+
+[node name="PromptParameterListParameter" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+text = "Prompt Parameter List Parameter"
+
+[node name="PromptParameterListFunction" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+text = "Prompt Parameter List Function"
+
 [node name="Output" type="CodeEdit" parent="VBoxContainer/PanelContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -244,6 +266,11 @@ text = "Send"
 [connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer/DumpFixtureData" to="." method="_on_dump_fixture_data_pressed"]
 [connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer/GetSerializedComponentRemote" to="." method="_on_get_serialized_component_pressed"]
 [connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer/GetSerializedComponentLocal" to="." method="_on_get_serialized_component_local_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer/PromptParameterListCombined" to="." method="_on_prompt_parameter_list_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer/PromptParameterListZone" to="." method="_on_prompt_parameter_list_zone_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer/PromptParameterListZoneParameter" to="." method="_on_prompt_parameter_list_zone_parameter_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer/PromptParameterListParameter" to="." method="_on_prompt_parameter_list_parameter_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer/PromptParameterListFunction" to="." method="_on_prompt_parameter_list_function_pressed"]
 [connection signal="pressed" from="VBoxContainer/PanelContainer2/ScrollContainer/HBoxContainer/SendMessage" to="." method="_on_send_message_to_server_pressed"]
 
 [editable path="VBoxContainer/PanelMenuBar"]
