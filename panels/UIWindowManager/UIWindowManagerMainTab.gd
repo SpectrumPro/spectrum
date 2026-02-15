@@ -69,8 +69,8 @@ func _update_buttons() -> void:
 	if _selected_window and _selected_window.is_window_root():
 		state = true
 	
-	close_window_button.set_disabled(state)
-	open_window_button.set_disabled(state or _selected_window.visible)
+	close_window_button.set_disabled(state or not _selected_window.is_visible())
+	open_window_button.set_disabled(state or _selected_window.is_visible())
 	delete_window_button.set_disabled(state)
 
 
