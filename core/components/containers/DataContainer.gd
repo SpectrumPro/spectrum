@@ -51,6 +51,8 @@ func _init(p_uuid: String = UUID_Util.v4(), p_name: String = _name) -> void:
 		"on_items_start_changed": _set_start,
 		"on_items_stop_changed": _set_stop,
 	})
+	
+	_settings_manager.set_callback_allow_deserialize("on_items_stored")
 
 
 ## Gets all the ContainerItems
@@ -204,6 +206,12 @@ func _erase_item(p_item: ContainerItem, no_signal: bool = false) -> bool:
 	
 	_items.erase(p_item)
 	_fixtures[p_item.get_fixture()][p_item.get_zone()].erase(p_item.get_parameter())
+	
+	if not _fixtures[p_item.get_fixture()][p_item.get_zone()]:
+		_fixtures[p_item.get_fixture()].erase(p_item.get_zone())
+		
+		if not _fixtures[p_item.get_fixture()]:
+			_fixtures.erase(p_item.get_fixture())
 	
 	if not no_signal:
 		items_erased.emit([p_item])
