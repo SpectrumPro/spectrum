@@ -647,12 +647,13 @@ func add_window(p_base_panel: Script = UICore) -> UIWindow:
 	new_window.set_initial_position(Window.WINDOW_INITIAL_POSITION_CENTER_SCREEN_WITH_KEYBOARD_FOCUS)
 	add_child(new_window)
 	
-	(func () -> void:
-		new_window.set_name("New Window")
-		new_window.set_window_popups(popups)
-		new_window.set_base_panel(UIDB.instance_panel(p_base_panel))
-		new_window.set_window_title(new_window.name)
-	).call_deferred()
+	if is_instance_valid(p_base_panel):
+		(func () -> void:
+			new_window.set_name("New Window")
+			new_window.set_window_popups(popups)
+			new_window.set_base_panel(UIDB.instance_panel(p_base_panel))
+			new_window.set_window_title(new_window.name)
+		).call_deferred()
 	
 	window_added.emit(new_window)
 	return new_window
