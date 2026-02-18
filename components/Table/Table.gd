@@ -59,6 +59,9 @@ var _columns: Array[Column]
 ## RefMap for Row: TreeItem
 var _rows: Array[Row]
 
+## Stores all top level rows
+var _top_level_rows: Array[Row]
+
 ## RefMap for CoreTree Row: TreeItem
 var _core_rows: RefMap = RefMap.new()
 
@@ -163,6 +166,8 @@ func add_row(p_data: Dictionary[int, Variant], p_icon: Texture2D = null) -> Row:
 	var new_row: Row = Row.new(self, _column_freeze, _columns, p_data, _core_tree, _freeze_tree, p_icon, _template_sidebar_button.duplicate())
 	
 	_rows.append(new_row)
+	_top_level_rows.append(new_row)
+	
 	_core_rows.map(new_row, new_row.get_core_item())
 	_freeze_rows.map(new_row, new_row.get_freeze_item())
 	
@@ -491,6 +496,12 @@ func _update_column_min_size() -> void:
 	_columns[-1].set_min_size(_columns[-1].get_min_size() - 1)
 
 
+## Forces all rows to update thier button text, used when re-indexing rows
+func _update_row_button_text() -> void:
+	for row: Row in _top_level_rows:
+		row._update_button_text()
+
+
 ## Called when a cell in the tree is selected
 func _handle_item_selected(p_item: Variant, p_column: Variant, p_selected: bool) -> void:
 	var row: Row
@@ -789,15 +800,7 @@ class Row extends Object:
 		_side_bar_button.set_icon_visable(true)
 		new_row.deleted.connect(_on_sub_row_deleted.bind(new_row))
 		
-		var row: Row = new_row
-		var text: PackedStringArray = []
-		
-		while is_instance_valid(row):
-			text.append(str(row.get_position() + 1))
-			row = row.get_parent()
-		
-		text.reverse()
-		new_row.get_side_bar_button().set_text(".".join(text))
+		new_row._update_button_text()
 		
 		new_row.get_core_item().set_visible(not _folded)
 		new_row.get_freeze_item().set_visible(not _folded)
@@ -840,10 +843,22 @@ class Row extends Object:
 			get_tree_item(p_column).set_text(p_column.get_tree_id(), str(_cells[p_column]))
 	
 	
-	## Sets the index of this row in the tree
+	## Sets the index of this row realtive to its parent
 	func set_position(p_position: int) -> void:
-		var core_children: Array[TreeItem] = _core_tree.get_root().get_children()
-		var freeze_children: Array[TreeItem] = _freeze_tree.get_root().get_children()
+		var differnce: int = p_position - get_position()
+		var core_children: Array[TreeItem]
+		var freeze_children: Array[TreeItem]
+		
+		if differnce == 0:
+			return
+		
+		if is_instance_valid(_parent):
+			core_children = _parent.get_core_item().get_children()
+			freeze_children = _parent.get_freeze_item().get_children()
+		else:
+			core_children = _core_tree.get_root().get_children()
+			freeze_children = _freeze_tree.get_root().get_children()
+		
 		p_position = clampi(p_position, 0, core_children.size() - 1)
 		
 		if p_position < get_position():
@@ -852,6 +867,11 @@ class Row extends Object:
 		else:
 			_core_item.move_after(core_children[p_position])
 			_freeze_item.move_after(freeze_children[p_position])
+		
+		var current_button_index: int = _table.get_side_bar_container().get_children().find(_side_bar_button)
+		_table.get_side_bar_container().move_child(_side_bar_button, current_button_index + differnce)
+		
+		_table.queue(_table._update_row_button_text)
 	
 	
 	## Sets the folded state of this Row
@@ -862,7 +882,7 @@ class Row extends Object:
 			row.get_core_item().set_visible(not _folded)
 			row.get_freeze_item().set_visible(not _folded)
 			
-		_traverse_sub_rows(_sub_rows, _folded)
+		_traverse_sub_rows_set_folded(_sub_rows, _folded)
 		_side_bar_button.set_folded(_folded)
 	
 	
@@ -976,15 +996,43 @@ class Row extends Object:
 		_visable = p_visable
 	
 	
+	## Updates the button text for this row, and all child rows
+	func _update_button_text() -> void:
+		var row: Row = self
+		var text: PackedStringArray = []
+		
+		while is_instance_valid(row):
+			text.append(str(row.get_position() + 1))
+			row = row.get_parent()
+		
+		text.reverse()
+		_side_bar_button.set_text(".".join(text))
+		
+		_traverse_sub_rows_set_button_text(_sub_rows, text)
+	
+	
 	## Recursively set visabilityu of sub rows
-	func _traverse_sub_rows(p_rows: Array[Row], p_folded: bool):
+	func _traverse_sub_rows_set_button_text(p_rows: Array[Row], p_text: PackedStringArray):
+		for row: Row in p_rows:
+			p_text.append(str(row.get_position()))
+			row.get_side_bar_button().set_text(".".join(p_text))
+			
+			var sub_rows: Array[Row] = row.get_sub_rows()
+			if sub_rows:
+				_traverse_sub_rows_set_button_text(sub_rows, p_text)
+			
+			p_text.remove_at(-1)
+	
+	
+	## Recursively set visabilityu of sub rows
+	func _traverse_sub_rows_set_folded(p_rows: Array[Row], p_folded: bool):
 		for row: Row in p_rows:
 			row.get_side_bar_button().set_visible(not (_folded and not row.get_folded()))
 			row._set_visable(not _folded)
 			
 			var sub_rows: Array[Row] = row.get_sub_rows()
 			if sub_rows:
-				_traverse_sub_rows(sub_rows, p_folded)
+				_traverse_sub_rows_set_folded(sub_rows, p_folded)
 	
 	
 	## Called when an Object's name is changed on a SettingsModule with Data.Type.OBJECT
