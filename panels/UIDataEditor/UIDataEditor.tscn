@@ -32,7 +32,6 @@ add_items_button = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollCont
 remove_items_button = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer2/HBoxContainer/RemoveItem")
 view_layer_option = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/ViewLayer")
 edit_controls = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/EditControls")
-display_mode = null
 menu_bar = NodePath("VBoxContainer/PanelMenuBar")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]

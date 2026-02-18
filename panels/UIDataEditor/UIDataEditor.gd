@@ -31,8 +31,11 @@ var _container: DataContainer
 ## RefMap for Parameter: Table.Column
 var _columns: RefMap = RefMap.new()
 
-## RefMap for Fixture: Table.Row
-var _rows: RefMap = RefMap.new()
+## RefMap for {Fixture: RefMap("zone", Table.Row)}
+var _rows: Dictionary[Fixture, RefMap]
+
+## Stores each fixture and row
+var _fixture_rows: Dictionary[Table.Row, Fixture]
 
 ## Current view layer
 var _view_layer: Programmer.Layer
@@ -178,17 +181,25 @@ func _set_container(p_container: DataContainer) -> void:
 	
 	var data: Dictionary[Fixture, Dictionary] = _container.get_data()
 	for fixture: Fixture in data:
+		var root_row: Table.Row = table.add_row({})
+		
+		_rows[fixture] = RefMap.from({Fixture.RootZone: root_row})
+		_fixture_rows[root_row] = fixture
+		
+		root_row.set_cell_data(table.get_column(0), fixture.settings().get_entry("name"))
+		root_row.set_cell_data(table.get_column(1), 0)
+		
 		for zone: String in data[fixture]:
 			var row: Table.Row
 			
-			if _rows.has_left(fixture):
-				row = _rows.left(fixture)
+			if _rows.has(fixture) and _rows[fixture].has_left(zone):
+				row = _rows[fixture].left(zone)
 			else:
-				row = table.add_row({})
-				_rows.map(fixture, row)
-			
-			row.set_cell_data(table.get_column(0), fixture.settings().get_entry("name"))
-			row.set_cell_data(table.get_column(1), 0)
+				row = root_row.add_sub_row({})
+				row.set_cell_data(table.get_column(0), zone)
+				
+				_rows[fixture].map(zone, row)
+				_fixture_rows[row] = fixture
 			
 			for parameter: String in data[fixture][zone]:
 				var item: ContainerItem = data[fixture][zone][parameter]
@@ -198,7 +209,7 @@ func _set_container(p_container: DataContainer) -> void:
 ## Reloads the data for the given items
 func _reload_item_data(p_items: Array) -> void:
 	for item: ContainerItem in p_items:
-		_rows.left(item.get_fixture()).set_cell_data(_columns.left(item.get_parameter()), _get_item_value(item))
+		_rows[item.get_fixture()].left(item.get_zone()).set_cell_data(_columns.left(item.get_parameter()), _get_item_value(item))
 
 
 ## Returns the value of a ContainerItem based on the current ViewMode
@@ -224,12 +235,12 @@ func _get_items_from_table_selection(p_selection: Dictionary[Table.Row, Array], 
 	var fixtures: Array[Fixture]
 	
 	for row: Table.Row in p_selection:
-		var fixture: Fixture = _rows.right(row)
+		var fixture: Fixture = _fixture_rows[row]
 		fixtures.append(fixture)
 		
 		for column: Table.Column in p_selection[row]:
 			var parameter: String = type_convert(_columns.right(column), TYPE_STRING)
-			var item: ContainerItem = _container.get_item(fixture, Fixture.RootZone, parameter)
+			var item: ContainerItem = _container.get_item(fixture, _rows[fixture].right(row), parameter)
 			
 			if is_instance_valid(item):
 				items.append(item)
