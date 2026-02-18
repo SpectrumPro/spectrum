@@ -24,7 +24,7 @@ script = ExtResource("2_ogrry")
 _pad = NodePath("VBoxContainer/HBoxContainer/Picker/HBoxContainer/PanelContainer/Pad")
 _crosshair = NodePath("VBoxContainer/HBoxContainer/Picker/HBoxContainer/PanelContainer/Pad/Crosshair")
 _value_slider = NodePath("VBoxContainer/HBoxContainer/Picker/HBoxContainer/SliderContainer/VBoxContainer/PadValueSlider")
-_mix_mode = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/PanelContainer/MixMode")
+_mix_mode = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/PanelContainer/MixMode")
 slider_container = NodePath("VBoxContainer/HBoxContainer/Picker/HBoxContainer/SliderContainer")
 edit_controls = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/EditControls")
 menu_bar = NodePath("VBoxContainer/PanelMenuBar")
@@ -39,10 +39,11 @@ layout_mode = 2
 text = "ColorPicker"
 icon = ExtResource("4_ara1c")
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="2"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer" index="0"]
 layout_mode = 2
+size_flags_horizontal = 10
 
-[node name="MixMode" type="OptionButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer/PanelContainer"]
+[node name="MixMode" type="OptionButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/PanelContainer"]
 layout_mode = 2
 selected = 0
 item_count = 2
