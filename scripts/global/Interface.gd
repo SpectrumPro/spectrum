@@ -293,7 +293,6 @@ func _show_window_popup(p_popup_type: WindowPopup, p_source: Node, p_setter_arg:
 	popup.focus()
 	
 	promise.set_object_refernce(popup)
-	promise.set_clear_on_call(true)
 	return promise
 
 
