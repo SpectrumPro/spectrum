@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cedqo06n6en8u"]
+[gd_scene load_steps=10 format=3 uid="uid://cedqo06n6en8u"]
 
 [ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://assets/styles/UIPanelBase.tres" id="1_5m0mk"]
 [ext_resource type="Script" uid="uid://byqpqgm3d03aq" path="res://panels/UIFunctions/UIFunctions.gd" id="2_npe7k"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://dqr6mygroiluf" path="res://assets/icons/NewPanel.svg" id="5_ij3w5"]
 [ext_resource type="Texture2D" uid="uid://dfrrs2dnvlvsu" path="res://assets/icons/Delete.svg" id="7_mx5jm"]
 [ext_resource type="PackedScene" uid="uid://7prnynnrdn4n" path="res://components/ComponentManagerView/ComponentManagerView.tscn" id="8_f8x5k"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gywq0"]
 
 [node name="Functions" type="PanelContainer" node_paths=PackedStringArray("edit_controls", "menu_bar")]
 anchors_preset = 15
@@ -56,6 +58,7 @@ icon = ExtResource("4_0odo6")
 
 [node name="ComponentManagerView" parent="VBoxContainer" node_paths=PackedStringArray("new_button", "delete_button", "duplicate_button") instance=ExtResource("8_f8x5k")]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_gywq0")
 classname = "Function"
 table_column_names = Array[String](["name"])
 new_button = NodePath("../PanelMenuBar/HBoxContainer/ScrollContainer/PanelContainer/HBoxContainer/NewComponent")
