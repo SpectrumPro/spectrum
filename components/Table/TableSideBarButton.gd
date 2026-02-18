@@ -28,6 +28,9 @@ var _icon_visable: bool
 func set_folded(p_folded: bool) -> void:
 	_folded = p_folded
 	
+	if not _icon_visable:
+		return
+	
 	if _folded:
 		set_button_icon(_folded_icon)
 	else:
