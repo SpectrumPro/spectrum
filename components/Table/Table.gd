@@ -34,17 +34,23 @@ signal edit_request_none_module(p_selected_items: Dictionary[Row, Array])
 ## The Container that contains the FreezeTree
 @onready var _freeze_tree_container: Control = %FreezeTreeContainer
 
+## The SideBarContainer
+@onready var _side_bar_container: VBoxContainer = %SideBarContainer
+
+## The SideBarScroll node
+@onready var _side_bar_scroll: ScrollContainer = %SideBarScroll
+
 ## The TemplateTitleButton
 @onready var _template_title_button: TableTitleButton = %TemplateTitleButton
+
+## The TemplateSideBarButton
+@onready var _template_sidebar_button: TableSideBarButton = %TemplateSideBarButton
 
 ## The TitleScroll on the title
 @onready var _title_scroll: ScrollContainer = %TitleScroll
 
 ## The Control node that contains the SelectBox
 @onready var _select_container: Control = %SelectContainer
-
-## The SelectBox
-@onready var _select_box: SelectBox = %SelectBox
 
 
 ## All columns in the tree
@@ -92,7 +98,7 @@ var _column_freeze: int = 0
 ## Saved column sizes from seralize
 var _saved_column_sizes: Dictionary[int, int]
 
-## If true, the next scroll event will be ignored
+## If true, the next scroll event on either tree will be ignored
 var _ignore_next_v_scroll: bool = false
 
 ## If true, the next tree selection will be ignored
@@ -122,13 +128,21 @@ func _ready() -> void:
 	_freeze_tree_h_scroll_bar.add_theme_stylebox_override("scroll", StyleBoxEmpty.new())
 	_freeze_tree_v_scroll_bar.add_theme_stylebox_override("scroll", StyleBoxEmpty.new())
 	
+	_core_tree_h_scroll_bar.add_theme_stylebox_override("scroll", StyleBoxEmpty.new())
+	_core_tree_v_scroll_bar.add_theme_stylebox_override("scroll", StyleBoxEmpty.new())
+	
 	_core_tree_v_scroll_bar.value_changed.connect(_on_core_tree_v_scroll_bar_value_changed)
 	_freeze_tree_v_scroll_bar.value_changed.connect(_on_freeze_tree_v_scroll_bar_value_changed)
 	
 	_core_tree_h_scroll_bar.value_changed.connect(_title_scroll.set_h_scroll)
 	_title_scroll.get_h_scroll_bar().value_changed.connect(_core_tree_h_scroll_bar.set_value)
 	
+	_side_bar_scroll.get_v_scroll_bar().value_changed.connect(_core_tree_v_scroll_bar.set_value)
+	_side_bar_scroll.get_v_scroll_bar().value_changed.connect(_freeze_tree_v_scroll_bar.set_value)
+	
 	_template_title_button.get_parent().remove_child(_template_title_button)
+	_template_sidebar_button.get_parent().remove_child(_template_sidebar_button)
+	
 	queue(_update_column_min_size_next_frame)
 
 
@@ -146,7 +160,7 @@ func add_column(p_name: String, p_data_type: Data.Type) -> Column:
 
 ## Adds a new row to the table
 func add_row(p_data: Dictionary[int, Variant], p_icon: Texture2D = null) -> Row:
-	var new_row: Row = Row.new(self, _column_freeze, _columns, p_data, _core_tree, _freeze_tree, p_icon)
+	var new_row: Row = Row.new(self, _column_freeze, _columns, p_data, _core_tree, _freeze_tree, p_icon, _template_sidebar_button.duplicate())
 	
 	_rows.append(new_row)
 	_core_rows.map(new_row, new_row.get_core_item())
@@ -161,6 +175,9 @@ func remove_row(p_row: Row) -> bool:
 		_selected_items.erase(p_row)
 	
 	_rows.erase(p_row)
+	_core_rows.erase_left(p_row)
+	_freeze_rows.erase_left(p_row)
+	
 	queue(_update_selection)
 	
 	p_row._delete()
@@ -327,6 +344,11 @@ func get_freeze_title_container() -> HBoxContainer:
 	return _freeze_title_container
 
 
+## Returns the SideBarContainer
+func get_side_bar_container() -> VBoxContainer:
+	return _side_bar_container
+
+
 ## Returns True if there are selected items in the tree
 func is_any_selected() -> bool:
 	return not _selected_items.is_empty()
@@ -363,6 +385,13 @@ func deserialize(p_serialized_data: Dictionary) -> void:
 		column.get_title_button().set_min_width(_saved_column_sizes.get(column.get_id(), 0))
 
 
+## Adds a sub row to this tree
+func _add_sub_row(p_row: Row) -> void:
+	_rows.append(p_row)
+	_freeze_rows.map(p_row, p_row.get_freeze_item())
+	_core_rows.map(p_row, p_row.get_core_item())
+
+
 ## Sets an item selected
 func _set_item_selected(p_row: Row, p_column: Column, p_selected: bool) -> void:
 	if p_selected:
@@ -389,22 +418,14 @@ func _update_selection() -> void:
 		_active_row_tints.append(row)
 		
 		for column: Column in _columns:
-			match column.get_tree():
-				_core_tree:
-					row.get_core_item().set_custom_bg_color(column.get_tree_id(), ThemeManager.Colors.Selections.SelectedDimmed)
-				_freeze_tree:
-					row.get_freeze_item().set_custom_bg_color(column.get_tree_id(), ThemeManager.Colors.Selections.SelectedDimmed)
+			row._set_bg_color(column, ThemeManager.Colors.Selections.SelectedDimmed)
 	
 	for row: Row in rows_to_reset:
 		if not is_instance_valid(row):
 			continue
 		
 		for column: Column in _columns:
-			match column.get_tree():
-				_core_tree:
-					row.get_core_item().set_custom_bg_color(column.get_tree_id(), Color.TRANSPARENT)
-				_freeze_tree:
-					row.get_freeze_item().set_custom_bg_color(column.get_tree_id(), Color.TRANSPARENT)
+			row._set_bg_color(column, row.get_bg_color(column))
 	
 	selection_changed.emit()
 
@@ -443,6 +464,16 @@ func _deselect_all_settings_modules() -> Dictionary[Row, Array]:
 	return result
 
 
+## Deselects all items in the freeze tree
+func _deselect_all_in(p_tree: Tree) -> void:
+	var selected_items: Dictionary[Row, Array] = _selected_items.duplicate(true)
+	
+	for row: Row in selected_items:
+		for column: Column in selected_items[row]:
+			if column.get_tree() == p_tree:
+				row.deselect(column)
+
+
 ## Updates the min size on the next frame
 func _update_column_min_size_next_frame() -> void:
 	await get_tree().process_frame
@@ -451,8 +482,13 @@ func _update_column_min_size_next_frame() -> void:
 
 ## Updates the min size of all columns, to match the button
 func _update_column_min_size() -> void:
+	if not _columns:
+		return
+	
 	for column: Column in _columns:
 		column.set_min_size(column.get_title_button().get_size().x)
+	
+	_columns[-1].set_min_size(_columns[-1].get_min_size() - 1)
 
 
 ## Called when a cell in the tree is selected
@@ -473,6 +509,13 @@ func _handle_item_selected(p_item: Variant, p_column: Variant, p_selected: bool)
 			p_column += _column_freeze
 		else:
 			row = _freeze_rows.right(p_item)
+		
+		if not Input.is_key_label_pressed(KEY_CTRL):
+			match p_item.get_tree():
+				_core_tree:
+					_deselect_all_in(_freeze_tree)
+				_freeze_tree:
+					_deselect_all_in(_core_tree)
 	
 	if typeof(p_column) == TYPE_OBJECT and p_column is Column:
 		column = p_column
@@ -565,8 +608,10 @@ func _on_core_tree_v_scroll_bar_value_changed(p_value: float) -> void:
 		_ignore_next_v_scroll = false
 		return 
 	
-	_freeze_tree_v_scroll_bar.set_value(p_value)
 	_ignore_next_v_scroll = true
+	_freeze_tree_v_scroll_bar.set_value(p_value)
+	_side_bar_scroll.get_v_scroll_bar().set_value(p_value)
+	_ignore_next_v_scroll = false
 
 
 ## Called when the sroll distance is changed on the VScrollBar inside of the FreezeTree
@@ -575,8 +620,10 @@ func _on_freeze_tree_v_scroll_bar_value_changed(p_value: float) -> void:
 		_ignore_next_v_scroll = false
 		return 
 	
-	_core_tree_v_scroll_bar.set_value(p_value)
 	_ignore_next_v_scroll = true
+	_core_tree_v_scroll_bar.set_value(p_value)
+	_side_bar_scroll.get_v_scroll_bar().set_value(p_value)
+	_ignore_next_v_scroll = false
 
 
 ## Called when the visibility is changed on the FreezeTree HScrollBar
@@ -598,7 +645,7 @@ func _on_select_box_selection_updated(p_selection: Rect2) -> void:
 			
 			selection.position += _select_container.get_global_rect().position - tree.get_global_rect().position
 			
-			if tree.get_item_area_rect(row.get_tree_item(column), column.get_tree_id()).intersects(selection):
+			if tree.get_item_area_rect(row.get_tree_item(column), column.get_tree_id()).intersects(selection) and row.is_visable():
 				_set_item_selected(row, column, true)
 
 
@@ -618,6 +665,10 @@ func _on_visibility_changed() -> void:
 
 ## Class to repersent a row in the tree
 class Row extends Object:
+	## Emitted when this Row is deleted
+	signal deleted
+	
+	
 	## The Table that hold this Row
 	var _table: Table
 	
@@ -645,24 +696,49 @@ class Row extends Object:
 	## Data for each cell in this row
 	var _cells: Dictionary[Table.Column, Variant]
 	
+	## All sub Rows below this row
+	var _sub_rows: Array[Row]
+	
+	## The parent of this row
+	var _parent: Row
+	
+	## True if this Row is visable, ie no parents are folded
+	var _visable: bool = true
+	
+	## Folded state of this Row
+	var _folded: bool = false
+	
+	## Stores custom BG colors for each column
+	var _bg_colors: Dictionary[Table.Column, Color]
+	
 	## All bound callables for when a SettingsModule's data is changed
 	var _module_bound_change_methods: Dictionary[Table.Column, Callable]
 	
 	## All bound methods when using a SettingsMoudle with Data.Type.OBJECT
 	var _module_bound_name_methods: Dictionary[Table.Column, Callable]
 	
+	## The sidebar button
+	var _side_bar_button: TableSideBarButton
+	
 	
 	## Init
-	func _init(p_table: Table, p_column_freeze: int, p_columns: Array[Column], p_data: Dictionary[int, Variant], p_core_tree: Tree, p_freeze_tree: Tree, p_icon: Texture2D) -> void:
+	func _init(p_table: Table, p_column_freeze: int, p_columns: Array[Column], p_data: Dictionary[int, Variant], p_core_tree: Tree, p_freeze_tree: Tree, p_icon: Texture2D, p_side_bar_button: TableSideBarButton) -> void:
 		_table = p_table
 		_columns = p_columns
 		_column_freeze = p_column_freeze
 		_icon = p_icon
+		_side_bar_button = p_side_bar_button
 		
 		_core_tree = p_core_tree
 		_freeze_tree = p_freeze_tree
 		_core_item = _core_tree.create_item()
 		_freeze_item = _freeze_tree.create_item()
+		
+		_side_bar_button.set_text(str(get_position() + 1))
+		_table.get_side_bar_container().add_child(_side_bar_button)
+		
+		_side_bar_button.right_clicked.connect(toggle_fold)
+		_side_bar_button.button_down.connect(_on_side_bar_button_down)
 		
 		if p_column_freeze:
 			_freeze_item.set_icon(0, _icon)
@@ -689,6 +765,44 @@ class Row extends Object:
 		else:
 			for column: Column in _columns:
 				_table._set_item_selected(self, column, false)
+	
+	
+	## Toggles the fold
+	func toggle_fold() -> void:
+		set_folded(not _folded)
+	
+	
+	## Adds a Sub Row to this Row
+	func add_sub_row(p_data: Dictionary[int, Variant], p_icon: Texture2D = null) -> Row:
+		var new_row: Row = Row.new(_table, _column_freeze, _columns, p_data, _core_tree, _freeze_tree, p_icon, _table._template_sidebar_button.duplicate())
+		new_row._set_parent(self)
+		
+		_freeze_tree.get_root().remove_child(new_row.get_freeze_item())
+		_freeze_item.add_child(new_row.get_freeze_item())
+		
+		_core_tree.get_root().remove_child(new_row.get_core_item())
+		_core_item.add_child(new_row.get_core_item())
+		
+		_table._add_sub_row(new_row)
+		_sub_rows.append(new_row)
+		
+		_side_bar_button.set_icon_visable(true)
+		new_row.deleted.connect(_on_sub_row_deleted.bind(new_row))
+		
+		var row: Row = new_row
+		var text: PackedStringArray = []
+		
+		while is_instance_valid(row):
+			text.append(str(row.get_position() + 1))
+			row = row.get_parent()
+		
+		text.reverse()
+		new_row.get_side_bar_button().set_text(".".join(text))
+		
+		new_row.get_core_item().set_visible(not _folded)
+		new_row.get_freeze_item().set_visible(not _folded)
+		
+		return new_row
 	
 	
 	## Sets the data with in a cell
@@ -740,6 +854,29 @@ class Row extends Object:
 			_freeze_item.move_after(freeze_children[p_position])
 	
 	
+	## Sets the folded state of this Row
+	func set_folded(p_folded: bool) -> void:
+		_folded = p_folded
+		
+		for row: Row in _sub_rows:
+			row.get_core_item().set_visible(not _folded)
+			row.get_freeze_item().set_visible(not _folded)
+			
+		_traverse_sub_rows(_sub_rows, _folded)
+		_side_bar_button.set_folded(_folded)
+	
+	
+	## Sets the custom BG color of this row, on the given column, or null
+	func set_bg_color(p_column: Column, p_color: Color) -> void:
+		if is_instance_valid(p_column):
+			_bg_colors[p_column] = p_color
+			_set_bg_color(p_column, p_color)
+		else:
+			for column: Table.Column in _columns:
+				_bg_colors[column] = p_color
+				_set_bg_color(column, p_color)
+	
+	
 	## Gets the data in a cell
 	func get_cell_data(p_column: Table.Column) -> Variant:
 		return _cells.get(p_column, null)
@@ -771,10 +908,48 @@ class Row extends Object:
 		return _freeze_item
 	
 	
+	## Gets a the custom BG color
+	func get_bg_color(p_column: Table.Column) -> Color:
+		return _bg_colors.get(p_column, Color.TRANSPARENT)
+	
+	
+	## Gets the SideBarButton of this Row
+	func get_side_bar_button() -> Button:
+		return _side_bar_button
+	
+	
+	## Gets the parent of this Row, or null if it is top level
+	func get_parent() -> Row:
+		return _parent
+	
+	
+	## Returns the folded state
+	func get_folded() -> bool:
+		return _folded
+	
+	
+	## Returns all the sub Rows
+	func get_sub_rows() -> Array[Row]:
+		return _sub_rows.duplicate()
+	
+	
+	## Returns this rows visable state
+	func is_visable() -> bool:
+		return _visable
+	
+	
 	## Free the TreeItems
 	func _delete() -> void:
-		_core_item.free()
-		_freeze_item.free()
+		if is_instance_valid(_core_item):
+			_core_item.free()
+		
+		if is_instance_valid(_freeze_item):
+			_freeze_item.free()
+		
+		if is_instance_valid(_side_bar_button):
+			_side_bar_button.queue_free()
+		
+		deleted.emit()
 	
 	
 	## Sets the cell data from a SettingsModule callback
@@ -786,6 +961,32 @@ class Row extends Object:
 		item.set_text(p_column.get_tree_id(), _cells[p_column].get_value_string())
 	
 	
+	## Sets the BG color of the underlaying TreeItem
+	func _set_bg_color(p_column: Table.Column, p_color: Color) -> void:
+		get_tree_item(p_column).set_custom_bg_color(p_column.get_tree_id(), p_color)
+	
+	
+	## Sets the parent of this Row
+	func _set_parent(p_parent: Table.Row) -> void:
+		_parent = p_parent
+	
+	
+	## Sets the internal visable state on this row
+	func _set_visable(p_visable: bool) -> void:
+		_visable = p_visable
+	
+	
+	## Recursively set visabilityu of sub rows
+	func _traverse_sub_rows(p_rows: Array[Row], p_folded: bool):
+		for row: Row in p_rows:
+			row.get_side_bar_button().set_visible(not (_folded and not row.get_folded()))
+			row._set_visable(not _folded)
+			
+			var sub_rows: Array[Row] = row.get_sub_rows()
+			if sub_rows:
+				_traverse_sub_rows(sub_rows, p_folded)
+	
+	
 	## Called when an Object's name is changed on a SettingsModule with Data.Type.OBJECT
 	func _on_cell_data_object_name_changed(p_name: String, p_column: Column) -> void:
 		var item: TreeItem = get_tree_item(p_column)
@@ -793,6 +994,22 @@ class Row extends Object:
 			return
 		
 		item.set_text(p_column.get_tree_id(), p_name)
+	
+	
+	## Called when a sub Row is removed
+	func _on_sub_row_deleted(p_row: Row) -> void:
+		_sub_rows.erase(p_row)
+		
+		if not _sub_rows:
+			_side_bar_button.set_icon_visable(false)
+	
+	
+	## Called on button-down on the side bar button
+	func _on_side_bar_button_down() -> void:
+		if not Input.is_key_pressed(KEY_CTRL):
+			_table.deselect_all()
+		
+		select()
 
 
 ## Class to repersent a column in the tree
