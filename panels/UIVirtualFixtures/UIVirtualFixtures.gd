@@ -119,11 +119,11 @@ func _on_grid_align_pressed() -> void:
 ## Saves this VirtualFixture layout into a dict
 func serialize() -> Dictionary:
 	return super.serialize().merged({
-	"fixture_group": fixture_container.fixture_group.uuid(),
+		"fixture_group": component_button.get_component_uuid(),
 		"scroll_h": real_scroll.scroll_horizontal,
 		"scroll_v": real_scroll.scroll_vertical,
 		"zoom": fixture_container.scale.x
-	} if fixture_container.fixture_group else {})
+	})
 
 
 ## Loads this VirtualFixture layout from a dict
