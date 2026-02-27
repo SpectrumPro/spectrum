@@ -686,15 +686,14 @@ func add_window(p_base_panel: Script = UICore) -> UIWindow:
 	_windows.map(uuid, new_window)
 	
 	new_window.set_initial_position(Window.WINDOW_INITIAL_POSITION_CENTER_SCREEN_WITH_KEYBOARD_FOCUS)
-	add_child(new_window)
+	new_window.set_window_popups(popups)
+	new_window.set_name("New Window")
+	
+	add_child(new_window, true)
+	new_window.set_window_title(new_window.name)
 	
 	if is_instance_valid(p_base_panel):
-		(func () -> void:
-			new_window.set_name("New Window")
-			new_window.set_window_popups(popups)
-			new_window.set_base_panel(UIDB.instance_panel(p_base_panel))
-			new_window.set_window_title(new_window.name)
-		).call_deferred()
+		new_window.set_base_panel.call_deferred(UIDB.instance_panel(p_base_panel))
 	
 	window_added.emit(new_window)
 	return new_window
@@ -711,24 +710,6 @@ func remove_window(p_window: UIWindow) -> bool:
 	remove_child(p_window)
 	window_removed.emit(p_window)
 	
-	return true
-
-
-## Hides the given window
-func close_window(p_window: UIWindow) -> bool:
-	if not _windows.has_right(p_window) or p_window.is_window_root():
-		return false
-	
-	p_window.hide()
-	return true
-
-
-## Hides the given window
-func show_window(p_window: UIWindow) -> bool:
-	if not _windows.has_right(p_window) or p_window.is_window_root():
-		return false
-	
-	p_window.show()
 	return true
 
 
