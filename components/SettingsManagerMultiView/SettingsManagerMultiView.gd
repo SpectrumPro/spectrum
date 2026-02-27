@@ -13,6 +13,10 @@ signal manager_selected(manager: SettingsManager)
 ## Table columns made up of SettingsManager
 @export var table_column_names: Array[String]
 
+## True if icons should be auto added based on an object type
+@export var display_icons: bool = true
+
+
 @export_group("Nodes")
 
 ## The Table
@@ -50,6 +54,7 @@ func add_manager(p_manager: SettingsManager) -> void:
 		return
 	
 	var rows: Dictionary[int, Variant]
+	var icon: Texture2D
 	
 	for column_name: String in _table_columns.get_right():
 		if not p_manager.get_entry(column_name):
@@ -64,7 +69,10 @@ func add_manager(p_manager: SettingsManager) -> void:
 			column.set_data_type(entry.get_data_type())
 			rows[column.get_id()] = entry
 	
-	_manager_rows.map(table.add_row(rows, UIDB.get_class_icon(p_manager.get_inheritance_child())), p_manager)
+	if display_icons:
+		icon = UIDB.get_class_icon(p_manager.get_inheritance_child())
+	
+	_manager_rows.map(table.add_row(rows, icon), p_manager)
 
 
 ## Removes a manager
@@ -104,6 +112,16 @@ func reset() -> void:
 ## Gets the current selected SettingsManager
 func get_selected_manager() -> SettingsManager:
 	return _selected_manager
+
+
+## Gets the owner of the selected SettingsManager
+func get_selected_owner() -> Object:
+	var selected_manager: SettingsManager = get_selected_manager()
+	
+	if is_instance_valid(selected_manager):
+		return selected_manager.get_owner()
+	else:
+		return null
 
 
 ## Called when the selection is changed on the table
