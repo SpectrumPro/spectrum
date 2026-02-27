@@ -1,20 +1,16 @@
-[gd_scene load_steps=14 format=3 uid="uid://dbindagv7rpfp"]
+[gd_scene load_steps=10 format=3 uid="uid://dbindagv7rpfp"]
 
 [ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://assets/styles/UIPanelBase.tres" id="1_eoc6a"]
 [ext_resource type="Script" uid="uid://dou4ebckt6mds" path="res://panels/UIWindowManager/UIWindowManager.gd" id="2_0pdyn"]
 [ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://panels/UIPanel/PanelMenuBar.tscn" id="2_a3hd6"]
 [ext_resource type="Texture2D" uid="uid://drhd7ui4hvxr8" path="res://assets/icons/WindowManager.svg" id="3_0pdyn"]
-[ext_resource type="PackedScene" uid="uid://bf3cbsyaotnnq" path="res://components/Table/Table.tscn" id="4_b1wap"]
-[ext_resource type="Script" uid="uid://dny1dtl3nbds6" path="res://panels/UIWindowManager/UIWindowManagerMainTab.gd" id="5_0pdyn"]
-[ext_resource type="PackedScene" uid="uid://kjup3yrjifr5" path="res://components/SettingsManagerView/SettingsManagerView.tscn" id="5_23wbi"]
-[ext_resource type="StyleBox" uid="uid://csle20exwqtti" path="res://assets/styles/PanelMenuBar.tres" id="8_38pb3"]
 [ext_resource type="Texture2D" uid="uid://bbennjke0ioen" path="res://assets/icons/Add.svg" id="9_qropn"]
-[ext_resource type="Texture2D" uid="uid://bhl73t2e0jcwn" path="res://assets/icons/close.svg" id="10_fsmei"]
+[ext_resource type="PackedScene" uid="uid://bobrutb83r27e" path="res://components/SettingsManagerMultiView/SettingsManagerMultiView.tscn" id="11_38pb3"]
 [ext_resource type="Texture2D" uid="uid://dhhbjjtkgbfl0" path="res://assets/icons/FileOpen.svg" id="11_qropn"]
 [ext_resource type="Texture2D" uid="uid://dfrrs2dnvlvsu" path="res://assets/icons/Delete.svg" id="11_ukpiy"]
 [ext_resource type="Texture2D" uid="uid://dylarrrwlpxwu" path="res://assets/icons/Search.svg" id="13_fsmei"]
 
-[node name="UIWindowManager" type="PanelContainer" node_paths=PackedStringArray("edit_controls", "menu_bar")]
+[node name="UIWindowManager" type="PanelContainer" node_paths=PackedStringArray("settings_manager_multi_view", "focus_window_button", "delete_window_button", "edit_controls", "menu_bar")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -22,6 +18,9 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("1_eoc6a")
 script = ExtResource("2_0pdyn")
+settings_manager_multi_view = NodePath("VBoxContainer/HBoxContainer/SettingsManagerMultiView")
+focus_window_button = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer/FocusWindow")
+delete_window_button = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer/DeleteWindow")
 edit_controls = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/EditControls")
 menu_bar = NodePath("VBoxContainer/PanelMenuBar")
 
@@ -32,100 +31,68 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="0"]
-text = "Window Manager"
+text = "WindowManager"
 icon = ExtResource("3_0pdyn")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer" index="0"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="AddWindow" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "New"
+icon = ExtResource("9_qropn")
+
+[node name="FocusWindow" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+disabled = true
+text = "Focus"
+icon = ExtResource("11_qropn")
+
+[node name="DeleteWindow" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+disabled = true
+text = "Delete"
+icon = ExtResource("11_ukpiy")
+
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer2"]
+layout_mode = 2
+
+[node name="IdentifyWindows" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer2/HBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+text = "Identify"
+icon = ExtResource("13_fsmei")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="WindowManagerTab" type="VBoxContainer" parent="VBoxContainer/HBoxContainer" node_paths=PackedStringArray("window_table", "settings_manager_view", "close_window_button", "open_window_button", "delete_window_button")]
-layout_mode = 2
-size_flags_horizontal = 3
-script = ExtResource("5_0pdyn")
-window_table = NodePath("WindowManagerTab/HSplitContainer/Table")
-settings_manager_view = NodePath("WindowManagerTab/HSplitContainer/ScrollContainer/SettingsManagerView")
-close_window_button = NodePath("PanelContainer/HBoxContainer/PanelContainer/HBoxContainer/CloseWindow")
-open_window_button = NodePath("PanelContainer/HBoxContainer/PanelContainer/HBoxContainer/OpenWindow")
-delete_window_button = NodePath("PanelContainer/HBoxContainer/PanelContainer/HBoxContainer/DeleteWindow")
-
-[node name="WindowManagerTab" type="PanelContainer" parent="VBoxContainer/HBoxContainer/WindowManagerTab"]
+[node name="SettingsManagerMultiView" parent="VBoxContainer/HBoxContainer" instance=ExtResource("11_38pb3")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+table_column_names = Array[String](["title"])
+display_icons = false
 
-[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/HBoxContainer/WindowManagerTab/WindowManagerTab"]
-layout_mode = 2
-split_offset = -290
-
-[node name="Table" parent="VBoxContainer/HBoxContainer/WindowManagerTab/WindowManagerTab/HSplitContainer" instance=ExtResource("4_b1wap")]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/WindowManagerTab/WindowManagerTab/HSplitContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="SettingsManagerView" parent="VBoxContainer/HBoxContainer/WindowManagerTab/WindowManagerTab/HSplitContainer/ScrollContainer" instance=ExtResource("5_23wbi")]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer/WindowManagerTab"]
-layout_mode = 2
-theme_override_styles/panel = ExtResource("8_38pb3")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/WindowManagerTab/PanelContainer"]
-layout_mode = 2
-
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer/WindowManagerTab/PanelContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/WindowManagerTab/PanelContainer/HBoxContainer/PanelContainer"]
-layout_mode = 2
-
-[node name="AddWindow" type="Button" parent="VBoxContainer/HBoxContainer/WindowManagerTab/PanelContainer/HBoxContainer/PanelContainer/HBoxContainer"]
-layout_mode = 2
-text = "Add Window"
-icon = ExtResource("9_qropn")
-
-[node name="CloseWindow" type="Button" parent="VBoxContainer/HBoxContainer/WindowManagerTab/PanelContainer/HBoxContainer/PanelContainer/HBoxContainer"]
-layout_mode = 2
-disabled = true
-text = "Close Window"
-icon = ExtResource("10_fsmei")
-
-[node name="OpenWindow" type="Button" parent="VBoxContainer/HBoxContainer/WindowManagerTab/PanelContainer/HBoxContainer/PanelContainer/HBoxContainer"]
-layout_mode = 2
-disabled = true
-text = "Open Window"
-icon = ExtResource("11_qropn")
-
-[node name="DeleteWindow" type="Button" parent="VBoxContainer/HBoxContainer/WindowManagerTab/PanelContainer/HBoxContainer/PanelContainer/HBoxContainer"]
-layout_mode = 2
-disabled = true
-text = "Delete Window"
-icon = ExtResource("11_ukpiy")
-
-[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/HBoxContainer/WindowManagerTab/PanelContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 10
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/WindowManagerTab/PanelContainer/HBoxContainer/PanelContainer2"]
-layout_mode = 2
-
-[node name="IdentifyWindows" type="Button" parent="VBoxContainer/HBoxContainer/WindowManagerTab/PanelContainer/HBoxContainer/PanelContainer2/HBoxContainer"]
-layout_mode = 2
-toggle_mode = true
-text = "identify"
-icon = ExtResource("13_fsmei")
-
-[connection signal="selection_changed" from="VBoxContainer/HBoxContainer/WindowManagerTab/WindowManagerTab/HSplitContainer/Table" to="VBoxContainer/HBoxContainer/WindowManagerTab" method="_on_table_selection_changed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/WindowManagerTab/PanelContainer/HBoxContainer/PanelContainer/HBoxContainer/AddWindow" to="VBoxContainer/HBoxContainer/WindowManagerTab" method="_on_add_window_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/WindowManagerTab/PanelContainer/HBoxContainer/PanelContainer/HBoxContainer/CloseWindow" to="VBoxContainer/HBoxContainer/WindowManagerTab" method="_on_close_window_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/WindowManagerTab/PanelContainer/HBoxContainer/PanelContainer/HBoxContainer/OpenWindow" to="VBoxContainer/HBoxContainer/WindowManagerTab" method="_on_open_window_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/WindowManagerTab/PanelContainer/HBoxContainer/PanelContainer/HBoxContainer/DeleteWindow" to="VBoxContainer/HBoxContainer/WindowManagerTab" method="_on_delete_window_pressed"]
-[connection signal="toggled" from="VBoxContainer/HBoxContainer/WindowManagerTab/PanelContainer/HBoxContainer/PanelContainer2/HBoxContainer/IdentifyWindows" to="VBoxContainer/HBoxContainer/WindowManagerTab" method="_on_identify_windows_toggled"]
+[connection signal="pressed" from="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer/AddWindow" to="." method="_on_add_window_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer/FocusWindow" to="." method="_on_focus_window_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer/DeleteWindow" to="." method="_on_delete_window_pressed"]
+[connection signal="toggled" from="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer2/HBoxContainer/IdentifyWindows" to="." method="_on_identify_windows_toggled"]
+[connection signal="manager_selected" from="VBoxContainer/HBoxContainer/SettingsManagerMultiView" to="." method="_update_buttons" unbinds=1]
 
 [editable path="VBoxContainer/PanelMenuBar"]
