@@ -24,6 +24,9 @@ signal window_size_changed(window_size: Vector2i)
 ## Emitted when the window borderless state is changed
 signal window_borderless_changed(window_borderless)
 
+## Emitted when the windows visible state is changed
+signal window_visibility_changed(window_visible)
+
 
 ## Enum for DisplayMode
 enum DisplayMode {WINDOWED, MAXIMIZED, FULLSCREEN}
@@ -47,11 +50,17 @@ var _previous_size: Vector2i
 ## Previous position
 var _previous_pos: Vector2i
 
+## The previous DisplayMode
+var _previous_mode: Mode
+
 ## Dont emit window_size_changed on next process loop
 var _size_no_signal: bool = false
 
 ## Dont emit window_position_changed on next process loop
 var _position_no_signal: bool = false
+
+## Dont emit display_mode_changed on next process loop
+var _mode_no_signal: bool = false
 
 
 ## Init
@@ -77,8 +86,11 @@ func _init() -> void:
 	_settings_manager.register_setting("borderless", Data.Type.BOOL, set_window_borderless, get_window_borderless, [window_borderless_changed])\
 	.display("UIWindow", 5)
 	
-	_settings_manager.register_status("root", Data.Type.BOOL, is_window_root, [])\
+	_settings_manager.register_setting("visable", Data.Type.BOOL, set_window_visible, get_window_visible, [window_visibility_changed])\
 	.display("UIWindow", 6)
+	
+	_settings_manager.register_status("root", Data.Type.BOOL, is_window_root, [])\
+	.display("UIWindow", 7)
 	
 	close_requested.connect(_on_close_request)
 
@@ -98,6 +110,25 @@ func _process(delta: float) -> void:
 		
 		_size_no_signal = false
 		_previous_size = get_size()
+	
+	if get_mode() != _previous_mode:
+		var current_mode: Mode = get_mode()
+		var new_display_mode: DisplayMode
+		
+		match current_mode:
+			Mode.MODE_WINDOWED, Mode.MODE_MINIMIZED:
+				new_display_mode = DisplayMode.WINDOWED
+			Mode.MODE_MAXIMIZED:
+				new_display_mode = DisplayMode.MAXIMIZED
+			Mode.MODE_FULLSCREEN, Mode.MODE_EXCLUSIVE_FULLSCREEN:
+				new_display_mode = DisplayMode.FULLSCREEN
+		
+		if not _mode_no_signal:
+			display_mode_changed.emit(new_display_mode)
+		
+		_mode_no_signal = false
+		_display_mode = new_display_mode
+		_previous_mode = current_mode
 
 
 ## Gets the SettingsManager
@@ -108,21 +139,20 @@ func settings() -> SettingsManager:
 ## Sets the window title
 func set_window_title(p_title: String, p_no_signal: bool = false) -> void:
 	title = p_title
-	
 	if not p_no_signal:
 		window_title_changed.emit(title)
 
 
 ## Sets the base UIPanel to display
 func set_base_panel(p_panel: UIPanel, p_no_signal: bool = false) -> void:
-	if _base_panel:
+	if is_instance_valid(_base_panel):
 		remove_child(_base_panel)
 		_base_panel.queue_free()
 	
 	_base_panel = p_panel
 	add_child(_base_panel)
 	
-	if _window_popups:
+	if is_instance_valid(_window_popups):
 		_window_popups.move_to_front()
 	
 	if not p_no_signal:
@@ -170,6 +200,40 @@ func set_window_borderless(p_borderless: bool, p_no_signal: bool = false) -> voi
 	set_flag(Window.FLAG_BORDERLESS, p_borderless)
 
 
+## Sets the visible state on this UIWindow
+func set_window_visible(p_visible: bool, p_no_signal: bool = false) -> void:
+	if is_window_root():
+		return
+	
+	if p_visible:
+		var current_pos: Vector2 = get_window_position()
+		var current_size: Vector2 = get_window_size()
+		var current_mode: DisplayMode = get_display_mode()
+		
+		show()
+		
+		## Im gonna blame this shit show on X11
+		await get_tree().process_frame
+		await get_tree().process_frame
+		
+		set_mode(Mode.MODE_WINDOWED)
+		
+		set_window_position(current_pos, true)
+		set_window_size(current_size, true)
+		
+		## Bullshit ass window manager
+		await get_tree().process_frame
+		await get_tree().process_frame
+		
+		set_display_mode(current_mode)
+	
+	else:
+		hide()
+	
+	if not p_no_signal:
+		window_visibility_changed.emit(p_visible)
+
+
 ## Gets the window title
 func get_window_title() -> String:
 	return title
@@ -205,6 +269,11 @@ func get_window_borderless() -> bool:
 	return get_flag(Window.FLAG_BORDERLESS)
 
 
+## Gets the visible state
+func get_window_visible() -> bool:
+	return visible
+
+
 ## Returns true if this node is the root window in the program
 func is_window_root() -> bool:
 	if get_parent():
@@ -222,16 +291,18 @@ func serialize() -> Dictionary:
 		"window_size": var_to_str(get_window_size()),
 		"window_position": var_to_str(get_window_position()),
 		"window_borderless": get_window_borderless(),
+		"window_visible": get_window_visible(),
 	}
 
 
 ## Deserializes this UIWindow
 func deserialize(p_serialized_data: Dictionary) -> void:
 	set_window_title(type_convert(p_serialized_data.get("window_title"), TYPE_STRING))
-	set_display_mode(type_convert(p_serialized_data.get("window_display_mode"), TYPE_INT))
 	set_window_size(type_convert(str_to_var(p_serialized_data.get("window_size")), TYPE_VECTOR2))
 	set_window_position(type_convert(str_to_var(p_serialized_data.get("window_position")), TYPE_VECTOR2))
 	set_window_borderless(type_convert(p_serialized_data.get("window_borderless"), TYPE_BOOL))
+	set_display_mode(type_convert(p_serialized_data.get("window_display_mode"), TYPE_INT))
+	set_window_visible(type_convert(p_serialized_data.get("window_visible"), TYPE_BOOL))
 	
 	var serialized_panel: Dictionary = type_convert(p_serialized_data.get("base_panel"), TYPE_DICTIONARY)
 	var panel_class: String = type_convert(serialized_panel.get("class"), TYPE_STRING)
@@ -243,4 +314,4 @@ func deserialize(p_serialized_data: Dictionary) -> void:
 
 ## Called for a close request
 func _on_close_request() -> void:
-	Interface.close_window(self)
+	set_window_visible(false)
