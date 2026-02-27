@@ -179,11 +179,14 @@ func remove_row(p_row: Row) -> bool:
 	if p_row in _selected_items:
 		_selected_items.erase(p_row)
 	
+	p_row.deselect()
+	queue(_update_selection)
+	queue(_update_row_button_text)
+	
 	_rows.erase(p_row)
+	_top_level_rows.erase(p_row)
 	_core_rows.erase_left(p_row)
 	_freeze_rows.erase_left(p_row)
-	
-	queue(_update_selection)
 	
 	p_row._delete()
 	p_row.free()
@@ -198,6 +201,7 @@ func clear() -> void:
 		row.free()
 	
 	_rows.clear()
+	_top_level_rows.clear()
 	_selected_items.clear()
 	_active_row_tints.clear()
 	
