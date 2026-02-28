@@ -69,6 +69,9 @@ new_button = NodePath("../PanelMenuBar/HBoxContainer/ScrollContainer/PanelContai
 delete_button = NodePath("../PanelMenuBar/HBoxContainer/ScrollContainer/PanelContainer/HBoxContainer/DeleteComponent")
 duplicate_button = NodePath("../PanelMenuBar/HBoxContainer/ScrollContainer/PanelContainer/HBoxContainer/DuplicateComponent")
 
+[node name="SettingsManagerMultiView" parent="VBoxContainer/ComponentManagerView/VBoxContainer" index="0"]
+display_icons = false
+
 [node name="PanelContainer" parent="VBoxContainer/ComponentManagerView/VBoxContainer" index="1"]
 visible = false
 
