@@ -21,6 +21,7 @@ signal option_chosen(option: Variant)
 enum Preset {
 	CONFIRM,
 	DELETE,
+	INFO
 }
 
 
@@ -47,6 +48,10 @@ var _preset_config: Dictionary[Preset, Callable] = {
 		title(p_label if p_label else "Confirm deletion? This action can't be undone.")
 		button("Cancel", false)
 		button("Delete", true, Color.RED)
+		),
+	Preset.INFO: (func (p_label: String):
+		title(p_label if p_label else "Infomation:")
+		button("acknowledge", true)
 		),
 }
 
