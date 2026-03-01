@@ -82,7 +82,7 @@ func _search_tree(p_search_text: String, p_tree: Tree) -> void:
 		if p_search_text:
 			return p_a.similarity > p_b.similarity
 		else:
-			return (p_a.item_name as String).naturalnocasecmp_to(p_b.item_name)
+			return (p_a.item_name as String).naturalnocasecmp_to(p_b.item_name) < 0
 	)
 	
 	items_to_display[0].tree_item.select(0)
