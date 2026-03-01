@@ -182,6 +182,7 @@ func remove_subscription() -> void:
 		return
 	
 	_refernce_fixture.remove_subscription(_zone, _parameter, _on_fixture_value_changed)
+	_refernce_fixture = null
 
 
 ## Loads all the presets based on the current selected function
@@ -205,7 +206,6 @@ func clear() -> void:
 	_functions.clear()
 	_function_list.clear()
 	_slider.set_value_no_signal(0)
-	_refernce_fixture = null
 	
 	remove_subscription()
 	set_override_bg(false)
