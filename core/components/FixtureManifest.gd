@@ -38,7 +38,7 @@ func _init(p_uuid: String = UUID_Util.v4(), p_name: String = _name) -> void:
 	super._init(p_uuid, p_name)
 	
 	_set_self_class("FixtureManifest")
-	set_name("FixtureManifest")
+	_set_name("FixtureManifest")
 
 
 ## Creates a new mode
