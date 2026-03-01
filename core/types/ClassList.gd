@@ -59,16 +59,14 @@ func _process_node(key: String, node: Variant, inheritance_map: Dictionary, inhe
 			else:
 				class_script_map[subkey] = subnode
 				inheritance_trees[subkey] = current_position.duplicate()
-				inheritance_map.get_or_add(key, []).append(subkey)
 				
-				if not inheritance_map.has(subkey):
-					inheritance_map[subkey] = [subkey]
+				for pos_key: String in current_position:
+					inheritance_map.get_or_add(pos_key, []).append(subkey)
 			
 			if remove_pos:
 				current_position.pop_back()
 	else:
 		class_script_map[key] = node
-		inheritance_map[key] = [node]
 
 
 ## Returns the class script from the script map, or null if not found
