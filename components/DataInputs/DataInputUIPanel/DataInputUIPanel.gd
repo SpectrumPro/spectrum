@@ -36,7 +36,7 @@ func _set_editable(p_editable: bool) -> void:
 
 ## Called when the button is pressed
 func _on_button_pressed() -> void:
-	Interface.prompt_panel_picker(self).then(func (p_panel_class: String):
+	Popups.PanelPicker(self).then(func (p_panel_class: String):
 		set_value(UIDB.instance_panel(p_panel_class))
 	)
 
@@ -46,4 +46,4 @@ func _on_settings_pressed() -> void:
 	var panel: UIPanel = _module.get_getter().call()
 	
 	if panel:
-		Interface.prompt_panel_settings(self, panel)
+		Popups.PanelSettings(self, panel)

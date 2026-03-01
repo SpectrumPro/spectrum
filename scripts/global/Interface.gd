@@ -189,8 +189,10 @@ func _init() -> void:
 	_settings_manager.register_control("OpenWindowManager", Data.Type.ACTION, set_popup_visable.bind(WindowPopup.WINDOW_MANAGER, self, true), Callable(), [])
 	_settings_manager.register_control("AddWindow", Data.Type.ACTION, add_window, Callable(), [])
 	_settings_manager.register_control("SaveUI", Data.Type.ACTION, save_ui, Callable(), [])
-	_settings_manager.register_control("ComponentSettings", Data.Type.ACTION, prompt_component_settings_search.bind(self))
-	_settings_manager.register_control("CreateComponent", Data.Type.ACTION, prompt_create_component_rename.bind(self))
+	
+	## TODO
+	#_settings_manager.register_control("ComponentSettings", Data.Type.ACTION, prompt_component_settings_search.bind(self))
+	#_settings_manager.register_control("CreateComponent", Data.Type.ACTION, prompt_create_component_rename.bind(self))
 
 
 ## Ready ClientInterface
@@ -216,7 +218,7 @@ func _ready() -> void:
 ## Notification
 func _notification(p_what: int) -> void:
 	if p_what == NOTIFICATION_WM_CLOSE_REQUEST:
-		Interface.prompt_popup_dialog(self, "Close Main Window?")\
+		Popups.PopupDialog(self, "Close Main Window?")\
 		.button("Cancel", false)\
 		.button("Close", true, Color.RED)\
 		.then(quit)
@@ -244,7 +246,7 @@ func _register_popup(p_window_popup: WindowPopup, p_window_popups: Control, p_wi
 
 
 ## Shows the given WindowPopup
-func _show_window_popup(p_popup_type: WindowPopup, p_source: Node, p_setter_arg: Variant) -> Promise:
+func show_window_popup(p_popup_type: WindowPopup, p_source: Node, p_setter_arg: Variant) -> Promise:
 	var window = p_source.get_window()
 	var config: PopupConfig = _window_popup_config[p_popup_type]
 	
@@ -266,7 +268,7 @@ func _show_window_popup(p_popup_type: WindowPopup, p_source: Node, p_setter_arg:
 			resolve_signal.disconnect(config.resolve_connections[window])
 		
 		config.resolve_connections[window] = (func (...p_args: Array):
-			_hide_window_popup(p_popup_type, window)
+			hide_window_popup(p_popup_type, window)
 			resolve_signal.disconnect(config.resolve_connections[window])
 			config.promises[window].resolve(p_args)
 		)
@@ -278,7 +280,7 @@ func _show_window_popup(p_popup_type: WindowPopup, p_source: Node, p_setter_arg:
 			reject_signal.disconnect(config.reject_connections[window])
 		
 		config.reject_connections[window] = (func (...p_args: Array):
-			_hide_window_popup(p_popup_type, window)
+			hide_window_popup(p_popup_type, window)
 			reject_signal.disconnect(config.reject_connections[window])
 			config.promises[window].resolve(p_args)
 		)
@@ -297,7 +299,7 @@ func _show_window_popup(p_popup_type: WindowPopup, p_source: Node, p_setter_arg:
 
 
 ## Hides and active window popup
-func _hide_window_popup(p_popup_type: WindowPopup, p_window: Window) -> void:
+func hide_window_popup(p_popup_type: WindowPopup, p_window: Window) -> void:
 	var config: PopupConfig = _window_popup_config[p_popup_type]
 	
 	if not config.active_state[p_window]:
@@ -307,131 +309,39 @@ func _hide_window_popup(p_popup_type: WindowPopup, p_window: Window) -> void:
 	fade_and_hide(config.nodes[p_window])
 
 
-## Prompts the user to select a UIPanel
-func prompt_panel_picker(p_source: Node) -> Promise:
-	return _show_window_popup(WindowPopup.PANEL_PICKER, p_source, null)
-
-
-## Promps the user with UIPaneSettings
-func prompt_panel_settings(p_source: Node, p_panel: UIPanel) -> Promise:
-	return _show_window_popup(WindowPopup.PANEL_SETTINGS, p_source, p_panel)
-
-
-## Promps the user with UIComponentSettings
-func prompt_component_settings(p_source: Node, p_component: EngineComponent) -> Promise:
-	return _show_window_popup(WindowPopup.COMPONENT_SETTINGS, p_source, p_component)
-
-
-## Prompts the user with UIObjectPicker to search for a component to view settings for
-func prompt_component_settings_search(p_source: Node) -> Promise:
-	return prompt_object_picker(p_source, EngineComponent, EngineComponent).then(func (p_component: EngineComponent):
-		prompt_component_settings(p_source, p_component)
-	)
-
-
-## Promps the user with UIPaneSettings
-func prompt_object_picker(p_source: Node, p_index: Script, p_class_filter: Variant) -> Promise:
-	var promise: Promise = _show_window_popup(WindowPopup.OBJECT_PICKER, p_source, null)
-	var object_picker: UIObjectPicker = promise.get_object_refernce()
+## Sets the visability of a WindowPopup
+func set_popup_visable(p_popup_type: WindowPopup, p_source: Node, p_visible: bool) -> UIBase:
+	if p_visible:
+		show_window_popup(p_popup_type, p_source, null)
+	else:
+		hide_window_popup(p_popup_type, p_source.get_window())
 	
-	if p_class_filter is Script:
-		p_class_filter = p_class_filter.get_global_name()
+	return get_window_popup(p_popup_type, p_source)
+
+
+## Sets the visability of a WindowPopup
+func toggle_popup_visable(p_popup_type: WindowPopup, p_source: Node) -> UIBase:
+	var popup: UIBase = get_window_popup(p_popup_type, p_source)
 	
-	p_class_filter = type_convert(p_class_filter, TYPE_STRING)
+	if not popup:
+		return null
 	
-	object_picker.set_select_mode(UIObjectPicker.SelectMode.OBJECT)
-	object_picker.set_index(p_index, p_class_filter)
+	if popup.visible:
+		hide_window_popup(p_popup_type, p_source.get_window())
+	else:
+		show_window_popup(p_popup_type, p_source, null)
 	
-	return promise
+	return popup
 
 
-## Prompts the user with UIManifestPicker
-func prompt_manifest_picker(p_source: Node) -> Promise:
-	var promise: Promise = _show_window_popup(WindowPopup.MANIFEST_PICKER, p_source, null)
-	
-	return promise
-
-
-## Prompts the user with UIInterfaceSelector
-func prompt_interface_selector(p_source: Node) -> Promise:
-	var promise: Promise = _show_window_popup(WindowPopup.INTERFACE_SELECTOR, p_source, null)
-	
-	return promise
-
-
-## Prompts the user with UIParameterFunctionList
-func prompt_parameter_list_combined(p_source: Node, p_fixtures: Array[Fixture]) -> Promise:
-	(get_window_popup(WindowPopup.PARAMETER_LIST, p_source) as UIParameterList).search_mode_combined(p_fixtures)
-	return _show_window_popup(WindowPopup.PARAMETER_LIST, p_source, null)
-
-
-## Prompts the user with UIParameterFunctionList
-func prompt_parameter_list_zone(p_source: Node, p_fixtures: Array[Fixture]) -> Promise:
-	(get_window_popup(WindowPopup.PARAMETER_LIST, p_source) as UIParameterList).search_mode_zone(p_fixtures)
-	return _show_window_popup(WindowPopup.PARAMETER_LIST, p_source, null)
-
-
-## Prompts the user with UIParameterFunctionList
-func prompt_parameter_list_zone_parameter(p_source: Node, p_fixtures: Array[Fixture]) -> Promise:
-	(get_window_popup(WindowPopup.PARAMETER_LIST, p_source) as UIParameterList).search_mode_zone_parameter(p_fixtures)
-	return _show_window_popup(WindowPopup.PARAMETER_LIST, p_source, null)
-
-
-## Prompts the user with UIParameterFunctionList
-func prompt_parameter_list_parameter(p_source: Node, p_fixtures: Array[Fixture], p_zone: String) -> Promise:
-	(get_window_popup(WindowPopup.PARAMETER_LIST, p_source) as UIParameterList).search_mode_parameter(p_fixtures, p_zone)
-	return _show_window_popup(WindowPopup.PARAMETER_LIST, p_source, null)
-
-
-## Prompts the user with UIParameterFunctionList
-func prompt_parameter_list_function(p_source: Node, p_fixtures: Array[Fixture], p_zone: String, p_parameter: String) -> Promise:
-	(get_window_popup(WindowPopup.PARAMETER_LIST, p_source) as UIParameterList).search_mode_function(p_fixtures, p_zone, p_parameter)
-	return _show_window_popup(WindowPopup.PARAMETER_LIST, p_source, null)
-
-
-## Promps the user with UIObjectPicker
-func prompt_create_component(p_source: Node, p_class_filter: String) -> Promise:
-	var promise: Promise = _show_window_popup(WindowPopup.OBJECT_PICKER, p_source, null)
-	var object_picker: UIObjectPicker = promise.get_object_refernce()
-	
-	object_picker.set_select_mode(UIObjectPicker.SelectMode.CLASS)
-	object_picker.set_index(EngineComponent, p_class_filter)
-	
-	return promise
-
-
-## Prompts the user with UIObjectPicker, creates the component, and Prompts the user with the name dialog
-func prompt_create_component_rename(p_source: Node) -> Promise:
-	return prompt_create_component(p_source, "EngineComponent").then(func (p_classname: String):
-		Core.create_component(p_classname).then(func (p_component: EngineComponent):
-			prompt_settings_module(p_source, p_component.settings().get_entry("name"))
-		)
-	)
-
-
-## Promps the user with SettingsModule
-func prompt_settings_module(p_source: Node, p_modules: Variant) -> Promise:
-	return _show_window_popup(WindowPopup.SETTINGS_MODULE, p_source, p_modules)
-
-
-## Promps the user with a DataInput
-func prompt_data_input(p_source: Node, p_data_type: Data.Type, p_default: Variant, p_label: String) -> Promise:
-	var promise: Promise = _show_window_popup(WindowPopup.SETTINGS_MODULE, p_source, null)
-	var module_view: UIPopupSettingsModule = promise.get_object_refernce()
-	var dummy_module: SettingsModule = SettingsModule.new(p_label, p_label, p_data_type, SettingsModule.Type.SETTING, promise.resolvev, func (): return p_default, [], p_source)
-	
-	module_view.set_module(dummy_module)
-	module_view.focus()
-	return promise
-
-
-## Prompts the user with a delete confirmation dialog
-func prompt_delete_confirmation(p_source: Node, p_title: String = "Confirm Deletion?") -> Promise:
-	return prompt_popup_dialog(p_source, p_title).preset(UIPopupDialog.Preset.DELETE, p_title).promise()
+## Hides all popup panels
+func hide_all_popup_panels() -> void:
+	for popup_type: WindowPopup in _window_popup_config:
+		hide_window_popup(popup_type, get_window())
 
 
 ## Creates and adds a blank UIPopupDialog
-func prompt_popup_dialog(p_source: Node, p_title: String = "") -> UIPopupDialog:
+func create_popup_dialog(p_source: Node, p_title: String = "") -> UIPopupDialog:
 	if _open_popup_dialogs.has(p_source):
 		var open_dialog: UIPopupDialog = _open_popup_dialogs[p_source]
 		
@@ -471,32 +381,8 @@ func prompt_popup_dialog(p_source: Node, p_title: String = "") -> UIPopupDialog:
 	return new_dialog
 
 
-## Prompts the user to delete the given engine components
-func prompt_delete_components(p_source: Node, p_components: Array, p_auto_delete: bool = true) -> Promise:
-	var title: PackedStringArray
-	title.append("Delete")
-	
-	if p_components.size() > 1:
-		title.append(": " + str(p_components.size()) + " Components?")
-	elif p_components.size() and p_components[0] is EngineComponent:
-		title.append(" Selected " + p_components[0].classname() + "?")
-	else:
-		return
-	
-	return prompt_popup_dialog(p_source, "").preset(UIPopupDialog.Preset.DELETE, "".join(title)).promise().then(func ():
-		if not p_auto_delete:
-			return
-		
-		for component: Variant in p_components:
-			if not component is EngineComponent:
-				continue
-			
-			component.delete_rpc()
-	)
-
-
 ## Prompts the user with a custom panel popup
-func prompt_panel_popup(p_source: Node, p_panel_class: Variant) -> UIPanel:
+func create_panel_popup(p_source: Node, p_panel_class: Variant) -> UIPanel:
 	var window_popups: Control = _window_popups[p_source.get_window()]
 	var panel: UIPanel = UIDB.instance_panel(p_panel_class)
 	
@@ -514,37 +400,6 @@ func prompt_panel_popup(p_source: Node, p_panel_class: Variant) -> UIPanel:
 	
 	show_and_fade(panel)
 	return panel
-
-
-## Sets the visability of a WindowPopup
-func set_popup_visable(p_popup_type: WindowPopup, p_source: Node, p_visible: bool) -> UIBase:
-	if p_visible:
-		_show_window_popup(p_popup_type, p_source, null)
-	else:
-		_hide_window_popup(p_popup_type, p_source.get_window())
-	
-	return get_window_popup(p_popup_type, p_source)
-
-
-## Sets the visability of a WindowPopup
-func toggle_popup_visable(p_popup_type: WindowPopup, p_source: Node) -> UIBase:
-	var popup: UIBase = get_window_popup(p_popup_type, p_source)
-	
-	if not popup:
-		return null
-	
-	if popup.visible:
-		_hide_window_popup(p_popup_type, p_source.get_window())
-	else:
-		_show_window_popup(p_popup_type, p_source, null)
-	
-	return popup
-
-
-## Hides all popup panels
-func hide_all_popup_panels() -> void:
-	for popup_type: WindowPopup in _window_popup_config:
-		_hide_window_popup(popup_type, get_window())
 
 
 ## Saves the UI to the ui save file
@@ -719,7 +574,7 @@ func show_window_id(p_on_windows: Array[UIWindow] = []) -> void:
 		p_on_windows = get_all_windows()
 	
 	for window: UIWindow in p_on_windows:
-		_show_window_popup(WindowPopup.WINDOW_ID, window, null)
+		show_window_popup(WindowPopup.WINDOW_ID, window, null)
 
 
 ## Shows the WindowID on all the given windows. or all windows
@@ -728,7 +583,7 @@ func hide_window_id(p_on_windows: Array[UIWindow] = []) -> void:
 		p_on_windows = get_all_windows()
 	
 	for window: UIWindow in p_on_windows:
-		_hide_window_popup(WindowPopup.WINDOW_ID, window)
+		hide_window_popup(WindowPopup.WINDOW_ID, window)
 
 
 ## Gets all windows

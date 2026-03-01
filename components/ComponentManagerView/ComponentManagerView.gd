@@ -108,14 +108,14 @@ func _on_manager_selected(p_manager: SettingsManager) -> void:
 
 ## Called when the NewComponent Button is pressed
 func _on_new_button_pressed() -> void:
-	Interface.prompt_create_component(self, classname).then(func (p_classname: String):
+	Popups.ObjectPicker_class(self, classname).then(func (p_classname: String):
 		match _mode:
 			Mode.STANDALONE:
 				Core.create_component(p_classname).then(func (p_component: EngineComponent):
 					if not is_instance_valid(p_component):
 						return
 					
-					Interface.prompt_settings_module(self, p_component.settings().get_entry("name"))
+					Popups.show_settings_module(self, p_component.settings().get_entry("name"))
 				)
 			Mode.MANUAL:
 				create_requested.emit(p_classname)

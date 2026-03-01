@@ -388,7 +388,7 @@ func _update_selection_box() -> void:
 #region UI Callbacks
 ## Called when the add fixtures button is pressed
 func _on_add_fixtures_pressed() -> void: 
-	Interface.prompt_object_picker(self, EngineComponent, "DMXFixture")
+	Popups.ObjectPicker(self, EngineComponent, "DMXFixture")
 
 
 ## Called when the remove fixtures button is pressed
@@ -402,8 +402,8 @@ func _on_remove_fixtures_pressed() -> void:
 
 
 ## Called when fixtures are selected in the object picker to be added
-func _on_object_picker_objects_selected(objects: Array) -> void:
-	_add_fixtures(objects)
+func _on_object_picker_objects_selected(component: EngineComponent) -> void:
+	_add_fixtures([component])
 
 
 func _on_import_pressed() -> void:
@@ -450,7 +450,7 @@ func _on_gui_input(event: InputEvent) -> void:
 				
 			MOUSE_BUTTON_RIGHT:
 				if event.is_released() and _edit_mode:
-					Interface.show_object_picker(ObjectPicker.SelectMode.Multi, _on_object_picker_objects_selected, "Fixture")
+					Popups.ObjectPicker(self, EngineComponent, Fixture).then(_on_object_picker_objects_selected)
 
 
 ## Called when the align button is pressed
@@ -507,10 +507,4 @@ func _on_de_select_random_pressed() -> void:
 	
 	Values.set_selection_value("selected_fixtures", selected)
 
-
-func _on_fixture_group_name_pressed() -> void:
-	Interface.show_object_picker(ObjectPicker.SelectMode.Single, func (objects: Array):
-		if objects[0] is FixtureGroup:
-			set_fixture_group(objects[0])
-	, "FixtureGroup")
 #endregion

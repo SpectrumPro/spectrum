@@ -73,7 +73,7 @@ func _on_delete_window_pressed() -> void:
 	var selected_window: UIWindow = settings_manager_multi_view.get_selected_owner()
 	
 	if is_instance_valid(selected_window):
-		Interface.prompt_delete_confirmation(self, str("Delete: ", selected_window.get_window_title(), "?")).then(func ():
+		Popups.show_delete_confirmation(self, str("Delete: ", selected_window.get_window_title(), "?")).then(func ():
 			Interface.remove_window(selected_window)
 			_update_buttons()
 		)

@@ -178,7 +178,7 @@ func _on_save_pressed() -> void:
 
 ## Called when the new button is clicked
 func _on_new_pressed() -> void:
-	Interface.prompt_popup_dialog(self).preset(UIPopupDialog.Preset.DELETE, "Warning: Creating a show will erace all current components!").then(func ():
+	Popups.PopupDialog(self).preset(UIPopupDialog.Preset.DELETE, "Warning: Creating a show will erace all current components!").then(func ():
 		Core.reset()
 	)
 
@@ -187,9 +187,9 @@ func _on_new_pressed() -> void:
 func _on_save_as_pressed() -> void:
 	var default_name: String = Core.get_file_name() if Core.get_file_name() else str("Save at: ", Time.get_time_string_from_system())
 	
-	Interface.prompt_data_input(self, Data.Type.STRING, default_name, "Save As:").then(func (p_file_name: String):
+	Popups.show_data_input(self, Data.Type.STRING, default_name, "Save As:").then(func (p_file_name: String):
 			if p_file_name in _listed_files:
-				Interface.prompt_popup_dialog(self).preset(UIPopupDialog.Preset.CONFIRM, "File Exists! Override?").then(Core.save.bind(p_file_name))
+				Popups.PopupDialog(self).preset(UIPopupDialog.Preset.CONFIRM, "File Exists! Override?").then(Core.save.bind(p_file_name))
 			else:
 				Core.save(p_file_name).then(_reload_saves)
 	)
@@ -201,11 +201,11 @@ func _on_rename_pressed() -> void:
 	
 	if selected:
 		var orignal_file: String = selected.get_text(0)
-		Interface.show_name_dialog("New Name: ", orignal_file).confirmed.connect(func (new_name: String):
-			if new_name in _listed_files:
-				Interface.show_info_dialog("A file with the same name already exists.")
+		Popups.show_data_input(self, Data.Type.STRING, orignal_file, "New Name:").then(func (p_new_name: String):
+			if p_new_name in _listed_files:
+				Popups.PopupDialog(self).preset(UIPopupDialog.Preset.INFO, "Name already exists")
 			else:
-				Core.rename_file(orignal_file, new_name).then(_reload_saves)
+				Core.rename_file(orignal_file, p_new_name).then(_reload_saves)
 		)
 
 

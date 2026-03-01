@@ -76,7 +76,7 @@ func _remove_fixtures(p_fixtures: Array[Fixture]) -> void:
 
 ## Called when the Add Button is pressed
 func _on_add_pressed() -> void:
-	Interface.prompt_object_picker(self, EngineComponent, "Fixture").then(func (p_fixture: Fixture):
+	Popups.ObjectPicker(self, EngineComponent, "Fixture").then(func (p_fixture: Fixture):
 		_fixture_group.add_fixture(p_fixture)
 	)
 

@@ -327,31 +327,31 @@ func _on_table_edit_request_none_module(p_selected_items: Dictionary[Table.Row, 
 	
 	match _view_layer:
 		Programmer.Layer.VALUE:
-			Interface.prompt_data_input(self, Data.Type.FLOAT, items[0].get_value(), "Value").then(func (p_value: float):
+			Popups.show_data_input(self, Data.Type.FLOAT, items[0].get_value(), "Value").then(func (p_value: float):
 				if is_instance_valid(_container): _container.set_value(items, p_value)
 			)
 		Programmer.Layer.START:
-			Interface.prompt_data_input(self, Data.Type.FLOAT, items[0].get_start(), "Start").then(func (p_value: float):
+			Popups.show_data_input(self, Data.Type.FLOAT, items[0].get_start(), "Start").then(func (p_value: float):
 				if is_instance_valid(_container): _container.set_start(items, p_value)
 			)
 		Programmer.Layer.STOP:
-			Interface.prompt_data_input(self, Data.Type.FLOAT, items[0].get_stop(), "Stop").then(func (p_value: float):
+			Popups.show_data_input(self, Data.Type.FLOAT, items[0].get_stop(), "Stop").then(func (p_value: float):
 				if is_instance_valid(_container): _container.set_stop(items, p_value)
 			)
 		Programmer.Layer.CANFADE:
-			Interface.prompt_data_input(self, Data.Type.BOOL, items[0].get_can_fade(), "Can Fade").then(func (p_value: bool):
+			Popups.show_data_input(self, Data.Type.BOOL, items[0].get_can_fade(), "Can Fade").then(func (p_value: bool):
 				if is_instance_valid(_container): _container.set_can_fade(items, p_value)
 			)
 		Programmer.Layer.FUNCTION:
-			Interface.prompt_parameter_list_function(self, fixtures, Fixture.RootZone, items[0].get_parameter()).then(func (p_function: String):
+			Popups.ParameterList_function(self, fixtures, Fixture.RootZone, items[0].get_parameter()).then(func (p_function: String):
 				if is_instance_valid(_container): _container.set_function(items, p_function)
 			)
 
 
 ## Called when the add item button is pressed
 func _on_add_item_pressed() -> void:
-	Interface.prompt_object_picker(self, EngineComponent, Fixture).then(func (p_fixture: Fixture):
-		Interface.prompt_parameter_list_combined(self, [p_fixture]).then(func (p_zone: String, p_parameter: String, p_function: String):
+	Popups.ObjectPicker(self, EngineComponent, Fixture).then(func (p_fixture: Fixture):
+		Popups.ParameterList(self, [p_fixture]).then(func (p_zone: String, p_parameter: String, p_function: String):
 			_container.store_data(
 				p_fixture, 
 				p_zone, 
@@ -365,6 +365,6 @@ func _on_add_item_pressed() -> void:
 ## Called when the RemoveItem button is pressed
 func _on_remove_item_pressed() -> void:
 	var items: Array[ContainerItem] = _get_items_from_table_selection(table.get_selection()).items
-	Interface.prompt_delete_components(self, items, false).then(func ():
+	Popups.confirm_delete_components(self, items, false).then(func ():
 		_container.erase_items(items)
 	)

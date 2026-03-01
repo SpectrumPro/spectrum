@@ -247,7 +247,7 @@ func edit_selected() -> void:
 		
 		if modules_to_edit:
 			Utils.array_move_to_start(modules_to_edit, cell_data)
-			Interface.prompt_settings_module(self, modules_to_edit)
+			Popups.show_settings_module(self, modules_to_edit)
 	else:
 		var result: Dictionary[Row, Array] = _deselect_all_settings_modules()
 		edit_request_none_module.emit(result)
@@ -262,7 +262,7 @@ func set_expand(p_expand: bool, p_no_signal: bool = false) -> void:
 	queue(_update_column_min_size_next_frame)
 	
 	for column: Column in _columns:
-		var flag: ConfirmationBox.SizeFlags
+		var flag: Control.SizeFlags
 		
 		if not column.get_allow_expand():
 			flag = Control.SIZE_SHRINK_BEGIN

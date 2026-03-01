@@ -200,10 +200,10 @@ func _on_add_cue_pressed() -> void:
 		if not is_instance_valid(p_cue):
 			return
 		
-		Interface.prompt_settings_module(self, p_cue.settings().get_entry("name"))
+		Popups.show_settings_module(self, p_cue.settings().get_entry("name"))
 	)
 
 
 ## Called when then DeleteCue button is pressed
 func _on_delete_cue_pressed() -> void:
-	Interface.prompt_delete_components(self, _get_selected_cues())
+	Popups.confirm_delete_components(self, _get_selected_cues())

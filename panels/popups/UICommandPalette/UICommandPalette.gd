@@ -84,7 +84,7 @@ func activate_item(p_tree_item: TreeItem) -> void:
 				Data.Type.ACTION:
 					module.get_setter().call()
 				_:
-					Interface.prompt_settings_module(self, module)
+					Popups.show_settings_module(self, module)
 	
 	accept()
 

@@ -37,6 +37,6 @@ func _set_editable(p_editable: bool) -> void:
 
 ## Called when the button is pressed
 func _on_button_pressed() -> void:
-	Interface.prompt_interface_selector(self).then(func (p_address: IPAddr):
+	Popups.InterfaceSelector(self).then(func (p_address: IPAddr):
 		set_value(p_address)
 	)

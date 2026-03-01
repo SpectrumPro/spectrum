@@ -209,7 +209,7 @@ func get_menu_bar_visible() -> bool:
 
 ## Shows or hides the panels settings
 func show_settings() -> void:
-	Interface.prompt_panel_settings(self, self)
+	Popups.PanelSettings(self, self)
 
 
 ## Detaches the menu bar

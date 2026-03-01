@@ -91,11 +91,11 @@ func _update_selection() -> void:
 
 ## Called when the add tab button is pressed
 func _on_create_tab_pressed() -> void:
-	Interface.prompt_panel_picker(self).then(func (p_panel_class: String):
+	Popups.PanelPicker(self).then(func (p_panel_class: String):
 		var panel: UIPanel = UIDB.instance_panel(p_panel_class)
 		var item: UICorePrimarySideBar.TabItem = _side_bar.create_tab(panel, _side_bar.get_next_empty_tab())
 		
-		Interface.prompt_data_input(self, Data.Type.STRING, panel.get_ui_name(), "Tab Name").then(func (p_name: String):
+		Popups.show_data_input(self, Data.Type.STRING, panel.get_ui_name(), "Tab Name").then(func (p_name: String):
 			item.set_title(p_name)
 		)
 	)

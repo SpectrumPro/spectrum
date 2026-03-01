@@ -544,12 +544,12 @@ func _on_zone_select_item_selected(index: int) -> void:
 
 ## Called when the store button is pressed
 func _on_store_pressed() -> void:
-	Interface.prompt_object_picker(self, EngineComponent, Function).then(func (p_function: Function):
+	Popups.ObjectPicker(self, EngineComponent, Function).then(func (p_function: Function):
 		Programmer.store_into(p_function).then(func (p_component: EngineComponent):
 			if not is_instance_valid(p_component) or not p_component is Cue:
 				return
 			
-			Interface.prompt_settings_module(self, p_component.settings().get_entry("name"))
+			Popups.show_settings_module(self, p_component.settings().get_entry("name"))
 		)
 	)
 

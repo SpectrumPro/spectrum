@@ -134,6 +134,6 @@ func _on_pressed() -> void:
 	if not enabled:
 		return
 	
-	Interface.prompt_object_picker(self, EngineComponent, class_filter.get_global_name()).then(func (p_component: EngineComponent):
+	Popups.ObjectPicker(self, EngineComponent, class_filter.get_global_name()).then(func (p_component: EngineComponent):
 		set_component(p_component)
 	)

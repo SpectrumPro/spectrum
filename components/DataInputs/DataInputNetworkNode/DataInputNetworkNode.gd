@@ -56,6 +56,6 @@ func _on_node_name_changed(p_name: String) -> void:
 
 ## Called when the button is pressed
 func _on_button_pressed() -> void:
-	Interface.prompt_object_picker(self, NetworkItem, _module.get_class_filter().get_global_name()).then(func (p_session: NetworkNode):
+	Popups.ObjectPicker(self, NetworkItem, _module.get_class_filter().get_global_name()).then(func (p_session: NetworkNode):
 		set_value(p_session)
 	)

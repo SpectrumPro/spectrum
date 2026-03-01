@@ -81,17 +81,14 @@ func reset() -> void:
 
 ## Called when the create session button is pressed
 func _on_create_session_button_pressed() -> void:
-	Interface.prompt_data_input(self, Data.Type.STRING, "NewSession", "Session Name").then(func (p_name: String):
+	Popups.show_data_input(self, Data.Type.STRING, "NewSession", "Session Name").then(func (p_name: String):
 		_constellation.create_session(p_name)
 	)
 
 
 ## Called when the LeaveSession button is pressed
 func _on_leave_session_button_pressed() -> void:
-	if _constellation.get_local_node().get_session().get_number_of_nodes() == 1:
-		Interface.prompt_popup_dialog(self).preset(UIPopupDialog.Preset.CONFIRM, "Leave Session?").then(_constellation.leave_session)
-	else:
-		_constellation.leave_session()
+	Popups.PopupDialog(self).preset(UIPopupDialog.Preset.CONFIRM, "Leave Session?").then(_constellation.leave_session)
 
 
 ## Called when the JoinSession button is pressed
