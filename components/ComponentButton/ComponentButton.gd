@@ -124,7 +124,9 @@ func _on_name_changed(p_new_name: String) -> void:
 
 ## Called when the component is to be deleted
 func _on_delete_requested() -> void:
+	var uuid: String = _component.uuid()
 	set_component(null)
+	look_for(uuid)
 
 
 ## Called when the button is pressed
