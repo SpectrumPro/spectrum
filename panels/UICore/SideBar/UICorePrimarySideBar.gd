@@ -501,6 +501,7 @@ class TabItem extends RefCounted:
 	func set_button(p_button: Button) -> void:
 		if is_instance_valid(_button):
 			_button.set_self_modulate(ThemeManager.Colors.UICorePrimarySideBarDisabledTabModulate)
+			_button.gui_input.disconnect(_on_button_gui_input)
 			
 			if _bound_switch_callable.is_valid() and _button.pressed.is_connected(_bound_switch_callable):
 				_button.pressed.disconnect(_bound_switch_callable)
@@ -509,6 +510,7 @@ class TabItem extends RefCounted:
 		
 		if is_instance_valid(_button):
 			_button.set_self_modulate(ThemeManager.Colors.UICorePrimarySideBarTabModulate)
+			_button.gui_input.connect(_on_button_gui_input)
 			
 			if _bound_switch_callable.is_valid() and not _button.pressed.is_connected(_bound_switch_callable):
 				_button.pressed.connect(_bound_switch_callable)
@@ -592,3 +594,13 @@ class TabItem extends RefCounted:
 		
 		if _bound_set_index_callable and request_index_change.is_connected(_bound_set_index_callable):
 			request_index_change.disconnect(_bound_set_index_callable)
+	
+	
+	## Called for each GUI input on the button
+	func _on_button_gui_input(p_event: InputEvent) -> void:
+		if p_event is InputEventMouseButton and p_event.is_pressed():
+			p_event = p_event as InputEventMouseButton
+			
+			match p_event.button_index:
+				MOUSE_BUTTON_RIGHT:
+					Popups.show_settings_manager(_button, _settings_manager)
