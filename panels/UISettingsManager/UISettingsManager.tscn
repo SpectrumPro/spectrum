@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://g5qrmeqkxr26"]
+
+[ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://assets/styles/UIPanelBase.tres" id="1_xoj2f"]
+[ext_resource type="Script" uid="uid://dt1a56owvlcsx" path="res://panels/UISettingsManager/UISettingsManager.gd" id="2_0dwd5"]
+[ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://panels/UIPanel/PanelMenuBar.tscn" id="3_0u21v"]
+[ext_resource type="Texture2D" uid="uid://c6xnsmttojanx" path="res://assets/icons/Settings.svg" id="4_8058h"]
+[ext_resource type="PackedScene" uid="uid://kjup3yrjifr5" path="res://components/SettingsManagerView/SettingsManagerView.tscn" id="5_x432d"]
+
+[node name="UISettingsManager" type="PanelContainer" node_paths=PackedStringArray("component_button", "settings_manager_view", "edit_controls", "menu_bar")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("1_xoj2f")
+script = ExtResource("2_0dwd5")
+component_button = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ComponentButton")
+settings_manager_view = NodePath("VBoxContainer/ScrollContainer/SettingsManagerView")
+edit_controls = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/EditControls")
+menu_bar = NodePath("VBoxContainer/PanelMenuBar")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="PanelMenuBar" parent="VBoxContainer" instance=ExtResource("3_0u21v")]
+layout_mode = 2
+
+[node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="0"]
+text = "SettingsManager"
+icon = ExtResource("4_8058h")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SettingsManagerView" parent="VBoxContainer/ScrollContainer" instance=ExtResource("5_x432d")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[connection signal="object_selected" from="VBoxContainer/PanelMenuBar/HBoxContainer/ComponentButton" to="." method="set_component"]
+
+[editable path="VBoxContainer/PanelMenuBar"]

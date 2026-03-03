@@ -115,6 +115,11 @@ func create_component_then_rename(p_source: Node) -> Promise:
 	)
 
 
+## Prompts the user with UISettingsManager
+func show_settings_manager(p_source: Node, p_manager: SettingsManager) -> void:
+	return Interface.show_window_popup(WindowPopup.SETTINGS_MANAGER, p_source, p_manager)
+
+
 ## Promps the user with SettingsModule
 func show_settings_module(p_source: Node, p_modules: Variant) -> Promise:
 	return Interface.show_window_popup(WindowPopup.SETTINGS_MODULE, p_source, p_modules)

@@ -64,6 +64,7 @@ enum WindowPopup {
 	INTERFACE_SELECTOR,	## UIInterfaceSelector
 	COMPONENT_SETTINGS,	## UIComponentSettings
 	PARAMETER_LIST,		## UIParameterList
+	SETTINGS_MANAGER,	## UISettingsManager
 }
 
 
@@ -144,6 +145,7 @@ var _window_popup_config: Dictionary[WindowPopup, PopupConfig] = {
 	WindowPopup.INTERFACE_SELECTOR: PopupConfig.new("UIInterfaceSelector"),
 	WindowPopup.COMPONENT_SETTINGS: PopupConfig.new("UIComponentSettings", "set_component"),
 	WindowPopup.PARAMETER_LIST:		PopupConfig.new("UIParameterList", "set_fixtures"),
+	WindowPopup.SETTINGS_MANAGER:	PopupConfig.new("UISettingsManager", "set_manager"),
 }
 
 ## All windows by UUID RefMap for UUID: Window
@@ -189,14 +191,13 @@ func _init() -> void:
 	_settings_manager.register_control("OpenWindowManager", Data.Type.ACTION, set_popup_visable.bind(WindowPopup.WINDOW_MANAGER, self, true), Callable(), [])
 	_settings_manager.register_control("AddWindow", Data.Type.ACTION, add_window, Callable(), [])
 	_settings_manager.register_control("SaveUI", Data.Type.ACTION, save_ui, Callable(), [])
-	
-	## TODO
-	#_settings_manager.register_control("ComponentSettings", Data.Type.ACTION, prompt_component_settings_search.bind(self))
-	#_settings_manager.register_control("CreateComponent", Data.Type.ACTION, prompt_create_component_rename.bind(self))
 
 
 ## Ready ClientInterface
 func _ready() -> void:
+	_settings_manager.register_control("ComponentSettings", Data.Type.ACTION, Popups.search_component_then_settings.bind(self))
+	_settings_manager.register_control("CreateComponent", Data.Type.ACTION, Popups.create_component_then_rename.bind(self))
+	
 	_load_config(load("res://InterfaceConfig.gd").new())
 	get_window().set_script(UIWindow)
 	
