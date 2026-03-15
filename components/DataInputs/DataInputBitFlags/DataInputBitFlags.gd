@@ -51,7 +51,7 @@ func _module_value_changed(p_value: Variant, ...p_args) -> void:
 		for bit: int in _module.get_enum_dict().values():
 			_buttons[bit].set_pressed_no_signal(p_value & bit)
 		
-		_flag_label.set_text(Data.flags_to_string(p_value, _module.get_enum_dict()))
+		_flag_label.set_text(Utils.flags_to_string(p_value, _module.get_enum_dict()))
 
 
 ## Resets this DataInputString

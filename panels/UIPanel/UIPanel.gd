@@ -66,7 +66,7 @@ func _init() -> void:
 	super._init()
 	_set_class_name("UIPanel")
 	
-	_settings_manager.register_setting("show_menu_bar", Data.Type.BOOL, set_menu_bar_visible, get_menu_bar_visible, [menu_bar_visibility_changed]
+	_settings.register_setting("show_menu_bar", Data.Type.BOOL, set_menu_bar_visible, get_menu_bar_visible, [menu_bar_visibility_changed]
 	).display("UIPanel", 0)
 	
 	(func ():
@@ -301,7 +301,7 @@ func get_button_actions(button: Button) -> Array:
 
 
 ## Serializes this UIPanel into a dictonary
-func serialize() -> Dictionary:
+func serialize(p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> Dictionary[String, Variant]:
 	var button_actions: Dictionary[String, Array]
 	
 	for button: Button in _buttons_map.get_left():
@@ -311,15 +311,15 @@ func serialize() -> Dictionary:
 		
 		button_actions[button.name] = actions
 	
-	return super.serialize().merged({
+	return super.serialize(p_flags).merged({
 		"button_actions": button_actions,
 		"show_menu_bar": get_menu_bar_visible()
 	})
 
 
 ## Loads this UIPanel from dictionary
-func deserialize(p_serialized_data: Dictionary) -> void:
-	super.deserialize(p_serialized_data)
+func deserialize(p_serialized_data: Dictionary, p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> void:
+	super.deserialize(p_serialized_data, p_flags)
 	
 	set_menu_bar_visible(type_convert(p_serialized_data.get("show_menu_bar", get_menu_bar_visible()), TYPE_BOOL))
 	

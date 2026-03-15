@@ -137,8 +137,8 @@ func update_label() -> void:
 
 
 ## Saves the state of this item for restoration later
-func serialize() -> Dictionary:
-	return super.serialize().merged({
+func serialize(p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> Dictionary:
+	return super.serialize(p_flags).merged({
 		"type": "",
 		"anchor_left": get_anchor(SIDE_LEFT),
 		"anchor_right": get_anchor(SIDE_RIGHT),

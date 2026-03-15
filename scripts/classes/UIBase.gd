@@ -6,73 +6,91 @@ class_name UIBase extends Control
 ## Client Component base class for all UI elements
 
 
-## Emitted when the UI name is changed
-signal ui_name_changed(ui_name: String)
+## Emitted when the user-defined name of this object changes.
+signal name_changed()
+
+## Emitted when this object is to be deleted (freed from memory). 
+signal delete_requested()
 
 
-## UUID of this UIBase
-var _uuid: String = UUID_Util.v4()
+## The user-defined name of this object. The variable name can be arbitrary.
+var _name: String
 
-## Class tree
-var _class_tree: Array[String] = ["UIBase"]
+## The UUID of this object. The variable name can be arbitrary.
+var _uuid: String
 
-## Current class name
-var _self_class_name: String = "UIBase"
+## The class name of this object. Must be set by any class that extends this base class.
+var _class_name: String
 
-## The name of this UIBase
-var _ui_name: String = _self_class_name
+## The inheritance tree of this object. Defaults to include this class.
+var _class_tree: Array[String]
+
+## The SettingsManager instance associated with this object. Variable name can be arbitrary.
+var _settings: SettingsManager = SettingsManager.new()
 
 ## Stores all queued callables for this frame
-var _queue_order: Array[Callable]
+var _queue_order: Array[Callable] = []
 
 ## Stores arguments for each queued callable
-var _queue_args: Dictionary[Callable, Array]
+var _queue_args: Dictionary[Callable, Array] = {}
 
-## True if _call_queue has already been call_defered()
+## True if _call_queue has already been call_deferred()
 var _queue_call_defered: bool = false
 
 ## True if _call_queue is running currently
 var _queue_is_calling: bool = false
 
-## Settings for this component
-var _settings_manager: SettingsManager = SettingsManager.new()
 
-
-## Init
-func _init() -> void:
-	_settings_manager.set_owner(self)
-	_settings_manager.set_inheritance_array(_class_tree)
+## init
+func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
+	_uuid = p_uuid
+	_set_class_name("UIBase")
 	
-	_settings_manager.register_setting("name", Data.Type.STRING, set_ui_name, get_ui_name, [ui_name_changed])
-	
-	(func ():
-		if _ui_name == "UIBase":
-			_ui_name = _self_class_name
-	).call_deferred()
+	_settings.set_owner(self)
+	_settings.set_inheritance_array(_class_tree)
 
 
-## Gets the uuid
-func uuid() -> String:
+## Returns the user-defined name of this object.
+func get_uname() -> String:
+	return _name
+
+
+## Returns the UUID of this object.
+func get_uuid() -> String:
 	return _uuid
 
 
-## Gets the SettingsManager
-func settings() -> SettingsManager:
-	return _settings_manager
+## Returns the class name of this object.
+func get_class_name() -> String:
+	return _class_name
 
 
-## Queues a callable for execution, will only all it to be called once per frame. Uses call_defered
+## Returns a copy of the inheritance tree for this object.
+func get_class_tree() -> Array[String]:
+	return _class_tree.duplicate()
+
+
+## Returns the SettingsManager for this object.
+func get_settings() -> SettingsManager:
+	return _settings
+
+
+## Sets the name of this object. If p_no_signal is true, the name_changed signal is not emitted.
+func set_uname(p_name: String, p_no_signal: bool = false) -> void:
+	_name = p_name
+	
+	if not p_no_signal:
+		name_changed.emit(_name)
+
+
+## Queues a callable for execution, will only allow it to be called once per frame. Uses call_deferred
 func queue(p_callable: Callable, p_args: Array[Variant] = []) -> bool:
 	if _queue_is_calling:
 		p_callable.callv(p_args)
-		
 		return true
-		
 	elif _queue_args.has(p_callable):
 		_queue_args[p_callable] = p_args
-		
 		return false
-		
 	else:
 		_queue_order.append(p_callable)
 		_queue_args[p_callable] = p_args
@@ -84,30 +102,33 @@ func queue(p_callable: Callable, p_args: Array[Variant] = []) -> bool:
 		return true
 
 
-## Sets the UI name
-func set_ui_name(p_ui_name) -> void:
-	_ui_name = p_ui_name
-	ui_name_changed.emit(_ui_name)
+## Emits the delete_requested signal to notify that this object should be deleted.
+func delete() -> void:
+	delete_requested.emit()
 
 
-## Gets the UIName
-func get_ui_name() -> String:
-	return _ui_name
+## Returns a JSON-compliant dictionary containing a serialized version of this object.
+func serialize(p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> Dictionary[String, Variant]:
+	return {
+		"name": _name,
+		"class_name": _class_name,
+	}.merged({} if p_flags & Data.SerializationFlags.NO_UUID else {
+		"uuid": _uuid,
+	})
 
 
-## Gets the classname
-func get_class_name() -> String:
-	return _self_class_name
+## Deserializes data either read from disk or returned by serialize().
+func deserialize(p_serialized_data: Dictionary, p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> void:
+	set_uname(type_convert(p_serialized_data.get("name", _name), TYPE_STRING), true)
+	
+	if not p_flags & Data.SerializationFlags.NO_UUID:
+		_uuid = type_convert(p_serialized_data.get("uuid", _uuid), TYPE_STRING)
 
 
-## Gets the class tree
-func get_class_tree() -> Array[String]:
-	return _class_tree.duplicate()
-
-
-## Sets the classname of this component
+## Sets the class name for this object and appends it to the inheritance tree.
+## This should be called by each child class during initialization.
 func _set_class_name(p_class_name: String) -> void:
-	_self_class_name = p_class_name
+	_class_name = p_class_name
 	_class_tree.append(p_class_name)
 
 
@@ -122,18 +143,3 @@ func _call_queue() -> void:
 	_queue_args.clear()
 	_queue_is_calling = false
 	_queue_call_defered = false
-
-
-## Serialize this ClientComponent into a Dictionary
-func serialize() -> Dictionary:
-	return {
-		"uuid": _uuid,
-		"name": _ui_name,
-		"class": _self_class_name,
-	}
-
-
-## Deserializes this ClientComponent from a dictionary
-func deserialize(p_serialized_data: Dictionary) -> void:
-	_uuid = type_convert(p_serialized_data.get("uuid", _uuid), TYPE_STRING)
-	_ui_name = type_convert(p_serialized_data.get("name", name), TYPE_STRING)

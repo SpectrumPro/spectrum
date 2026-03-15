@@ -7,7 +7,7 @@ class_name CommandPaletteEntry extends Object
 
 
 ## Reference to the settings manager when _object_type is GLOBAL.
-var _settings_manager: SettingsManager
+var _settings: SettingsManager
 
 ## The class name for the class
 var _class_name: String = ""
@@ -15,13 +15,13 @@ var _class_name: String = ""
 
 ## Init
 func _init(p_settings_manager: SettingsManager, p_class_name: String) -> void:
-	_settings_manager = p_settings_manager
+	_settings = p_settings_manager
 	_class_name = p_class_name
 
 
 ## Gets the settings manager
 func get_settings_manager() -> SettingsManager:
-	return _settings_manager
+	return _settings
 
 
 ## Gets the class name
@@ -31,7 +31,7 @@ func get_class_name() -> String:
 
 ## Sets the settings manager
 func set_settings_manager(p_settings_manager: SettingsManager) -> CommandPaletteEntry:
-	_settings_manager = p_settings_manager
+	_settings = p_settings_manager
 	return self
 
 

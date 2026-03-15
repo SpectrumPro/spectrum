@@ -114,8 +114,8 @@ func _init() -> void:
 	
 	_set_class_name("Table")
 	
-	_settings_manager.register_setting("Expand", Data.Type.BOOL, set_expand, get_expand, [expand_changed])
-	_settings_manager.register_setting("ColumnFreeze", Data.Type.INT, set_column_freeze, get_column_freeze, [column_freeze_changed]).set_min_max(0, INF)
+	_settings.register_setting("Expand", Data.Type.BOOL, set_expand, get_expand, [expand_changed])
+	_settings.register_setting("ColumnFreeze", Data.Type.INT, set_column_freeze, get_column_freeze, [column_freeze_changed]).set_min_max(0, INF)
 
 
 ## Ready
@@ -364,13 +364,13 @@ func is_any_selected() -> bool:
 
 
 ## Serializes this Table
-func serialize() -> Dictionary:
+func serialize(p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> Dictionary[String, Variant]:
 	var column_sizes: Dictionary[int, int]
 	
 	for column: Column in _columns:
 		column_sizes[column.get_id()] = column.get_min_size()
 	
-	return super.serialize().merged({
+	return super.serialize(p_flags).merged({
 		"column_sizes": column_sizes,
 		"expand": _expand
 	})
@@ -378,8 +378,8 @@ func serialize() -> Dictionary:
 
 
 ## Deserializes this Table
-func deserialize(p_serialized_data: Dictionary) -> void:
-	super.deserialize(p_serialized_data)
+func deserialize(p_serialized_data: Dictionary, p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> void:
+	super.deserialize(p_serialized_data, p_flags)
 	
 	var column_sizes: Dictionary = type_convert(p_serialized_data.get("column_sizes"), TYPE_DICTIONARY)
 	set_expand(type_convert(p_serialized_data.get("expand"), TYPE_BOOL), true)
@@ -841,7 +841,7 @@ class Row extends Object:
 			var data: Variant = p_value
 			
 			if p_column.get_data_type() != Data.Type.NULL:
-				data = Data.data_type_convert(p_value, p_column.get_data_type())
+				data = Data.custom_type_to_string(p_value, p_column.get_data_type())
 			
 			_cells[p_column] = data
 			get_tree_item(p_column).set_text(p_column.get_tree_id(), str(_cells[p_column]))

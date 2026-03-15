@@ -30,23 +30,23 @@ var _outputs: Dictionary[String, DMXOutput] = {}
 
 
 ## Called when this EngineComponent is ready
-func _init(p_uuid: String = UUID_Util.v4(), p_name: String = _name) -> void:
+func _init(p_uuid: String = UUID.v4(), p_name: String = _name) -> void:
 	super._init(p_uuid, p_name)
 	
 	_set_name("Universe")
-	_set_self_class("Universe")
+	_set_class_name("Universe")
 	
-	_settings_manager.register_custom_panel("outputs", preload("res://components/SettingsManagerCustomPanels/UniverseOutputEditor.tscn"), "set_universe")
+	_settings.register_custom_panel("outputs", preload("res://components/SettingsManagerCustomPanels/UniverseOutputEditor.tscn"), "set_universe")
 	
-	_settings_manager.register_networked_callbacks({
+	_settings.register_networked_callbacks({
 		"on_fixtures_added": _add_fixtures,
 		"on_fixtures_removed": _remove_fixtures,
 		"on_outputs_added": _add_outputs,
 		"on_outputs_removed": _remove_outputs,
 	})
 	
-	_settings_manager.set_callback_allow_deserialize("on_outputs_added")
-	_settings_manager.set_callback_allow_deserialize("on_fixtures_added")
+	_settings.set_callback_allow_deserialize("on_outputs_added")
+	_settings.set_callback_allow_deserialize("on_fixtures_added")
 
 
 ## Creates a new output by class name
@@ -132,7 +132,7 @@ func _add_output(p_output: DMXOutput, p_no_signal: bool = false) -> bool:
 	if p_output in _outputs.values():
 		return false
 	
-	_outputs[p_output.uuid()] = p_output
+	_outputs[p_output.get_uuid()] = p_output
 	
 	p_output.delete_requested.connect(_remove_output.bind(p_output), CONNECT_ONE_SHOT)
 	ComponentDB.register_component(p_output)
@@ -198,7 +198,7 @@ func _add_fixture(p_fixture: DMXFixture, p_channel: int = -1, p_no_signal: bool 
 		_fixture_channels[fixture_channel] = []
 	
 	_fixture_channels[fixture_channel].append(p_fixture)
-	_fixtures[p_fixture.uuid()] = p_fixture
+	_fixtures[p_fixture.get_uuid()] = p_fixture
 
 	p_fixture.delete_requested.connect(_remove_fixture.bind(p_fixture), CONNECT_ONE_SHOT)
 
@@ -226,7 +226,7 @@ func _remove_fixture(p_fixture: DMXFixture, p_no_signal: bool = false, p_delete:
 	if not p_fixture in _fixtures.values():
 		return false
 	
-	_fixtures.erase(p_fixture.uuid())
+	_fixtures.erase(p_fixture.get_uuid())
 	
 	if _fixture_channels.has(p_fixture.get_channel()):
 		_fixture_channels[p_fixture.get_channel()].erase(p_fixture)
@@ -265,12 +265,12 @@ func delete() -> void:
 
 
 ## Serializes this universe
-func serialize() -> Dictionary:
+func serialize(p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> Dictionary:
 	var serialized_outputs: Dictionary[String, Dictionary] = {}
 	var serialized_fixtures: Dictionary[String, Array] = {}
 
 	for output: DMXOutput in _outputs.values():
-		serialized_outputs[output.uuid()] = output.serialize()
+		serialized_outputs[output.get_uuid()] = output.serialize()
 	
 	for channel: int in _fixture_channels.keys():
 		serialized_fixtures[str(channel)] = []
@@ -278,7 +278,7 @@ func serialize() -> Dictionary:
 		for fixture: DMXFixture in _fixture_channels[channel]:
 			serialized_fixtures[str(channel)].append(fixture.uuid)
 
-	return super.serialize().merged({
+	return super.serialize(p_flags).merged({
 		"outputs": serialized_outputs,
 		"fixtures": serialized_fixtures
 	})
@@ -286,8 +286,8 @@ func serialize() -> Dictionary:
 
 
 ## Loads this universe from a serialised universe
-func deserialize(p_serialized_data: Dictionary) -> void:
-	super.deserialize(p_serialized_data)
+func deserialize(p_serialized_data: Dictionary, p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> void:
+	super.deserialize(p_serialized_data, p_flags)
 	
 	var just_added_fixtures: Array[DMXFixture] = []
 	var just_added_output: Array[DMXOutput] = []

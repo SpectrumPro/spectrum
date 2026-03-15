@@ -21,7 +21,7 @@ static var config: Dictionary = {
 	"user_config_file_name": "constellation.conf",
 	
 	## NodeID of the local node
-	"node_id": UUID_Util.v4(),
+	"node_id": UUID.v4(),
 	
 	## Node name of the local node
 	"node_name": "Spectrum Client",

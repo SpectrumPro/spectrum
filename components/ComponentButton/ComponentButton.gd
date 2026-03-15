@@ -62,7 +62,7 @@ func set_component(p_component: EngineComponent) -> void:
 		underline.set_modulate(ThemeManager.Colors.Statuses.Standby)
 	
 	else:
-		set_text(_component.name())
+		set_text(_component.get_name())
 		underline.set_modulate(ThemeManager.Colors.Statuses.Normal)
 	
 	remove_look_for()
@@ -76,7 +76,7 @@ func get_component() -> EngineComponent:
 
 ## Returns the UUID of the component, or ""
 func get_component_uuid(p_allow_resolve_uuid: bool = true) -> String:
-	return _component.uuid() if is_instance_valid(_component) else _look_for_component if p_allow_resolve_uuid else ""
+	return _component.get_uuid() if is_instance_valid(_component) else _look_for_component if p_allow_resolve_uuid else ""
 
 
 ## Removes the ComponentDB request for the object
@@ -113,7 +113,7 @@ func set_enabled(p_enabled) -> void:
 
 ## Called if ComponentDB find the component
 func _on_component_found(p_component: EngineComponent) -> void:
-	if ClassList.does_class_inherit(p_component.classname(), class_filter.get_global_name()):
+	if ClassList.does_class_inherit(p_component.get_class_name(), class_filter.get_global_name()):
 		set_component(p_component)
 
 
@@ -124,7 +124,7 @@ func _on_name_changed(p_new_name: String) -> void:
 
 ## Called when the component is to be deleted
 func _on_delete_requested() -> void:
-	var uuid: String = _component.uuid()
+	var uuid: String = _component.get_uuid()
 	set_component(null)
 	look_for(uuid)
 

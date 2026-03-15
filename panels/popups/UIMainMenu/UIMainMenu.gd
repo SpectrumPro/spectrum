@@ -110,4 +110,4 @@ func _on_new_window_pressed() -> void:
 
 ## Called when the SetDisplayMode button is pressed
 func _on_set_display_mode_pressed() -> void:
-	Popups.show_settings_module(self, Interface.get_window_node(self).settings().get_entry("display_mode"))
+	Popups.show_settings_module(self, Interface.get_window_node(self).get_settings().get_entry("display_mode"))

@@ -56,7 +56,7 @@ func _add_fixtures(p_fixtures: Array[FixtureGroupItem]) -> void:
 			return
 		
 		var item: TreeItem = _root.create_child()
-		item.set_text(0, fixture.name())
+		item.set_text(0, fixture.get_name())
 		
 		_fixture_tree_items.map(fixture, item)
 

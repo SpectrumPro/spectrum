@@ -69,7 +69,7 @@ func _init() -> void:
 
 ## ready
 func _ready() -> void:
-	_settings_manager.require("Table", table.settings())
+	_settings.require("Table", table.get_settings())
 	table.set_column_freeze(2)
 	
 	for layer_name: String in Programmer.Layer:
@@ -96,7 +96,7 @@ func set_function(p_function: Function) -> void:
 		_set_container(null)
 		return
 	
-	if ClassList.does_class_inherit(_function.classname(), "CueList"):
+	if ClassList.does_class_inherit(_function.get_class_name(), "CueList"):
 		var current_cue: Cue = _function.get_active_cue()
 		var cues: Array[Cue] = _function.get_cues()
 		
@@ -119,15 +119,15 @@ func set_view_layer(p_view_layer: Programmer.Layer) -> void:
 
 
 ## Serializes this UIDataEditor
-func serialize() -> Dictionary:
-	return super.serialize().merged({
+func serialize(p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> Dictionary:
+	return super.serialize(p_flags).merged({
 		"cue_list": component_button.get_component_uuid()
 	})
 
 
 ## Deserializes this UIDataEditor
-func deserialize(p_serialized_data: Dictionary) -> void:
-	super.deserialize(p_serialized_data)
+func deserialize(p_serialized_data: Dictionary, p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> void:
+	super.deserialize(p_serialized_data, p_flags)
 	
 	component_button.look_for(type_convert(p_serialized_data.get("cue_list"), TYPE_STRING))
 
@@ -148,7 +148,7 @@ func _set_container(p_container: DataContainer) -> void:
 	_columns.clear()
 	
 	table.add_column("Fixture", Data.Type.STRING)
-	table.add_column("CID", Data.Type.CID)
+	table.add_column("CID", Data.Type.INT)
 	
 	if not is_valid:
 		return
@@ -186,7 +186,7 @@ func _set_container(p_container: DataContainer) -> void:
 		_rows[fixture] = RefMap.from({Fixture.RootZone: root_row})
 		_fixture_rows[root_row] = fixture
 		
-		root_row.set_cell_data(table.get_column(0), fixture.settings().get_entry("name"))
+		root_row.set_cell_data(table.get_column(0), fixture.get_settings().get_entry("name"))
 		root_row.set_cell_data(table.get_column(1), 0)
 		
 		for zone: String in data[fixture]:

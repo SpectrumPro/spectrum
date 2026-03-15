@@ -26,7 +26,7 @@ func _init() -> void:
 
 ## ready
 func _ready() -> void:
-	_interface_settings.set_manager(Interface.settings())
+	_interface_settings.set_manager(Interface.get_settings())
 
 
 ## Switched to the given tab

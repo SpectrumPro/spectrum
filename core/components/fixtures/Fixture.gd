@@ -39,13 +39,13 @@ static var RootZone: String = "root"
 
 
 ## init
-func _init(p_uuid: String = UUID_Util.v4(), p_name: String = _name) -> void:
+func _init(p_uuid: String = UUID.v4(), p_name: String = _name) -> void:
 	super._init(p_uuid, p_name)
 	
-	_set_self_class("Fixture")
+	_set_class_name("Fixture")
 	_set_name("Fixture")
 	
-	_settings_manager.register_networked_callbacks({
+	_settings.register_networked_callbacks({
 		"on_parameter_changed": _set_parameter,
 		"on_parameter_erased": _erase_parameter,
 		"on_override_changed": _set_override,

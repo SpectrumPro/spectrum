@@ -34,12 +34,12 @@ func _ready() -> void:
 
 ## Called when a window is added
 func _add_window(p_window: UIWindow) -> void:
-	settings_manager_multi_view.add_manager(p_window.settings())
+	settings_manager_multi_view.add_manager(p_window.get_settings())
 
 
 ## Called when an item is removed
 func _remove_window(p_window: UIWindow) -> void:
-	settings_manager_multi_view.remove_manager(p_window.settings())
+	settings_manager_multi_view.remove_manager(p_window.get_settings())
 
 
 ## Updates buttons disabled state

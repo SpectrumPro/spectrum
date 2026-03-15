@@ -21,4 +21,4 @@ func _ready() -> void:
 	_constellation = Network.get_active_handler_by_name("Constellation")
 	_local_node = _constellation.get_local_node()
 	
-	_settings_manager_view.set_manager(_local_node.settings_manager)
+	_settings_manager_view.set_manager(_local_node.get_settings())

@@ -29,7 +29,7 @@ func _init() -> void:
 
 ## Ready
 func _ready() -> void:
-	_settings_manager.require("side_bar_settings", _side_bar.settings())
+	_settings.require("side_bar_settings", _side_bar.get_settings())
 	
 	_startup_bg.show()
 	
@@ -58,15 +58,15 @@ func add_startup_notice(p_notice: StartUpNotice) -> void:
 
 
 ## Saves all the tabs
-func serialize() -> Dictionary:
-	return super.serialize().merged({
+func serialize(p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> Dictionary:
+	return super.serialize(p_flags).merged({
 		"tabs": _side_bar.serialize(),
 	})
 
 
 ## Loads all the tabs
-func deserialize(p_serialized_data: Dictionary) -> void:
-	super.deserialize(p_serialized_data)
+func deserialize(p_serialized_data: Dictionary, p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> void:
+	super.deserialize(p_serialized_data, p_flags)
 	
 	var tabs: Dictionary = type_convert(p_serialized_data.get("tabs", {}), TYPE_DICTIONARY)
 	_side_bar.deserialize(tabs)

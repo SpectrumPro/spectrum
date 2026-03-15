@@ -34,10 +34,10 @@ var _force_defaults: Array[String]
 
 
 ## init
-func _init(p_uuid: String = UUID_Util.v4(), p_name: String = _name) -> void:
+func _init(p_uuid: String = UUID.v4(), p_name: String = _name) -> void:
 	super._init(p_uuid, p_name)
 	
-	_set_self_class("FixtureManifest")
+	_set_class_name("FixtureManifest")
 	_set_name("FixtureManifest")
 
 
@@ -238,8 +238,8 @@ func has_force_default(p_parameter) -> bool:
 
 
 ## Overide this function to serialize your object
-func serialize() -> Dictionary:
-	return super.serialize().merged({
+func serialize(p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> Dictionary:
+	return super.serialize(p_flags).merged({
 		"type": type,
 		"manufacturer": manufacturer,
 		"importer": importer,
@@ -251,8 +251,8 @@ func serialize() -> Dictionary:
 
 
 ## Overide this function to handle load requests
-func deserialize(p_serialized_data: Dictionary) -> void:
-	super.deserialize(p_serialized_data)
+func deserialize(p_serialized_data: Dictionary, p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> void:
+	super.deserialize(p_serialized_data, p_flags)
 	
 	type = type_convert(p_serialized_data.get("type"), TYPE_INT)
 	manufacturer = type_convert(p_serialized_data.get("manufacturer"), TYPE_STRING)

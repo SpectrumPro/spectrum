@@ -33,7 +33,7 @@ func set_component(p_component: EngineComponent) -> void:
 		settings_manager_view.reset()
 		return
 	
-	settings_manager_view.set_manager(_component.settings())
+	settings_manager_view.set_manager(_component.get_settings())
 
 
 ## Gets the current component

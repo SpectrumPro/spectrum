@@ -117,8 +117,8 @@ func _on_grid_align_pressed() -> void:
 
 
 ## Saves this VirtualFixture layout into a dict
-func serialize() -> Dictionary:
-	return super.serialize().merged({
+func serialize(p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> Dictionary:
+	return super.serialize(p_flags).merged({
 		"fixture_group": component_button.get_component_uuid(),
 		"scroll_h": real_scroll.scroll_horizontal,
 		"scroll_v": real_scroll.scroll_vertical,
@@ -127,8 +127,8 @@ func serialize() -> Dictionary:
 
 
 ## Loads this VirtualFixture layout from a dict
-func deserialize(p_serialized_data: Dictionary) -> void:
-	super.deserialize(p_serialized_data)
+func deserialize(p_serialized_data: Dictionary, p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> void:
+	super.deserialize(p_serialized_data, p_flags)
 	
 	var group_uuid: String = type_convert(p_serialized_data.get("fixture_group", ""), TYPE_STRING)
 	var zoom: int = type_convert(p_serialized_data.get("zoom", fixture_container.scale.x), TYPE_INT)

@@ -92,10 +92,10 @@ func reset() -> void:
 ## Called each time a Universe is added or removed from ComponentDB
 func class_callback(p_added: Array, p_removed: Array) -> void:
 	for component: EngineComponent in p_added:
-		settings_manager_multi_view.add_manager(component.settings())
+		settings_manager_multi_view.add_manager(component.get_settings())
 	
 	for component: EngineComponent in p_removed:
-		settings_manager_multi_view.remove_manager(component.settings())
+		settings_manager_multi_view.remove_manager(component.get_settings())
 
 
 ## Called when a SettingsManager is selected
@@ -115,7 +115,7 @@ func _on_new_button_pressed() -> void:
 					if not is_instance_valid(p_component):
 						return
 					
-					Popups.show_settings_module(self, p_component.settings().get_entry("name"))
+					Popups.show_settings_module(self, p_component.get_settings().get_entry("name"))
 				)
 			Mode.MANUAL:
 				create_requested.emit(p_classname)

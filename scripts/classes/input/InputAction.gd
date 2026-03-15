@@ -1,7 +1,7 @@
 # Copyright (c) 2024 Liam Sherwin, All rights reserved.
 # This file is part of the Spectrum Lighting Engine, licensed under the GPL v3.
 
-class_name InputAction extends ClientComponent
+class_name InputAction extends VertexComponent
 ## Combines inputs and control things
 
 
@@ -44,7 +44,8 @@ var _active_state: bool = false
 ## Ready
 func _component_ready() -> void:
 	_set_class_name("InputAction")
-	register_setting_enum("call_press_on_button", set_button_press_mode, get_button_press_mode, button_press_mode_changed, ButtonPressMode)
+	
+	_settings.register_setting("ButtonMode", Data.Type.ENUM, set_button_press_mode, get_button_press_mode, [button_press_mode_changed]).set_enum_dict(ButtonPressMode)
 
 
 ## Activates this InputAction
@@ -135,7 +136,7 @@ func add_input_trigger(p_input_trigger: InputTrigger, no_signal: bool = false) -
 	
 	match p_input_trigger.get_class_name():
 		"InputTriggerKey", "InputTriggerJoyKey":
-			InputMap.action_add_event(uuid(), p_input_trigger.get_input_event())
+			InputMap.action_add_event(get_uuid(), p_input_trigger.get_input_event())
 	
 	if not no_signal:
 		input_trigger_added.emit(p_input_trigger)
@@ -152,7 +153,7 @@ func remove_input_trigger(p_input_trigger: InputTrigger, no_signal: bool = false
 	
 	match p_input_trigger.get_class_name():
 		"InputTriggerKey":
-			InputMap.action_erase_event(uuid(), p_input_trigger.get_input_event())
+			InputMap.action_erase_event(get_uuid(), p_input_trigger.get_input_event())
 	
 	if not no_signal:
 		input_trigger_removed.emit(p_input_trigger)

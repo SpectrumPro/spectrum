@@ -23,13 +23,13 @@ var _manifest_requests: Dictionary
 var _is_loaded: bool = false
 
 ## The SettingsManager
-var _settings_manager: SettingsManager = SettingsManager.new()
+var _settings: SettingsManager = SettingsManager.new()
 
 
 ## Init
 func _init() -> void:
-	_settings_manager.set_owner(self)
-	_settings_manager.set_inheritance_array(["CoreFixtureLibrary"])
+	_settings.set_owner(self)
+	_settings.set_inheritance_array(["CoreFixtureLibrary"])
 
 
 ## Ready
@@ -38,8 +38,8 @@ func _ready() -> void:
 
 
 ## Gets the SettingsManager
-func settings() -> SettingsManager:
-	return _settings_manager
+func get_settings() -> SettingsManager:
+	return _settings
 
 
 ## Creates a new fixture from a manifest
@@ -113,8 +113,8 @@ func _reset() -> void:
 ## Called when a manifest is received from the server
 func _on_get_manifest_received(p_manifest: FixtureManifest) -> void:
 	if p_manifest:
-		_loaded_manifests[p_manifest.uuid()] = p_manifest
-		for promise: Promise in _manifest_requests.get(p_manifest.uuid(), []):
+		_loaded_manifests[p_manifest.get_uuid()] = p_manifest
+		for promise: Promise in _manifest_requests.get(p_manifest.get_uuid(), []):
 			promise.resolve([p_manifest])
 		
-		_manifest_requests.erase(p_manifest.uuid)
+		_manifest_requests.erase(p_manifest.get_uuid())

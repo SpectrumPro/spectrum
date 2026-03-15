@@ -15,11 +15,11 @@ enum Columns {NAME, IP_ADDR, ROLE_FLAGS, CONNECTION_STATUS, SESSION}
 
 ## Config for each column
 var _column_config: Dictionary[int, Dictionary] = {
-	Columns.NAME: {"type": Data.Type.NAME},
+	Columns.NAME: {"type": Data.Type.STRING},
 	Columns.IP_ADDR: {"type": Data.Type.STRING},
 	Columns.ROLE_FLAGS: {"type": Data.Type.BITFLAGS},
 	Columns.CONNECTION_STATUS: {"type": Data.Type.ENUM},
-	Columns.SESSION: {"type": Data.Type.NETWORKSESSION},
+	Columns.SESSION: {"type": Data.Type.OBJECT},
 }
 
 ## The Constellation network instance
@@ -40,11 +40,11 @@ func _ready() -> void:
 ## Adds a ConstellationNode to the table
 func add_node(p_node: ConstellationNode) -> void:
 	_node_rows.map(p_node, _table.add_row({
-		Columns.NAME: p_node.settings_manager.get_entry("Name"),
-		Columns.IP_ADDR:p_node.settings_manager.get_entry("IpAddress"),
-		Columns.ROLE_FLAGS: p_node.settings_manager.get_entry("RoleFlags"),
-		Columns.CONNECTION_STATUS: p_node.settings_manager.get_entry("ConnectionState"),
-		Columns.SESSION: p_node.settings_manager.get_entry("Session"),
+		Columns.NAME: p_node.get_settings().get_entry("Name"),
+		Columns.IP_ADDR:p_node.get_settings().get_entry("IpAddress"),
+		Columns.ROLE_FLAGS: p_node.get_settings().get_entry("RoleFlags"),
+		Columns.CONNECTION_STATUS: p_node.get_settings().get_entry("ConnectionState"),
+		Columns.SESSION: p_node.get_settings().get_entry("Session"),
 	}))
 
 

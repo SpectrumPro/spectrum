@@ -42,7 +42,7 @@ func _ready() -> void:
 ## Sets the panel
 func set_panel(p_panel: UIPanel, add_to_history: bool = true) -> void:
 	_panel = p_panel
-	_settings_panel.set_manager(_panel.settings())
+	_settings_panel.set_manager(_panel.get_settings())
 	
 	if add_to_history:
 		_panel_history.append(_panel)

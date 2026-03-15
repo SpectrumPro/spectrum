@@ -22,7 +22,7 @@ func _ready() -> void:
 ## Called when the orignal value is changed
 func _module_value_changed(p_value: Variant, ...p_args) -> void:
 	if p_value is FixtureManifest:
-		_button.set_text(p_value.name())
+		_button.set_text(p_value.get_name())
 		_button.add_theme_color_override("font_color", ThemeManager.Colors.FontColor)
 	else:
 		_button.set_text("null")

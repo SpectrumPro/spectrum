@@ -118,7 +118,7 @@ func add_fixture(fixture: Fixture, set_vf_selected: bool = true, at_position: Ve
 	if _virtual_fixtures.has_left(fixture):
 		return
 	
-	var vf_uuid: String = UUID_Util.v4()
+	var vf_uuid: String = UUID.v4()
 	var new_vf: VirtualFixture = load("uid://cen3hxenplnih").instantiate()
 	
 	new_vf.set_fixture(fixture)

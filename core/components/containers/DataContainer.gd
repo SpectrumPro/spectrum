@@ -36,13 +36,13 @@ var _fixtures: Dictionary[Fixture, Dictionary]
 
 
 ## init
-func _init(p_uuid: String = UUID_Util.v4(), p_name: String = _name) -> void:
+func _init(p_uuid: String = UUID.v4(), p_name: String = _name) -> void:
 	super._init(p_uuid, p_name)
 	
 	_set_name("DataContainer")
-	_set_self_class("DataContainer")
+	_set_class_name("DataContainer")
 	
-	_settings_manager.register_networked_callbacks({
+	_settings.register_networked_callbacks({
 		"on_items_stored": _store_items,
 		"on_items_erased": _erase_items,
 		"on_items_function_changed": _set_function,
@@ -52,7 +52,7 @@ func _init(p_uuid: String = UUID_Util.v4(), p_name: String = _name) -> void:
 		"on_items_stop_changed": _set_stop,
 	})
 	
-	_settings_manager.set_callback_allow_deserialize("on_items_stored")
+	_settings.set_callback_allow_deserialize("on_items_stored")
 
 
 ## Gets all the ContainerItems
@@ -158,13 +158,13 @@ func delete() -> void:
 
 
 ## Serializes this Datacontainer and returnes it in a dictionary
-func serialize() -> Dictionary:
-	return super.serialize().merged(_serialize())
+func serialize(p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> Dictionary:
+	return super.serialize(p_flags).merged(_serialize())
 
 
 ## Loads this DataContainer from a dictonary
-func deserialize(p_serialized_data: Dictionary) -> void:
-	super.deserialize(p_serialized_data)
+func deserialize(p_serialized_data: Dictionary, p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> void:
+	super.deserialize(p_serialized_data, p_flags)
 	
 	_load(p_serialized_data)
 
@@ -300,10 +300,10 @@ func _set_stop(p_items: Array, p_stop: float) -> void:
 ## Serializes this DataContainer and returnes it in a dictionary
 func _serialize() -> Dictionary:
 	return {
-		"items": Utils.seralise_component_array(_items)
+		"items": seralise_component_array(_items)
 	}
 
 
 ## Called when this DataContainer is to be loaded from serialized data
 func _load(serialized_data: Dictionary) -> void:
-	_store_items(Utils.deseralise_component_array(type_convert(serialized_data.get("items", []), TYPE_ARRAY)))
+	_store_items(deseralise_component_array(type_convert(serialized_data.get("items", []), TYPE_ARRAY)))

@@ -32,7 +32,7 @@ func _module_value_changed(p_value: Variant, ...p_args) -> void:
 	if _current_component is EngineComponent and is_instance_valid(_current_component):
 		_current_component.name_changed.connect(_on_component_name_changed)
 		
-		_button.set_text(_current_component.name())
+		_button.set_text(_current_component.get_name())
 		_button.add_theme_color_override("font_color", ThemeManager.Colors.FontColor)
 		
 	else:

@@ -107,7 +107,7 @@ func _init() -> void:
 	super._init()
 	_set_class_name("UIProgrammer")
 	
-	_settings_manager.register_setting("ControlersPerPage", Data.Type.INT, set_controlers_per_page, get_controlers_per_page, [controlers_per_page_changed]).set_min_max(1, 10)
+	_settings.register_setting("ControlersPerPage", Data.Type.INT, set_controlers_per_page, get_controlers_per_page, [controlers_per_page_changed]).set_min_max(1, 10)
 
 
 ## ready
@@ -169,15 +169,15 @@ func get_page_count() -> int:
 
 
 ## Seralizes this UIProgrammer
-func serialize() -> Dictionary:
-	return super.serialize().merged({
+func serialize(p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> Dictionary:
+	return super.serialize(p_flags).merged({
 		"controlers_per_page": get_controlers_per_page()
 	})
 
 
 ## Deserializes this UIProgrammer
-func deserialize(p_serialized_data: Dictionary) -> void:
-	super.deserialize(p_serialized_data)
+func deserialize(p_serialized_data: Dictionary, p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> void:
+	super.deserialize(p_serialized_data, p_flags)
 	
 	set_controlers_per_page(type_convert(p_serialized_data.get("controlers_per_page", _controlers_per_page), TYPE_INT))
 
@@ -549,7 +549,7 @@ func _on_store_pressed() -> void:
 			if not is_instance_valid(p_component) or not p_component is Cue:
 				return
 			
-			Popups.show_settings_module(self, p_component.settings().get_entry("name"))
+			Popups.show_settings_module(self, p_component.get_settings().get_entry("name"))
 		)
 	)
 

@@ -31,15 +31,15 @@ var scale_factor: float = 1
 ## Default items in the UICommandPalette
 var command_palette_default_items: Array[CommandPaletteEntry] = [
 		CommandPaletteEntry.new(
-			Interface.settings(),
+			Interface.get_settings(),
 			"Interface",
 		),
 		CommandPaletteEntry.new(
-			Network.settings(),
+			Network.get_settings(),
 			"Network",
 		),
 		CommandPaletteEntry.new(
-			Network.get_active_handler_by_name("Constellation").get_local_node().settings_manager, 
+			Network.get_active_handler_by_name("Constellation").get_local_node().get_settings(), 
 			"Constellation", 
 		)
 	]
@@ -51,8 +51,8 @@ var object_picker_default_items: Dictionary[Script, ClassTreeConfig] = {
 			ClassList.get_inheritance_map(),
 			ClassList.is_class_hidden, 
 			ComponentDB.get_components_by_classname, 
-			func (p_component: EngineComponent): return p_component.classname(),
-			func (p_component: EngineComponent): return p_component.name(),
+			func (p_component: EngineComponent): return p_component.get_class_name(),
+			func (p_component: EngineComponent): return p_component.get_name(),
 			ClassList.does_class_inherit,
 			Core.create_component,
 		),
@@ -62,7 +62,7 @@ var object_picker_default_items: Dictionary[Script, ClassTreeConfig] = {
 			NetworkClassList.is_class_hidden, 
 			Network.get_items_by_classname, 
 			func (p_item: NetworkItem): return p_item.get_script().get_global_name(),
-			func (p_item: NetworkItem): return p_item.get_handler_name() if p_item is NetworkHandler else p_item.get_session_name() if p_item is NetworkSession else p_item.get_node_name() if p_item is NetworkNode else "",
+			func (p_item: NetworkItem): return p_item.get_uname(),
 			NetworkClassList.does_class_inherit,
 			Callable()
 		)

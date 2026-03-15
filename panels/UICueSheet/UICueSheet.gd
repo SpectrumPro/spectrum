@@ -74,7 +74,7 @@ func _ready() -> void:
 		var column: Columns = Columns[column_name]
 		table.add_column(column_name.capitalize(), _column_config[column])
 	
-	_settings_manager.require("Table", table.settings())
+	_settings.require("Table", table.get_settings())
 
 
 ## Sets the CueList
@@ -107,16 +107,16 @@ func get_cue_list() -> CueList:
 
 
 ## Serializes this UICueSheet
-func serialize() -> Dictionary:
-	return super.serialize().merged({
+func serialize(p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> Dictionary:
+	return super.serialize(p_flags).merged({
 		"cue_list": component_button.get_component_uuid(),
 		"table": table.serialize()
 	})
 
 
 ## Deserializes this UICueSheet
-func deserialize(p_serialized_data: Dictionary) -> void:
-	super.deserialize(p_serialized_data)
+func deserialize(p_serialized_data: Dictionary, p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> void:
+	super.deserialize(p_serialized_data, p_flags)
 	
 	component_button.look_for(type_convert(p_serialized_data.get("cue_list"), TYPE_STRING))
 	table.deserialize(type_convert(p_serialized_data.get("table"), TYPE_DICTIONARY))
@@ -128,7 +128,7 @@ func _add_cues(p_cues: Array) -> void:
 		if _cues.has_left(cue):
 			continue
 		
-		var manager: SettingsManager = cue.settings()
+		var manager: SettingsManager = cue.get_settings()
 		_cues.map(cue, table.add_row({
 			Columns.IDX: manager.get_entry("position"),
 			Columns.QID: manager.get_entry("qid"),
@@ -200,7 +200,7 @@ func _on_add_cue_pressed() -> void:
 		if not is_instance_valid(p_cue):
 			return
 		
-		Popups.show_settings_module(self, p_cue.settings().get_entry("name"))
+		Popups.show_settings_module(self, p_cue.get_settings().get_entry("name"))
 	)
 
 

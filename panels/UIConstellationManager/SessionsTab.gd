@@ -24,7 +24,7 @@ enum Columns {NAME, MEMBER_COUNT, MASTER}
 var _column_config: Dictionary[int, Dictionary] = {
 	Columns.NAME: {"type": Data.Type.STRING},
 	Columns.MEMBER_COUNT: {"type": Data.Type.INT},
-	Columns.MASTER: {"type": Data.Type.NETWORKNODE},
+	Columns.MASTER: {"type": Data.Type.OBJECT},
 }
 
 ## The Constellation network instance
@@ -54,9 +54,9 @@ func _ready() -> void:
 func add_session(p_session: ConstellationSession) -> void:
 	_session_connections.connect_object(p_session, true)
 	_session_rows.map(p_session, _table.add_row({
-		Columns.NAME: p_session.settings_manager.get_entry("Name"),
-		Columns.MEMBER_COUNT: p_session.settings_manager.get_entry("MemberCount"),
-		Columns.MASTER: p_session.settings_manager.get_entry("Master"),
+		Columns.NAME: p_session.get_settings().get_entry("Name"),
+		Columns.MEMBER_COUNT: p_session.get_settings().get_entry("MemberCount"),
+		Columns.MASTER: p_session.get_settings().get_entry("Master"),
 	}))
 
 

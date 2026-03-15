@@ -39,8 +39,8 @@ func set_output(output: Variant) -> void:
 
 
 ## Saves this panel into a dictonary
-func serialize() -> Dictionary:
-	return super.serialize().merged({
+func serialize(p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> Dictionary:
+	return super.serialize(p_flags).merged({
 		"message": {
 			"for": message_for.text,
 			"method": message_method.text,
@@ -50,8 +50,8 @@ func serialize() -> Dictionary:
 
 
 ## Loads this panel from a dictonary
-func deserialize(p_serialized_data: Dictionary) -> void:
-	super.deserialize(p_serialized_data)
+func deserialize(p_serialized_data: Dictionary, p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> void:
+	super.deserialize(p_serialized_data, p_flags)
 	
 	var message: Dictionary = type_convert(p_serialized_data.get("message", {}), TYPE_DICTIONARY)
 	

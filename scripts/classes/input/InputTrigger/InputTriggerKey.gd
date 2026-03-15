@@ -45,12 +45,13 @@ func _component_ready() -> void:
 	set_name("InputTriggerKey")
 	_set_class_name("InputTriggerKey")
 	
-	register_setting("InputTriggerKey", "listen", set_input_event, get_input_event, Signal(), Data.Type.INPUTEVENT, 0, "Listen")
-	register_setting_int("Keycode", set_keycode, get_keycode, keycode_changed, 0, 0x7FFFFFFF)
-	register_setting_bool("Shift", set_shift_pressed, get_shift_pressed, shift_pressed_state_changed)
-	register_setting_bool("Control", set_control_pressed, get_control_pressed, control_pressed_state_changed)
-	register_setting_bool("Alt", set_alt_pressed, get_alt_pressed, alt_pressed_state_changed)
-	register_setting_bool("Meta", set_meta_pressed, get_meta_pressed, meta_pressed_state_changed)
+	_settings.register_setting("InputTriggerKey", Data.Type.INPUTEVENT, set_input_event, get_input_event)
+	_settings.register_setting("KeyCode", Data.Type.INT, set_keycode, get_keycode, [keycode_changed]).set_min_max(0, 0x7FFFFFFF)
+	_settings.register_setting("Shift", Data.Type.BOOL, set_shift_pressed, get_shift_pressed, [shift_pressed_state_changed])
+	_settings.register_setting("Control", Data.Type.BOOL, set_control_pressed, get_control_pressed, [control_pressed_state_changed])
+	_settings.register_setting("Alt", Data.Type.BOOL, set_alt_pressed, get_alt_pressed, [alt_pressed_state_changed])
+	_settings.register_setting("Meta", Data.Type.BOOL, set_meta_pressed, get_meta_pressed, [meta_pressed_state_changed])
+
 
 
 ## Sets the input event

@@ -1,0 +1,9 @@
+[submodule "modules/Utils"]
+	path = modules/Utils
+	url = https://github.com/SpectrumPro/utils
+[submodule "modules/NetworkManager"]
+	path = modules/NetworkManager
+	url = https://github.com/SpectrumPro/networkmanager
+[submodule "modules/Constellation"]
+	path = modules/Constellation
+	url = https://github.com/SpectrumPro/constellation

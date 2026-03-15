@@ -31,7 +31,7 @@ var _fixture: Fixture = null
 
 
 ## Signals to connect to the fixture
-var _fixture_signal_connections: Dictionary = {
+var _fixture_signal_connections: SignalGroup = SignalGroup.new([], {
 	"override_changed": _on_override_value_changed,
 	"override_erased": _on_override_value_erased,
 	"all_override_removed": _on_override_value_erased,
@@ -39,7 +39,7 @@ var _fixture_signal_connections: Dictionary = {
 	"parameter_erased": _on_parameter_eraced,
 	"manifest_changed": _on_dmx_fixture_manifest_changed,
 	"name_changed": set_label_name
-}
+})
 
 
 ## init
@@ -56,9 +56,9 @@ func _ready() -> void:
 
 ## Sets the fixture linked to this virtual fixture
 func set_fixture(control_fixture: Fixture) -> void:
-	Utils.disconnect_signals(_fixture_signal_connections, _fixture)
+	_fixture_signal_connections.disconnect_object(_fixture)
 	_fixture = control_fixture
-	Utils.connect_signals(_fixture_signal_connections, _fixture)
+	_fixture_signal_connections.connect_object(_fixture)
 	
 	if _fixture.has_overrides():
 		$Override.show()
@@ -68,8 +68,8 @@ func set_fixture(control_fixture: Fixture) -> void:
 	else:
 		render_color()
 	
-	set_label_name(control_fixture.name())
-	$UUID.text = control_fixture.uuid()
+	set_label_name(control_fixture.get_name())
+	$UUID.text = control_fixture.get_uuid()
 
 
 ## Gets the fixture linked to this virtual fixture

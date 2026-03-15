@@ -32,7 +32,7 @@ var _current_file_name: String = ""
 var _config: EngineConfig
 
 ## The SettingsManager for CoreEngine
-var _settings_manager: SettingsManager = SettingsManager.new()
+var _settings: SettingsManager = SettingsManager.new()
 
 
 ## Internal engine config options
@@ -51,10 +51,10 @@ class EngineConfig extends Object:
 			"object": (FixtureLibrary),
 			"name": "FixtureLibrary"
 		},
-		{
-			"object": (CIDManager),
-			"name": "CIDManager"
-		},
+		#{
+			#"object": (CIDManager),
+			#"name": "CIDManager"
+		#},
 	]
 	
 	## Root classes are the primary classes that will be seralized and loaded 
@@ -72,16 +72,16 @@ func _init() -> void:
 	OS.set_low_processor_usage_mode(false)
 	Details.print_startup_detils()
 	
-	_settings_manager.set_owner(self)
-	_settings_manager.set_inheritance_array(["CoreEngine"])
-	_settings_manager.register_networked_callbacks({
+	_settings.set_owner(self)
+	_settings.set_inheritance_array(["CoreEngine"])
+	_settings.register_networked_callbacks({
 		"on_components_added": _add_components,
 		"on_components_removed": _remove_components,
 		"on_resetting": _reset,
 		"on_file_name_changed": _set_file_name,
 	})
 	
-	_settings_manager.set_callback_allow_deserialize("on_components_added")
+	_settings.set_callback_allow_deserialize("on_components_added")
 
 
 ## Init
@@ -92,15 +92,15 @@ func _ready() -> void:
 	var local_node: ConstellationNode = Network.get_active_handler_by_name("Constellation").get_local_node()
 	
 	local_node.connected_to_session_master.connect(_load_from_server)
-	local_node.node_name_changed.connect(Log.set_instance_name)
+	local_node.name_changed.connect(Log.set_instance_name)
 	
 	Log.set_instance_name(local_node.get_node_name())
 	_add_auto_network_classes.call_deferred()
 
 
 ## Gets the SettingsManager
-func settings() -> SettingsManager:
-	return _settings_manager
+func get_settings() -> SettingsManager:
+	return _settings
 
 
 ## Returns a serialized copy of the engine from the server
@@ -247,7 +247,7 @@ func _remove_components(p_components: Array, p_no_signal: bool = false) -> void:
 ## Adds all objects from _config.network_objects to the Network
 func _add_auto_network_classes() -> void:
 	for config: Dictionary in _config.network_objects:
-		Network.register_network_object(config.name, config.object.settings())
+		Network.register_network_object(config.name, config.object.get_settings())
 
 
 ## Requests the current state from the server and loads it localy

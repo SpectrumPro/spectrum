@@ -110,7 +110,7 @@ func PopupDialog(p_source: Node, p_title: String = "") -> UIPopupDialog:
 func create_component_then_rename(p_source: Node) -> Promise:
 	return ObjectPicker_class(p_source, "EngineComponent").then(func (p_classname: String):
 		Core.create_component(p_classname).then(func (p_component: EngineComponent):
-			show_settings_module(p_source, p_component.settings().get_entry("name"))
+			show_settings_module(p_source, p_component.get_settings().get_entry("name"))
 		)
 	)
 
@@ -149,7 +149,7 @@ func confirm_delete_components(p_source: Node, p_components: Array, p_auto_delet
 	if p_components.size() > 1:
 		title.append(": " + str(p_components.size()) + " Components?")
 	elif p_components.size() and p_components[0] is EngineComponent:
-		title.append(" Selected " + p_components[0].classname() + "?")
+		title.append(" Selected " + p_components[0].get_class_name() + "?")
 	else:
 		return
 	

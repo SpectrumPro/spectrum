@@ -30,17 +30,17 @@ var _universe_number: int = 0
 
 
 ## Called when this object is first created
-func _init(p_uuid: String = UUID_Util.v4(), p_name: String = _name) -> void:
+func _init(p_uuid: String = UUID.v4(), p_name: String = _name) -> void:
 	super._init(p_uuid, p_name)
 	
 	_set_name("ArtNetOutput")
-	_set_self_class("ArtNetOutput")
+	_set_class_name("ArtNetOutput")
 	
-	_settings_manager.register_setting("ip_address", Data.Type.STRING, set_ip, get_ip, [ip_changed])
-	_settings_manager.register_setting("use_broadcast", Data.Type.BOOL, set_use_broadcast, get_use_broadcast, [broadcast_state_changed])
-	_settings_manager.register_setting("universe_number", Data.Type.INT, set_universe_number, get_universe_number, [universe_number_changed])
+	_settings.register_setting("ip_address", Data.Type.STRING, set_ip, get_ip, [ip_changed])
+	_settings.register_setting("use_broadcast", Data.Type.BOOL, set_use_broadcast, get_use_broadcast, [broadcast_state_changed])
+	_settings.register_setting("universe_number", Data.Type.INT, set_universe_number, get_universe_number, [universe_number_changed])
 	
-	_settings_manager.register_networked_callbacks({
+	_settings.register_networked_callbacks({
 		"on_ip_changed": _set_ip,
 		"on_broadcast_state_changed": _set_use_broadcast,
 		"on_universe_number_changed": _set_universe_number,
@@ -88,8 +88,8 @@ func get_universe_number() -> int:
 
 
 ## Saves this component to a dictonary
-func serialize() -> Dictionary:
-	return super.serialize().merged({
+func serialize(p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> Dictionary:
+	return super.serialize(p_flags).merged({
 		"ip_address": _ip_address,
 		"port": _port,
 		"use_broadcast": _use_broadcast,
@@ -99,8 +99,8 @@ func serialize() -> Dictionary:
 
 
 ## Loads this component from a dictonary
-func deserialize(p_serialized_data: Dictionary) -> void:
-	super.deserialize(p_serialized_data)
+func deserialize(p_serialized_data: Dictionary, p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> void:
+	super.deserialize(p_serialized_data, p_flags)
 	
 	_ip_address = type_convert(p_serialized_data.get("ip_address", _ip_address), TYPE_STRING)
 	_port = type_convert(p_serialized_data.get("port", _port), TYPE_INT)

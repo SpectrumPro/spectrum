@@ -222,15 +222,15 @@ func _on_stop_pressed() -> void:
 
 
 ## Saves this into a dict
-func serialize() -> Dictionary:
-	return super.serialize().merged({
+func serialize(p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> Dictionary:
+	return super.serialize(p_flags).merged({
 		"cue_list": component_button.get_component_uuid()
 	})
 
 
 ## Loads this from a dict
-func deserialize(p_serialized_data: Dictionary) -> void:
-	super.deserialize(p_serialized_data)
+func deserialize(p_serialized_data: Dictionary, p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> void:
+	super.deserialize(p_serialized_data, p_flags)
 	
 	component_button.look_for(type_convert(p_serialized_data.get("cue_list", ""), TYPE_STRING))
 

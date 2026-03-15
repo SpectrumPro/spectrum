@@ -33,7 +33,7 @@ enum DisplayMode {WINDOWED, MAXIMIZED, FULLSCREEN}
 
 
 ## The SettingsManager for this UIWindow
-var _settings_manager: SettingsManager = SettingsManager.new()
+var _settings: SettingsManager = SettingsManager.new()
 
 ## The base UIPanel
 var _base_panel: UIPanel
@@ -65,31 +65,31 @@ var _mode_no_signal: bool = false
 
 ## Init
 func _init() -> void:
-	_settings_manager.set_owner(self)
-	_settings_manager.set_inheritance_array(["UIWindow"])
+	_settings.set_owner(self)
+	_settings.set_inheritance_array(["UIWindow"])
 	
-	_settings_manager.register_setting("title", Data.Type.STRING, set_window_title, get_window_title, [window_title_changed])\
+	_settings.register_setting("title", Data.Type.STRING, set_window_title, get_window_title, [window_title_changed])\
 	.display("UIWindow", 0)
 	
-	_settings_manager.register_setting("base_panel", Data.Type.UIPANEL, set_base_panel, get_base_panel, [base_panel_changed])\
-	.display("UIWindow", 1).set_edit_condition(func(): return not is_window_root())
+	_settings.register_setting("base_panel", Data.Type.OBJECT, set_base_panel, get_base_panel, [base_panel_changed])\
+	.display("UIWindow", 1).set_class_filter(UIPanel).set_edit_condition(func(): return not is_window_root())
 	
-	_settings_manager.register_setting("display_mode", Data.Type.ENUM, set_display_mode, get_display_mode, [display_mode_changed])\
+	_settings.register_setting("display_mode", Data.Type.ENUM, set_display_mode, get_display_mode, [display_mode_changed])\
 	.display("UIWindow", 2).set_enum_dict(DisplayMode)
 	
-	_settings_manager.register_setting("position", Data.Type.VECTOR2I, set_window_position, get_window_position, [window_position_changed])\
+	_settings.register_setting("position", Data.Type.VECTOR2I, set_window_position, get_window_position, [window_position_changed])\
 	.display("UIWindow", 3).set_min_max(Vector2.ZERO, Vector2.INF)
 	
-	_settings_manager.register_setting("size", Data.Type.VECTOR2I, set_window_size, get_window_size, [window_size_changed])\
+	_settings.register_setting("size", Data.Type.VECTOR2I, set_window_size, get_window_size, [window_size_changed])\
 	.display("UIWindow", 4).set_min_max(Vector2.ZERO, Vector2.INF)
 	
-	_settings_manager.register_setting("borderless", Data.Type.BOOL, set_window_borderless, get_window_borderless, [window_borderless_changed])\
+	_settings.register_setting("borderless", Data.Type.BOOL, set_window_borderless, get_window_borderless, [window_borderless_changed])\
 	.display("UIWindow", 5)
 	
-	_settings_manager.register_setting("visable", Data.Type.BOOL, set_window_visible, get_window_visible, [window_visibility_changed])\
+	_settings.register_setting("visable", Data.Type.BOOL, set_window_visible, get_window_visible, [window_visibility_changed])\
 	.display("UIWindow", 6)
 	
-	_settings_manager.register_status("root", Data.Type.BOOL, is_window_root, [])\
+	_settings.register_status("root", Data.Type.BOOL, is_window_root, [])\
 	.display("UIWindow", 7)
 	
 	close_requested.connect(_on_close_request)
@@ -132,8 +132,8 @@ func _process(delta: float) -> void:
 
 
 ## Gets the SettingsManager
-func settings() -> SettingsManager:
-	return _settings_manager
+func get_settings() -> SettingsManager:
+	return _settings
 
 
 ## Sets the window title

@@ -67,7 +67,7 @@ func _init() -> void:
 	
 	_set_class_name("UIDesk")
 	
-	_settings_manager.register_setting("GridSize", Data.Type.ENUM, set_grid_size, get_grid_size, [grid_size_changed]).set_enum_dict(GridSize)
+	_settings.register_setting("GridSize", Data.Type.ENUM, set_grid_size, get_grid_size, [grid_size_changed]).set_enum_dict(GridSize)
 
 
 ## Process
@@ -183,21 +183,21 @@ func get_grid_size() -> GridSize:
 
 
 ## Returns a dictionary containing all panels, their positions, sizes, and settings
-func serialize() -> Dictionary:
+func serialize(p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> Dictionary:
 	var items: Array = []
 	
 	for desk_item_container: UIDeskItemContainer in _items:
 		items.append(desk_item_container.serialize())
 	
-	return super.serialize().merged({
+	return super.serialize(p_flags).merged({
 		"items": items,
 		"grid_size": _grid_size
 	})
 
 
 ## Loads all items in this desk from a saved dictionary
-func deserialize(p_serialized_data: Dictionary) -> void:
-	super.deserialize(p_serialized_data)
+func deserialize(p_serialized_data: Dictionary, p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> void:
+	super.deserialize(p_serialized_data, p_flags)
 	
 	var items: Array = type_convert(p_serialized_data.get("items", []), TYPE_ARRAY)
 	
