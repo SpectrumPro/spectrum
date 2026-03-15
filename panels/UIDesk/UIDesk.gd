@@ -206,7 +206,7 @@ func deserialize(p_serialized_data: Dictionary, p_flags: Data.SerializationFlags
 			continue
 		
 		var serialized_panel: Dictionary = type_convert(serialized_container.get("serialized_panel", []), TYPE_DICTIONARY)
-		var panel_class: String = type_convert(serialized_panel.get("class", []), TYPE_STRING)
+		var panel_class: String = type_convert(serialized_panel.get("class_name", []), TYPE_STRING)
 		
 		var panel_anchor_left: float = type_convert(serialized_container.get("anchor_left"), TYPE_FLOAT)
 		var panel_anchor_right: float = type_convert(serialized_container.get("anchor_right"), TYPE_FLOAT)

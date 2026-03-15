@@ -305,7 +305,7 @@ func deserialize(p_serialized_data: Dictionary) -> void:
 	set_window_visible(type_convert(p_serialized_data.get("window_visible"), TYPE_BOOL))
 	
 	var serialized_panel: Dictionary = type_convert(p_serialized_data.get("base_panel"), TYPE_DICTIONARY)
-	var panel_class: String = type_convert(serialized_panel.get("class"), TYPE_STRING)
+	var panel_class: String = type_convert(serialized_panel.get("class_name"), TYPE_STRING)
 	var panel: UIPanel = UIDB.instance_panel(panel_class)
 	
 	set_base_panel(panel)

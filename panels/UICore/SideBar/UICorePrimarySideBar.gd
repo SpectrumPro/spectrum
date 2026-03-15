@@ -327,7 +327,7 @@ func deserialize(p_saved_data: Dictionary) -> void:
 		
 		var title: String = type_convert(tabs[tab_id].get("title", ""), TYPE_STRING)
 		var serialized_panel: Dictionary = type_convert(tabs[tab_id].get("panel", ""), TYPE_DICTIONARY)
-		var panel_class: String = serialized_panel.get("class")
+		var panel_class: String = serialized_panel.get("class_name")
 		
 		var tab_id_int: int = int(tab_id)
 		var tab_item: TabItem
