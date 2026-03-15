@@ -35,7 +35,7 @@ func _on_add_desk_pressed() -> void:
 func _on_add_custom_pressed() -> void:
 	Popups.PanelPicker(self).then(func (p_panel_class: String):
 		var panel: UIPanel = UIDB.instance_panel(p_panel_class)
-		side_bar.create_tab(panel, side_bar.get_current_empty_tab()).set_title(panel.get_ui_name())
+		side_bar.create_tab(panel, side_bar.get_current_empty_tab()).set_title(panel.get_uname())
 	)
 
 
