@@ -89,8 +89,12 @@ func _ready() -> void:
 	_config = EngineConfig.new()
 	
 	Network.start_all()
+	var local_node: ConstellationNode = Network.get_active_handler_by_name("Constellation").get_local_node()
 	
-	(Network.get_active_handler_by_name("Constellation").get_local_node() as ConstellationNode).connected_to_session_master.connect(_load_from_server)
+	local_node.connected_to_session_master.connect(_load_from_server)
+	local_node.node_name_changed.connect(Log.set_instance_name)
+	
+	Log.set_instance_name(local_node.get_node_name())
 	_add_auto_network_classes.call_deferred()
 
 
@@ -290,7 +294,6 @@ func _set_file_name(p_file_name: String) -> void:
 
 ## Internal: Resets this engine to its default state
 func _reset():
-	print("Performing Engine Reset!")
 	_set_file_name("")
 	resetting.emit()  
 	

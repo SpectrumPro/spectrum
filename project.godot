@@ -32,6 +32,7 @@ driver/enable_input=true
 
 [autoload]
 
+Log="*res://core/engine/Logger.gd"
 ClassList="*res://core/global/ClassList.gd"
 NetworkClassList="*res://core/global/NetworkClassList.gd"
 ComponentDB="*res://core/global/ComponentDB.gd"
@@ -49,6 +50,7 @@ InputServer="*res://scripts/global/Input.gd"
 
 [debug]
 
+settings/gdscript/always_track_call_stacks=true
 gdscript/warnings/unused_parameter=0
 gdscript/warnings/shadowed_variable=0
 gdscript/warnings/shadowed_variable_base_class=0

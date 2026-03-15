@@ -1,6 +1,6 @@
 static var config: Dictionary = {
 	## Defines a custom callable to call when logging infomation
-	"custom_loging_method": Callable(),
+	"custom_loging_method": Log.info,
 	
 	## Defines a custom callable to call when logging infomation verbosely
 	"custom_loging_method_verbose": Callable(),
