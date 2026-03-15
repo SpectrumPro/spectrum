@@ -301,7 +301,7 @@ func get_button_actions(button: Button) -> Array:
 
 
 ## Serializes this UIPanel into a dictonary
-func serialize(p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> Dictionary[String, Variant]:
+func serialize(p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> Dictionary:
 	var button_actions: Dictionary[String, Array]
 	
 	for button: Button in _buttons_map.get_left():

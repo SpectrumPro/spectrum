@@ -108,7 +108,7 @@ func delete() -> void:
 
 
 ## Returns a JSON-compliant dictionary containing a serialized version of this object.
-func serialize(p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> Dictionary[String, Variant]:
+func serialize(p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> Dictionary:
 	return {
 		"name": _name,
 		"class_name": _class_name,

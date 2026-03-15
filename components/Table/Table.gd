@@ -364,7 +364,7 @@ func is_any_selected() -> bool:
 
 
 ## Serializes this Table
-func serialize(p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> Dictionary[String, Variant]:
+func serialize(p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> Dictionary:
 	var column_sizes: Dictionary[int, int]
 	
 	for column: Column in _columns:
