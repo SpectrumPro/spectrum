@@ -28,7 +28,7 @@ func set_title(title: String) -> void:
 
 ## Shows a setting
 func show_module(p_module: SettingsModule) -> void:
-	var data_input: DataInput = UIDB.instance_data_input(p_module.get_data_type())
+	var data_input: DataInput = UIDB.instance_data_input(p_module.get_data_type(), p_module.get_sub_type())
 	
 	if data_input is not DataInputNull:
 		data_input.ready.connect(func ():

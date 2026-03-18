@@ -15,7 +15,8 @@ var _current_component: EngineComponent
 
 ## Ready
 func _ready() -> void:
-	_data_type = Data.Type.ENGINECOMPONENT
+	_data_type = Data.Type.OBJECT
+	_sub_type = Data.Sub.Type.OBJECT_ENGINECOMPONENT
 	_button = $HBox/Button
 	_label = $HBox/Label
 	_outline = $HBox/Button/Outline

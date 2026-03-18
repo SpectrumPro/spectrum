@@ -86,7 +86,7 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-table_column_names = Array[String](["title"])
+table_column_names = Array[String](["Title"])
 display_icons = false
 
 [connection signal="pressed" from="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer/AddWindow" to="." method="_on_add_window_pressed"]

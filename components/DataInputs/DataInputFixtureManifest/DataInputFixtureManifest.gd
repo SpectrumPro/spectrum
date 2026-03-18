@@ -12,7 +12,8 @@ var _button: Button
 
 ## Ready
 func _ready() -> void:
-	_data_type = Data.Type.FIXTUREMANIFEST
+	_data_type = Data.Type.OBJECT
+	_sub_type = Data.Sub.Type.OBJECT_FIXTUREMANIFEST
 	_button = $HBox/Button
 	_label = $HBox/Label
 	_outline = $HBox/Button/Outline

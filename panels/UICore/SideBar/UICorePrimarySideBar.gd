@@ -464,7 +464,7 @@ class TabItem extends RefCounted:
 		_settings.set_owner(self)
 		_settings.set_inheritance_array(["TabItem"])
 		_settings.register_setting("title", Data.Type.STRING, set_title, get_title, [title_changed])
-		_settings.register_setting("panel", Data.Type.OBJECT, set_panel, get_panel, [panel_changed]).set_class_filter(UIPanel)
+		_settings.register_setting("panel", Data.Type.PACKEDSCENE, set_panel, get_panel, [panel_changed]).set_sub_type(Data.Sub.Type.PACKEDSCENE_UIPANEL)
 		_settings.register_setting("index", Data.Type.INT, set_index, get_index, [index_changed]).set_min_max(0, 65535)
 	
 	

@@ -1,3 +1,19 @@
+class_name DataConfig extends Object
+## Class to store config for Data
+
+
+## Class to store SubType keys
+class SubType:
+	enum Type {
+		NULL,						## No Type
+		INT_CID,					## A Component ID
+		OBJECT_ENGINECOMPONENT,		## A EngineComponent
+		OBJECT_FIXTUREMANIFEST,		## A FixtureManifest
+		OBJECT_NETWORKITEM,			## A NetworkItem
+		PACKEDSCENE_UIPANEL,		## A UIPanel
+	}
+
+
 ## Config for Data
 static var config: Dictionary[String, Variant] = {
 	"custom_type_to_string_method": custom_type_to_string,

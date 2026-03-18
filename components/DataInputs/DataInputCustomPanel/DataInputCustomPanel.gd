@@ -12,7 +12,7 @@ var _current_panel: Control
 
 ## Ready
 func _ready() -> void:
-	_data_type = Data.Type.CUSTOMPANEL
+	_data_type = Data.Type.PACKEDSCENE
 	_outline = $Outline
 	_focus_node = self
 

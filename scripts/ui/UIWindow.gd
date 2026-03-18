@@ -68,28 +68,28 @@ func _init() -> void:
 	_settings.set_owner(self)
 	_settings.set_inheritance_array(["UIWindow"])
 	
-	_settings.register_setting("title", Data.Type.STRING, set_window_title, get_window_title, [window_title_changed])\
+	_settings.register_setting("Title", Data.Type.STRING, set_window_title, get_window_title, [window_title_changed])\
 	.display("UIWindow", 0)
 	
-	_settings.register_setting("base_panel", Data.Type.OBJECT, set_base_panel, get_base_panel, [base_panel_changed])\
-	.display("UIWindow", 1).set_class_filter(UIPanel).set_edit_condition(func(): return not is_window_root())
+	_settings.register_setting("BasePanel", Data.Type.PACKEDSCENE, set_base_panel, get_base_panel, [base_panel_changed])\
+	.display("UIWindow", 1).set_sub_type(Data.Sub.Type.PACKEDSCENE_UIPANEL).set_edit_condition(func(): return not is_window_root())
 	
-	_settings.register_setting("display_mode", Data.Type.ENUM, set_display_mode, get_display_mode, [display_mode_changed])\
+	_settings.register_setting("DisplayMode", Data.Type.ENUM, set_display_mode, get_display_mode, [display_mode_changed])\
 	.display("UIWindow", 2).set_enum_dict(DisplayMode)
 	
-	_settings.register_setting("position", Data.Type.VECTOR2I, set_window_position, get_window_position, [window_position_changed])\
+	_settings.register_setting("Position", Data.Type.VECTOR2I, set_window_position, get_window_position, [window_position_changed])\
 	.display("UIWindow", 3).set_min_max(Vector2.ZERO, Vector2.INF)
 	
-	_settings.register_setting("size", Data.Type.VECTOR2I, set_window_size, get_window_size, [window_size_changed])\
+	_settings.register_setting("Size", Data.Type.VECTOR2I, set_window_size, get_window_size, [window_size_changed])\
 	.display("UIWindow", 4).set_min_max(Vector2.ZERO, Vector2.INF)
 	
-	_settings.register_setting("borderless", Data.Type.BOOL, set_window_borderless, get_window_borderless, [window_borderless_changed])\
+	_settings.register_setting("Borderless", Data.Type.BOOL, set_window_borderless, get_window_borderless, [window_borderless_changed])\
 	.display("UIWindow", 5)
 	
-	_settings.register_setting("visable", Data.Type.BOOL, set_window_visible, get_window_visible, [window_visibility_changed])\
-	.display("UIWindow", 6)
+	_settings.register_setting("Visable", Data.Type.BOOL, set_window_visible, get_window_visible, [window_visibility_changed])\
+	.display("UIWindow", 6).set_edit_condition(func(): return not is_window_root())
 	
-	_settings.register_status("root", Data.Type.BOOL, is_window_root, [])\
+	_settings.register_status("Root", Data.Type.BOOL, is_window_root, [])\
 	.display("UIWindow", 7)
 	
 	close_requested.connect(_on_close_request)

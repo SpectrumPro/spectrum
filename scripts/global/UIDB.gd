@@ -63,7 +63,7 @@ var _components: Dictionary[String, PackedScene] = {
 
 
 ## All DataInputs by DataType
-var _data_inputs: Dictionary[Data.Type, PackedScene] = {
+var _data_inputs: Dictionary[Data.Type, Variant] = {
 	Data.Type.NULL:				load(_d("DataInputNull")),
 	Data.Type.STRING:			load(_d("DataInputString")),
 	Data.Type.BOOL:				load(_d("DataInputBool")),
@@ -74,16 +74,18 @@ var _data_inputs: Dictionary[Data.Type, PackedScene] = {
 	Data.Type.COLOR:			load(_d("DataInputColor")),
 	Data.Type.ENUM:				load(_d("DataInputEnum")),
 	Data.Type.BITFLAGS:			load(_d("DataInputBitFlags")),
-	#Data.Type.NAME:				load(_d("DataInputString")),
 	Data.Type.IP:				load(_d("DataInputIPAddr")),
-	#Data.Type.NETWORKSESSION: 	load(_d("DataInputNetworkSession")),
-	#Data.Type.NETWORKNODE:	 	load(_d("DataInputNetworkNode")),
-	#Data.Type.ENGINECOMPONENT:	load(_d("DataInputEngineComponent")),
-	#Data.Type.FIXTUREMANIFEST:	load(_d("DataInputFixtureManifest")),
-	#Data.Type.UIPANEL:			load(_d("DataInputUIPanel")),
 	Data.Type.SETTINGSMANAGER:	load(_d("DataInputSettingsManager")),
-	#Data.Type.CUSTOMPANEL:		load(_d("DataInputCustomPanel")),
 	Data.Type.ACTION:			load(_d("DataInputAction")),
+	Data.Type.OBJECT:			{
+		Data.Sub.Type.OBJECT_ENGINECOMPONENT: 	load(_d("DataInputEngineComponent")),
+		Data.Sub.Type.OBJECT_FIXTUREMANIFEST: 	load(_d("DataInputFixtureManifest")),
+		Data.Sub.Type.OBJECT_NETWORKITEM: 		load(_d("DataInputNetworkItem")),
+	},
+	Data.Type.PACKEDSCENE:		{
+		Data.Sub.Type.PACKEDSCENE_UIPANEL:		load(_d("DataInputUIPanel")),
+		
+	},
 }
 
 ## All UIPanels sorted by category
@@ -224,17 +226,23 @@ func instance_component(p_component_class: Variant) -> UIComponent:
 
 
 ## Creates a new instance of a panel
-func instance_data_input(p_data_type: Data.Type) -> DataInput:
-	if not has_data_input(p_data_type):
-		var null_type: DataInputNull = _data_inputs[Data.Type.NULL].instantiate()
+func instance_data_input(p_data_type: Data.Type, p_sub_type: int = Data.Sub.Type.NULL) -> DataInput:
+	if has_data_input(p_data_type):
+		var entry: Variant = _data_inputs[p_data_type]
 		
-		null_type.ready.connect(func ():
-			null_type.set_unsupported_type(p_data_type)
-		)
+		if entry is PackedScene:
+			return entry.instantiate()
 		
-		return null_type
+		elif entry is Dictionary and entry.has(p_sub_type): 
+			return entry[p_sub_type].instantiate()
 	
-	return _data_inputs[p_data_type].instantiate()
+	var null_type: DataInputNull = _data_inputs[Data.Type.NULL].instantiate()
+	
+	null_type.ready.connect(func ():
+		null_type.set_unsupported_type(p_data_type)
+	)
+	
+	return null_type
 
 
 ## Checks if a UIPanel exists

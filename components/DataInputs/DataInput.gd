@@ -31,6 +31,9 @@ var _unsaved: bool = false
 ## The DataType of this DataInput
 var _data_type: Data.Type = Data.Type.NULL
 
+## The SubType of this DataInput, if any
+var _sub_type: int = Data.Sub.Type.NULL
+
 ## Editable state
 var _editable: bool = true
 
@@ -129,6 +132,11 @@ func get_label_text() -> String:
 ## Gets the data type
 func get_data_type() -> Data.Type:
 	return _data_type
+
+
+## Gets the sub type
+func get_sub_type() -> int:
+	return _sub_type
 
 
 ## Gets the editable state

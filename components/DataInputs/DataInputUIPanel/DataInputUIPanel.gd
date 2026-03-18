@@ -12,7 +12,8 @@ var _button: Button
 
 ## Ready
 func _ready() -> void:
-	_data_type = Data.Type.UIPANEL
+	_data_type = Data.Type.PACKEDSCENE
+	_sub_type = Data.Sub.Type.PACKEDSCENE_UIPANEL
 	_button = $HBox/Button
 	_label = $HBox/Label
 	_outline = $HBox/Button/Outline
