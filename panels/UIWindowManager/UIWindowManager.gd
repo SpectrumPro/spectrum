@@ -47,11 +47,12 @@ func _update_buttons() -> void:
 	var selected_window: UIWindow = settings_manager_multi_view.get_selected_owner()
 	var state: bool = selected_window == null
 	
+	focus_window_button.set_disabled(state)
+	
 	if selected_window and selected_window.is_window_root():
 		state = true
 	
 	delete_window_button.set_disabled(state)
-	focus_window_button.set_disabled(state)
 
 
 ## Called when the AddWindow button is pressed
