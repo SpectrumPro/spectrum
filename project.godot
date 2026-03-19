@@ -32,7 +32,7 @@ driver/enable_input=true
 
 [autoload]
 
-Log="*res://core/engine/Logger.gd"
+Log="*res://modules/Utils/global/Logger.gd"
 ClassList="*res://core/global/ClassList.gd"
 NetworkClassList="*res://modules/NetworkManager/global/NetworkClassList.gd"
 ComponentDB="*res://core/global/ComponentDB.gd"
