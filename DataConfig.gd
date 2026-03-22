@@ -18,6 +18,7 @@ class SubType:
 static var config: Dictionary[String, Variant] = {
 	"custom_type_to_string_method": custom_type_to_string,
 	"get_object_name_signal_method": get_object_name_changed_signal,
+	"get_object_db": get_object_db,
 }
 
 
@@ -44,3 +45,18 @@ static func get_object_name_changed_signal(p_module: SettingsModule) -> Variant:
 	
 	## else return false to use default 
 	return false
+
+
+## Returns the ObjectDB that p_object's type belongs to
+static func get_object_db(p_object: Object) -> ObjectDB:
+	if not is_instance_valid(p_object):
+		return null
+	
+	match p_object.get_base_class():
+		"EngineComponent":
+			return ComponentDB
+		"NetworkItem":
+			return NetworkDB
+		_:
+			return null
+	
