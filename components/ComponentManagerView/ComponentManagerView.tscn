@@ -1,13 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://7prnynnrdn4n"]
+[gd_scene load_steps=7 format=3 uid="uid://7prnynnrdn4n"]
 
 [ext_resource type="Script" uid="uid://dsx8tu82of1tm" path="res://components/ComponentManagerView/ComponentManagerView.gd" id="1_bwvqs"]
-[ext_resource type="PackedScene" uid="uid://bobrutb83r27e" path="res://components/SettingsManagerMultiView/SettingsManagerMultiView.tscn" id="2_i14tg"]
+[ext_resource type="PackedScene" uid="uid://bobrutb83r27e" path="res://modules/Vertex/components/SettingsManagerMultiView/SettingsManagerMultiView.tscn" id="2_i14tg"]
 [ext_resource type="StyleBox" uid="uid://csle20exwqtti" path="res://assets/styles/PanelMenuBar.tres" id="3_fygsi"]
 [ext_resource type="Texture2D" uid="uid://dqr6mygroiluf" path="res://assets/icons/NewPanel.svg" id="4_l13yj"]
 [ext_resource type="Texture2D" uid="uid://dfrrs2dnvlvsu" path="res://assets/icons/Delete.svg" id="5_e52lp"]
 [ext_resource type="Texture2D" uid="uid://cuvwwbojtcpg6" path="res://assets/icons/Duplicate.svg" id="6_b0p4b"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ortsv"]
 
 [node name="ComponentManagerView" type="PanelContainer" node_paths=PackedStringArray("settings_manager_multi_view", "new_button", "delete_button", "duplicate_button")]
 anchors_preset = 15
@@ -29,7 +27,6 @@ layout_mode = 2
 [node name="SettingsManagerMultiView" parent="VBoxContainer" instance=ExtResource("2_i14tg")]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxEmpty_ortsv")
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
 layout_mode = 2

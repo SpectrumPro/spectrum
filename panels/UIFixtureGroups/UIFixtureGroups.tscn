@@ -1,9 +1,9 @@
 [gd_scene load_steps=11 format=3 uid="uid://crkkr3uvy6hvc"]
 
-[ext_resource type="Theme" uid="uid://cyua45ur0ijqo" path="res://assets/Main.theme" id="1_sc08c"]
+[ext_resource type="Theme" uid="uid://cyua45ur0ijqo" path="res://modules/Vertex/assets/themes/Main.theme" id="1_sc08c"]
 [ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://assets/styles/UIPanelBase.tres" id="2_43xcs"]
 [ext_resource type="Script" uid="uid://bs7wdwuqtm3s5" path="res://panels/UIFixtureGroups/UIFixtureGroups.gd" id="3_gyjuj"]
-[ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://panels/UIPanel/PanelMenuBar.tscn" id="4_em10j"]
+[ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://modules/Vertex/panels/UIPanel/PanelMenuBar.tscn" id="4_em10j"]
 [ext_resource type="Texture2D" uid="uid://bs16qw34pxxr4" path="res://assets/icons/FixtureGroup.svg" id="5_7ac3b"]
 [ext_resource type="Texture2D" uid="uid://dqr6mygroiluf" path="res://assets/icons/NewPanel.svg" id="6_610ut"]
 [ext_resource type="Texture2D" uid="uid://dfrrs2dnvlvsu" path="res://assets/icons/Delete.svg" id="7_0856o"]
@@ -68,9 +68,6 @@ table_column_names = Array[String](["name"])
 new_button = NodePath("../PanelMenuBar/HBoxContainer/ScrollContainer/PanelContainer/HBoxContainer/NewComponent")
 delete_button = NodePath("../PanelMenuBar/HBoxContainer/ScrollContainer/PanelContainer/HBoxContainer/DeleteComponent")
 duplicate_button = NodePath("../PanelMenuBar/HBoxContainer/ScrollContainer/PanelContainer/HBoxContainer/DuplicateComponent")
-
-[node name="SettingsManagerMultiView" parent="VBoxContainer/ComponentManagerView/VBoxContainer" index="0"]
-display_icons = false
 
 [node name="PanelContainer" parent="VBoxContainer/ComponentManagerView/VBoxContainer" index="1"]
 visible = false

@@ -2,7 +2,7 @@
 
 [ext_resource type="StyleBox" uid="uid://c248eat6flpbo" path="res://assets/styles/UIPanelImbed.tres" id="1_7kg0u"]
 [ext_resource type="Script" uid="uid://cjbnp24htiy3i" path="res://panels/UICore/UICore.gd" id="1_febpr"]
-[ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://panels/UIPanel/PanelMenuBar.tscn" id="2_dciud"]
+[ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://modules/Vertex/panels/UIPanel/PanelMenuBar.tscn" id="2_dciud"]
 [ext_resource type="Script" uid="uid://cpdu3qjv70rxp" path="res://panels/UICore/SideBar/UICorePrimarySideBar.gd" id="2_hksc6"]
 [ext_resource type="Texture2D" uid="uid://vw0vs7dlct55" path="res://assets/icons/menu.svg" id="3_prxic"]
 [ext_resource type="Texture2D" uid="uid://rqf8w11gk6ud" path="res://assets/icons/Edit.svg" id="4_avgbi"]
@@ -253,7 +253,7 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 
-[node name="UICoreResolveButtons" type="PanelContainer" parent="VBoxContainer/HBoxContainer/MainContent/OverlayContainer" node_paths=PackedStringArray("_button_container")]
+[node name="UICoreResolveButtons" type="PanelContainer" parent="VBoxContainer/HBoxContainer/MainContent/OverlayContainer"]
 visible = false
 layout_mode = 1
 anchors_preset = 7
@@ -268,18 +268,16 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = ExtResource("8_x6rwm")
 script = ExtResource("9_h7bru")
-_button_container = NodePath("HBoxContainer")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/MainContent/OverlayContainer/UICoreResolveButtons"]
 layout_mode = 2
 
-[node name="UICoreStatusBar" type="PanelContainer" parent="VBoxContainer" node_paths=PackedStringArray("_version_label", "_info_label", "_resolve_button_container")]
+[node name="UICoreStatusBar" type="PanelContainer" parent="VBoxContainer" node_paths=PackedStringArray("_version_label", "_resolve_button_container")]
 custom_minimum_size = Vector2(0, 61)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_pj23w")
 script = ExtResource("10_00dbt")
 _version_label = NodePath("HBoxContainer/VersionLabel")
-_info_label = NodePath("HBoxContainer/PanelContainer/HBoxContainer/Label")
 _resolve_button_container = NodePath("../HBoxContainer/MainContent/OverlayContainer/UICoreResolveButtons")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/UICoreStatusBar"]

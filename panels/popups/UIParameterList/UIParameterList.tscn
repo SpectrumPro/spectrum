@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://bjh4174cvuyps" path="res://panels/popups/UIParameterList/UIParameterList.gd" id="2_rhsr6"]
 [ext_resource type="StyleBox" uid="uid://csle20exwqtti" path="res://assets/styles/PanelMenuBar.tres" id="3_55w2s"]
 [ext_resource type="Texture2D" uid="uid://dis005hfepinf" path="res://assets/icons/DMXFixture.svg" id="4_4bqt7"]
-[ext_resource type="Script" uid="uid://c1mxckcn5x4su" path="res://components/Scripts/TaggedLineEdit.gd" id="4_7fjpl"]
-[ext_resource type="PackedScene" uid="uid://dfu5s8fjy0ex4" path="res://components/EditControls/EditControls.tscn" id="4_qxuyf"]
+[ext_resource type="Script" uid="uid://c6lkkp6akoipw" path="res://modules/Vertex/classes/TaggedLineEdit.gd" id="4_7fjpl"]
+[ext_resource type="PackedScene" uid="uid://dfu5s8fjy0ex4" path="res://modules/Vertex/panels/UIPanel/EditControls/EditControls.tscn" id="4_qxuyf"]
 
 [node name="UIParameterList" type="PanelContainer" node_paths=PackedStringArray("combined_tree", "zone_tree", "parameter_tree", "function_tree", "search_bar", "edit_controls")]
 custom_minimum_size = Vector2(0, 60)

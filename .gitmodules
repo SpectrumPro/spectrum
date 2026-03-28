@@ -7,3 +7,9 @@
 [submodule "modules/Constellation"]
 	path = modules/Constellation
 	url = https://github.com/SpectrumPro/constellation
+[submodule "modules/Vertex"]
+	path = modules/Vertex
+	url = https://github.com/spectrumpro/vertex
+[submodule "modules/Axis"]
+	path = modules/Axis
+	url = https://github.com/spectrumpro/axis

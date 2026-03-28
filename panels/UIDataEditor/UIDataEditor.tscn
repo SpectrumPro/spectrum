@@ -1,14 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://bk280hh4f1sbc"]
+[gd_scene load_steps=14 format=3 uid="uid://bk280hh4f1sbc"]
 
 [ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://assets/styles/UIPanelBase.tres" id="1_pxtb2"]
 [ext_resource type="Script" uid="uid://dtpmr3p1f8vf0" path="res://panels/UIDataEditor/UIDataEditor.gd" id="2_lbtkl"]
-[ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://panels/UIPanel/PanelMenuBar.tscn" id="3_66500"]
+[ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://modules/Vertex/panels/UIPanel/PanelMenuBar.tscn" id="3_66500"]
 [ext_resource type="Texture2D" uid="uid://dfi7uhhle4irm" path="res://assets/icons/DataContainer.svg" id="4_yj1cb"]
-[ext_resource type="Script" uid="uid://se24iiujvm2g" path="res://core/components/functions/Function.gd" id="5_dft08"]
 [ext_resource type="Texture2D" uid="uid://bbennjke0ioen" path="res://assets/icons/Add.svg" id="6_v023y"]
 [ext_resource type="Texture2D" uid="uid://dfrrs2dnvlvsu" path="res://assets/icons/Delete.svg" id="7_0ny1a"]
 [ext_resource type="Script" uid="uid://ca0v066nkb8v1" path="res://panels/UIDataEditor/TimeLine.gd" id="9_ndlaa"]
-[ext_resource type="PackedScene" uid="uid://bf3cbsyaotnnq" path="res://components/Table/Table.tscn" id="9_t58bb"]
+[ext_resource type="PackedScene" uid="uid://bf3cbsyaotnnq" path="res://modules/Vertex/components/Table/Table.tscn" id="9_t58bb"]
 [ext_resource type="Texture2D" uid="uid://bwhtkajekd4o3" path="res://assets/icons/Auto.svg" id="10_wsg5a"]
 [ext_resource type="Texture2D" uid="uid://dee78hal6ympb" path="res://assets/icons/Grid_On.svg" id="11_fafqp"]
 [ext_resource type="Texture2D" uid="uid://dvj551fd4wb7o" path="res://assets/icons/Handle.svg" id="12_ovyrj"]
@@ -43,9 +42,6 @@ layout_mode = 2
 [node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="0"]
 text = "DataEditor"
 icon = ExtResource("4_yj1cb")
-class_filter = ExtResource("5_dft08")
-enable_resolve_mode = true
-enabled = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer" index="0"]
 layout_mode = 2
@@ -266,12 +262,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Can Fade"
 
-[connection signal="object_selected" from="VBoxContainer/PanelMenuBar/HBoxContainer/ComponentButton" to="." method="set_function"]
 [connection signal="pressed" from="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer2/HBoxContainer/AddItem" to="." method="_on_add_item_pressed"]
 [connection signal="pressed" from="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer2/HBoxContainer/RemoveItem" to="." method="_on_remove_item_pressed"]
 [connection signal="item_selected" from="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/ViewLayer" to="." method="set_view_layer"]
-[connection signal="edit_request_none_module" from="VBoxContainer/Table" to="." method="_on_table_edit_request_none_module"]
-[connection signal="selection_changed" from="VBoxContainer/Table" to="." method="_on_table_selection_changed"]
 [connection signal="value_changed" from="VBoxContainer/TimeLine/HBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer/Start" to="VBoxContainer/TimeLine" method="_on_start_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/TimeLine/HBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2/Stop" to="VBoxContainer/TimeLine" method="_on_stop_value_changed"]
 [connection signal="toggled" from="VBoxContainer/TimeLine/HBoxContainer/PanelContainer4/VBoxContainer/ToggleGrid" to="VBoxContainer/TimeLine" method="_on_toggle_grid_toggled"]

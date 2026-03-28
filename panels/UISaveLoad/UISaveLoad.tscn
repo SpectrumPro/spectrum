@@ -1,9 +1,9 @@
 [gd_scene load_steps=15 format=3 uid="uid://dm6rs78fm1lh4"]
 
-[ext_resource type="Theme" uid="uid://cyua45ur0ijqo" path="res://assets/Main.theme" id="1_4n2ck"]
+[ext_resource type="Theme" uid="uid://cyua45ur0ijqo" path="res://modules/Vertex/assets/themes/Main.theme" id="1_4n2ck"]
 [ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://assets/styles/UIPanelBase.tres" id="2_252qo"]
 [ext_resource type="Script" uid="uid://vwxcnn2f2rl6" path="res://panels/UISaveLoad/UISaveLoad.gd" id="3_yqnd6"]
-[ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://panels/UIPanel/PanelMenuBar.tscn" id="4_01dry"]
+[ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://modules/Vertex/panels/UIPanel/PanelMenuBar.tscn" id="4_01dry"]
 [ext_resource type="Texture2D" uid="uid://dpncjre34kf25" path="res://assets/icons/Storage.svg" id="5_868id"]
 [ext_resource type="Texture2D" uid="uid://c6rls43ddilxg" path="res://assets/icons/Save.svg" id="6_einec"]
 [ext_resource type="Texture2D" uid="uid://b7f3pgpifntmh" path="res://assets/icons/SaveAs.svg" id="7_hynpq"]

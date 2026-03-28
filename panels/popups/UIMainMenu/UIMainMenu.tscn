@@ -2,7 +2,7 @@
 
 [ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://assets/styles/UIPanelBase.tres" id="1_542aj"]
 [ext_resource type="Script" uid="uid://d1auarm8gwi8i" path="res://panels/popups/UIMainMenu/UIMainMenu.gd" id="1_dbhe3"]
-[ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://panels/UIPanel/PanelMenuBar.tscn" id="3_4mlm5"]
+[ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://modules/Vertex/panels/UIPanel/PanelMenuBar.tscn" id="3_4mlm5"]
 [ext_resource type="Texture2D" uid="uid://vw0vs7dlct55" path="res://assets/icons/menu.svg" id="4_8hqmw"]
 [ext_resource type="Texture2D" uid="uid://c6xnsmttojanx" path="res://assets/icons/Settings.svg" id="4_26f48"]
 [ext_resource type="Texture2D" uid="uid://bl7nw5rh753wr" path="res://assets/icons/Network.svg" id="5_788k0"]

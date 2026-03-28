@@ -11,9 +11,6 @@ class_name UICoreStatusBar extends PanelContainer
 ## The VersionLabel
 @export var _version_label: Label
 
-## The VersionLabel
-@export var _info_label: Label
-
 ## The UICoreResolveButtons node
 @export var _resolve_button_container: UICoreResolveButtons
 

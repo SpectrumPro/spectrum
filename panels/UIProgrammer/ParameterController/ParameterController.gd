@@ -115,7 +115,7 @@ func set_override_bg(p_state: bool) -> void:
 	var target: Color
 	
 	if p_state:
-		target = ThemeManager.Colors.Statuses.ProgrammerOverride
+		target = ThemeManager.Colors.Statuses.DataOverride
 	else:
 		target = _default_color
 	

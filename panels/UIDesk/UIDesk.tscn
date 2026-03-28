@@ -1,11 +1,11 @@
 [gd_scene load_steps=19 format=3 uid="uid://bsxgp5g0jmyke"]
 
-[ext_resource type="Theme" uid="uid://cyua45ur0ijqo" path="res://assets/Main.theme" id="1_vopyx"]
+[ext_resource type="Theme" uid="uid://cyua45ur0ijqo" path="res://modules/Vertex/assets/themes/Main.theme" id="1_vopyx"]
 [ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://assets/styles/UIPanelBase.tres" id="2_63t2f"]
 [ext_resource type="Script" uid="uid://ls3oi5ej0d0g" path="res://panels/UIDesk/UIDesk.gd" id="2_j5yap"]
 [ext_resource type="FontFile" uid="uid://crlak6jhg5jy2" path="res://assets/font/RubikMonoOne-Regular.ttf" id="4_u3w1e"]
 [ext_resource type="Texture2D" uid="uid://bbennjke0ioen" path="res://assets/icons/Add.svg" id="5_7kvcf"]
-[ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://panels/UIPanel/PanelMenuBar.tscn" id="5_63t2f"]
+[ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://modules/Vertex/panels/UIPanel/PanelMenuBar.tscn" id="5_63t2f"]
 [ext_resource type="Texture2D" uid="uid://dfrrs2dnvlvsu" path="res://assets/icons/Delete.svg" id="6_74a5n"]
 [ext_resource type="Texture2D" uid="uid://bly6v8fqc5sdb" path="res://assets/icons/Panel.svg" id="6_u3w1e"]
 [ext_resource type="Texture2D" uid="uid://rqf8w11gk6ud" path="res://assets/icons/Edit.svg" id="7_tirx7"]
@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://cawxywwrt8wr5" path="res://assets/icons/Arrow_upward.svg" id="9_i2hmx"]
 [ext_resource type="Texture2D" uid="uid://cv0titm4w4jp6" path="res://assets/icons/Arrow_downward.svg" id="10_ol5uu"]
 [ext_resource type="Script" uid="uid://b3irikla64343" path="res://panels/UIDesk/DrawGrid.gd" id="13_fr8l7"]
-[ext_resource type="PackedScene" uid="uid://b6eijsxlis7r3" path="res://components/SelectBox/SelectBox.tscn" id="15_u3w1e"]
+[ext_resource type="PackedScene" uid="uid://b6eijsxlis7r3" path="res://modules/Vertex/components/SelectBox/SelectBox.tscn" id="15_u3w1e"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_i61ds"]
 font = ExtResource("4_u3w1e")
@@ -41,7 +41,7 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
-[node name="UIDesk" type="PanelContainer" node_paths=PackedStringArray("disable_on_deselect", "_select_box", "_container_node", "_area_indicator", "edit_controls", "edit_mode_nodes", "menu_bar")]
+[node name="UIDesk" type="PanelContainer" node_paths=PackedStringArray("disable_on_deselect", "_select_box", "_container_node", "_area_indicator", "edit_controls", "menu_bar")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -57,7 +57,6 @@ _select_box = NodePath("VBoxContainer/PanelContainer2/Container/SelectBox")
 _container_node = NodePath("VBoxContainer/PanelContainer2/Container")
 _area_indicator = NodePath("VBoxContainer/PanelContainer2/Container/AeraIndicator")
 edit_controls = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/EditControls")
-edit_mode_nodes = [NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/MainControls"), NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/LayerControls")]
 menu_bar = NodePath("VBoxContainer/PanelMenuBar")
 
 [node name="Control" type="Control" parent="."]
@@ -153,14 +152,12 @@ grid_size = Vector2(80, 80)
 line_width = 2.28
 grid_mode = 1
 
-[node name="SelectBox" parent="VBoxContainer/PanelContainer2/Container" node_paths=PackedStringArray("event_control") instance=ExtResource("15_u3w1e")]
+[node name="SelectBox" parent="VBoxContainer/PanelContainer2/Container" instance=ExtResource("15_u3w1e")]
 visible = false
 layout_mode = 1
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
-event_control = NodePath("..")
-snapping_distance = Vector2(80, 80)
 
 [node name="AeraIndicator" type="Panel" parent="VBoxContainer/PanelContainer2/Container"]
 visible = false
@@ -190,7 +187,5 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_u3w1e")
 [connection signal="mouse_entered" from="VBoxContainer/PanelContainer2/Container" to="." method="_on_container_mouse_entered"]
 [connection signal="mouse_exited" from="VBoxContainer/PanelContainer2/Container" to="." method="_on_container_mouse_exited"]
 [connection signal="resized" from="VBoxContainer/PanelContainer2/Container" to="." method="_on_container_resized"]
-[connection signal="pressed" from="VBoxContainer/PanelContainer2/Container/SelectBox" to="." method="_on_select_box_pressed"]
-[connection signal="released" from="VBoxContainer/PanelContainer2/Container/SelectBox" to="." method="_on_select_box_released"]
 
 [editable path="VBoxContainer/PanelMenuBar"]

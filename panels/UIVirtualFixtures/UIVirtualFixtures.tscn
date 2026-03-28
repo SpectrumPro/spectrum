@@ -1,12 +1,11 @@
-[gd_scene load_steps=24 format=3 uid="uid://darbo0x41j3wt"]
+[gd_scene load_steps=23 format=3 uid="uid://darbo0x41j3wt"]
 
-[ext_resource type="Theme" uid="uid://cyua45ur0ijqo" path="res://assets/Main.theme" id="1_wppqu"]
+[ext_resource type="Theme" uid="uid://cyua45ur0ijqo" path="res://modules/Vertex/assets/themes/Main.theme" id="1_wppqu"]
 [ext_resource type="Script" uid="uid://da7s6m61slqga" path="res://panels/UIVirtualFixtures/UIVirtualFixtures.gd" id="2_rd2ea"]
 [ext_resource type="Script" uid="uid://y4hb6kdxsou5" path="res://panels/UIVirtualFixtures/FixtureContainer.gd" id="3_4kdmq"]
 [ext_resource type="Shader" uid="uid://g52t8ljy2oxx" path="res://assets/shaders/Grid.gdshader" id="4_hfqw6"]
-[ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://panels/UIPanel/PanelMenuBar.tscn" id="5_uoejw"]
+[ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://modules/Vertex/panels/UIPanel/PanelMenuBar.tscn" id="5_uoejw"]
 [ext_resource type="Texture2D" uid="uid://bs16qw34pxxr4" path="res://assets/icons/FixtureGroup.svg" id="6_n4jju"]
-[ext_resource type="Script" uid="uid://xt6kc4c6oyap" path="res://core/components/FixtureGroup.gd" id="7_uktvc"]
 [ext_resource type="Texture2D" uid="uid://bt7w4l5chxmnr" path="res://assets/icons/ZoomIn.svg" id="8_7f0w5"]
 [ext_resource type="Texture2D" uid="uid://ce4pstyb2a81e" path="res://assets/icons/ZoomAll.svg" id="9_fhyt7"]
 [ext_resource type="Texture2D" uid="uid://cyu6w28aucjer" path="res://assets/icons/ZoomOut.svg" id="10_0y48c"]
@@ -66,7 +65,7 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[node name="UIVirtualFixtures" type="Control" node_paths=PackedStringArray("dummy_scroll", "real_scroll", "fixture_container", "remove_fixture_button", "horizontal_align_button", "vertical_align_button", "grid_align_button", "component_button", "edit_controls", "edit_mode_nodes", "menu_bar")]
+[node name="UIVirtualFixtures" type="Control" node_paths=PackedStringArray("dummy_scroll", "real_scroll", "fixture_container", "remove_fixture_button", "horizontal_align_button", "vertical_align_button", "grid_align_button", "component_button", "edit_controls", "menu_bar")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -84,7 +83,6 @@ vertical_align_button = NodePath("TitleBar/HBoxContainer/ScrollContainer/HBoxCon
 grid_align_button = NodePath("TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/AlignControls/HBoxContainer/GridAlign")
 component_button = NodePath("TitleBar/HBoxContainer/ComponentButton")
 edit_controls = NodePath("TitleBar/HBoxContainer/EditControls")
-edit_mode_nodes = [NodePath("TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/GridControls"), NodePath("TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer"), NodePath("TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/AlignControls")]
 menu_bar = NodePath("TitleBar")
 
 [node name="Table" type="PanelContainer" parent="."]
@@ -152,9 +150,6 @@ grow_horizontal = 2
 [node name="ComponentButton" parent="TitleBar/HBoxContainer" index="0"]
 text = "FixtureGroup"
 icon = ExtResource("6_n4jju")
-class_filter = ExtResource("7_uktvc")
-enable_resolve_mode = true
-enabled = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="TitleBar/HBoxContainer/ScrollContainer" index="0"]
 layout_mode = 2
@@ -198,6 +193,7 @@ layout_mode = 2
 icon = ExtResource("12_ym8mk")
 
 [node name="GridControls" type="PanelContainer" parent="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 4
 
@@ -216,6 +212,7 @@ tooltip_text = "Snapping Distance"
 value = 20.0
 
 [node name="PanelContainer" type="PanelContainer" parent="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 4
 
@@ -240,6 +237,7 @@ disabled = true
 icon = ExtResource("16_5f2hc")
 
 [node name="AlignControls" type="PanelContainer" parent="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 4
 
@@ -318,7 +316,6 @@ update_on_text_changed = true
 
 [connection signal="gui_input" from="Table/RealScroll/ScrollSize/FixtureContainer" to="." method="_on_fixture_container_gui_input"]
 [connection signal="gui_input" from="Table/RealScroll/ScrollSize/FixtureContainer" to="Table/RealScroll/ScrollSize/FixtureContainer" method="_on_gui_input"]
-[connection signal="object_selected" from="TitleBar/HBoxContainer/ComponentButton" to="Table/RealScroll/ScrollSize/FixtureContainer" method="set_fixture_group"]
 [connection signal="pressed" from="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/Zoom Controls/HBoxContainer/ZoomIn" to="." method="_zoom_in"]
 [connection signal="pressed" from="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/Zoom Controls/HBoxContainer/ZoomOut" to="." method="_zoom_out"]
 [connection signal="pressed" from="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/Select Controls/HBoxContainer/SelectAll" to="Table/RealScroll/ScrollSize/FixtureContainer" method="_on_select_all_pressed"]

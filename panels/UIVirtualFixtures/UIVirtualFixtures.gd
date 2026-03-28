@@ -79,7 +79,7 @@ func _zoom_out() -> void:
 ## Sets edit mode state
 func _edit_mode_toggled(p_edit_mode: bool) -> void:
 	fixture_container.set_edit_mode(_edit_mode)
-	$TitleBar/HBoxContainer/EditControls/HBoxContainer/Edit.button_pressed = _edit_mode
+	edit_controls.edit_button.button_pressed = _edit_mode
 	$GridAlignSize.hide()
 
 

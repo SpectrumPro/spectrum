@@ -39,16 +39,16 @@ func _ready() -> void:
 	await get_tree().create_timer(0.5).timeout
 	Interface.fade_property(_startup_bg, "modulate", Color.TRANSPARENT, _startup_bg.hide, 0.3)
 	
-	for notice: StartUpNotice in Interface.config().startup_notices:
+	for notice: StartUpNotice in Interface.Config.startup_notices:
 		add_startup_notice(notice)
 
 
 ## Displays a StartUpNotice
 func add_startup_notice(p_notice: StartUpNotice) -> void:
-	if not is_instance_valid(p_notice) or _notices.has_left(p_notice) or Interface.config().can_show_notice(p_notice.get_notice_id()):
+	if not is_instance_valid(p_notice) or _notices.has_left(p_notice) or Interface.Config.can_show_notice(p_notice.get_notice_id()):
 		return
 	
-	var notice_container: StartUpNoticeContainer = preload("res://panels/UICore/StartUpNoticeContainer.tscn").instantiate()
+	var notice_container: StartUpNoticeContainer = preload("res://modules/Vertex/components/StartUpNoticeContainer/StartUpNoticeContainer.tscn").instantiate()
 	
 	notice_container.set_notice(p_notice)
 	notice_container.closing.connect(func (): _notices.erase_left(p_notice))

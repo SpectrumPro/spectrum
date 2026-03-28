@@ -105,11 +105,10 @@ func _init() -> void:
 ## Ready
 func _ready() -> void:
 	_load_default_buttons()
-	
 	create_tab(UIDB.instance_panel(UIDesk), 0).set_title("Desk")
 	
 	_tab_button_container.add_theme_constant_override("separation", button_separation)
-	_main_menu = Interface.get_window_popup(Interface.WindowPopup.MAIN_MENU, self)
+	_main_menu = Interface.get_window_popup(UIMainMenu, self)
 	_main_menu.visibility_changed.connect(func ():
 		_menu_button.set_pressed_no_signal(_main_menu.visible)
 	)
@@ -154,12 +153,17 @@ func set_tab_panel(p_panel: UIPanel, p_tab: TabItem) -> void:
 		_tab_control_container.remove_child(p_tab.get_panel())
 		p_tab.get_panel().queue_redraw()
 	
-	_overlay_container.add_child(p_panel.detatch_menu_bar())
-	_tab_control_container.add_child(p_panel)
+	var menu_bar: PanelMenuBar = p_panel.detatch_menu_bar()
 	
-	p_panel.get_menu_bar().size.x = menu_bar_default_size
-	p_panel.get_menu_bar().set_anchors_and_offsets_preset(Control.PRESET_CENTER_TOP, Control.PRESET_MODE_KEEP_WIDTH)
-	p_panel.get_menu_bar().set_visible(false)
+	if is_instance_valid(menu_bar):
+		_overlay_container.add_child(menu_bar)
+		p_panel.get_menu_bar().size.x = menu_bar_default_size
+		p_panel.get_menu_bar().set_anchors_and_offsets_preset(Control.PRESET_CENTER_TOP, Control.PRESET_MODE_KEEP_WIDTH)
+		p_panel.get_menu_bar().set_visible(false)
+	else:
+		print(p_panel, " does not have valid PanelMenuBar")
+	
+	_tab_control_container.add_child(p_panel)
 	p_tab._set_panel(p_panel)
 	
 	if p_tab == _current_tab:
@@ -399,7 +403,7 @@ func _on_edit_toggled(p_toggled_on: bool) -> void:
 
 ## Called when the main menu button is toggled
 func _on_menu_toggled(p_toggled_on: bool) -> void:
-	Interface.set_popup_visable(Interface.WindowPopup.MAIN_MENU, self, p_toggled_on)
+	Interface.set_popup_visable(UIMainMenu, self, p_toggled_on)
 
 
 ## Called for each GUI input on the edit button

@@ -2,8 +2,8 @@
 
 [ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://assets/styles/UIPanelBase.tres" id="1_axtmf"]
 [ext_resource type="Script" uid="uid://b758cm002fxcw" path="res://panels/UISettings/UISettings.gd" id="2_axtmf"]
-[ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://panels/UIPanel/PanelMenuBar.tscn" id="3_axtmf"]
-[ext_resource type="PackedScene" uid="uid://kjup3yrjifr5" path="res://components/SettingsManagerView/SettingsManagerView.tscn" id="4_c2tg1"]
+[ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://modules/Vertex/panels/UIPanel/PanelMenuBar.tscn" id="3_axtmf"]
+[ext_resource type="PackedScene" uid="uid://kjup3yrjifr5" path="res://modules/Vertex/components/SettingsManagerView/SettingsManagerView.tscn" id="4_c2tg1"]
 [ext_resource type="Texture2D" uid="uid://c6xnsmttojanx" path="res://assets/icons/Settings.svg" id="4_f3m7m"]
 [ext_resource type="PackedScene" uid="uid://dpkn0u6ocbxrj" path="res://panels/UIConstellationManager/UIConstellationManager.tscn" id="9_c2tg1"]
 [ext_resource type="StyleBox" uid="uid://c248eat6flpbo" path="res://assets/styles/UIPanelImbed.tres" id="9_k8fg3"]
@@ -87,13 +87,11 @@ size_flags_vertical = 3
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
-module_type_denylist = Array[int]([33])
 
 [node name="UIConstellationManager" parent="VBoxContainer/HBoxContainer" instance=ExtResource("9_c2tg1")]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = ExtResource("9_k8fg3")
-display_mode = 2
 
 [connection signal="toggled" from="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer/InterfaceSettingsTabButton" to="VBoxContainer/HBoxContainer/InterfaceSettings" method="set_visible"]
 [connection signal="toggled" from="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer/NetworkManagerTabButton" to="VBoxContainer/HBoxContainer/UIConstellationManager" method="set_visible"]

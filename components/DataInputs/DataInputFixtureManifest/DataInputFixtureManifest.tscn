@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://chmj6nhrkqmrx"]
 
 [ext_resource type="Script" uid="uid://cmwuph3rmc3ix" path="res://components/DataInputs/DataInputFixtureManifest/DataInputFixtureManifest.gd" id="1_gynkc"]
-[ext_resource type="StyleBox" uid="uid://cftl4b5dnt57b" path="res://assets/styles/ResolveBoxBGLess.tres" id="2_oivcw"]
+[ext_resource type="StyleBox" uid="uid://cftl4b5dnt57b" path="res://assets/styles/ResolveBoxNoBG.tres" id="2_oivcw"]
 
 [node name="DataInputFixtureManifest" type="PanelContainer"]
 custom_minimum_size = Vector2(0, 50)
@@ -33,4 +33,3 @@ mouse_filter = 1
 theme_override_styles/panel = ExtResource("2_oivcw")
 
 [connection signal="pressed" from="HBox/Button" to="." method="_on_button_pressed"]
-[connection signal="toggled" from="HBox/Button" to="." method="_on_button_toggled"]

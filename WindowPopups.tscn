@@ -1,0 +1,234 @@
+[gd_scene load_steps=16 format=3 uid="uid://ds42t8h4nusm4"]
+
+[ext_resource type="PackedScene" uid="uid://bojo5mnmadf4j" path="res://modules/Vertex/panels/popups/UIPanelSelector/UIPanelSelector.tscn" id="1_e0vty"]
+[ext_resource type="PackedScene" uid="uid://cgkb6rh0joakn" path="res://modules/Vertex/panels/UIPanelSettings/UIPanelSettings.tscn" id="2_m68sf"]
+[ext_resource type="PackedScene" uid="uid://d0naqdd3py4jm" path="res://panels/popups/UIMainMenu/UIMainMenu.tscn" id="3_3r4oo"]
+[ext_resource type="PackedScene" uid="uid://c3ri0p6vmbv6v" path="res://panels/UISettings/UISettings.tscn" id="4_u85oq"]
+[ext_resource type="PackedScene" uid="uid://dm6rs78fm1lh4" path="res://panels/UISaveLoad/UISaveLoad.tscn" id="5_aq3lt"]
+[ext_resource type="PackedScene" uid="uid://bgos7cwjodq8j" path="res://modules/Vertex/panels/popups/UICommandPalette/UICommandPalette.tscn" id="6_5wuys"]
+[ext_resource type="PackedScene" uid="uid://bfdb7diyn2pub" path="res://modules/Vertex/panels/popups/UIObjectSelector/UIObjectSelector.tscn" id="7_l8vcs"]
+[ext_resource type="PackedScene" uid="uid://b1kltq456o7pj" path="res://modules/Vertex/panels/popups/UIPopupSettingsModule/UIPopupSettingsModule.tscn" id="8_fdaae"]
+[ext_resource type="PackedScene" uid="uid://dbindagv7rpfp" path="res://modules/Vertex/panels/UIWindowManager/UIWindowManager.tscn" id="9_if4f4"]
+[ext_resource type="PackedScene" uid="uid://k0p6c6xe8xmi" path="res://modules/Vertex/panels/popups/UIWindowID/UIWindowID.tscn" id="10_0h5oi"]
+[ext_resource type="PackedScene" uid="uid://bcksw5esp2mib" path="res://panels/popups/UIManifestSelector/UIManifestSelector.tscn" id="11_jcwaf"]
+[ext_resource type="PackedScene" uid="uid://dpbusafl685o6" path="res://modules/Vertex/panels/popups/UINetworkSelector/UINetworkSelector.tscn" id="12_jcqk3"]
+[ext_resource type="PackedScene" uid="uid://b4sabjg5utge2" path="res://panels/UIComponentSettings/UIComponentSettings.tscn" id="13_7kxgq"]
+[ext_resource type="PackedScene" uid="uid://w4jjpcc5ej1o" path="res://panels/popups/UIParameterList/UIParameterList.tscn" id="14_rie3b"]
+[ext_resource type="PackedScene" uid="uid://g5qrmeqkxr26" path="res://modules/Vertex/panels/UISettingsManager/UISettingsManager.tscn" id="15_mx2hk"]
+
+[node name="WindowPopups" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="UIPanelSelector" parent="." instance=ExtResource("1_e0vty")]
+visible = false
+layout_mode = 1
+offset_left = -343.0
+offset_top = -188.0
+offset_right = 343.0
+offset_bottom = 188.0
+display_mode = 1
+
+[node name="UIPanelSettings" parent="." instance=ExtResource("2_m68sf")]
+visible = false
+layout_mode = 1
+offset_left = 462.0
+offset_top = 233.0
+offset_right = -462.0
+offset_bottom = -233.0
+display_mode = 1
+
+[node name="UIMainMenu" parent="." instance=ExtResource("3_3r4oo")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -234.0
+offset_top = -171.0
+offset_right = 234.0
+offset_bottom = 171.0
+grow_horizontal = 2
+grow_vertical = 2
+display_mode = 1
+
+[node name="UISettings" parent="." instance=ExtResource("4_u85oq")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -512.0
+offset_top = -315.0
+offset_right = 512.0
+offset_bottom = 315.0
+display_mode = 1
+
+[node name="UISaveLoad" parent="." node_paths=PackedStringArray("_file_action_buttons") instance=ExtResource("5_aq3lt")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -473.0
+offset_top = -262.0
+offset_right = 473.0
+offset_bottom = 262.0
+_file_action_buttons = []
+display_mode = 1
+
+[node name="UICommandPalette" parent="." instance=ExtResource("6_5wuys")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -343.0
+offset_top = -188.0
+offset_right = 343.0
+offset_bottom = 188.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UIObjectSelector" parent="." instance=ExtResource("7_l8vcs")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -343.0
+offset_top = -188.0
+offset_right = 343.0
+offset_bottom = 188.0
+grow_horizontal = 2
+grow_vertical = 2
+display_mode = 1
+
+[node name="UIPopupSettingsModule" parent="." instance=ExtResource("8_fdaae")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -111.5
+offset_top = -35.0
+offset_right = 111.5
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+display_mode = 1
+
+[node name="UIWindowManager" parent="." instance=ExtResource("9_if4f4")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -462.0
+offset_top = -246.0
+offset_right = 462.0
+offset_bottom = 246.0
+display_mode = 1
+
+[node name="UIWindowID" parent="." instance=ExtResource("10_0h5oi")]
+visible = false
+layout_mode = 1
+offset_left = -264.0
+offset_top = -128.0
+offset_right = 264.0
+offset_bottom = 128.0
+display_mode = 1
+
+[node name="UIManifestSelector" parent="." instance=ExtResource("11_jcwaf")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -343.0
+offset_top = -188.0
+offset_right = 343.0
+offset_bottom = 188.0
+grow_horizontal = 2
+grow_vertical = 2
+display_mode = 1
+
+[node name="UINetworkSelector" parent="." instance=ExtResource("12_jcqk3")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -167.0
+offset_top = -186.0
+offset_right = 167.0
+offset_bottom = 186.0
+display_mode = 1
+
+[node name="UIComponentSettings" parent="." instance=ExtResource("13_7kxgq")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -412.0
+offset_top = -229.0
+offset_right = 412.0
+offset_bottom = 229.0
+display_mode = 1
+
+[node name="UIParameterList" parent="." instance=ExtResource("14_rie3b")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -318.0
+offset_top = -183.0
+offset_right = 318.0
+offset_bottom = 183.0
+grow_horizontal = 2
+grow_vertical = 2
+display_mode = 1
+
+[node name="UISettingsManager" parent="." instance=ExtResource("15_mx2hk")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -342.0
+offset_top = -200.0
+offset_right = 342.0
+offset_bottom = 200.0
+display_mode = 1

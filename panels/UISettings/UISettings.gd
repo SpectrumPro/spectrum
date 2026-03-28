@@ -2,8 +2,7 @@
 # This file is part of the Spectrum Lighting Engine, licensed under the GPL v3.0 or later.
 # See the LICENSE file for details.
 
-
-class_name UISetting extends UIPanel
+class_name UISettings extends UIPanel
 ## Settings Panel
 
 
