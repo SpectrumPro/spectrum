@@ -269,7 +269,8 @@ grow_vertical = 0
 theme_override_styles/panel = ExtResource("8_x6rwm")
 script = ExtResource("9_h7bru")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/MainContent/OverlayContainer/UICoreResolveButtons"]
+[node name="ResolveButtonContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/MainContent/OverlayContainer/UICoreResolveButtons"]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="UICoreStatusBar" type="PanelContainer" parent="VBoxContainer" node_paths=PackedStringArray("_version_label", "_resolve_button_container")]

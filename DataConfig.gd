@@ -10,7 +10,8 @@ class SubType:
 		OBJECT_ENGINECOMPONENT,		## A EngineComponent
 		OBJECT_FIXTUREMANIFEST,		## A FixtureManifest
 		OBJECT_NETWORKITEM,			## A NetworkItem
-		PACKEDSCENE_UIPANEL,		## A UIPanel
+		OBJECT_UIPANEL,				## A UIPanel instance
+		PACKEDSCENE_UIPANEL,		## A UIPanel PackedScene
 	}
 
 
