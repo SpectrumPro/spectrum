@@ -6,9 +6,35 @@ class_name InterfacePopups extends Node
 ## Collection of shortcuts for opening UIPopups
 
 
+## The SettingsManager for this IntefacePopups object
+var _settings: SettingsManager = SettingsManager.new()
+
+
+## init 
+func _init() -> void:
+	_settings.set_owner(self)
+	_settings.set_inheritance_array(["Popups"])
+	
+	_settings.register_control("OpenMainMenu", Data.Type.ACTION, MainMenu.bind(self), Callable(), [])
+	_settings.register_control("OpenSettings", Data.Type.ACTION, Settings.bind(self), Callable(), [])
+	_settings.register_control("OpenSaveLoad", Data.Type.ACTION, SaveLoad.bind(self), Callable(), [])
+	_settings.register_control("ComponentSettings", Data.Type.ACTION, search_component_then_settings.bind(self))
+	_settings.register_control("CreateComponent", Data.Type.ACTION, create_component_then_rename.bind(self))
+
+
 ## Shows UIMainMenue
 func MainMenu(p_source: Node) -> Promise:
 	return Interface.show_window_popup(UIMainMenu, p_source, null)
+
+
+## Shows UISettings
+func Settings(p_source: Node) -> Promise:
+	return Interface.show_window_popup(UISettings, p_source, null)
+
+
+## Shows UISaveLoad
+func SaveLoad(p_source: Node) -> Promise:
+	return Interface.show_window_popup(UISaveLoad, p_source, null)
 
 
 ## Prompts the user to select a UIPanel
@@ -171,3 +197,8 @@ func search_component_then_settings(p_source: Node) -> Promise:
 	return ObjectSelector(p_source, EngineComponent, EngineComponent).then(func (p_component: EngineComponent):
 		ComponentSettings(p_source, p_component)
 	)
+
+
+## Returns the SettingsManager for this InterfacePopups object
+func get_settings() -> SettingsManager:
+	return _settings

@@ -28,3 +28,34 @@ static var config: Dictionary[String, Variant] = {
 		.set_notice_id("BETANOTICEV1.0.0-beta.3")
 	]
 }
+
+## static init
+static func _static_init() -> void:
+	load_command_palette_entrys.call_deferred()
+
+
+## Loads all the CommandPaletteEntrys
+static func load_command_palette_entrys() -> void:
+	## All CommandPaletteEntry to be added
+	var command_palette_entrys: Array[CommandPaletteEntry] = [
+		CommandPaletteEntry.new(
+			Network.get_settings(), 
+			"Network"
+		),
+		CommandPaletteEntry.new(
+			Interface.get_settings(), 
+			"Interface"
+		),
+		CommandPaletteEntry.new(
+			Popups.get_settings(), 
+			"Popups"
+		),
+		CommandPaletteEntry.new(
+			Network.get_active_handler_by_name("Constellation").get_local_node().get_settings(), 
+			"Constellation"
+		),
+	]
+	
+	for entry: CommandPaletteEntry in command_palette_entrys:
+		Interface.add_command_palette_entry(entry)
+	
