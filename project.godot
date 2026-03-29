@@ -22,8 +22,8 @@ boot_splash/bg_color=Color(0.0901961, 0.0901961, 0.0901961, 1)
 boot_splash/fullsize=false
 boot_splash/image="uid://bsbmpadvx8wi8"
 config/icon="uid://b25mctiamjbwy"
-config/macos_native_icon="res://modules/Vertex/assets/logos/spectrum/spectrum_dark.icns"
-config/windows_native_icon="res://modules/Vertex/assets/logos/spectrum/spectrum_dark.ico"
+config/macos_native_icon="res://assets/logos/spectrum/spectrum_dark.icns"
+config/windows_native_icon="res://assets/logos/spectrum/spectrum_dark.ico"
 
 [audio]
 
