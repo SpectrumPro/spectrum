@@ -1,15 +1,15 @@
 [gd_scene load_steps=11 format=3 uid="uid://5wsmpnnijdd4"]
 
-[ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://assets/styles/UIPanelBase.tres" id="1_3uf7h"]
+[ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://modules/Vertex/assets/styles/UIPanelBase.tres" id="1_3uf7h"]
 [ext_resource type="Script" uid="uid://poawc6x4w6po" path="res://panels/UICueSheet/UICueSheet.gd" id="2_cng42"]
 [ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://modules/Vertex/panels/UIPanel/PanelMenuBar.tscn" id="3_kypdf"]
 [ext_resource type="Texture2D" uid="uid://dnfqijjcnit7c" path="res://assets/icons/CueList.svg" id="5_ew5bc"]
-[ext_resource type="Texture2D" uid="uid://c1cl6qetwg8st" path="res://assets/icons/Arrow_back.svg" id="6_xv7bu"]
-[ext_resource type="Texture2D" uid="uid://kkblmodueva1" path="res://assets/icons/Arrow_foward.svg" id="7_r6ku8"]
+[ext_resource type="Texture2D" uid="uid://c1cl6qetwg8st" path="res://modules/Vertex/assets/icons/Arrow_back.svg" id="6_xv7bu"]
+[ext_resource type="Texture2D" uid="uid://kkblmodueva1" path="res://modules/Vertex/assets/icons/Arrow_foward.svg" id="7_r6ku8"]
 [ext_resource type="PackedScene" uid="uid://bnbr5mq5sb6gt" path="res://components/FunctionPlaybackControls/FunctionPlaybackControls.tscn" id="8_kypdf"]
-[ext_resource type="Texture2D" uid="uid://bbennjke0ioen" path="res://assets/icons/Add.svg" id="9_npvjf"]
+[ext_resource type="Texture2D" uid="uid://bbennjke0ioen" path="res://modules/Vertex/assets/icons/Add.svg" id="9_npvjf"]
 [ext_resource type="PackedScene" uid="uid://bf3cbsyaotnnq" path="res://modules/Vertex/components/Table/Table.tscn" id="10_npvjf"]
-[ext_resource type="Texture2D" uid="uid://dfrrs2dnvlvsu" path="res://assets/icons/Delete.svg" id="11_pa88r"]
+[ext_resource type="Texture2D" uid="uid://dfrrs2dnvlvsu" path="res://modules/Vertex/assets/icons/Delete.svg" id="11_pa88r"]
 
 [node name="UICueSheet" type="PanelContainer" node_paths=PackedStringArray("component_button", "previous_button", "go_button", "next_button", "function_playback_controls", "add_cue_button", "delete_button", "table", "edit_controls", "menu_bar")]
 anchors_preset = 15

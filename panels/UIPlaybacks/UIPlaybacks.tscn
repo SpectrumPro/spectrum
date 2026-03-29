@@ -1,13 +1,13 @@
 [gd_scene load_steps=10 format=3 uid="uid://baortk0rwrhup"]
 
 [ext_resource type="Theme" uid="uid://cyua45ur0ijqo" path="res://modules/Vertex/assets/themes/Main.theme" id="1_fpd1u"]
-[ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://assets/styles/UIPanelBase.tres" id="2_rmybk"]
+[ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://modules/Vertex/assets/styles/UIPanelBase.tres" id="2_rmybk"]
 [ext_resource type="Script" uid="uid://bmu8b4eaoouxa" path="res://panels/UIPlaybacks/UIPlaybacks.gd" id="3_rij1d"]
 [ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://modules/Vertex/panels/UIPanel/PanelMenuBar.tscn" id="4_5ou05"]
-[ext_resource type="Texture2D" uid="uid://cols1ubfr2ttn" path="res://assets/icons/Mix.svg" id="5_vrrkr"]
-[ext_resource type="Texture2D" uid="uid://bbennjke0ioen" path="res://assets/icons/Add.svg" id="6_os0li"]
-[ext_resource type="Texture2D" uid="uid://f8q8t2pxjmkl" path="res://assets/icons/remove_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" id="7_l4k0t"]
-[ext_resource type="Texture2D" uid="uid://rqf8w11gk6ud" path="res://assets/icons/Edit.svg" id="8_5a8nk"]
+[ext_resource type="Texture2D" uid="uid://cols1ubfr2ttn" path="res://modules/Vertex/assets/icons/Mix.svg" id="5_vrrkr"]
+[ext_resource type="Texture2D" uid="uid://bbennjke0ioen" path="res://modules/Vertex/assets/icons/Add.svg" id="6_os0li"]
+[ext_resource type="Texture2D" uid="uid://f8q8t2pxjmkl" path="res://modules/Vertex/assets/icons/remove_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg" id="7_l4k0t"]
+[ext_resource type="Texture2D" uid="uid://rqf8w11gk6ud" path="res://modules/Vertex/assets/icons/Edit.svg" id="8_5a8nk"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_ahq5b"]
 

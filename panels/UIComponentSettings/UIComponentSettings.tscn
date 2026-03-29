@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://b4sabjg5utge2"]
 
-[ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://assets/styles/UIPanelBase.tres" id="1_hycm7"]
+[ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://modules/Vertex/assets/styles/UIPanelBase.tres" id="1_hycm7"]
 [ext_resource type="Script" uid="uid://b1xqk8j41uia1" path="res://panels/UIComponentSettings/UIComponentSettings.gd" id="2_2jjai"]
 [ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://modules/Vertex/panels/UIPanel/PanelMenuBar.tscn" id="3_mnque"]
 [ext_resource type="PackedScene" uid="uid://kjup3yrjifr5" path="res://modules/Vertex/components/SettingsManagerView/SettingsManagerView.tscn" id="4_7pvrr"]
-[ext_resource type="Texture2D" uid="uid://c6xnsmttojanx" path="res://assets/icons/Settings.svg" id="4_mnque"]
+[ext_resource type="Texture2D" uid="uid://c6xnsmttojanx" path="res://modules/Vertex/assets/icons/Settings.svg" id="4_mnque"]
 
 [node name="UIComponentSettings" type="PanelContainer" node_paths=PackedStringArray("component_button", "settings_manager_view", "edit_controls", "menu_bar")]
 anchors_preset = 15

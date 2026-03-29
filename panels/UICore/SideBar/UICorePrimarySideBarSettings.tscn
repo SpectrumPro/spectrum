@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://b4lpvcf5mgeyv" path="res://panels/UICore/SideBar/UICorePrimarySideBarSettings.gd" id="1_67xso"]
 [ext_resource type="PackedScene" uid="uid://kjup3yrjifr5" path="res://modules/Vertex/components/SettingsManagerView/SettingsManagerView.tscn" id="1_hx8ak"]
-[ext_resource type="StyleBox" uid="uid://csle20exwqtti" path="res://assets/styles/PanelMenuBar.tres" id="2_lkmdf"]
+[ext_resource type="StyleBox" uid="uid://csle20exwqtti" path="res://modules/Vertex/assets/styles/PanelMenuBar.tres" id="2_lkmdf"]
 [ext_resource type="PackedScene" uid="uid://bf3cbsyaotnnq" path="res://modules/Vertex/components/Table/Table.tscn" id="2_vrj4d"]
-[ext_resource type="Texture2D" uid="uid://bbennjke0ioen" path="res://assets/icons/Add.svg" id="3_7nj6a"]
-[ext_resource type="Texture2D" uid="uid://dhhbjjtkgbfl0" path="res://assets/icons/FileOpen.svg" id="4_cpjgq"]
-[ext_resource type="Texture2D" uid="uid://dfrrs2dnvlvsu" path="res://assets/icons/Delete.svg" id="5_us6l3"]
+[ext_resource type="Texture2D" uid="uid://bbennjke0ioen" path="res://modules/Vertex/assets/icons/Add.svg" id="3_7nj6a"]
+[ext_resource type="Texture2D" uid="uid://dhhbjjtkgbfl0" path="res://modules/Vertex/assets/icons/FileOpen.svg" id="4_cpjgq"]
+[ext_resource type="Texture2D" uid="uid://dfrrs2dnvlvsu" path="res://modules/Vertex/assets/icons/Delete.svg" id="5_us6l3"]
 
 [node name="UICorePrimarySideBarSettings" type="PanelContainer" node_paths=PackedStringArray("table", "settings_manager_view", "open_tab_button", "delete_tab_button")]
 custom_minimum_size = Vector2(0, 350)

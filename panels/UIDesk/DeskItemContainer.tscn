@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://cebqk3au5iwx0"]
 
 [ext_resource type="Script" uid="uid://cj6rjtd8yhtck" path="res://panels/UIDesk/DeskItemContainer.gd" id="1_u1i3e"]
-[ext_resource type="Texture2D" uid="uid://bi6l77hvjlekh" path="res://assets/icons/Resize.svg" id="2_gw62f"]
-[ext_resource type="FontFile" uid="uid://crlak6jhg5jy2" path="res://assets/font/RubikMonoOne-Regular.ttf" id="3_70702"]
+[ext_resource type="Texture2D" uid="uid://bi6l77hvjlekh" path="res://modules/Vertex/assets/icons/Resize.svg" id="2_gw62f"]
+[ext_resource type="FontFile" uid="uid://crlak6jhg5jy2" path="res://modules/Vertex/assets/font/RubikMonoOne-Regular.ttf" id="3_70702"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q375a"]
 bg_color = Color(0.199988, 0.199988, 0.199988, 0.760784)

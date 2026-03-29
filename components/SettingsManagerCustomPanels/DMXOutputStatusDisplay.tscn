@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cx2fhdc52ft54"]
 
-[ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://assets/styles/UIPanelBase.tres" id="1_l6ycl"]
+[ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://modules/Vertex/assets/styles/UIPanelBase.tres" id="1_l6ycl"]
 [ext_resource type="Script" uid="uid://cobayumnfokx0" path="res://components/SettingsManagerCustomPanels/DmxOutputStatusDisplay.gd" id="1_oxcgw"]
 
 [node name="DmxOutputStatusDisplay" type="PanelContainer" node_paths=PackedStringArray("status_label")]

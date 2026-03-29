@@ -1,13 +1,13 @@
 [gd_scene load_steps=11 format=3 uid="uid://crkkr3uvy6hvc"]
 
 [ext_resource type="Theme" uid="uid://cyua45ur0ijqo" path="res://modules/Vertex/assets/themes/Main.theme" id="1_sc08c"]
-[ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://assets/styles/UIPanelBase.tres" id="2_43xcs"]
+[ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://modules/Vertex/assets/styles/UIPanelBase.tres" id="2_43xcs"]
 [ext_resource type="Script" uid="uid://bs7wdwuqtm3s5" path="res://panels/UIFixtureGroups/UIFixtureGroups.gd" id="3_gyjuj"]
 [ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://modules/Vertex/panels/UIPanel/PanelMenuBar.tscn" id="4_em10j"]
 [ext_resource type="Texture2D" uid="uid://bs16qw34pxxr4" path="res://assets/icons/FixtureGroup.svg" id="5_7ac3b"]
-[ext_resource type="Texture2D" uid="uid://dqr6mygroiluf" path="res://assets/icons/NewPanel.svg" id="6_610ut"]
-[ext_resource type="Texture2D" uid="uid://dfrrs2dnvlvsu" path="res://assets/icons/Delete.svg" id="7_0856o"]
-[ext_resource type="Texture2D" uid="uid://cuvwwbojtcpg6" path="res://assets/icons/Duplicate.svg" id="8_vjvpo"]
+[ext_resource type="Texture2D" uid="uid://dqr6mygroiluf" path="res://modules/Vertex/assets/icons/NewPanel.svg" id="6_610ut"]
+[ext_resource type="Texture2D" uid="uid://dfrrs2dnvlvsu" path="res://modules/Vertex/assets/icons/Delete.svg" id="7_0856o"]
+[ext_resource type="Texture2D" uid="uid://cuvwwbojtcpg6" path="res://modules/Vertex/assets/icons/Duplicate.svg" id="8_vjvpo"]
 [ext_resource type="PackedScene" uid="uid://7prnynnrdn4n" path="res://components/ComponentManagerView/ComponentManagerView.tscn" id="9_1kh4h"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7ac3b"]

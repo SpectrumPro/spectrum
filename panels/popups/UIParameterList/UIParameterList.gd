@@ -345,7 +345,7 @@ func _reload_combined_tree() -> void:
 			else:
 				zone_item_combined = combined_tree.create_item()
 			
-			_config_item(zone_item_combined, zone, "enter", preload("res://assets/icons/Zone.svg"))
+			_config_item(zone_item_combined, zone, "enter", preload("res://modules/Vertex/assets/icons/Zone.svg"))
 			_zones_combined.map(zone, zone_item_combined)
 			_combined_types[zone_item_combined] = ItemType.ZONE
 			
@@ -400,7 +400,7 @@ func _reload_zone_tree() -> void:
 			var zone_item_single: TreeItem = zone_tree.create_item()
 			var subtype: String = "use" if _orignal_search_mode == SearchMode.ZONE else "enter"
 			
-			_config_item(zone_item_single, zone, subtype, preload("res://assets/icons/Zone.svg"))
+			_config_item(zone_item_single, zone, subtype, preload("res://modules/Vertex/assets/icons/Zone.svg"))
 			_zones_single.map(zone, zone_item_single)
 	
 	_select_first(zone_tree)

@@ -304,7 +304,7 @@ func _load_manifests() -> void:
 		var manufacturer_item: TreeItem = manifest_tree.create_item()
 		
 		manufacturer_item.set_text(0, manufacturer)
-		manufacturer_item.set_icon(0, preload("res://assets/icons/Factory.svg"))
+		manufacturer_item.set_icon(0, preload("res://modules/Vertex/assets/icons/Factory.svg"))
 		
 		manufacturer_item.set_custom_color(1, Color(0x919191ff))
 		manufacturer_item.set_text(1, "Manufacturer")
@@ -314,7 +314,7 @@ func _load_manifests() -> void:
 		var manufacturer_tree_manufacturer_item: TreeItem = manufacturer_tree.create_item()
 			
 		manufacturer_tree_manufacturer_item.set_text(0, manufacturer)
-		manufacturer_tree_manufacturer_item.set_icon(0, preload("res://assets/icons/Factory.svg"))
+		manufacturer_tree_manufacturer_item.set_icon(0, preload("res://modules/Vertex/assets/icons/Factory.svg"))
 		
 		manufacturer_tree_manufacturer_item.set_custom_color(1, Color(0x919191ff))
 		manufacturer_tree_manufacturer_item.set_text(1, str(len(_manifest_info[manufacturer])))

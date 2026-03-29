@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://bcksw5esp2mib"]
 
-[ext_resource type="StyleBox" uid="uid://csle20exwqtti" path="res://assets/styles/PanelMenuBar.tres" id="1_adyyq"]
+[ext_resource type="StyleBox" uid="uid://csle20exwqtti" path="res://modules/Vertex/assets/styles/PanelMenuBar.tres" id="1_adyyq"]
 [ext_resource type="Script" uid="uid://3shyid6t18bp" path="res://panels/popups/UIManifestSelector/UIManifestSelector.gd" id="2_lx18e"]
-[ext_resource type="Texture2D" uid="uid://70jvrxlq7sgl" path="res://assets/icons/Schema.svg" id="3_br15q"]
+[ext_resource type="Texture2D" uid="uid://70jvrxlq7sgl" path="res://modules/Vertex/assets/icons/Schema.svg" id="3_br15q"]
 [ext_resource type="Script" uid="uid://c6lkkp6akoipw" path="res://modules/Vertex/classes/TaggedLineEdit.gd" id="4_6yh07"]
 [ext_resource type="PackedScene" uid="uid://dfu5s8fjy0ex4" path="res://modules/Vertex/panels/UIPanel/EditControls/EditControls.tscn" id="5_orbug"]
-[ext_resource type="StyleBox" uid="uid://cftl4b5dnt57b" path="res://assets/styles/ResolveBoxNoBG.tres" id="6_2qeie"]
+[ext_resource type="StyleBox" uid="uid://cftl4b5dnt57b" path="res://modules/Vertex/assets/styles/ResolveBoxNoBG.tres" id="6_2qeie"]
 
 [node name="UIManifestSelector" type="PanelContainer" node_paths=PackedStringArray("manifest_tree", "manufacturer_tree", "global_fixture_tree", "manufacturer_fixture_tree", "mode_tree", "manufacturer_tree_select_box", "fixture_tree_select_box", "search_bar", "edit_controls")]
 custom_minimum_size = Vector2(0, 60)

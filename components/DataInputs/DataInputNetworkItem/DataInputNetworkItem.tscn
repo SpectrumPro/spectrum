@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ch1l2wfhsihe1"]
 
 [ext_resource type="Script" uid="uid://dja0xpf11drof" path="res://components/DataInputs/DataInputNetworkItem/DataInputNetworkItem.gd" id="1_g1ioq"]
-[ext_resource type="StyleBox" uid="uid://cftl4b5dnt57b" path="res://assets/styles/ResolveBoxNoBG.tres" id="2_k24ij"]
+[ext_resource type="StyleBox" uid="uid://cftl4b5dnt57b" path="res://modules/Vertex/assets/styles/ResolveBoxNoBG.tres" id="2_k24ij"]
 
 [node name="DataInputNetworkSession" type="PanelContainer"]
 custom_minimum_size = Vector2(0, 50)

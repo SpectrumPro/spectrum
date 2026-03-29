@@ -1,14 +1,14 @@
 [gd_scene load_steps=10 format=3 uid="uid://cnqivpcpimlwc"]
 
 [ext_resource type="Theme" uid="uid://cyua45ur0ijqo" path="res://modules/Vertex/assets/themes/Main.theme" id="1_rr313"]
-[ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://assets/styles/UIPanelBase.tres" id="2_3fmy2"]
+[ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://modules/Vertex/assets/styles/UIPanelBase.tres" id="2_3fmy2"]
 [ext_resource type="Script" uid="uid://b014dpwwf0a4j" path="res://panels/UICuePlayback/UICuePlayback.gd" id="3_wkadf"]
-[ext_resource type="StyleBox" uid="uid://csle20exwqtti" path="res://assets/styles/PanelMenuBar.tres" id="4_iouh4"]
+[ext_resource type="StyleBox" uid="uid://csle20exwqtti" path="res://modules/Vertex/assets/styles/PanelMenuBar.tres" id="4_iouh4"]
 [ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://modules/Vertex/panels/UIPanel/PanelMenuBar.tscn" id="4_rr313"]
 [ext_resource type="Texture2D" uid="uid://dnfqijjcnit7c" path="res://assets/icons/CueList.svg" id="6_gheyh"]
 [ext_resource type="PackedScene" uid="uid://bnbr5mq5sb6gt" path="res://components/FunctionPlaybackControls/FunctionPlaybackControls.tscn" id="7_kkuxk"]
-[ext_resource type="Texture2D" uid="uid://c1cl6qetwg8st" path="res://assets/icons/Arrow_back.svg" id="11_5iwye"]
-[ext_resource type="Texture2D" uid="uid://kkblmodueva1" path="res://assets/icons/Arrow_foward.svg" id="12_dwiu4"]
+[ext_resource type="Texture2D" uid="uid://c1cl6qetwg8st" path="res://modules/Vertex/assets/icons/Arrow_back.svg" id="11_5iwye"]
+[ext_resource type="Texture2D" uid="uid://kkblmodueva1" path="res://modules/Vertex/assets/icons/Arrow_foward.svg" id="12_dwiu4"]
 
 [node name="UICuePlayback" type="PanelContainer" node_paths=PackedStringArray("cue_container", "scroll_container", "component_button", "function_playback_controls", "go_button", "control_buttons", "edit_controls", "menu_bar")]
 anchors_preset = 15

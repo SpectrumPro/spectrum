@@ -1,13 +1,13 @@
 [gd_scene load_steps=16 format=3 uid="uid://owx4rxrtg50d"]
 
 [ext_resource type="Theme" uid="uid://cyua45ur0ijqo" path="res://modules/Vertex/assets/themes/Main.theme" id="1_t3b7b"]
-[ext_resource type="Texture2D" uid="uid://cxtdx7cj44nk" path="res://assets/icons/Touch.svg" id="1_yeptw"]
-[ext_resource type="Texture2D" uid="uid://gntqv7ddcqvv" path="res://assets/icons/Fade.svg" id="2_2p1lo"]
+[ext_resource type="Texture2D" uid="uid://cxtdx7cj44nk" path="res://modules/Vertex/assets/icons/Touch.svg" id="1_yeptw"]
+[ext_resource type="Texture2D" uid="uid://gntqv7ddcqvv" path="res://modules/Vertex/assets/icons/Fade.svg" id="2_2p1lo"]
 [ext_resource type="Script" uid="uid://dhbb4w3i6cv8f" path="res://panels/UICuePlayback/CueItem/CueItem.gd" id="2_aostn"]
-[ext_resource type="Texture2D" uid="uid://txqtfrlvm3r7" path="res://assets/icons/ReturnFlipped.svg" id="2_dbt18"]
-[ext_resource type="Texture2D" uid="uid://doaysnonvo60k" path="res://assets/icons/PreWait.svg" id="3_ns1ii"]
-[ext_resource type="Texture2D" uid="uid://03gtlskodjas" path="res://assets/icons/Cue.svg" id="3_u1n7c"]
-[ext_resource type="Texture2D" uid="uid://chjhgm2c7y36o" path="res://assets/icons/ArrowDownAlt.svg" id="3_woprv"]
+[ext_resource type="Texture2D" uid="uid://txqtfrlvm3r7" path="res://modules/Vertex/assets/icons/ReturnFlipped.svg" id="2_dbt18"]
+[ext_resource type="Texture2D" uid="uid://doaysnonvo60k" path="res://modules/Vertex/assets/icons/PreWait.svg" id="3_ns1ii"]
+[ext_resource type="Texture2D" uid="uid://03gtlskodjas" path="res://modules/Vertex/assets/icons/Cue.svg" id="3_u1n7c"]
+[ext_resource type="Texture2D" uid="uid://chjhgm2c7y36o" path="res://modules/Vertex/assets/icons/ArrowDownAlt.svg" id="3_woprv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lrd3y"]
 content_margin_left = 5.0

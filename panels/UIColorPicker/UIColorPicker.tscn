@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=3 uid="uid://dhp8aa07tyxbf"]
 
-[ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://assets/styles/UIPanelBase.tres" id="1_vgwxr"]
+[ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://modules/Vertex/assets/styles/UIPanelBase.tres" id="1_vgwxr"]
 [ext_resource type="Script" uid="uid://bltvgq1jnaqgt" path="res://panels/UIColorPicker/UIColorPicker.gd" id="2_ogrry"]
 [ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://modules/Vertex/panels/UIPanel/PanelMenuBar.tscn" id="3_g582g"]
-[ext_resource type="Texture2D" uid="uid://clt2djtbul2kf" path="res://assets/icons/ColorPalett.svg" id="4_ara1c"]
+[ext_resource type="Texture2D" uid="uid://clt2djtbul2kf" path="res://modules/Vertex/assets/icons/ColorPalett.svg" id="4_ara1c"]
 [ext_resource type="Texture2D" uid="uid://2p7ffb5yq0hx" path="res://assets/asset_scripts/color_picker.png" id="6_3j0ua"]
-[ext_resource type="Texture2D" uid="uid://b7q628ocmror7" path="res://assets/icons/Crosshair.svg" id="7_b53g6"]
+[ext_resource type="Texture2D" uid="uid://b7q628ocmror7" path="res://modules/Vertex/assets/icons/Crosshair.svg" id="7_b53g6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7y88r"]
 corner_radius_top_left = 5

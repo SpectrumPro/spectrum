@@ -291,7 +291,7 @@ func _update_categorys(p_fixtures: Array) -> void:
 		_set_category_override(category, used_categories.has(category))
 
 	zone_select.add_item(Fixture.RootZone, 0)
-	zone_select.set_item_icon(0, preload("res://assets/icons/Zone.svg"))
+	zone_select.set_item_icon(0, preload("res://modules/Vertex/assets/icons/Zone.svg"))
 	_zone_indexes[Fixture.RootZone] = 0
 
 	var sorted_zones: Array = Utils.sort_text_and_numbers(zones.keys())
@@ -303,7 +303,7 @@ func _update_categorys(p_fixtures: Array) -> void:
 			continue
 
 		zone_select.add_item(zone, idx)
-		zone_select.set_item_icon(idx, preload("res://assets/icons/Zone.svg"))
+		zone_select.set_item_icon(idx, preload("res://modules/Vertex/assets/icons/Zone.svg"))
 
 		zone_select.get_popup().set_item_icon_modulate(idx, ThemeManager.Colors.Statuses.DataOverride if _zones_with_overrides.has(zone) else Color.WHITE)
 		_zone_indexes[zone] = idx

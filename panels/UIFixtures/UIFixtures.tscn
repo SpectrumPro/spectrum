@@ -1,13 +1,13 @@
 [gd_scene load_steps=11 format=3 uid="uid://dut26fusowr8i"]
 
 [ext_resource type="Theme" uid="uid://cyua45ur0ijqo" path="res://modules/Vertex/assets/themes/Main.theme" id="1_egktx"]
-[ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://assets/styles/UIPanelBase.tres" id="2_wpgpr"]
+[ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://modules/Vertex/assets/styles/UIPanelBase.tres" id="2_wpgpr"]
 [ext_resource type="Script" uid="uid://ny6rdbl4hjv4" path="res://panels/UIFixtures/UIFixtures.gd" id="3_ti08j"]
 [ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://modules/Vertex/panels/UIPanel/PanelMenuBar.tscn" id="4_4ox1a"]
-[ext_resource type="Texture2D" uid="uid://dqr6mygroiluf" path="res://assets/icons/NewPanel.svg" id="5_8ppod"]
+[ext_resource type="Texture2D" uid="uid://dqr6mygroiluf" path="res://modules/Vertex/assets/icons/NewPanel.svg" id="5_8ppod"]
 [ext_resource type="Texture2D" uid="uid://bc3qxkbsra1x8" path="res://assets/icons/Fixture.svg" id="5_sf6va"]
-[ext_resource type="Texture2D" uid="uid://dfrrs2dnvlvsu" path="res://assets/icons/Delete.svg" id="6_rpcjh"]
-[ext_resource type="Texture2D" uid="uid://cuvwwbojtcpg6" path="res://assets/icons/Duplicate.svg" id="7_xqphx"]
+[ext_resource type="Texture2D" uid="uid://dfrrs2dnvlvsu" path="res://modules/Vertex/assets/icons/Delete.svg" id="6_rpcjh"]
+[ext_resource type="Texture2D" uid="uid://cuvwwbojtcpg6" path="res://modules/Vertex/assets/icons/Duplicate.svg" id="7_xqphx"]
 [ext_resource type="PackedScene" uid="uid://7prnynnrdn4n" path="res://components/ComponentManagerView/ComponentManagerView.tscn" id="8_sypgw"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sf6va"]

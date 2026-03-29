@@ -1,12 +1,12 @@
 [gd_scene load_steps=10 format=3 uid="uid://cedqo06n6en8u"]
 
-[ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://assets/styles/UIPanelBase.tres" id="1_5m0mk"]
+[ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://modules/Vertex/assets/styles/UIPanelBase.tres" id="1_5m0mk"]
 [ext_resource type="Script" uid="uid://byqpqgm3d03aq" path="res://panels/UIFunctions/UIFunctions.gd" id="2_npe7k"]
 [ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://modules/Vertex/panels/UIPanel/PanelMenuBar.tscn" id="3_p7i0o"]
-[ext_resource type="Texture2D" uid="uid://cuvwwbojtcpg6" path="res://assets/icons/Duplicate.svg" id="4_0odo6"]
+[ext_resource type="Texture2D" uid="uid://cuvwwbojtcpg6" path="res://modules/Vertex/assets/icons/Duplicate.svg" id="4_0odo6"]
 [ext_resource type="Texture2D" uid="uid://cxh7su68my38i" path="res://assets/icons/Function.svg" id="4_gywq0"]
-[ext_resource type="Texture2D" uid="uid://dqr6mygroiluf" path="res://assets/icons/NewPanel.svg" id="5_ij3w5"]
-[ext_resource type="Texture2D" uid="uid://dfrrs2dnvlvsu" path="res://assets/icons/Delete.svg" id="7_mx5jm"]
+[ext_resource type="Texture2D" uid="uid://dqr6mygroiluf" path="res://modules/Vertex/assets/icons/NewPanel.svg" id="5_ij3w5"]
+[ext_resource type="Texture2D" uid="uid://dfrrs2dnvlvsu" path="res://modules/Vertex/assets/icons/Delete.svg" id="7_mx5jm"]
 [ext_resource type="PackedScene" uid="uid://7prnynnrdn4n" path="res://components/ComponentManagerView/ComponentManagerView.tscn" id="8_f8x5k"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gywq0"]

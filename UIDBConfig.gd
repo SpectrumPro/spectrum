@@ -52,7 +52,7 @@ static var data_inputs: Dictionary[Data.Type, Variant] = {
 }
 
 ## All user defined UIPanels
-static var class_icons: Dictionary[String, PackedScene] = {
+static var class_icons: Dictionary[String, Texture2D] = {
 	"NetworkManager": 		load(_i("Network")),
 	"Network": 				load(_i("Network")),
 	"Constellation": 		load(_i("Graph3")),
