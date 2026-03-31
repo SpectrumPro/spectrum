@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cx2fhdc52ft54"]
+[gd_scene load_steps=4 format=3 uid="uid://cx2fhdc52ft54"]
 
 [ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://modules/Vertex/assets/styles/UIPanelBase.tres" id="1_l6ycl"]
 [ext_resource type="Script" uid="uid://cobayumnfokx0" path="res://components/SettingsManagerCustomPanels/DmxOutputStatusDisplay.gd" id="1_oxcgw"]
+[ext_resource type="FontFile" uid="uid://crlak6jhg5jy2" path="res://modules/Vertex/assets/font/RubikMonoOne-Regular.ttf" id="3_0klvm"]
 
 [node name="DmxOutputStatusDisplay" type="PanelContainer" node_paths=PackedStringArray("status_label")]
 anchors_preset = 15
@@ -18,4 +19,5 @@ status_label = NodePath("ConnectionState")
 [node name="ConnectionState" type="Label" parent="."]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_0klvm")
 text = "DISCONNEDTED"
