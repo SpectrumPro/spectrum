@@ -51,8 +51,8 @@ func _init(p_uuid: String = UUID.v4(), p_name: String = _name) -> void:
 	_set_class_name("DMXFixture")
 	
 	_settings.register_setting("channel", Data.Type.INT, set_channel, get_channel, [channel_changed]).set_min_max(1, 512)
-	_settings.register_setting("universe", Data.Type.OBJECT, set_universe, get_universe, [universe_changed]).set_class_filter(Universe)
-	_settings.register_setting("manifest", Data.Type.OBJECT, set_manifest, get_manifest, [manifest_changed]).set_class_filter(FixtureManifest)
+	_settings.register_setting("universe", Data.Type.OBJECT, set_universe, get_universe, [universe_changed]).set_class_filter(EngineComponent, Universe)
+	_settings.register_setting("manifest", Data.Type.OBJECT, set_manifest, get_manifest, [manifest_changed]).set_class_filter(EngineComponent, FixtureManifest)
 	_settings.register_status("mode", Data.Type.STRING, get_mode, [mode_changed])
 	
 	_settings.register_networked_callbacks({

@@ -45,9 +45,8 @@ static var components: Dictionary[String, PackedScene]
 ## All user defined UIPanels
 static var data_inputs: Dictionary[Data.Type, Variant] = {
 	Data.Type.OBJECT:			{
-		Data.Sub.Type.OBJECT_ENGINECOMPONENT: 	load(_d("DataInputEngineComponent")),
+		Data.Sub.Type.NULL:						load(CoreUIDB._d("DataInputObject")),
 		Data.Sub.Type.OBJECT_FIXTUREMANIFEST: 	load(_d("DataInputFixtureManifest")),
-		Data.Sub.Type.OBJECT_NETWORKITEM: 		load(_d("DataInputNetworkItem")),
 	}
 }
 
