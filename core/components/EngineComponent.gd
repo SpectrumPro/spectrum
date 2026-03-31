@@ -93,14 +93,54 @@ static func deseralise_component_array(array: Array) -> Array[EngineComponent]:
 	return result
 
 
-## Calls a method on the remote object.
-func rpc(p_method_name: String, p_args: Array = []) -> Promise:
-	return Network.send_command(_uuid, p_method_name, p_args)
+## Gets the uuid
+func get_uuid() -> String:
+	return _uuid
+
+
+## Gets the name
+func get_name() -> String:
+	return _name
+
+
+## Gets the name
+func get_uname() -> String:
+	return _name
+
+
+## Gets the classname of this EngineComponent
+func get_class_name() -> String:
+	return _class_name
+
+
+## Gets the classname of this EngineComponent
+func get_base_class() -> String:
+	return _class_tree[-1]
+
+
+## Gets the class tree
+func get_class_tree() -> Array[String]:
+	return _class_tree.duplicate()
+
+
+## Gets the settings manager
+func get_settings() -> SettingsManager:
+	return _settings
+
+
+## Gets the CID
+func get_cid() -> int:
+	return _cid
 
 
 ## Sets the name of this component
-func set_name(new_name) -> void: 
-	rpc("set_name", [new_name])
+func set_name(new_name) -> Promise: 
+	return rpc("set_name", [new_name])
+
+
+## Sets the name of this EngineComponent
+func set_uname(p_name: String, p_no_signal: bool = false) -> void:
+	rpc("set_name", [p_name])
 
 
 ## Sets user_meta from the given value
@@ -123,34 +163,9 @@ func get_all_user_meta() -> Dictionary:
 	return _user_meta
 
 
-## Gets the CID
-func get_cid() -> int:
-	return _cid
-
-
-## Gets the uuid
-func get_uuid() -> String:
-	return _uuid
-
-
-## Gets the name
-func get_name() -> String:
-	return _name
-
-
-## Gets the classname of this EngineComponent
-func get_class_name() -> String:
-	return _class_name
-
-
-## Gets the settings manager
-func get_settings() -> SettingsManager:
-	return _settings
-
-
-## Gets the class tree
-func get_class_tree() -> Array[String]:
-	return _class_tree.duplicate()
+## Calls a method on the remote object.
+func rpc(p_method_name: String, p_args: Array = []) -> Promise:
+	return Network.send_command(_uuid, p_method_name, p_args)
 
 
 ## Always call this function when you want to delete this component. 
