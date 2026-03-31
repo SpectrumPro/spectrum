@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://darbo0x41j3wt"]
+[gd_scene load_steps=25 format=3 uid="uid://darbo0x41j3wt"]
 
 [ext_resource type="Theme" uid="uid://cyua45ur0ijqo" path="res://modules/Vertex/assets/themes/Main.theme" id="1_wppqu"]
 [ext_resource type="Script" uid="uid://da7s6m61slqga" path="res://panels/UIVirtualFixtures/UIVirtualFixtures.gd" id="2_rd2ea"]
@@ -6,6 +6,8 @@
 [ext_resource type="Shader" uid="uid://g52t8ljy2oxx" path="res://modules/Vertex/assets/shaders/Grid.gdshader" id="4_hfqw6"]
 [ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://modules/Vertex/panels/UIPanel/PanelMenuBar.tscn" id="5_uoejw"]
 [ext_resource type="Texture2D" uid="uid://bs16qw34pxxr4" path="res://assets/icons/FixtureGroup.svg" id="6_n4jju"]
+[ext_resource type="Script" uid="uid://xt6kc4c6oyap" path="res://core/components/FixtureGroup.gd" id="7_rd2ea"]
+[ext_resource type="Script" uid="uid://ctnse5muj3sti" path="res://core/components/EngineComponent.gd" id="8_4kdmq"]
 [ext_resource type="Texture2D" uid="uid://bt7w4l5chxmnr" path="res://modules/Vertex/assets/icons/ZoomIn.svg" id="8_7f0w5"]
 [ext_resource type="Texture2D" uid="uid://ce4pstyb2a81e" path="res://modules/Vertex/assets/icons/ZoomAll.svg" id="9_fhyt7"]
 [ext_resource type="Texture2D" uid="uid://cyu6w28aucjer" path="res://modules/Vertex/assets/icons/ZoomOut.svg" id="10_0y48c"]
@@ -150,6 +152,10 @@ grow_horizontal = 2
 [node name="ComponentButton" parent="TitleBar/HBoxContainer" index="0"]
 text = "FixtureGroup"
 icon = ExtResource("6_n4jju")
+class_filter = ExtResource("7_rd2ea")
+base_class = ExtResource("8_4kdmq")
+enable_resolve_mode = true
+enabled = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="TitleBar/HBoxContainer/ScrollContainer" index="0"]
 layout_mode = 2
@@ -316,6 +322,7 @@ update_on_text_changed = true
 
 [connection signal="gui_input" from="Table/RealScroll/ScrollSize/FixtureContainer" to="." method="_on_fixture_container_gui_input"]
 [connection signal="gui_input" from="Table/RealScroll/ScrollSize/FixtureContainer" to="Table/RealScroll/ScrollSize/FixtureContainer" method="_on_gui_input"]
+[connection signal="object_selected" from="TitleBar/HBoxContainer/ComponentButton" to="Table/RealScroll/ScrollSize/FixtureContainer" method="set_fixture_group"]
 [connection signal="pressed" from="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/Zoom Controls/HBoxContainer/ZoomIn" to="." method="_zoom_in"]
 [connection signal="pressed" from="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/Zoom Controls/HBoxContainer/ZoomOut" to="." method="_zoom_out"]
 [connection signal="pressed" from="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/Select Controls/HBoxContainer/SelectAll" to="Table/RealScroll/ScrollSize/FixtureContainer" method="_on_select_all_pressed"]

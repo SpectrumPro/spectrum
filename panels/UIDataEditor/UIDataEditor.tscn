@@ -1,9 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://bk280hh4f1sbc"]
+[gd_scene load_steps=16 format=3 uid="uid://bk280hh4f1sbc"]
 
 [ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://modules/Vertex/assets/styles/UIPanelBase.tres" id="1_pxtb2"]
 [ext_resource type="Script" uid="uid://dtpmr3p1f8vf0" path="res://panels/UIDataEditor/UIDataEditor.gd" id="2_lbtkl"]
 [ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://modules/Vertex/panels/UIPanel/PanelMenuBar.tscn" id="3_66500"]
 [ext_resource type="Texture2D" uid="uid://dfi7uhhle4irm" path="res://assets/icons/DataContainer.svg" id="4_yj1cb"]
+[ext_resource type="Script" uid="uid://se24iiujvm2g" path="res://core/components/functions/Function.gd" id="5_t58bb"]
+[ext_resource type="Script" uid="uid://ctnse5muj3sti" path="res://core/components/EngineComponent.gd" id="6_144fo"]
 [ext_resource type="Texture2D" uid="uid://bbennjke0ioen" path="res://modules/Vertex/assets/icons/Add.svg" id="6_v023y"]
 [ext_resource type="Texture2D" uid="uid://dfrrs2dnvlvsu" path="res://modules/Vertex/assets/icons/Delete.svg" id="7_0ny1a"]
 [ext_resource type="Script" uid="uid://ca0v066nkb8v1" path="res://panels/UIDataEditor/TimeLine.gd" id="9_ndlaa"]
@@ -42,6 +44,10 @@ layout_mode = 2
 [node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="0"]
 text = "DataEditor"
 icon = ExtResource("4_yj1cb")
+class_filter = ExtResource("5_t58bb")
+base_class = ExtResource("6_144fo")
+enable_resolve_mode = true
+enabled = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer" index="0"]
 layout_mode = 2
@@ -262,6 +268,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Can Fade"
 
+[connection signal="object_selected" from="VBoxContainer/PanelMenuBar/HBoxContainer/ComponentButton" to="." method="set_function"]
 [connection signal="pressed" from="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer2/HBoxContainer/AddItem" to="." method="_on_add_item_pressed"]
 [connection signal="pressed" from="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer2/HBoxContainer/RemoveItem" to="." method="_on_remove_item_pressed"]
 [connection signal="item_selected" from="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/ViewLayer" to="." method="set_view_layer"]
