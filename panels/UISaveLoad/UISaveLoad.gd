@@ -47,6 +47,8 @@ func _init() -> void:
 
 ## ready
 func _ready() -> void:
+	super._ready()
+	
 	Core.synchronizing.connect(_reload_saves)
 	Core.file_name_changed.connect(_set_file_name)
 	

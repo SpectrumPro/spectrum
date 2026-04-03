@@ -13,7 +13,7 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[node name="UIColorPicker" type="PanelContainer" node_paths=PackedStringArray("_pad", "_crosshair", "_value_slider", "_mix_mode", "slider_container", "edit_controls", "menu_bar")]
+[node name="UIColorPicker" type="PanelContainer" node_paths=PackedStringArray("_pad", "_crosshair", "_value_slider", "_mix_mode", "slider_container")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -26,13 +26,12 @@ _crosshair = NodePath("VBoxContainer/HBoxContainer/Picker/HBoxContainer/PanelCon
 _value_slider = NodePath("VBoxContainer/HBoxContainer/Picker/HBoxContainer/SliderContainer/VBoxContainer/PadValueSlider")
 _mix_mode = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/PanelContainer/MixMode")
 slider_container = NodePath("VBoxContainer/HBoxContainer/Picker/HBoxContainer/SliderContainer")
-edit_controls = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/EditControls")
-menu_bar = NodePath("VBoxContainer/PanelMenuBar")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
 [node name="PanelMenuBar" parent="VBoxContainer" instance=ExtResource("3_g582g")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="0"]

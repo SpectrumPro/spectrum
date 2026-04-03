@@ -50,10 +50,10 @@ func _init() -> void:
 	super._init()
 	
 	_set_class_name("UIColorPicker")
+	_settings.register_setting("ShowValueSlider", Data.Type.BOOL, set_show_value_slider, get_show_value_slider, [show_value_slider_changed])
+	
 	Values.connect_to_selection_value("selected_fixtures", _on_selected_fixture_changed)
 	_on_selected_fixture_changed(Values.get_selection_value("selected_fixtures"))
-	
-	_settings.register_setting("ShowValueSlider", Data.Type.BOOL, set_show_value_slider, get_show_value_slider, [show_value_slider_changed])
 
 
 ## Shows or hides the value slider

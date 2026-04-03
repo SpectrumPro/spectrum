@@ -19,7 +19,7 @@
 font_size = 11
 font_color = Color(0.529067, 0.529067, 0.529067, 1)
 
-[node name="UIDataEditor" type="PanelContainer" node_paths=PackedStringArray("table", "component_button", "add_items_button", "remove_items_button", "view_layer_option", "edit_controls", "menu_bar")]
+[node name="UIDataEditor" type="PanelContainer" node_paths=PackedStringArray("table", "component_button", "add_items_button", "remove_items_button", "view_layer_option")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -32,13 +32,12 @@ component_button = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ComponentB
 add_items_button = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer2/HBoxContainer/AddItem")
 remove_items_button = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer2/HBoxContainer/RemoveItem")
 view_layer_option = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/ViewLayer")
-edit_controls = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/EditControls")
-menu_bar = NodePath("VBoxContainer/PanelMenuBar")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
 [node name="PanelMenuBar" parent="VBoxContainer" instance=ExtResource("3_66500")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="0"]

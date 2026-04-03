@@ -50,6 +50,8 @@ func _init() -> void:
 
 ## ready
 func _ready() -> void:
+	super._ready()
+	
 	dummy_scroll.get_h_scroll_bar().value_changed.connect(real_scroll.set_h_scroll)
 	dummy_scroll.get_v_scroll_bar().value_changed.connect(real_scroll.set_v_scroll)
 	
@@ -79,7 +81,7 @@ func _zoom_out() -> void:
 ## Sets edit mode state
 func _edit_mode_toggled(p_edit_mode: bool) -> void:
 	fixture_container.set_edit_mode(_edit_mode)
-	edit_controls.edit_button.button_pressed = _edit_mode
+	get_edit_controls().edit_button.button_pressed = _edit_mode
 	$GridAlignSize.hide()
 
 

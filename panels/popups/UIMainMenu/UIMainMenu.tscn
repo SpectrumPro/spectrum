@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://dyd2xybu6duv4" path="res://modules/Vertex/assets/icons/NewWindow.svg" id="13_ljneo"]
 [ext_resource type="Texture2D" uid="uid://beoapfaav6t6" path="res://modules/Vertex/assets/icons/Move.svg" id="14_7ow35"]
 
-[node name="UIMainMenu" type="PanelContainer" node_paths=PackedStringArray("all_settings_button", "network_manager_settings_button", "external_input_settings_button", "window_manager_button", "new_window_button", "move_window_button", "save_load_button", "save_file_button", "load_file_button", "edit_controls", "menu_bar")]
+[node name="UIMainMenu" type="PanelContainer" node_paths=PackedStringArray("all_settings_button", "network_manager_settings_button", "external_input_settings_button", "window_manager_button", "new_window_button", "move_window_button", "save_load_button", "save_file_button", "load_file_button")]
 offset_right = 468.0
 offset_bottom = 342.0
 theme_override_styles/panel = ExtResource("1_542aj")
@@ -28,13 +28,12 @@ move_window_button = NodePath("VBoxContainer/VBoxContainer2/VBoxContainer2/Panel
 save_load_button = NodePath("VBoxContainer/VBoxContainer2/VBoxContainer/PanelContainer2/SaveLoad")
 save_file_button = NodePath("VBoxContainer/VBoxContainer2/VBoxContainer2/PanelContainer2/SaveLoadContainer/SaveFile")
 load_file_button = NodePath("VBoxContainer/VBoxContainer2/VBoxContainer2/PanelContainer2/SaveLoadContainer/LoadFile")
-edit_controls = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/EditControls")
-menu_bar = NodePath("VBoxContainer/PanelMenuBar")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
 [node name="PanelMenuBar" parent="VBoxContainer" instance=ExtResource("3_4mlm5")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="0"]

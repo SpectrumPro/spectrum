@@ -38,7 +38,7 @@ font_color = Color(0.15, 0.15, 0.15, 1)
 [sub_resource type="ButtonGroup" id="ButtonGroup_qwc1o"]
 allow_unpress = true
 
-[node name="UIProgrammer" type="PanelContainer" node_paths=PackedStringArray("tab_button_container", "layer_button_container", "controler_container", "zone_select", "random_mode", "template_placeholder", "page_select_option", "prev_page_button", "next_page_button", "edit_controls", "menu_bar")]
+[node name="UIProgrammer" type="PanelContainer" node_paths=PackedStringArray("tab_button_container", "layer_button_container", "controler_container", "zone_select", "random_mode", "template_placeholder", "page_select_option", "prev_page_button", "next_page_button")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -56,13 +56,12 @@ template_placeholder = NodePath("VBoxContainer/ScrollContainer/HBoxContainer/Tem
 page_select_option = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/PageButtons/HBoxContainer/PageSelect")
 prev_page_button = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/PageButtons/HBoxContainer/PageBack")
 next_page_button = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/PageButtons/HBoxContainer/PageFowards")
-edit_controls = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/EditControls")
-menu_bar = NodePath("VBoxContainer/PanelMenuBar")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
 [node name="PanelMenuBar" parent="VBoxContainer" instance=ExtResource("4_rdv1j")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="0"]

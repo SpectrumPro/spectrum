@@ -153,6 +153,17 @@ func set_tab_panel(p_panel: UIPanel, p_tab: TabItem) -> void:
 		_tab_control_container.remove_child(p_tab.get_panel())
 		p_tab.get_panel().queue_redraw()
 	
+	_tab_control_container.add_child(p_panel)
+	p_tab._set_panel(p_panel)
+	
+	if p_tab == _current_tab:
+		p_panel.set_visible(true)
+	else:
+		p_panel.set_visible(false)
+	
+	if not p_panel.is_node_ready():
+		await p_panel.ready
+	
 	var menu_bar: PanelMenuBar = p_panel.detatch_menu_bar()
 	
 	if is_instance_valid(menu_bar):
@@ -162,14 +173,8 @@ func set_tab_panel(p_panel: UIPanel, p_tab: TabItem) -> void:
 		p_panel.get_menu_bar().set_visible(false)
 	else:
 		print(p_panel, " does not have valid PanelMenuBar")
-	
-	_tab_control_container.add_child(p_panel)
-	p_tab._set_panel(p_panel)
-	
-	if p_tab == _current_tab:
-		p_panel.set_visible(true)
-	else:
-		p_panel.set_visible(false)
+		print(p_panel.get_path)
+		p_panel.modulate = Color.RED
 
 
 ## Sets the tab index

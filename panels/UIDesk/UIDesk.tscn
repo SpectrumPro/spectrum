@@ -41,7 +41,7 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
-[node name="UIDesk" type="PanelContainer" node_paths=PackedStringArray("disable_on_deselect", "_select_box", "_container_node", "_area_indicator", "edit_controls", "menu_bar")]
+[node name="UIDesk" type="PanelContainer" node_paths=PackedStringArray("disable_on_deselect", "_select_box", "_container_node", "_area_indicator")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -56,8 +56,6 @@ disable_on_deselect = [NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/Scroll
 _select_box = NodePath("VBoxContainer/PanelContainer2/Container/SelectBox")
 _container_node = NodePath("VBoxContainer/PanelContainer2/Container")
 _area_indicator = NodePath("VBoxContainer/PanelContainer2/Container/AeraIndicator")
-edit_controls = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/EditControls")
-menu_bar = NodePath("VBoxContainer/PanelMenuBar")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 2
@@ -83,6 +81,7 @@ label_settings = SubResource("LabelSettings_i61ds")
 layout_mode = 2
 
 [node name="PanelMenuBar" parent="VBoxContainer" instance=ExtResource("5_63t2f")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="0"]

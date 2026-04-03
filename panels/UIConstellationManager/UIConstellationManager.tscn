@@ -23,7 +23,7 @@ spacing_bottom = -5
 font = SubResource("FontVariation_djvka")
 font_size = 27
 
-[node name="UIConstellationManager" type="PanelContainer" node_paths=PackedStringArray("status_label", "power_button", "nodes_tab", "session_tab", "edit_controls", "menu_bar")]
+[node name="UIConstellationManager" type="PanelContainer" node_paths=PackedStringArray("status_label", "power_button", "nodes_tab", "session_tab")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -35,13 +35,12 @@ status_label = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContaine
 power_button = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer3/PowerButton")
 nodes_tab = NodePath("VBoxContainer/HBoxContainer/NodesTab")
 session_tab = NodePath("VBoxContainer/HBoxContainer/SessionsTab")
-edit_controls = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/EditControls")
-menu_bar = NodePath("VBoxContainer/PanelMenuBar")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
 [node name="PanelMenuBar" parent="VBoxContainer" instance=ExtResource("3_nrpeh")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="0"]

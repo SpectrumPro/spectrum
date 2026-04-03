@@ -56,6 +56,8 @@ func _init() -> void:
 
 ## ready
 func _ready() -> void:
+	super._ready()
+	
 	_style_box = panel.get_theme_stylebox("panel").duplicate()
 	panel.add_theme_stylebox_override("panel", _style_box)
 

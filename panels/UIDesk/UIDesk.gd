@@ -378,7 +378,7 @@ func _on_container_gui_input(p_event: InputEvent) -> void:
 			else:
 				var area_rect: Rect2i = _get_preset_area_size(p_event.position)
 				
-				Popups.PanelPicker(self).then(func (p_panel_class: String):
+				Popups.PanelSelector(self).then(func (p_panel_class: String):
 					add_panel(UIDB.instance_panel(p_panel_class), area_rect.position, area_rect.size)
 				)
 	
@@ -390,7 +390,7 @@ func _on_container_gui_input(p_event: InputEvent) -> void:
 func _on_select_box_released() -> void:
 	var rect: Rect2 = _select_box.get_selection()
 	
-	Popups.PanelPicker(self).then(func (p_panel_class: String):
+	Popups.PanelSelector(self).then(func (p_panel_class: String):
 		add_panel(UIDB.instance_panel(p_panel_class), rect.position.snapped(_snapping_distance), rect.size.snapped(_snapping_distance))
 	)
 	

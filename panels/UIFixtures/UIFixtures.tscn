@@ -12,7 +12,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sf6va"]
 
-[node name="UIFixtures" type="PanelContainer" node_paths=PackedStringArray("edit_controls", "menu_bar")]
+[node name="UIFixtures" type="PanelContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -23,13 +23,12 @@ size_flags_vertical = 3
 theme = ExtResource("1_egktx")
 theme_override_styles/panel = ExtResource("2_wpgpr")
 script = ExtResource("3_ti08j")
-edit_controls = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/EditControls")
-menu_bar = NodePath("VBoxContainer/PanelMenuBar")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
 [node name="PanelMenuBar" parent="VBoxContainer" instance=ExtResource("4_4ox1a")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="0"]
@@ -60,17 +59,9 @@ layout_mode = 2
 text = "Duplicate"
 icon = ExtResource("7_xqphx")
 
-[node name="ComponentManagerView" parent="VBoxContainer" node_paths=PackedStringArray("new_button", "delete_button", "duplicate_button") instance=ExtResource("8_sypgw")]
+[node name="ComponentManagerView" parent="VBoxContainer" instance=ExtResource("8_sypgw")]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_sf6va")
-classname = "Fixture"
-table_column_names = Array[String](["name"])
-new_button = NodePath("../PanelMenuBar/HBoxContainer/ScrollContainer/PanelContainer/HBoxContainer/NewComponent")
-delete_button = NodePath("../PanelMenuBar/HBoxContainer/ScrollContainer/PanelContainer/HBoxContainer/DeleteComponent")
-duplicate_button = NodePath("../PanelMenuBar/HBoxContainer/ScrollContainer/PanelContainer/HBoxContainer/DuplicateComponent")
-
-[node name="PanelContainer" parent="VBoxContainer/ComponentManagerView/VBoxContainer" index="1"]
-visible = false
 
 [editable path="VBoxContainer/PanelMenuBar"]
 [editable path="VBoxContainer/ComponentManagerView"]

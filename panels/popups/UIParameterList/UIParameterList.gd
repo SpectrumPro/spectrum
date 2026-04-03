@@ -108,6 +108,8 @@ func _init() -> void:
 
 ## ready
 func _ready() -> void:
+	super._ready()
+	
 	[combined_tree, zone_tree, parameter_tree, function_tree].map(func (p_tree: Tree):
 		p_tree.set_column_expand(1, false)
 		p_tree.set_column_custom_minimum_width(1, column_min_size)

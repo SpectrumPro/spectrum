@@ -70,6 +70,8 @@ func _init() -> void:
 
 ## ready
 func _ready() -> void:
+	super._ready()
+	
 	for column_name: String in Columns.keys():
 		var column: Columns = Columns[column_name]
 		table.add_column(column_name.capitalize(), _column_config[column])

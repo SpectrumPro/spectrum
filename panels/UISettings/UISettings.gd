@@ -25,6 +25,8 @@ func _init() -> void:
 
 ## ready
 func _ready() -> void:
+	super._ready()
+	
 	_interface_settings.set_manager(Interface.get_settings())
 
 

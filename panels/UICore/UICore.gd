@@ -29,8 +29,9 @@ func _init() -> void:
 
 ## Ready
 func _ready() -> void:
-	_settings.require("side_bar_settings", _side_bar.get_settings())
+	super._ready()
 	
+	_settings.require("side_bar_settings", _side_bar.get_settings())
 	_startup_bg.show()
 	
 	if get_parent() is UIWindow:

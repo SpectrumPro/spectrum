@@ -67,7 +67,7 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[node name="UIVirtualFixtures" type="Control" node_paths=PackedStringArray("dummy_scroll", "real_scroll", "fixture_container", "remove_fixture_button", "horizontal_align_button", "vertical_align_button", "grid_align_button", "component_button", "edit_controls", "menu_bar")]
+[node name="UIVirtualFixtures" type="Control" node_paths=PackedStringArray("dummy_scroll", "real_scroll", "fixture_container", "remove_fixture_button", "horizontal_align_button", "vertical_align_button", "grid_align_button", "component_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -79,13 +79,11 @@ script = ExtResource("2_rd2ea")
 dummy_scroll = NodePath("DummyScroll")
 real_scroll = NodePath("Table/RealScroll")
 fixture_container = NodePath("Table/RealScroll/ScrollSize/FixtureContainer")
-remove_fixture_button = NodePath("TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer/RemoveFixtures")
-horizontal_align_button = NodePath("TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/AlignControls/HBoxContainer/HorizontalAlign")
-vertical_align_button = NodePath("TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/AlignControls/HBoxContainer/VerticalAlign")
-grid_align_button = NodePath("TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/AlignControls/HBoxContainer/GridAlign")
-component_button = NodePath("TitleBar/HBoxContainer/ComponentButton")
-edit_controls = NodePath("TitleBar/HBoxContainer/EditControls")
-menu_bar = NodePath("TitleBar")
+remove_fixture_button = NodePath("PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer/RemoveFixtures")
+horizontal_align_button = NodePath("PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/AlignControls/HBoxContainer/HorizontalAlign")
+vertical_align_button = NodePath("PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/AlignControls/HBoxContainer/VerticalAlign")
+grid_align_button = NodePath("PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/AlignControls/HBoxContainer/GridAlign")
+component_button = NodePath("PanelMenuBar/HBoxContainer/ComponentButton")
 
 [node name="Table" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -139,7 +137,8 @@ offset_right = 267.0
 offset_bottom = 257.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_a7r8u")
 
-[node name="TitleBar" parent="." instance=ExtResource("5_uoejw")]
+[node name="PanelMenuBar" parent="." instance=ExtResource("5_uoejw")]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -149,7 +148,7 @@ offset_right = -6.0
 offset_bottom = 65.0
 grow_horizontal = 2
 
-[node name="ComponentButton" parent="TitleBar/HBoxContainer" index="0"]
+[node name="ComponentButton" parent="PanelMenuBar/HBoxContainer" index="0"]
 text = "FixtureGroup"
 icon = ExtResource("6_n4jju")
 class_filter = ExtResource("7_rd2ea")
@@ -157,118 +156,118 @@ base_class = ExtResource("8_4kdmq")
 enable_resolve_mode = true
 enabled = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TitleBar/HBoxContainer/ScrollContainer" index="0"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelMenuBar/HBoxContainer/ScrollContainer" index="0"]
 layout_mode = 2
 
-[node name="Zoom Controls" type="PanelContainer" parent="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer"]
+[node name="Zoom Controls" type="PanelContainer" parent="PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/Zoom Controls"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/Zoom Controls"]
 layout_mode = 2
 
-[node name="ZoomIn" type="Button" parent="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/Zoom Controls/HBoxContainer"]
+[node name="ZoomIn" type="Button" parent="PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/Zoom Controls/HBoxContainer"]
 layout_mode = 2
 tooltip_text = "Zoom In"
 icon = ExtResource("8_7f0w5")
 
-[node name="ZoomAll" type="Button" parent="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/Zoom Controls/HBoxContainer"]
+[node name="ZoomAll" type="Button" parent="PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/Zoom Controls/HBoxContainer"]
 layout_mode = 2
 tooltip_text = "Center Zoom"
 disabled = true
 icon = ExtResource("9_fhyt7")
 
-[node name="ZoomOut" type="Button" parent="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/Zoom Controls/HBoxContainer"]
+[node name="ZoomOut" type="Button" parent="PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/Zoom Controls/HBoxContainer"]
 layout_mode = 2
 tooltip_text = "Zoom Out"
 icon = ExtResource("10_0y48c")
 
-[node name="Select Controls" type="PanelContainer" parent="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer"]
+[node name="Select Controls" type="PanelContainer" parent="PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/Select Controls"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/Select Controls"]
 layout_mode = 2
 
-[node name="SelectAll" type="Button" parent="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/Select Controls/HBoxContainer"]
+[node name="SelectAll" type="Button" parent="PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/Select Controls/HBoxContainer"]
 layout_mode = 2
 icon = ExtResource("11_qywxx")
 
-[node name="DeSelectRandom" type="Button" parent="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/Select Controls/HBoxContainer"]
+[node name="DeSelectRandom" type="Button" parent="PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/Select Controls/HBoxContainer"]
 layout_mode = 2
 icon = ExtResource("12_ym8mk")
 
-[node name="GridControls" type="PanelContainer" parent="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer"]
+[node name="GridControls" type="PanelContainer" parent="PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer"]
 visible = false
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/GridControls"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/GridControls"]
 layout_mode = 2
 
-[node name="ShowGrid" type="Button" parent="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/GridControls/HBoxContainer"]
+[node name="ShowGrid" type="Button" parent="PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/GridControls/HBoxContainer"]
 layout_mode = 2
 tooltip_text = "Toggle Grid"
 toggle_mode = true
 icon = ExtResource("13_2j73k")
 
-[node name="GridSize" type="SpinBox" parent="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/GridControls/HBoxContainer"]
+[node name="GridSize" type="SpinBox" parent="PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/GridControls/HBoxContainer"]
 layout_mode = 2
 tooltip_text = "Snapping Distance"
 value = 20.0
 
-[node name="PanelContainer" type="PanelContainer" parent="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer"]
 visible = false
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer"]
 layout_mode = 2
 
-[node name="AddFixtures" type="Button" parent="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer"]
+[node name="AddFixtures" type="Button" parent="PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer"]
 layout_mode = 2
 tooltip_text = "Add Fixtures"
 icon = ExtResource("14_kpcuh")
 
-[node name="Import" type="Button" parent="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer"]
+[node name="Import" type="Button" parent="PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer"]
 layout_mode = 2
 tooltip_text = "Import Selected Fixtures"
 disabled = true
 icon = ExtResource("15_gpywp")
 
-[node name="RemoveFixtures" type="Button" parent="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer"]
+[node name="RemoveFixtures" type="Button" parent="PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer"]
 layout_mode = 2
 tooltip_text = "Remove Selected Fixtures"
 disabled = true
 icon = ExtResource("16_5f2hc")
 
-[node name="AlignControls" type="PanelContainer" parent="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer"]
+[node name="AlignControls" type="PanelContainer" parent="PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer"]
 visible = false
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/AlignControls"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/AlignControls"]
 layout_mode = 2
 
-[node name="HorizontalAlign" type="Button" parent="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/AlignControls/HBoxContainer"]
+[node name="HorizontalAlign" type="Button" parent="PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/AlignControls/HBoxContainer"]
 layout_mode = 2
 tooltip_text = "Horizontal Align Selection"
 disabled = true
 icon = ExtResource("17_v186y")
 
-[node name="VerticalAlign" type="Button" parent="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/AlignControls/HBoxContainer"]
+[node name="VerticalAlign" type="Button" parent="PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/AlignControls/HBoxContainer"]
 layout_mode = 2
 tooltip_text = "Vertical Align Selection"
 disabled = true
 icon = ExtResource("18_7l1cq")
 
-[node name="GridAlign" type="Button" parent="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/AlignControls/HBoxContainer"]
+[node name="GridAlign" type="Button" parent="PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/AlignControls/HBoxContainer"]
 layout_mode = 2
 tooltip_text = "Grid Align Selection"
 disabled = true
 icon = ExtResource("19_exsht")
 
-[node name="EditControls" parent="TitleBar/HBoxContainer" index="2"]
+[node name="EditControls" parent="PanelMenuBar/HBoxContainer" index="2"]
 show_edit = true
 
 [node name="DummyScroll" type="ScrollContainer" parent="."]
@@ -322,20 +321,20 @@ update_on_text_changed = true
 
 [connection signal="gui_input" from="Table/RealScroll/ScrollSize/FixtureContainer" to="." method="_on_fixture_container_gui_input"]
 [connection signal="gui_input" from="Table/RealScroll/ScrollSize/FixtureContainer" to="Table/RealScroll/ScrollSize/FixtureContainer" method="_on_gui_input"]
-[connection signal="object_selected" from="TitleBar/HBoxContainer/ComponentButton" to="Table/RealScroll/ScrollSize/FixtureContainer" method="set_fixture_group"]
-[connection signal="pressed" from="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/Zoom Controls/HBoxContainer/ZoomIn" to="." method="_zoom_in"]
-[connection signal="pressed" from="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/Zoom Controls/HBoxContainer/ZoomOut" to="." method="_zoom_out"]
-[connection signal="pressed" from="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/Select Controls/HBoxContainer/SelectAll" to="Table/RealScroll/ScrollSize/FixtureContainer" method="_on_select_all_pressed"]
-[connection signal="pressed" from="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/Select Controls/HBoxContainer/DeSelectRandom" to="Table/RealScroll/ScrollSize/FixtureContainer" method="_on_de_select_random_pressed"]
-[connection signal="toggled" from="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/GridControls/HBoxContainer/ShowGrid" to="Table/RealScroll/ScrollSize/FixtureContainer" method="_on_show_grid_toggled"]
-[connection signal="value_changed" from="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/GridControls/HBoxContainer/GridSize" to="Table/RealScroll/ScrollSize/FixtureContainer" method="_on_grid_size_value_changed"]
-[connection signal="pressed" from="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer/AddFixtures" to="Table/RealScroll/ScrollSize/FixtureContainer" method="_on_add_fixtures_pressed"]
-[connection signal="pressed" from="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer/Import" to="Table/RealScroll/ScrollSize/FixtureContainer" method="_on_import_pressed"]
-[connection signal="pressed" from="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer/RemoveFixtures" to="Table/RealScroll/ScrollSize/FixtureContainer" method="_on_remove_fixtures_pressed"]
-[connection signal="pressed" from="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/AlignControls/HBoxContainer/HorizontalAlign" to="Table/RealScroll/ScrollSize/FixtureContainer" method="_on_horizontal_align_pressed"]
-[connection signal="pressed" from="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/AlignControls/HBoxContainer/VerticalAlign" to="Table/RealScroll/ScrollSize/FixtureContainer" method="_on_vertical_align_pressed"]
-[connection signal="pressed" from="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/AlignControls/HBoxContainer/GridAlign" to="." method="_on_grid_align_pressed"]
-[connection signal="pressed" from="TitleBar/HBoxContainer/ScrollContainer/HBoxContainer/AlignControls/HBoxContainer/GridAlign" to="Table/RealScroll/ScrollSize/FixtureContainer" method="_on_grid_align_pressed"]
+[connection signal="object_selected" from="PanelMenuBar/HBoxContainer/ComponentButton" to="Table/RealScroll/ScrollSize/FixtureContainer" method="set_fixture_group"]
+[connection signal="pressed" from="PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/Zoom Controls/HBoxContainer/ZoomIn" to="." method="_zoom_in"]
+[connection signal="pressed" from="PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/Zoom Controls/HBoxContainer/ZoomOut" to="." method="_zoom_out"]
+[connection signal="pressed" from="PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/Select Controls/HBoxContainer/SelectAll" to="Table/RealScroll/ScrollSize/FixtureContainer" method="_on_select_all_pressed"]
+[connection signal="pressed" from="PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/Select Controls/HBoxContainer/DeSelectRandom" to="Table/RealScroll/ScrollSize/FixtureContainer" method="_on_de_select_random_pressed"]
+[connection signal="toggled" from="PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/GridControls/HBoxContainer/ShowGrid" to="Table/RealScroll/ScrollSize/FixtureContainer" method="_on_show_grid_toggled"]
+[connection signal="value_changed" from="PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/GridControls/HBoxContainer/GridSize" to="Table/RealScroll/ScrollSize/FixtureContainer" method="_on_grid_size_value_changed"]
+[connection signal="pressed" from="PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer/AddFixtures" to="Table/RealScroll/ScrollSize/FixtureContainer" method="_on_add_fixtures_pressed"]
+[connection signal="pressed" from="PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer/Import" to="Table/RealScroll/ScrollSize/FixtureContainer" method="_on_import_pressed"]
+[connection signal="pressed" from="PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer/RemoveFixtures" to="Table/RealScroll/ScrollSize/FixtureContainer" method="_on_remove_fixtures_pressed"]
+[connection signal="pressed" from="PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/AlignControls/HBoxContainer/HorizontalAlign" to="Table/RealScroll/ScrollSize/FixtureContainer" method="_on_horizontal_align_pressed"]
+[connection signal="pressed" from="PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/AlignControls/HBoxContainer/VerticalAlign" to="Table/RealScroll/ScrollSize/FixtureContainer" method="_on_vertical_align_pressed"]
+[connection signal="pressed" from="PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/AlignControls/HBoxContainer/GridAlign" to="." method="_on_grid_align_pressed"]
+[connection signal="pressed" from="PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/AlignControls/HBoxContainer/GridAlign" to="Table/RealScroll/ScrollSize/FixtureContainer" method="_on_grid_align_pressed"]
 [connection signal="value_changed" from="GridAlignSize/VBoxContainer/GridWidth" to="Table/RealScroll/ScrollSize/FixtureContainer" method="_on_grid_width_value_changed"]
 
-[editable path="TitleBar"]
+[editable path="PanelMenuBar"]

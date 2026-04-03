@@ -69,6 +69,8 @@ func _init() -> void:
 
 ## ready
 func _ready() -> void:
+	super._ready()
+	
 	_settings.require("Table", table.get_settings())
 	table.set_column_freeze(2)
 	

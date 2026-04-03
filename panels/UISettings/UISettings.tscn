@@ -10,7 +10,7 @@
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_i7um0"]
 
-[node name="UISettings" type="PanelContainer" node_paths=PackedStringArray("_tab_button_container", "_interface_settings", "edit_controls", "menu_bar")]
+[node name="UISettings" type="PanelContainer" node_paths=PackedStringArray("_tab_button_container", "_interface_settings")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -22,13 +22,12 @@ theme_override_styles/panel = ExtResource("1_axtmf")
 script = ExtResource("2_axtmf")
 _tab_button_container = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer")
 _interface_settings = NodePath("VBoxContainer/HBoxContainer/InterfaceSettings")
-edit_controls = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/EditControls")
-menu_bar = NodePath("VBoxContainer/PanelMenuBar")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
 [node name="PanelMenuBar" parent="VBoxContainer" instance=ExtResource("3_axtmf")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="0"]

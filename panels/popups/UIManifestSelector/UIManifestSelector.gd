@@ -86,6 +86,8 @@ func _init() -> void:
 
 ## Ready
 func _ready() -> void:
+	super._ready()
+	
 	manifest_tree.set_column_expand(1, false)
 	manifest_tree.set_column_custom_minimum_width(1, column_min_size)
 	
@@ -104,7 +106,7 @@ func _ready() -> void:
 	_search_mode_search_active_tree = global_fixture_tree
 	fixture_tree_select_box.show()
 	
-	edit_controls.back_button.pressed.connect(go_back)
+	get_edit_controls().back_button.pressed.connect(go_back)
 	
 	FixtureLibrary.manifests_found.connect(_load_manifests)
 	_load_manifests()
@@ -118,7 +120,7 @@ func focus() -> void:
 ## Sets the search mode to SearchMode.SEARCH and displays all fixtuers and manufacturers
 func search_mode_default() -> void:
 	_search_mode = SearchMode.SEARCH
-	edit_controls.set_show_back(false)
+	get_edit_controls().set_show_back(false)
 	
 	search_bar.clear_all()
 	search_for("")
@@ -153,7 +155,7 @@ func search_mode_manufacturer(p_manufacturer: String) -> void:
 	search_bar.clear_all()
 	search_bar.create_tag("@" + p_manufacturer)
 	
-	edit_controls.set_show_back(true)
+	get_edit_controls().set_show_back(true)
 	search_for("")
 
 
@@ -184,7 +186,7 @@ func search_mode_mode_select(p_manufacturer: String, p_fixture: String) -> void:
 	search_bar.clear_all()
 	search_bar.create_tag("@" + p_manufacturer + "/" + p_fixture)
 	
-	edit_controls.set_show_back(true)
+	get_edit_controls().set_show_back(true)
 	search_for("")
 
 

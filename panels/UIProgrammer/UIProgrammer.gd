@@ -112,6 +112,8 @@ func _init() -> void:
 
 ## ready
 func _ready() -> void:
+	super._ready()
+	
 	Values.connect_to_selection_value("selected_fixtures", _on_selected_fixtures_changed)
 	Programmer.cleared.connect(_clear_overrides)
 

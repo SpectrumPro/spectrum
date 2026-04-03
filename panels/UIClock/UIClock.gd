@@ -99,6 +99,8 @@ func _init() -> void:
 
 ## ready
 func _ready() -> void:
+	super._ready()
+	
 	label.label_settings = label.label_settings.duplicate()
 	
 	await get_tree().process_frame

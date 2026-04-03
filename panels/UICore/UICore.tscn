@@ -70,7 +70,7 @@ font_color = Color(0.789062, 0.789062, 0.789062, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bphhv"]
 bg_color = Color(0.09, 0.09, 0.09, 1)
 
-[node name="UICore" type="PanelContainer" node_paths=PackedStringArray("_side_bar", "_startup_bg", "_notice_container", "edit_controls", "menu_bar")]
+[node name="UICore" type="PanelContainer" node_paths=PackedStringArray("_side_bar", "_startup_bg", "_notice_container")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -81,14 +81,13 @@ script = ExtResource("1_febpr")
 _side_bar = NodePath("VBoxContainer/HBoxContainer/UICorePrimarySideBar")
 _startup_bg = NodePath("StartupBG")
 _notice_container = NodePath("NoticeContainer")
-edit_controls = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/EditControls")
-menu_bar = NodePath("VBoxContainer/PanelMenuBar")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="PanelMenuBar" parent="VBoxContainer" instance=ExtResource("2_dciud")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="0"]

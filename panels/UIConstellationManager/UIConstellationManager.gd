@@ -49,6 +49,8 @@ func _init() -> void:
 
 ## Ready
 func _ready() -> void:
+	super._ready()
+	
 	_constellation = Network.get_active_handler_by_name("Constellation")
 	_constellation_signals.connect_object(_constellation)
 	

@@ -11,7 +11,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gywq0"]
 
-[node name="Functions" type="PanelContainer" node_paths=PackedStringArray("edit_controls", "menu_bar")]
+[node name="Functions" type="PanelContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -19,13 +19,12 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("1_5m0mk")
 script = ExtResource("2_npe7k")
-edit_controls = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/EditControls")
-menu_bar = NodePath("VBoxContainer/PanelMenuBar")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
 [node name="PanelMenuBar" parent="VBoxContainer" instance=ExtResource("3_p7i0o")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="0"]
@@ -56,17 +55,9 @@ layout_mode = 2
 text = "Duplicate"
 icon = ExtResource("4_0odo6")
 
-[node name="ComponentManagerView" parent="VBoxContainer" node_paths=PackedStringArray("new_button", "delete_button", "duplicate_button") instance=ExtResource("8_f8x5k")]
+[node name="ComponentManagerView" parent="VBoxContainer" instance=ExtResource("8_f8x5k")]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_gywq0")
-classname = "Function"
-table_column_names = Array[String](["name"])
-new_button = NodePath("../PanelMenuBar/HBoxContainer/ScrollContainer/PanelContainer/HBoxContainer/NewComponent")
-delete_button = NodePath("../PanelMenuBar/HBoxContainer/ScrollContainer/PanelContainer/HBoxContainer/DeleteComponent")
-duplicate_button = NodePath("../PanelMenuBar/HBoxContainer/ScrollContainer/PanelContainer/HBoxContainer/DuplicateComponent")
-
-[node name="PanelContainer" parent="VBoxContainer/ComponentManagerView/VBoxContainer" index="1"]
-visible = false
 
 [editable path="VBoxContainer/PanelMenuBar"]
 [editable path="VBoxContainer/ComponentManagerView"]

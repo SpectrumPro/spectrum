@@ -61,6 +61,8 @@ func _init() -> void:
 
 ## Ready
 func _ready() -> void:
+	super._ready()
+	
 	_settings_panel.visibility_changed.connect(func (): all_settings_button.set_pressed_no_signal(_settings_panel.visible))
 	_window_manager_panel.visibility_changed.connect(func (): window_manager_button.set_pressed_no_signal(_window_manager_panel.visible))
 	_save_load_panel.visibility_changed.connect(func (): save_load_button.set_pressed_no_signal(_save_load_panel.visible))
