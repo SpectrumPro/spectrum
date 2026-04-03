@@ -32,6 +32,7 @@ driver/enable_input=true
 
 [autoload]
 
+Data="*res://modules/Utils/global/Data.gd"
 Log="*res://modules/Utils/global/Logger.gd"
 ClassList="*res://core/global/ClassList.gd"
 NetworkClassList="*res://modules/NetworkManager/global/NetworkClassList.gd"

@@ -23,6 +23,11 @@ static var config: Dictionary[String, Variant] = {
 }
 
 
+## static init
+func _init() -> void: 
+	add_gbc_configs.call_deferred()
+
+
 ## Converts a custom data type to a string, with a human readable name
 @warning_ignore("unused_parameter")
 static func custom_type_to_string(p_variant: Variant, p_orignal_type: Data.Type) -> Variant:
@@ -60,4 +65,42 @@ static func get_object_db(p_object: Object) -> ObjectDB:
 			return NetworkDB
 		_:
 			return null
+
+
+## Adds all the GBC index configs to Data
+static func add_gbc_configs() -> void:
+	var indexes: Array[GBCIndexConfig] = [
+		GBCIndexConfig.new(EngineComponent, ComponentDB, ClassList, ChildManager.new(
+			Core, 
+			Core.create_component,
+			Core.add_component,
+			Core.add_components,
+			Core.remove_component,
+			Core.remove_components,
+			Core.duplicate_component,
+			Callable(), ## TODO add CoreEngine.duplicate_components() method
+			ComponentDB.get_components,
+			ComponentDB.components_added,
+			ComponentDB.components_removed,
+			EngineComponent,
+			EngineComponent, 
+		)),
+		GBCIndexConfig.new(NetworkItem, NetworkDB, NetworkClassList, ChildManager.new(
+			NetworkManager,
+			Callable(),
+			Callable(),
+			Callable(),
+			Callable(),
+			Callable(),
+			Callable(),
+			Callable(),
+			NetworkDB.get_components,
+			NetworkDB.component_added,
+			NetworkDB.component_removed,
+			NetworkItem,
+			NetworkItem
+		))
+	]
 	
+	for index: GBCIndexConfig in indexes:
+		Data.add_gbc_index(index)
