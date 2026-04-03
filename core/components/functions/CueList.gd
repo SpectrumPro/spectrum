@@ -100,6 +100,22 @@ func _init(p_uuid: String = UUID.v4(), p_name: String = _name) -> void:
 	})
 	
 	_settings.set_callback_allow_deserialize("on_cues_added")
+	
+	_settings.add_child_manager("Cues", ChildManager.new(
+		self,
+		create_cue,
+		add_cue,
+		Callable(),
+		remove_cue,
+		Callable(),
+		Callable(),
+		Callable(),
+		get_cues,
+		cues_added,
+		cues_removed,
+		EngineComponent,
+		Cue
+	))
 
 
 ## Creates a new cue

@@ -36,8 +36,6 @@ func _init(p_uuid: String = UUID.v4(), p_name: String = _name) -> void:
 	_set_name("Universe")
 	_set_class_name("Universe")
 	
-	_settings.register_custom_panel("outputs", preload("res://components/SettingsManagerCustomPanels/UniverseOutputEditor.tscn"), "set_universe")
-	
 	_settings.register_networked_callbacks({
 		"on_fixtures_added": _add_fixtures,
 		"on_fixtures_removed": _remove_fixtures,
@@ -47,6 +45,38 @@ func _init(p_uuid: String = UUID.v4(), p_name: String = _name) -> void:
 	
 	_settings.set_callback_allow_deserialize("on_outputs_added")
 	_settings.set_callback_allow_deserialize("on_fixtures_added")
+	
+	_settings.add_child_manager("Outputs", ChildManager.new(
+		self,
+		create_output,
+		add_output,
+		add_outputs,
+		remove_output,
+		remove_outputs,
+		Callable(),
+		Callable(),
+		get_outputs,
+		outputs_added,
+		outputs_removed,
+		EngineComponent,
+		DMXOutput
+	))
+	
+	_settings.add_child_manager("Fixtures", ChildManager.new(
+		self,
+		Callable(),
+		add_fixture,
+		add_fixtures,
+		remove_fixture,
+		remove_fixtures,
+		Callable(),
+		Callable(),
+		get_fixtures,
+		fixtures_added,
+		fixtures_removed,
+		EngineComponent,
+		DMXFixture,
+	))
 
 
 ## Creates a new output by class name
@@ -103,13 +133,13 @@ func get_fixture_by_channel(p_channel: int) -> Array[DMXFixture]:
 
 
 ## Gets all the outputs in this universe
-func get_outputs() -> Dictionary:
-	return _outputs.duplicate()
+func get_outputs() -> Array:
+	return _outputs.values()
 
 
 ## Gets all the fixtures in this universe
-func get_fixtures() -> Dictionary:
-	return _fixtures.duplicate()
+func get_fixtures() -> Array:
+	return _fixtures.values()
 
 
 ## Sets a manual dmx channel to the set value
