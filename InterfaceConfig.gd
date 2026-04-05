@@ -5,7 +5,6 @@ static var config: Dictionary[String, Variant] = {
 	"window_popup_config": {
 		UIMainMenu:				CoreInterface.PopupConfig.new("UIMainMenu", ""),
 		UIManifestSelector:		CoreInterface.PopupConfig.new("UIManifestSelector"),
-		UIComponentSettings:	CoreInterface.PopupConfig.new("UIComponentSettings", "set_component"),
 		UIParameterList:		CoreInterface.PopupConfig.new("UIParameterList", "set_fixtures"),
 		UISaveLoad:				CoreInterface.PopupConfig.new("UISaveLoad", ""),
 		UISettings:				CoreInterface.PopupConfig.new("UISettings", ""),
