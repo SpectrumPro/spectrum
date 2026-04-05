@@ -26,10 +26,6 @@ static var config: Dictionary[String, Variant] = {
 		.set_link_url("https://github.com/SpectrumPro/Spectrum/issues")
 		.set_notice_id("BETANOTICEV1.0.0-beta.3")
 	],
-	"object_picker_default_items": {
-		EngineComponent: ClassTreeConfig.new(EngineComponent, ComponentDB, ClassList),
-		NetworkItem: ClassTreeConfig.new(NetworkItem, NetworkDB, NetworkClassList),
-	},
 	"command_palette_default_items": [
 		CommandPaletteEntry.new(
 			Network.get_settings(), 
