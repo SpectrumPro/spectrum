@@ -30,18 +30,8 @@ static var config: Dictionary[String, Variant] = {
 	"object_picker_default_items": {
 		EngineComponent: ClassTreeConfig.new(EngineComponent, ComponentDB, ClassList),
 		NetworkItem: ClassTreeConfig.new(NetworkItem, NetworkDB, NetworkClassList),
-	}
-}
-
-## static init
-static func _static_init() -> void:
-	load_command_palette_entrys.call_deferred()
-
-
-## Loads all the CommandPaletteEntrys
-static func load_command_palette_entrys() -> void:
-	## All CommandPaletteEntry to be added
-	var command_palette_entrys: Array[CommandPaletteEntry] = [
+	},
+	"command_palette_default_items": [
 		CommandPaletteEntry.new(
 			Network.get_settings(), 
 			"Network"
@@ -59,7 +49,4 @@ static func load_command_palette_entrys() -> void:
 			"Constellation"
 		),
 	]
-	
-	for entry: CommandPaletteEntry in command_palette_entrys:
-		Interface.add_command_palette_entry(entry)
-	
+}
