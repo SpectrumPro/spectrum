@@ -53,7 +53,7 @@ func _init() -> void:
 ## Sets mode to Mode.GBCIndex
 func mode_gbc_index(p_index_class: String, p_class_filter: String = "") -> void:
 	reset()
-	_mode = Mode.CHILDMANAGER
+	_mode = Mode.GBCINDEX
 	
 	if not Data.has_gbc_config(p_index_class):
 		return
