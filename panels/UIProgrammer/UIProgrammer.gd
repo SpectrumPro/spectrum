@@ -551,7 +551,7 @@ func _on_store_pressed() -> void:
 			if not is_instance_valid(p_component) or not p_component is Cue:
 				return
 
-			Popups.show_settings_module(self, p_component.get_settings().get_entry("name"))
+			Popups.USettingsModule(self, p_component.get_settings().get_entry("name"))
 		)
 	)
 

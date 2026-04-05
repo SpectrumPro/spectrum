@@ -73,7 +73,7 @@ func ParameterList_function(p_source: Node, p_fixtures: Array[Fixture], p_zone: 
 func create_component_then_rename(p_source: Node) -> Promise:
 	return ObjectSelector_class(p_source, EngineComponent, "EngineComponent").then(func (p_classname: String):
 		Core.create_component(p_classname).then(func (p_component: EngineComponent):
-			show_settings_module(p_source, p_component.get_settings().get_entry("name"))
+			USettingsModule(p_source, p_component.get_settings().get_entry("name"))
 		)
 	)
 
@@ -81,5 +81,5 @@ func create_component_then_rename(p_source: Node) -> Promise:
 ## Prompts the user with UIObjectPicker to search for a component to view settings for
 func search_component_then_settings(p_source: Node) -> Promise:
 	return ObjectSelector(p_source, EngineComponent, EngineComponent).then(func (p_component: EngineComponent):
-		ComponentSettings(p_source, p_component)
+		USettingsManager(p_source, p_component.get_settings())
 	)

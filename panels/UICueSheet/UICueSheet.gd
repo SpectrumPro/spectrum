@@ -202,7 +202,7 @@ func _on_add_cue_pressed() -> void:
 		if not is_instance_valid(p_cue):
 			return
 		
-		Popups.show_settings_module(self, p_cue.get_settings().get_entry("name"))
+		Popups.USettingsModule(self, p_cue.get_settings().get_entry("name"))
 	)
 
 
