@@ -151,15 +151,15 @@ grid_size = Vector2(80, 80)
 line_width = 2.28
 grid_mode = 1
 
-[node name="SelectBox" parent="VBoxContainer/PanelContainer2/Container" instance=ExtResource("15_u3w1e")]
+[node name="SelectBox" parent="VBoxContainer/PanelContainer2/Container" node_paths=PackedStringArray("event_control") instance=ExtResource("15_u3w1e")]
 visible = false
 layout_mode = 1
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
+event_control = NodePath("..")
 
 [node name="AeraIndicator" type="Panel" parent="VBoxContainer/PanelContainer2/Container"]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -186,5 +186,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_u3w1e")
 [connection signal="mouse_entered" from="VBoxContainer/PanelContainer2/Container" to="." method="_on_container_mouse_entered"]
 [connection signal="mouse_exited" from="VBoxContainer/PanelContainer2/Container" to="." method="_on_container_mouse_exited"]
 [connection signal="resized" from="VBoxContainer/PanelContainer2/Container" to="." method="_on_container_resized"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer2/Container/SelectBox" to="." method="_on_select_box_pressed"]
+[connection signal="released" from="VBoxContainer/PanelContainer2/Container/SelectBox" to="." method="_on_select_box_released"]
 
 [editable path="VBoxContainer/PanelMenuBar"]
