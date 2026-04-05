@@ -164,7 +164,7 @@ func _add_output(p_output: DMXOutput, p_no_signal: bool = false) -> bool:
 	
 	_outputs[p_output.get_uuid()] = p_output
 	
-	p_output.delete_requested.connect(_remove_output.bind(p_output), CONNECT_ONE_SHOT)
+	p_output.delete_requested.connect(_remove_output)
 	ComponentDB.register_component(p_output)
 	
 	if not p_no_signal:
@@ -192,7 +192,8 @@ func _remove_output(p_output: DMXOutput, p_no_signal: bool = false, p_delete: bo
 		return false
 	
 	_outputs.erase(p_output.uuid)
-
+	p_output.delete_requested.disconnect(_remove_output)
+	
 	if not p_no_signal:
 		outputs_removed.emit([p_output])
 	
@@ -230,7 +231,7 @@ func _add_fixture(p_fixture: DMXFixture, p_channel: int = -1, p_no_signal: bool 
 	_fixture_channels[fixture_channel].append(p_fixture)
 	_fixtures[p_fixture.get_uuid()] = p_fixture
 
-	p_fixture.delete_requested.connect(_remove_fixture.bind(p_fixture), CONNECT_ONE_SHOT)
+	p_fixture.delete_requested.connect(_remove_fixture)
 
 	if not p_no_signal:
 		fixtures_added.emit([p_fixture])
@@ -257,6 +258,7 @@ func _remove_fixture(p_fixture: DMXFixture, p_no_signal: bool = false, p_delete:
 		return false
 	
 	_fixtures.erase(p_fixture.get_uuid())
+	p_fixture.delete_requested.disconnect(_remove_fixture)
 	
 	if _fixture_channels.has(p_fixture.get_channel()):
 		_fixture_channels[p_fixture.get_channel()].erase(p_fixture)

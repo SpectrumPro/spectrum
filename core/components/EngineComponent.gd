@@ -19,7 +19,7 @@ signal name_changed(new_name: String)
 signal cid_changed(cid: int)
 
 ## Emited when this object is about to be deleted
-signal delete_requested()
+signal delete_requested(from: Object)
 
 
 ## The name of this object
@@ -175,7 +175,7 @@ func delete_rpc() -> void:
 
 ## Deletes this component localy, with out contacting the server. Usefull when handling server side delete requests
 func delete() -> void:
-	delete_requested.emit()
+	delete_requested.emit(self)
 	print(_uuid, " Has had a delete request send. Currently has:", str(get_reference_count()), " refernces")
 
 

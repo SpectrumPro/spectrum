@@ -274,7 +274,7 @@ func _add_cue(p_cue: Cue, p_no_signal: bool = false) -> bool:
 		return false
 	
 	_cues.append(p_cue)
-	p_cue.delete_requested.connect(_remove_cue.bind(p_cue))
+	p_cue.delete_requested.connect(_remove_cue)
 	ComponentDB.register_component(p_cue)
 	
 	p_cue._set_cue_list(self)
@@ -304,6 +304,8 @@ func _remove_cue(p_cue: Cue, p_no_signal: bool = false) -> bool:
 		return false
 	 
 	_cues.erase(p_cue)
+	p_cue.delete_requested.disconnect(_remove_cue)
+	
 	Network.deregister_network_object(p_cue.get_settings())
 
 	if not p_no_signal:

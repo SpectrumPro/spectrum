@@ -178,7 +178,7 @@ func _store_item(p_item: ContainerItem, no_signal: bool = false) -> bool:
 	_fixtures.get_or_add(p_item.get_fixture(), {}).get_or_add(p_item.get_zone(), {})[p_item.get_parameter()] = p_item
 
 	ComponentDB.register_component(p_item)
-	p_item.delete_requested.connect(_erase_item.bind(p_item))
+	p_item.delete_requested.connect(_erase_item)
 
 	if not no_signal:
 		items_stored.emit([p_item])
@@ -205,6 +205,7 @@ func _erase_item(p_item: ContainerItem, no_signal: bool = false) -> bool:
 		return false
 	
 	_items.erase(p_item)
+	p_item.delete_requested.disconnect(_erase_item)
 	_fixtures[p_item.get_fixture()][p_item.get_zone()].erase(p_item.get_parameter())
 	
 	if not _fixtures[p_item.get_fixture()][p_item.get_zone()]:

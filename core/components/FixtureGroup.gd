@@ -139,7 +139,7 @@ func _add_group_item(group_item: FixtureGroupItem, no_signal: bool = false) -> b
 	
 	_fixtures[group_item.get_fixture()] = group_item
 	
-	group_item.get_fixture().delete_requested.connect(_remove_fixture.bind(group_item.get_fixture()), CONNECT_ONE_SHOT)
+	group_item.get_fixture().delete_requested.connect(_remove_fixture)
 	ComponentDB.register_component(group_item)
 	
 	if not no_signal:
@@ -167,6 +167,8 @@ func _remove_fixture(fixture: Fixture, no_signal: bool = false) -> bool:
 	
 	_fixtures[fixture].delete()
 	_fixtures.erase(fixture)
+	
+	fixture.delete_requested.disconnect(_remove_fixture)
 	
 	if not no_signal:
 		fixtures_removed.emit([fixture])

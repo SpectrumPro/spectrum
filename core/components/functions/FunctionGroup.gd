@@ -87,7 +87,7 @@ func _add_function(p_function: Function, no_signal: bool = false) -> bool:
 	if p_function and p_function in _functions and p_function != self:
 		return false
 	
-	p_function.delete_requested.connect(_remove_function.bind(p_function))
+	p_function.delete_requested.connect(_remove_function)
 	_functions.append(p_function)
 
 	if not no_signal:
@@ -115,7 +115,7 @@ func _remove_function(p_function: Function, no_signal: bool = false) -> bool:
 		return false
 
 	_functions.erase(p_function)
-
+	p_function.delete_requested.disconnect(_remove_function)
 	if not no_signal:
 		functions_removed.emit([p_function])
 
