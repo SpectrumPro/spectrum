@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dqr6mygroiluf" path="res://modules/Vertex/assets/icons/NewPanel.svg" id="6_610ut"]
 [ext_resource type="Texture2D" uid="uid://dfrrs2dnvlvsu" path="res://modules/Vertex/assets/icons/Delete.svg" id="7_0856o"]
 [ext_resource type="Texture2D" uid="uid://cuvwwbojtcpg6" path="res://modules/Vertex/assets/icons/Duplicate.svg" id="8_vjvpo"]
-[ext_resource type="PackedScene" uid="uid://7prnynnrdn4n" path="res://components/ComponentManagerView/ComponentManagerView.tscn" id="9_1kh4h"]
+[ext_resource type="PackedScene" uid="uid://7prnynnrdn4n" path="res://modules/Vertex/components/ComponentManagerView/ComponentManagerView.tscn" id="9_1kh4h"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7ac3b"]
 
