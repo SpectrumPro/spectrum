@@ -34,8 +34,8 @@ var _force_defaults: Array[String]
 
 
 ## init
-func _init(p_uuid: String = UUID.v4(), p_name: String = _name) -> void:
-	super._init(p_uuid, p_name)
+func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
+	super._init(p_uuid, p_args)
 	
 	_set_class_name("FixtureManifest")
 	_set_name("FixtureManifest")

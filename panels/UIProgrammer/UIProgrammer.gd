@@ -103,8 +103,8 @@ var _fixtures: Array
 
 
 ## init
-func _init() -> void:
-	super._init()
+func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
+	super._init(p_uuid, p_args)
 	_set_class_name("UIProgrammer")
 
 	_settings.register_setting("ControlersPerPage", Data.Type.INT, set_controlers_per_page, get_controlers_per_page, [controlers_per_page_changed]).set_min_max(1, 10)

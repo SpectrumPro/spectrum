@@ -61,10 +61,9 @@ var _aera_indicator_target: Rect2 = Rect2()
 var _used_mouse_select: bool = false
 
 
-## Init
-func _init() -> void:
-	super._init()
-	
+## init
+func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
+	super._init(p_uuid, p_args)
 	_set_class_name("UIDesk")
 	
 	_settings.register_setting("GridSize", Data.Type.ENUM, set_grid_size, get_grid_size, [grid_size_changed]).set_enum_dict(GridSize)

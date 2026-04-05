@@ -42,9 +42,8 @@ var _show_panel_border: bool = true
 
 
 ## init
-func _init() -> void:
-	super._init()
-	
+func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
+	super._init(p_uuid, p_args)
 	_set_class_name("UIColorBlock")
 	
 	_settings.register_setting("Color", Data.Type.COLOR, set_color, get_color, [color_changed])

@@ -44,10 +44,9 @@ var _cid: int = -1
 var _settings: SettingsManager = SettingsManager.new()
 
 
-## Init
-func _init(p_uuid: String = UUID.v4(), p_name: String = _name) -> void:
+## init
+func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
 	_uuid = p_uuid
-	_name = p_name
 	
 	_settings.set_owner(self)
 	_settings.set_inheritance_array(_class_tree)

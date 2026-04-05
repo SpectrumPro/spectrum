@@ -21,8 +21,8 @@ var _position: Vector3 = Vector3.ZERO
 
 
 ## init
-func _init(p_uuid: String = UUID.v4(), p_name: String = _name) -> void:
-	super._init(p_uuid, p_name)
+func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
+	super._init(p_uuid, p_args)
 	
 	_set_name("FixtureGroupItem")
 	_set_class_name("FixtureGroupItem")

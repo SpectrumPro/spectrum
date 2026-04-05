@@ -20,9 +20,9 @@ var _fade_in_speed: float = 2
 var _fade_out_speed: float = 2
 
 
-## Called when this EngineComponent is ready
-func _init(p_uuid: String = UUID.v4(), p_name: String = _name) -> void:
-	super._init(p_uuid, p_name)
+## init
+func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
+	super._init(p_uuid, p_args)
 	
 	_set_name("Scene")
 	_set_class_name("Scene")

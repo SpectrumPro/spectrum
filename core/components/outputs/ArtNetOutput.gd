@@ -29,9 +29,9 @@ var _use_broadcast: bool = false
 var _universe_number: int = 0
 
 
-## Called when this object is first created
-func _init(p_uuid: String = UUID.v4(), p_name: String = _name) -> void:
-	super._init(p_uuid, p_name)
+## init
+func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
+	super._init(p_uuid, p_args)
 	
 	_set_name("ArtNetOutput")
 	_set_class_name("ArtNetOutput")

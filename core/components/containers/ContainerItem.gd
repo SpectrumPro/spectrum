@@ -34,9 +34,9 @@ var _stop: float = 1.0
 var _attribute_id: String = ""
 
 
-## Ready function
-func _init(p_uuid: String = UUID.v4(), p_name: String = _name) -> void:
-	super._init(p_uuid, p_name)
+## init
+func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
+	super._init(p_uuid, p_args)
 	
 	_set_name("ContainerItem")
 	_set_class_name("ContainerItem")

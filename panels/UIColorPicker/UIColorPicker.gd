@@ -46,8 +46,8 @@ var _show_value_slider: bool = true
 
 
 ## init
-func _init() -> void:
-	super._init()
+func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
+	super._init(p_uuid, p_args)
 	
 	_set_class_name("UIColorPicker")
 	_settings.register_setting("ShowValueSlider", Data.Type.BOOL, set_show_value_slider, get_show_value_slider, [show_value_slider_changed])

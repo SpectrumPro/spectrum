@@ -29,9 +29,9 @@ var _fixtures: Dictionary[String, DMXFixture] = {}
 var _outputs: Dictionary[String, DMXOutput] = {} 
 
 
-## Called when this EngineComponent is ready
-func _init(p_uuid: String = UUID.v4(), p_name: String = _name) -> void:
-	super._init(p_uuid, p_name)
+## init
+func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
+	super._init(p_uuid, p_args)
 	
 	_set_name("Universe")
 	_set_class_name("Universe")

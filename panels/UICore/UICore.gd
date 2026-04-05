@@ -20,10 +20,9 @@ class_name UICore extends UIPanel
 var _notices: RefMap = RefMap.new()
 
 
-## Init
-func _init() -> void:
-	super._init()
-	
+## init
+func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
+	super._init(p_uuid, p_args)
 	_set_class_name("UICore")
 
 

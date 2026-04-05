@@ -80,9 +80,8 @@ var _font_color: Color = Color.WHITE
 
 
 ## init
-func _init() -> void:
-	super._init()
-	
+func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
+	super._init(p_uuid, p_args)
 	_set_class_name("UIClock")
 	
 	_settings.register_setting("ShowYear", Data.Type.BOOL, set_show_year, get_show_year, [show_year_changed])
