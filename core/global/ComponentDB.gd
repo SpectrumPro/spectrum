@@ -8,12 +8,14 @@ class_name EngineComponentDB extends ObjectDB
 
 ## init
 func _init() -> void:
-	component_added.connect(func (p_component: EngineComponent):
-		Network.register_network_object(p_component.get_uuid(), p_component.get_settings())
+	components_added.connect(func (p_components: Array):
+		for component: EngineComponent in p_components:
+			Network.register_network_object(component.get_uuid(), component.get_settings())
 	)
 	
-	component_removed.connect(func (p_component: EngineComponent):
-		Network.deregister_network_object(p_component.get_settings())
+	components_removed.connect(func (p_components: Array):
+		for component: EngineComponent in p_components:
+			Network.deregister_network_object(component.get_settings())
 	)
 
 

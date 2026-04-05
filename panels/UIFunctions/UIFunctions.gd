@@ -3,11 +3,24 @@
 # See the LICENSE file for details.
 
 class_name UIFunctions extends UIPanel
-## UI panel for managing functions
+## GUI element for managing Functions
 
 
-## Init
-func _init() -> void:
-	super._init()
-	
+## The ComponentManagerView
+@onready var _component_manager: ComponentManagerView = %ComponentManagerView
+
+
+## init
+func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
+	super._init(p_uuid, p_args)
 	_set_class_name("UIFunctions")
+
+
+## ready
+func _ready() -> void:
+	super._ready()
+	
+	_component_manager.set_new_button(%NewComponent)
+	_component_manager.set_delete_button(%DeleteComponent)
+	_component_manager.set_duplicate_button(%DuplicateComponent)
+	_component_manager.mode_gbc_index("EngineComponent", "Function")

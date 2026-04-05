@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ds42t8h4nusm4"]
+[gd_scene load_steps=17 format=3 uid="uid://ds42t8h4nusm4"]
 
 [ext_resource type="PackedScene" uid="uid://bojo5mnmadf4j" path="res://modules/Vertex/panels/popups/UIPanelSelector/UIPanelSelector.tscn" id="1_e0vty"]
 [ext_resource type="PackedScene" uid="uid://cgkb6rh0joakn" path="res://modules/Vertex/panels/UIPanelSettings/UIPanelSettings.tscn" id="2_m68sf"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://b4sabjg5utge2" path="res://panels/UIComponentSettings/UIComponentSettings.tscn" id="13_7kxgq"]
 [ext_resource type="PackedScene" uid="uid://w4jjpcc5ej1o" path="res://panels/popups/UIParameterList/UIParameterList.tscn" id="14_rie3b"]
 [ext_resource type="PackedScene" uid="uid://g5qrmeqkxr26" path="res://modules/Vertex/panels/UISettingsManager/UISettingsManager.tscn" id="15_mx2hk"]
+[ext_resource type="PackedScene" uid="uid://cth1gcyw48lub" path="res://modules/Vertex/panels/UIChildManager/UIChildManager.tscn" id="16_cxd05"]
 
 [node name="WindowPopups" type="Control"]
 layout_mode = 3
@@ -231,4 +232,18 @@ offset_left = -342.0
 offset_top = -200.0
 offset_right = 342.0
 offset_bottom = 200.0
+display_mode = 1
+
+[node name="UIChildManager" parent="." instance=ExtResource("16_cxd05")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -583.0
+offset_top = -331.0
+offset_right = 583.0
+offset_bottom = 331.0
 display_mode = 1
