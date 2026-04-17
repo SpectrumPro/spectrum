@@ -194,12 +194,40 @@ func _on_prompt_parameter_list_function_pressed() -> void:
 
 
 func _on_object_picker_pressed() -> void:
-	Popups.ObjectSelector(self, EngineComponent, "").then(func (p_object: Object):
+	Popups.ObjectSelector_gbc_index(self).then(func (p_gbc_index: GBCIndexConfig):
+		if not is_instance_valid(p_gbc_index):
+			return
+		
+		Popups.ObjectSelector(self, p_gbc_index.get_base_class(), "").then(func (p_object: Object):
+			set_output(p_object)
+		)
+	)
+
+
+func _on_object_selector_gbc_index_pressed() -> void:
+	Popups.ObjectSelector_gbc_index(self).then(func (p_gbc_index: GBCIndexConfig):
+		set_output(p_gbc_index)
+	)
+
+
+func _on_object_selector_gbc_object_pressed() -> void:
+	Popups.ObjectSelector_gbc_object(self).then(func (p_object: Object):
 		set_output(p_object)
 	)
 
 
+func _on_object_selector_gbc_class_pressed() -> void:
+	Popups.ObjectSelector_gbc_class(self).then(func (p_class: String):
+		set_output(p_class)
+	)
+
+
 func _on_object_picker_class_pressed() -> void:
-	Popups.ObjectSelector_class(self, EngineComponent, "").then(func (p_object: Object):
-		set_output(p_object)
+	Popups.ObjectSelector_gbc_index(self).then(func (p_gbc_index: Variant):
+		if not is_instance_valid(p_gbc_index):
+			return
+		
+		Popups.ObjectSelector_class(self, p_gbc_index.get_base_class(), "").then(func (p_class: String):
+			set_output(p_class)
+		)
 	)

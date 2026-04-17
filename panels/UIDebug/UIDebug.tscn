@@ -170,6 +170,18 @@ text = "Prompt Parameter List Function"
 layout_mode = 2
 text = "Prompt ObjectPicker"
 
+[node name="ObjectSelector_gbc_index" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+text = "Prompt ObjectPicker_gbc_index"
+
+[node name="ObjectSelector_gbc_object" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+text = "Prompt ObjectPicker_gbc_object"
+
+[node name="ObjectSelector_gbc_class" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+text = "Prompt ObjectPicker_gbc_class"
+
 [node name="ObjectSelector_class" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer"]
 layout_mode = 2
 text = "Prompt ObjectPicker_class"
@@ -279,6 +291,9 @@ text = "Send"
 [connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer/PromptParameterListParameter" to="." method="_on_prompt_parameter_list_parameter_pressed"]
 [connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer/PromptParameterListFunction" to="." method="_on_prompt_parameter_list_function_pressed"]
 [connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer/ObjectSelector" to="." method="_on_object_picker_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer/ObjectSelector_gbc_index" to="." method="_on_object_selector_gbc_index_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer/ObjectSelector_gbc_object" to="." method="_on_object_selector_gbc_object_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer/ObjectSelector_gbc_class" to="." method="_on_object_selector_gbc_class_pressed"]
 [connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer/ObjectSelector_class" to="." method="_on_object_picker_class_pressed"]
 [connection signal="pressed" from="VBoxContainer/PanelContainer2/ScrollContainer/HBoxContainer/SendMessage" to="." method="_on_send_message_to_server_pressed"]
 
