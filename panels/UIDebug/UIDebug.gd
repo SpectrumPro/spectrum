@@ -146,48 +146,60 @@ func _on_list_functions_pressed() -> void:
 				#func (result: Variant = null):
 					#set_output(result)
 			#)
-#
-#
-### Called when the prompt parameter list button is pressed
-#func _on_prompt_parameter_list_pressed() -> void:
-	#Interface.prompt_object_picker(self, EngineComponent, Fixture).then(func (p_fixture: Fixture):
-		#Interface.prompt_parameter_list_combined(self, [p_fixture]).then(func (p_zone: String, p_parameter: String, p_function: String):
-			#set_output([p_zone, p_parameter, p_function])
-		#)
-	#)
-#
-#
-#func _on_prompt_parameter_list_zone_pressed() -> void:
-	#Interface.prompt_object_picker(self, EngineComponent, Fixture).then(func (p_fixture: Fixture):
-		#Interface.prompt_parameter_list_zone(self, [p_fixture]).then(func (p_zone: String):
-			#set_output(p_zone)
-		#)
-	#)
-#
-#
-#func _on_prompt_parameter_list_zone_parameter_pressed() -> void:
-	#Interface.prompt_object_picker(self, EngineComponent, Fixture).then(func (p_fixture: Fixture):
-		#Interface.prompt_parameter_list_zone_parameter(self, [p_fixture]).then(func (p_zone: String, p_parameter: String):
-			#set_output([p_zone, p_parameter])
-		#)
-	#)
-#
-#
-#func _on_prompt_parameter_list_parameter_pressed() -> void:
-	#Interface.prompt_object_picker(self, EngineComponent, Fixture).then(func (p_fixture: Fixture):
-		#Interface.prompt_parameter_list_zone(self, [p_fixture]).then(func (p_zone: String):
-			#Interface.prompt_parameter_list_parameter(self, [p_fixture], p_zone).then(func (p_parameter: String):
-				#set_output(p_parameter)
-			#)
-		#)
-	#)
-#
-#
-#func _on_prompt_parameter_list_function_pressed() -> void:
-	#Interface.prompt_object_picker(self, EngineComponent, Fixture).then(func (p_fixture: Fixture):
-		#Interface.prompt_parameter_list_zone_parameter(self, [p_fixture]).then(func (p_zone: String, p_parameter: String):
-			#Interface.prompt_parameter_list_function(self, [p_fixture], p_zone, p_parameter).then(func (p_function: String):
-				#set_output(p_function)
-			#)
-		#)
-	#)
+
+
+## Called when the prompt parameter list button is pressed
+func _on_prompt_parameter_list_pressed() -> void:
+	Popups.ObjectSelector(self, EngineComponent, Fixture).then(func (p_fixture: Fixture):
+		Popups.ParameterList(self, [p_fixture]).then(func (p_zone: String, p_parameter: String, p_function: String):
+			set_output([p_zone, p_parameter, p_function])
+		)
+	)
+
+
+func _on_prompt_parameter_list_zone_pressed() -> void:
+	Popups.ObjectSelector(self, EngineComponent, Fixture).then(func (p_fixture: Fixture):
+		Popups.ParameterList_zone(self, [p_fixture]).then(func (p_zone: String):
+			set_output(p_zone)
+		)
+	)
+
+
+func _on_prompt_parameter_list_zone_parameter_pressed() -> void:
+	Popups.ObjectSelector(self, EngineComponent, Fixture).then(func (p_fixture: Fixture):
+		Popups.ParameterList_zone_parameter(self, [p_fixture]).then(func (p_zone: String, p_parameter: String):
+			set_output([p_zone, p_parameter])
+		)
+	)
+
+
+func _on_prompt_parameter_list_parameter_pressed() -> void:
+	Popups.ObjectSelector(self, EngineComponent, Fixture).then(func (p_fixture: Fixture):
+		Popups.ParameterList_zone(self, [p_fixture]).then(func (p_zone: String):
+			Popups.ParameterList_parameter(self, [p_fixture], p_zone).then(func (p_parameter: String):
+				set_output(p_parameter)
+			)
+		)
+	)
+
+
+func _on_prompt_parameter_list_function_pressed() -> void:
+	Popups.ObjectSelector(self, EngineComponent, Fixture).then(func (p_fixture: Fixture):
+		Popups.ParameterList_zone_parameter(self, [p_fixture]).then(func (p_zone: String, p_parameter: String):
+			Popups.ParameterList_function(self, [p_fixture], p_zone, p_parameter).then(func (p_function: String):
+				set_output(p_function)
+			)
+		)
+	)
+
+
+func _on_object_picker_pressed() -> void:
+	Popups.ObjectSelector(self, EngineComponent, "").then(func (p_object: Object):
+		set_output(p_object)
+	)
+
+
+func _on_object_picker_class_pressed() -> void:
+	Popups.ObjectSelector_class(self, EngineComponent, "").then(func (p_object: Object):
+		set_output(p_object)
+	)

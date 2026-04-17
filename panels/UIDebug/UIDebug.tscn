@@ -166,6 +166,14 @@ text = "Prompt Parameter List Parameter"
 layout_mode = 2
 text = "Prompt Parameter List Function"
 
+[node name="ObjectSelector" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+text = "Prompt ObjectPicker"
+
+[node name="ObjectSelector_class" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+text = "Prompt ObjectPicker_class"
+
 [node name="Output" type="CodeEdit" parent="VBoxContainer/PanelContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -270,6 +278,8 @@ text = "Send"
 [connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer/PromptParameterListZoneParameter" to="." method="_on_prompt_parameter_list_zone_parameter_pressed"]
 [connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer/PromptParameterListParameter" to="." method="_on_prompt_parameter_list_parameter_pressed"]
 [connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer/PromptParameterListFunction" to="." method="_on_prompt_parameter_list_function_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer/ObjectSelector" to="." method="_on_object_picker_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer/ObjectSelector_class" to="." method="_on_object_picker_class_pressed"]
 [connection signal="pressed" from="VBoxContainer/PanelContainer2/ScrollContainer/HBoxContainer/SendMessage" to="." method="_on_send_message_to_server_pressed"]
 
 [editable path="VBoxContainer/PanelMenuBar"]
