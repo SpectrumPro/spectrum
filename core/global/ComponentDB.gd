@@ -2,12 +2,15 @@
 # This file is part of the Spectrum Lighting Controller, licensed under the GPL v3.0 or later.
 # See the LICENSE file for details.
 
-class_name EngineComponentDB extends ObjectDB
+class_name CoreComponentDB extends CoreObjectDB
 ## Extends ObjectDB to auto add and remove components from NetworkManager
 
 
 ## init
-func _init() -> void:
+func _init(p_uuid: String = "", ...p_args: Array[Variant]) -> void:
+	super._init(p_uuid, p_args)
+	_set_class_name("CoreComponentDB")
+	
 	components_added.connect(func (p_components: Array):
 		for component: EngineComponent in p_components:
 			Network.register_network_object(component.get_uuid(), component.get_settings())

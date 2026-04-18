@@ -2,7 +2,7 @@
 # This file is part of the Spectrum Lighting Engine, licensed under the GPL v3.0 or later.
 # See the LICENSE file for details.
 
-class_name CoreProgrammer extends Node
+class_name CoreProgrammer extends CoreGlobal
 ## Engine class for programming lights, colors, positions, etc.
 
 
@@ -82,20 +82,15 @@ var _settings: SettingsManager = SettingsManager.new()
 
 
 ## init
-func _init() -> void:
-	_settings.set_owner(self)
-	_settings.set_inheritance_array(["Programmer"])
+func _init(p_uuid: String = "", ...p_args: Array[Variant]) -> void:
+	super._init(p_uuid, p_args)
+	_set_class_name("CoreComponentDB")
 	
 	_settings.register_networked_callbacks({
 		"on_cleared": _clear,
 	})
 	
 	_convert_order_array_to_dict()
-
-
-## Gets the SettingsManager
-func get_settings() -> SettingsManager:
-	return _settings
 
 
 ## Gets a Category enum as a string

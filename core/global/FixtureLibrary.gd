@@ -2,7 +2,7 @@
 # This file is part of the Spectrum Lighting Engine, licensed under the GPL v3.0 or later.
 # See the LICENSE file for details.
 
-class_name CoreFixtureLibrary extends Node
+class_name CoreFixtureLibrary extends CoreGlobal
 ## The main fixture library used to manage fixture manifests
 
 
@@ -22,24 +22,17 @@ var _manifest_requests: Dictionary
 ## Loaded state
 var _is_loaded: bool = false
 
-## The SettingsManager
-var _settings: SettingsManager = SettingsManager.new()
 
+## init
+func _init(p_uuid: String = "", ...p_args: Array[Variant]) -> void:
+	super._init(p_uuid, p_args)
+	_set_class_name("CoreComponentDB")
 
-## Init
-func _init() -> void:
-	_settings.set_owner(self)
-	_settings.set_inheritance_array(["CoreFixtureLibrary"])
 
 
 ## Ready
 func _ready() -> void:
 	Core.synchronizing.connect(_synchronize)
-
-
-## Gets the SettingsManager
-func get_settings() -> SettingsManager:
-	return _settings
 
 
 ## Creates a new fixture from a manifest
