@@ -271,6 +271,8 @@ text = "Can Fade"
 [connection signal="pressed" from="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer2/HBoxContainer/AddItem" to="." method="_on_add_item_pressed"]
 [connection signal="pressed" from="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer2/HBoxContainer/RemoveItem" to="." method="_on_remove_item_pressed"]
 [connection signal="item_selected" from="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/ViewLayer" to="." method="set_view_layer"]
+[connection signal="edit_request_none_module" from="VBoxContainer/Table" to="." method="_on_table_edit_request_none_module"]
+[connection signal="selection_changed" from="VBoxContainer/Table" to="." method="_on_table_selection_changed"]
 [connection signal="value_changed" from="VBoxContainer/TimeLine/HBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer/Start" to="VBoxContainer/TimeLine" method="_on_start_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/TimeLine/HBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2/Stop" to="VBoxContainer/TimeLine" method="_on_stop_value_changed"]
 [connection signal="toggled" from="VBoxContainer/TimeLine/HBoxContainer/PanelContainer4/VBoxContainer/ToggleGrid" to="VBoxContainer/TimeLine" method="_on_toggle_grid_toggled"]

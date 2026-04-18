@@ -351,7 +351,7 @@ func _on_table_edit_request_none_module(p_selected_items: Dictionary[Table.Row, 
 
 ## Called when the add item button is pressed
 func _on_add_item_pressed() -> void:
-	Popups.ObjectPicker(self, EngineComponent, Fixture).then(func (p_fixture: Fixture):
+	Popups.ObjectSelector(self, EngineComponent, Fixture).then(func (p_fixture: Fixture):
 		Popups.ParameterList(self, [p_fixture]).then(func (p_zone: String, p_parameter: String, p_function: String):
 			_container.store_data(
 				p_fixture, 
