@@ -3,7 +3,7 @@
 # See the LICENSE file for details.
 
 class_name CoreComponentDB extends CoreObjectDB
-## Extends ObjectDB to auto add and remove components from NetworkManager
+## Extends CoreObjectDB to auto add and remove components from NetworkManager
 
 
 ## init
@@ -22,6 +22,6 @@ func _init(p_uuid: String = "", ...p_args: Array[Variant]) -> void:
 	)
 
 
-## Returns true if the given component is allowed in this ObjectDB
+## Returns true if the given component is allowed in this CoreObjectDB
 func is_component_allowed(p_component: Object) -> bool:
 	return p_component is EngineComponent

@@ -273,10 +273,10 @@ func _load_from(serialized_data: Dictionary) -> void:
 			var classname: String = type_convert(serialized_component.get("class_name", ""), TYPE_STRING)
 
 			# Check if the components class name is a valid class type in the engine
-			if not ClassList.has_class(classname):
+			if not ComponentClassList.has_class(classname):
 				continue
 			
-			var new_component: EngineComponent = ClassList.get_class_script(serialized_component.class_name).new(component_uuid)
+			var new_component: EngineComponent = ComponentClassList.get_class_script(serialized_component.class_name).new(component_uuid)
 			new_component.deserialize(serialized_component)
 			
 			if _add_component(new_component, true):

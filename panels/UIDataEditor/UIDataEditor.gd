@@ -97,7 +97,7 @@ func set_function(p_function: Function) -> void:
 		_set_container(null)
 		return
 	
-	if ClassList.does_class_inherit(_function.get_class_name(), "CueList"):
+	if ComponentClassList.does_class_inherit(_function.get_class_name(), "CueList"):
 		var current_cue: Cue = _function.get_active_cue()
 		var cues: Array[Cue] = _function.get_cues()
 		

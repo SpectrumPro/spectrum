@@ -71,16 +71,6 @@ var _parameter_order: Dictionary[Category, Variant] = {
 }
 
 
-## Current store mode state
-var _store_mode_state: bool = false
-
-## Callback for store mode
-var _store_mode_callback: Callable
-
-## The SettingsManager for this Programmer
-var _settings: SettingsManager = SettingsManager.new()
-
-
 ## init
 func _init(p_uuid: String = "", ...p_args: Array[Variant]) -> void:
 	super._init(p_uuid, p_args)

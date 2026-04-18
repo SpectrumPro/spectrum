@@ -18,7 +18,7 @@ class SubType:
 ## Config for Data
 var config: Dictionary[String, Variant] = {
 	"gbc_index": {
-		"EngineComponent": GBCIndexConfig.new(EngineComponent, ComponentDB, ClassList, ChildManager.new(
+		"EngineComponent": GBCIndexConfig.new(EngineComponent, ComponentDB, ComponentClassList, ChildManager.new(
 			Core, 
 			Core.create_component,
 			Core.add_component,
@@ -34,7 +34,7 @@ var config: Dictionary[String, Variant] = {
 			EngineComponent, 
 		)),
 		"NetworkItem": GBCIndexConfig.new(NetworkItem, NetworkDB, NetworkClassList, ChildManager.new(
-			NetworkManager,
+			Network,
 			Callable(),
 			Callable(),
 			Callable(),

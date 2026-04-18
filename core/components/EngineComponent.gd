@@ -85,7 +85,7 @@ static func deseralise_component_array(array: Array) -> Array[EngineComponent]:
 	
 	for seralized_component: Variant in array:
 		if seralized_component is Dictionary and seralized_component.has("class_name"):
-			var component: EngineComponent = ClassList.get_class_script(seralized_component.class_name).new()
+			var component: EngineComponent = ComponentClassList.get_class_script(seralized_component.class_name).new()
 	
 			component.deserialize(seralized_component)
 			result.append(component)
