@@ -388,7 +388,7 @@ func _update_selection_box() -> void:
 #region UI Callbacks
 ## Called when the add fixtures button is pressed
 func _on_add_fixtures_pressed() -> void: 
-	Popups.ObjectPicker(self, EngineComponent, "DMXFixture")
+	Popups.ObjectSelector(self, EngineComponent, "DMXFixture")
 
 
 ## Called when the remove fixtures button is pressed
@@ -450,7 +450,7 @@ func _on_gui_input(event: InputEvent) -> void:
 				
 			MOUSE_BUTTON_RIGHT:
 				if event.is_released() and _edit_mode:
-					Popups.ObjectPicker(self, EngineComponent, Fixture).then(_on_object_picker_objects_selected)
+					Popups.ObjectSelector(self, EngineComponent, Fixture).then(_on_object_picker_objects_selected)
 
 
 ## Called when the align button is pressed

@@ -546,7 +546,7 @@ func _on_zone_select_item_selected(index: int) -> void:
 
 ## Called when the store button is pressed
 func _on_store_pressed() -> void:
-	Popups.ObjectPicker(self, EngineComponent, Function).then(func (p_function: Function):
+	Popups.ObjectSelector(self, EngineComponent, Function).then(func (p_function: Function):
 		Programmer.store_into(p_function).then(func (p_component: EngineComponent):
 			if not is_instance_valid(p_component) or not p_component is Cue:
 				return
