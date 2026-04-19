@@ -1,8 +1,8 @@
-# Copyright (c) 2025 Liam Sherwin. All rights reserved.
+# Copyright (c) 2026 Liam Sherwin. All rights reserved.
 # This file is part of the Spectrum Lighting Engine, licensed under the GPL v3.0 or later.
 # See the LICENSE file for details.
 
-class_name CoreEngine extends Node
+class_name CoreEngine extends CoreGlobal
 ## The client side engine that powers Spectrum
 
 
@@ -30,9 +30,6 @@ var _current_file_name: String = ""
 
 ## The EngineConfig
 var _config: EngineConfig
-
-## The SettingsManager for CoreEngine
-var _settings: SettingsManager = SettingsManager.new()
 
 
 ## Internal engine config options
@@ -69,6 +66,9 @@ class EngineConfig extends Object:
 
 ## Init
 func _init() -> void:
+	super._init()
+	_set_class_name("CoreEngine")
+	
 	OS.set_low_processor_usage_mode(false)
 	Details.print_startup_detils()
 	
@@ -101,11 +101,6 @@ func _ready() -> void:
 ## Gets the SettingsManager
 func get_settings() -> SettingsManager:
 	return _settings
-
-
-## Returns a serialized copy of the engine from the server
-func serialize() -> Promise: 
-	return Network.send_command("engine", "serialize")
 
 
 ## Saves this file to disk on the server
