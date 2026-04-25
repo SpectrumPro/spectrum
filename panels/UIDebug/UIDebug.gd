@@ -223,11 +223,11 @@ func _on_object_selector_gbc_class_pressed() -> void:
 
 
 func _on_object_picker_class_pressed() -> void:
-	Popups.ObjectSelector_gbc_index(self).then(func (p_gbc_index: Variant):
-		if not is_instance_valid(p_gbc_index):
+	Popups.ObjectSelector_gbc_class(self).then(func (p_classname: String):
+		if not p_classname:
 			return
 		
-		Popups.ObjectSelector_class(self, p_gbc_index.get_base_class(), "").then(func (p_class: String):
+		Popups.ObjectSelector_class(self, CoreClassListDB.get_class_gbc_index(p_classname).get_base_class(), p_classname).then(func (p_class: String):
 			set_output(p_class)
 		)
 	)
