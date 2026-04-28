@@ -9,9 +9,6 @@ class_name CueList extends Function
 ## Emitted when the active cue is changed
 signal active_cue_changed(cue: Cue)
 
-## Emitted when a cues crossfade is finished
-signal cue_crossfade_finished(cue: Cue)
-
 ## Emitted when the global fade state is changed
 signal global_fade_state_changed(use_global_fade: bool)
 
