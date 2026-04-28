@@ -187,7 +187,7 @@ func _set_container(p_container: DataContainer) -> void:
 		_rows[fixture] = RefMap.from({Fixture.RootZone: root_row})
 		_fixture_rows[root_row] = fixture
 		
-		root_row.set_cell_data(table.get_column(0), fixture.get_settings().get_entry("name"))
+		root_row.set_cell_data(table.get_column(0), fixture.get_settings().get_entry("Name"))
 		root_row.set_cell_data(table.get_column(1), 0)
 		
 		for zone: String in data[fixture]:

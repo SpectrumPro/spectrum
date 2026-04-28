@@ -131,12 +131,12 @@ func _add_cues(p_cues: Array) -> void:
 		
 		var manager: SettingsManager = cue.get_settings()
 		_cues.map(cue, table.add_row({
-			Columns.IDX: manager.get_entry("position"),
-			Columns.QID: manager.get_entry("qid"),
-			Columns.NAME: manager.get_entry("name"),
-			Columns.FADE_TIME: manager.get_entry("fade_time"),
-			Columns.PRE_WAIT: manager.get_entry("pre_wait"),
-			Columns.TRIGGER_MODE: manager.get_entry("trigger_mode"),
+			Columns.IDX: manager.get_entry("Position"),
+			Columns.QID: manager.get_entry("QID"),
+			Columns.NAME: manager.get_entry("Name"),
+			Columns.FADE_TIME: manager.get_entry("FadeTime"),
+			Columns.PRE_WAIT: manager.get_entry("PreWait"),
+			Columns.TRIGGER_MODE: manager.get_entry("TriggerMode"),
 		}))
 
 

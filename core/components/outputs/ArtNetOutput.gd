@@ -36,9 +36,9 @@ func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
 	_set_name("ArtNetOutput")
 	_set_class_name("ArtNetOutput")
 	
-	_settings.register_setting("ip_address", Data.Type.STRING, set_ip, get_ip, [ip_changed])
-	_settings.register_setting("use_broadcast", Data.Type.BOOL, set_use_broadcast, get_use_broadcast, [broadcast_state_changed])
-	_settings.register_setting("universe_number", Data.Type.INT, set_universe_number, get_universe_number, [universe_number_changed])
+	_settings.register_setting("IpAddress", Data.Type.STRING, set_ip, get_ip, [ip_changed])
+	_settings.register_setting("UseBroadcast", Data.Type.BOOL, set_use_broadcast, get_use_broadcast, [broadcast_state_changed])
+	_settings.register_setting("UniverseNumber", Data.Type.INT, set_universe_number, get_universe_number, [universe_number_changed])
 	
 	_settings.register_networked_callbacks({
 		"on_ip_changed": _set_ip,

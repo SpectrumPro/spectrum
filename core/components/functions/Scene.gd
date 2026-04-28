@@ -27,8 +27,8 @@ func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
 	_set_name("Scene")
 	_set_class_name("Scene")
 	
-	_settings.register_setting("fade_in", Data.Type.FLOAT, set_fade_in_speed, get_fade_in_speed, [fade_in_speed_changed])
-	_settings.register_setting("fade_out", Data.Type.FLOAT, set_fade_out_speed, get_fade_out_speed, [fade_out_speed_changed])
+	_settings.register_setting("FadeIn", Data.Type.FLOAT, set_fade_in_speed, get_fade_in_speed, [fade_in_speed_changed])
+	_settings.register_setting("FadeOut", Data.Type.FLOAT, set_fade_out_speed, get_fade_out_speed, [fade_out_speed_changed])
 	
 	_settings.register_networked_callbacks({
 		"on_fade_in_speed_changed": _set_fade_in_speed,

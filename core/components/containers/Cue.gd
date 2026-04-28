@@ -61,12 +61,12 @@ func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
 	_set_name("Cue")
 	_set_class_name("Cue")
 	
-	_settings.register_setting("position", Data.Type.INT, set_position, get_position, [position_changed]).set_min_max(0, INF)
-	_settings.register_setting("qid", Data.Type.STRING, set_qid, get_qid, [qid_changed])
-	_settings.register_setting("trigger_mode", Data.Type.ENUM, set_trigger_mode, get_trigger_mode, [trigger_mode_changed]).set_enum_dict(TriggerMode)
-	_settings.register_setting("tracking_mode", Data.Type.ENUM, set_tracking_mode, get_tracking_mode, [tracking_mode_changed]).set_enum_dict(TrackingMode)
-	_settings.register_control("fade_time", Data.Type.FLOAT, set_fade_time, get_fade_time, [fade_time_changed]).set_min_max(0, INF)
-	_settings.register_control("pre_wait", Data.Type.FLOAT, set_pre_wait, get_pre_wait, [pre_wait_time_changed]).set_min_max(0, INF)
+	_settings.register_setting("Position", Data.Type.INT, set_position, get_position, [position_changed]).set_min_max(0, INF)
+	_settings.register_setting("QID", Data.Type.STRING, set_qid, get_qid, [qid_changed])
+	_settings.register_setting("TriggerMode", Data.Type.ENUM, set_trigger_mode, get_trigger_mode, [trigger_mode_changed]).set_enum_dict(TriggerMode)
+	_settings.register_setting("TrackingMode", Data.Type.ENUM, set_tracking_mode, get_tracking_mode, [tracking_mode_changed]).set_enum_dict(TrackingMode)
+	_settings.register_control("FadeTime", Data.Type.FLOAT, set_fade_time, get_fade_time, [fade_time_changed]).set_min_max(0, INF)
+	_settings.register_control("PreWait", Data.Type.FLOAT, set_pre_wait, get_pre_wait, [pre_wait_time_changed]).set_min_max(0, INF)
 	
 	_settings.register_networked_callbacks({
 		"on_qid_changed": _set_qid,

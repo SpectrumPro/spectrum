@@ -54,7 +54,7 @@ func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
 	_settings.set_inheritance_array(_class_tree)
 	_settings.set_delete_signal(delete_requested)
 	
-	_settings.register_setting("name", Data.Type.STRING, set_name, get_name, [name_changed])
+	_settings.register_setting("Name", Data.Type.STRING, set_name, get_name, [name_changed])
 	
 	#_settings.register_setting("CID", Data.Type.CID, CIDManager.set_component_id.bind(self), cid, [cid_changed])\
 	#.display("EngineComponent", 1)

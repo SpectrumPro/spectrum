@@ -187,7 +187,7 @@ func _on_cue_item_clicked(p_cue_item: CueItem) -> void:
 
 ## Called when a CueItem is right clicked
 func _on_cue_item_right_clicked(p_cue_item: CueItem) -> void:
-	Popups.ComponentSettings(self, _cues.right(p_cue_item))
+	Popups.USettingsManager(self, _cues.right(p_cue_item).get_settings())
 
 
 ## Called when a CueItem is double clicked
