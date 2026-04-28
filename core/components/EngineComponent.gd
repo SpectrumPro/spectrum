@@ -16,6 +16,7 @@ signal user_meta_deleted(key: String)
 signal name_changed(new_name: String)
 
 ## Emitted when the CID is changed
+@warning_ignore("unused_signal")
 signal cid_changed(cid: int)
 
 ## Emited when this object is about to be deleted
