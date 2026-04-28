@@ -19,7 +19,7 @@ class_name DrawGrid extends Control
 @export var line_width: float = 1 : set = set_line_width
 
 ## Sets the display mode of this grid
-@export var grid_mode: DisplayMode = 0 : set = set_grid_mode
+@export var grid_mode: DisplayMode = DisplayMode.GRID_MODE_LINE : set = set_grid_mode
 
 ## Sets the visability of the point
 @export var show_point: bool = false : set = set_show_point
