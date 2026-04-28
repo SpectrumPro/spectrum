@@ -40,9 +40,6 @@ enum HandleType {START, STOP}
 ## The DataContainer
 var _container: DataContainer
 
-## All current selected fixtures
-var _fixtures: Dictionary[Fixture, Dictionary]
-
 ## All handles and Lines for each ContainerItem in the timeline
 var _timeline_handles: Dictionary[ContainerItem, Dictionary]
 
