@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bfk7wccmsndfr"]
+[gd_scene load_steps=10 format=3 uid="uid://bfk7wccmsndfr"]
 
 [ext_resource type="Theme" uid="uid://cyua45ur0ijqo" path="res://modules/Vertex/assets/themes/Main.theme" id="1_7me6c"]
 [ext_resource type="StyleBox" uid="uid://bxwylw4uk8cyk" path="res://modules/Vertex/assets/styles/ClassSettingsBG.tres" id="2_56yd5"]
 [ext_resource type="Script" uid="uid://01ronclpv10b" path="res://panels/UIProgrammer/ParameterController/ParameterController.gd" id="3_437gf"]
 [ext_resource type="FontFile" uid="uid://crlak6jhg5jy2" path="res://modules/Vertex/assets/font/RubikMonoOne-Regular.ttf" id="4_33gbp"]
 [ext_resource type="Texture2D" uid="uid://dlikb8or3xepr" path="res://modules/Vertex/assets/icons/Reset.svg" id="4_ukk8e"]
+[ext_resource type="Theme" uid="uid://ci2nvibdyee1j" path="res://assets/themes/Slider.tres" id="5_mpn20"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sjuwc"]
 content_margin_left = 5.0
@@ -95,6 +96,7 @@ custom_minimum_size = Vector2(84, 0)
 layout_mode = 2
 size_flags_horizontal = 1
 size_flags_vertical = 3
+theme = ExtResource("5_mpn20")
 max_value = 1.0
 step = 0.001
 value = 1.0
