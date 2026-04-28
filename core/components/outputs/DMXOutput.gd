@@ -30,13 +30,13 @@ func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
 	_set_name("DMXOutput")
 	_set_class_name("DMXOutput")
 	
-	_settings.register_custom_panel("connection_status_panel", preload("res://components/SettingsManagerCustomPanels/DMXOutputStatusDisplay.tscn"), "set_output")
-	_settings.register_setting("auto_start", Data.Type.BOOL, set_auto_start, get_auto_start, [auto_start_changed])
+	_settings.register_custom_panel("ConnectionStatusPanel", preload("res://components/SettingsManagerCustomPanels/DMXOutputStatusDisplay.tscn"), "set_output")
+	_settings.register_setting("AutoStart", Data.Type.BOOL, set_auto_start, get_auto_start, [auto_start_changed])
 	
-	_settings.register_control("start", Data.Type.ACTION, start)
-	_settings.register_control("stop", Data.Type.ACTION, stop)
+	_settings.register_control("Start", Data.Type.ACTION, start)
+	_settings.register_control("Stop", Data.Type.ACTION, stop)
 	
-	_settings.register_status("connection_status", Data.Type.BOOL, get_connection_state, [connection_state_changed])
+	_settings.register_status("ConnectionStatus", Data.Type.BOOL, get_connection_state, [connection_state_changed])
 	
 	_settings.register_networked_callbacks({
 		"on_connection_state_changed": _on_connection_state_changed,

@@ -73,15 +73,15 @@ func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
 	_set_name("CueList")
 	_set_class_name("CueList")
 	
-	_settings.register_setting("allow_triggered_looping", Data.Type.BOOL, set_allow_triggered_looping, get_allow_triggered_looping, [triggered_looping_changed])
-	_settings.register_setting("use_global_fade", Data.Type.BOOL, set_global_fade_state, get_global_fade_state, [global_fade_state_changed])
-	_settings.register_setting("use_global_pre_wait", Data.Type.BOOL, set_global_pre_wait_state, get_global_pre_wait_state, [global_pre_wait_state_changed])
-	_settings.register_setting("loop_mode", Data.Type.ENUM, set_loop_mode, get_loop_mode, [loop_mode_changed]).set_enum_dict(LoopMode)
+	_settings.register_setting("AllowTriggeredLooping", Data.Type.BOOL, set_allow_triggered_looping, get_allow_triggered_looping, [triggered_looping_changed])
+	_settings.register_setting("UseGlobalFade", Data.Type.BOOL, set_global_fade_state, get_global_fade_state, [global_fade_state_changed])
+	_settings.register_setting("UseGlobalPreWait", Data.Type.BOOL, set_global_pre_wait_state, get_global_pre_wait_state, [global_pre_wait_state_changed])
+	_settings.register_setting("LoopMode", Data.Type.ENUM, set_loop_mode, get_loop_mode, [loop_mode_changed]).set_enum_dict(LoopMode)
 	
-	_settings.register_control("go_previous", Data.Type.ACTION, go_previous)
-	_settings.register_control("go_next", Data.Type.ACTION, go_next)
-	_settings.register_control("global_fade_speed", Data.Type.FLOAT, set_global_fade_speed, get_global_fade_speed, [global_fade_changed]).set_min_max(0, INF)
-	_settings.register_control("global_pre_wait_speed", Data.Type.FLOAT, set_global_pre_wait_speed, get_global_pre_wait_speed, [global_pre_wait_changed]).set_min_max(0, INF)
+	_settings.register_control("GoPrevious", Data.Type.ACTION, go_previous)
+	_settings.register_control("GoNext", Data.Type.ACTION, go_next)
+	_settings.register_control("GlobalFadeSpeed", Data.Type.FLOAT, set_global_fade_speed, get_global_fade_speed, [global_fade_changed]).set_min_max(0, INF)
+	_settings.register_control("GlobalPreWaitSpeed", Data.Type.FLOAT, set_global_pre_wait_speed, get_global_pre_wait_speed, [global_pre_wait_changed]).set_min_max(0, INF)
 	
 	_settings.register_networked_callbacks({
 		"on_active_cue_changed": _on_active_cue_changed,

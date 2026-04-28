@@ -50,10 +50,10 @@ func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
 	_set_name("DMXFixture")
 	_set_class_name("DMXFixture")
 	
-	_settings.register_setting("channel", Data.Type.INT, set_channel, get_channel, [channel_changed]).set_min_max(1, 512)
-	_settings.register_setting("universe", Data.Type.OBJECT, set_universe, get_universe, [universe_changed]).set_class_filter(EngineComponent, Universe)
-	_settings.register_setting("manifest", Data.Type.OBJECT, set_manifest, get_manifest, [manifest_changed]).set_class_filter(EngineComponent, FixtureManifest)
-	_settings.register_status("mode", Data.Type.STRING, get_mode, [mode_changed])
+	_settings.register_setting("Channel", Data.Type.INT, set_channel, get_channel, [channel_changed]).set_min_max(1, 512)
+	_settings.register_setting("Universe", Data.Type.OBJECT, set_universe, get_universe, [universe_changed]).set_class_filter(EngineComponent, Universe)
+	_settings.register_setting("Manifest", Data.Type.OBJECT, set_manifest, get_manifest, [manifest_changed]).set_class_filter(EngineComponent, FixtureManifest)
+	_settings.register_status("Mode", Data.Type.STRING, get_mode, [mode_changed])
 	
 	_settings.register_networked_callbacks({
 		"on_channel_changed": _set_channel,
