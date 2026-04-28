@@ -92,10 +92,6 @@ func set_fixture_group(p_fixture_group: FixtureGroup) -> void:
 		fixture_group.fixtures_added.connect(_on_fixture_group_fixtures_added)
 		fixture_group.fixtures_removed.connect(_on_fixture_group_fixtures_removed)
 		
-		for group_item: FixtureGroupItem in _group_item_signal_connections:
-			var connections: Dictionary = _group_item_signal_connections[group_item]
-			
-		
 		for fixture: Fixture in fixture_group.get_fixtures():
 			var group_item: FixtureGroupItem = fixture_group.get_group_item_for(fixture)
 			_group_item_signal_connections[group_item] = {
