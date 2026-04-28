@@ -39,13 +39,13 @@ static var RootZone: String = "root"
 
 
 ## init
-func _init(p_uuid: String = UUID_Util.v4(), p_name: String = _name) -> void:
-	super._init(p_uuid, p_name)
+func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
+	super._init(p_uuid, p_args)
 	
-	_set_self_class("Fixture")
+	_set_class_name("Fixture")
 	_set_name("Fixture")
 	
-	_settings_manager.register_networked_callbacks({
+	_settings.register_networked_callbacks({
 		"on_parameter_changed": _set_parameter,
 		"on_parameter_erased": _erase_parameter,
 		"on_override_changed": _set_override,
@@ -100,6 +100,11 @@ func get_all_values() -> Dictionary:
 
 
 ## Gets all the parameters and there category from a zone
+func get_parameter_category(p_zone: String, p_parameter: String) -> String:
+	return ""
+
+
+## Gets all the parameters and there category from a zone
 func get_parameter_categories(p_zone: String) -> Dictionary:
 	return {}
 
@@ -142,6 +147,16 @@ func get_current_value_or_force_default(p_zone: String, p_parameter: String) -> 
 ## Gets all the zones
 func get_zones() -> Array[String]:
 	return []
+
+
+## Gets all the parameters
+func get_parameters(p_zone: String) -> Array[String]:
+	return []
+
+
+## Returns an uuid defining the type of this fixture or device. two fixtures of the same type should have the same type id
+func get_type_id() -> String:
+	return ""
 
 
 ## Checks if this Fixture has any overrides

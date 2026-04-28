@@ -34,12 +34,12 @@ var _stop: float = 1.0
 var _attribute_id: String = ""
 
 
-## Ready function
-func _init(p_uuid: String = UUID_Util.v4(), p_name: String = _name) -> void:
-	super._init(p_uuid, p_name)
+## init
+func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
+	super._init(p_uuid, p_args)
 	
 	_set_name("ContainerItem")
-	_set_self_class("ContainerItem")
+	_set_class_name("ContainerItem")
 
 
 ## Checks if this ContainerItem is valid
@@ -187,8 +187,8 @@ func get_attribute_id() -> String:
 
 
 ## Saves this component into a dict
-func serialize() -> Dictionary:
-	return super.settings().merged({
+func serialize(p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> Dictionary:
+	return super.serialize(p_flags).merged({
 		"fixture": _fixture.uuid,
 		"zone": _zone,
 		"parameter": _parameter,
@@ -201,8 +201,8 @@ func serialize() -> Dictionary:
 
 
 ## Loads this component from a dict
-func deserialize(p_serialized_data: Dictionary) -> void:
-	super.deserialize(p_serialized_data)
+func deserialize(p_serialized_data: Dictionary, p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> void:
+	super.deserialize(p_serialized_data, p_flags)
 	
 	_fixture = ComponentDB.get_component(type_convert((p_serialized_data.get("fixture", "")), TYPE_STRING))
 	
@@ -219,4 +219,4 @@ func deserialize(p_serialized_data: Dictionary) -> void:
 
 ## Updates the attribute id
 func _update_attribute_id() -> void:
-	_attribute_id = (_fixture.uuid() if _fixture else "") + _zone + _parameter
+	_attribute_id = (_fixture.get_uuid() if _fixture else "") + _zone + _parameter

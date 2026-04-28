@@ -16,91 +16,132 @@ signal user_meta_deleted(key: String)
 signal name_changed(new_name: String)
 
 ## Emitted when the CID is changed
+@warning_ignore("unused_signal")
 signal cid_changed(cid: int)
 
 ## Emited when this object is about to be deleted
-signal delete_requested()
+signal delete_requested(from: Object)
 
 
 ## The name of this object
 var _name: String = "Unnamed EngineComponent"
 
-## Infomation that can be stored by other scripts / clients, this data will get saved to disk and send to all clients
-var _user_meta: Dictionary
-
 ## Uuid of the current component, do not modify at runtime unless you know what you are doing, things will break
 var _uuid: String = ""
 
 ## The class_name of this component this should always be set by the object that extends EngineComponent
-var _self_class_name: String = "EngineComponent" : set = _set_self_class
+var _class_name: String
 
 ## Stores all the classes this component inherits from
-var _class_tree: Array[String] = ["EngineComponent"]
+var _class_tree: Array[String]
+
+## Infomation that can be stored by other scripts / clients, this data will get saved to disk and send to all clients
+var _user_meta: Dictionary
 
 ## ComponentID
 var _cid: int = -1
 
 ## The SettingsManager
-var _settings_manager: SettingsManager = SettingsManager.new()
+var _settings: SettingsManager = SettingsManager.new()
 
 
-## Init
-func _init(p_uuid: String = UUID_Util.v4(), p_name: String = _name) -> void:
+## init
+func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
 	_uuid = p_uuid
-	_name = p_name
+	_set_class_name("EngineComponent")
 	
-	_settings_manager.set_owner(self)
-	_settings_manager.set_inheritance_array(_class_tree)
-	_settings_manager.set_delete_signal(delete_requested)
+	_settings.set_owner(self)
+	_settings.set_inheritance_array(_class_tree)
+	_settings.set_delete_signal(delete_requested)
 	
-	_settings_manager.register_setting("name", Data.Type.STRING, set_name, get_name, [name_changed])
+	_settings.register_setting("name", Data.Type.STRING, set_name, get_name, [name_changed])
 	
-	#_settings_manager.register_setting("CID", Data.Type.CID, CIDManager.set_component_id.bind(self), cid, [cid_changed])\
+	#_settings.register_setting("CID", Data.Type.CID, CIDManager.set_component_id.bind(self), cid, [cid_changed])\
 	#.display("EngineComponent", 1)
 	
-	_settings_manager.register_networked_callbacks({
+	_settings.register_networked_callbacks({
 		"on_name_changed": _set_name,
 		"on_delete_requested": delete,
 		"on_user_meta_changed": _set_user_meta,
 		"on_user_meta_deleted": _delete_user_meta
 	})
 	
-	print_verbose("I am: ", name(), " | ", uuid())
+	print_verbose("I am: ", get_name(), " | ", get_uuid())
 
 
-## Shorthand for get_cid()
-func cid() -> int:
-	return get_cid()
+## Seralizes an array of EngineComponents
+static func seralise_component_array(array: Array) -> Array[Dictionary]:
+	var result: Array[Dictionary]
+	
+	for component: Variant in array:
+		if component is EngineComponent:
+			result.append(component.serialize())
+	
+	return result
 
 
-## shorthand for get_uuid()
-func uuid() -> String:
-	return get_uuid()
+## Deseralizes an array of seralized EngineComponents
+static func deseralise_component_array(array: Array) -> Array[EngineComponent]:
+	var result: Array[EngineComponent]
+	
+	for seralized_component: Variant in array:
+		if seralized_component is Dictionary and seralized_component.has("class_name"):
+			var component: EngineComponent = ComponentClassList.get_class_script(seralized_component.class_name).new()
+	
+			component.deserialize(seralized_component)
+			result.append(component)
+	
+	return result
 
 
-## Shorthand for get_name()
-func name() -> String:
-	return get_name()
+## Gets the uuid
+func get_uuid() -> String:
+	return _uuid
 
 
-## Shorthand for get_self_classname()
-func classname() -> String:
-	return get_self_classname()
+## Gets the name
+func get_name() -> String:
+	return _name
 
 
-## Shorthand for get_settings_manager()
-func settings() -> SettingsManager:
-	return get_settings_manager()
+## Gets the name
+func get_uname() -> String:
+	return _name
 
 
-## Calls a method on the remote object.
-func rpc(p_method_name: String, p_args: Array = []) -> Promise:
-	return Network.send_command(_uuid, p_method_name, p_args)
+## Gets the classname of this EngineComponent
+func get_class_name() -> String:
+	return _class_name
+
+
+## Gets the classname of this EngineComponent
+func get_base_class() -> String:
+	return _class_tree[-1]
+
+
+## Gets the class tree
+func get_class_tree() -> Array[String]:
+	return _class_tree.duplicate()
+
+
+## Gets the settings manager
+func get_settings() -> SettingsManager:
+	return _settings
+
+
+## Gets the CID
+func get_cid() -> int:
+	return _cid
 
 
 ## Sets the name of this component
-func set_name(new_name) -> void: 
-	rpc("set_name", [new_name])
+func set_name(new_name) -> Promise: 
+	return rpc("set_name", [new_name])
+
+
+## Sets the name of this EngineComponent
+func set_uname(p_name: String, p_no_signal: bool = false) -> void:
+	rpc("set_name", [p_name])
 
 
 ## Sets user_meta from the given value
@@ -123,34 +164,9 @@ func get_all_user_meta() -> Dictionary:
 	return _user_meta
 
 
-## Gets the CID
-func get_cid() -> int:
-	return _cid
-
-
-## Gets the uuid
-func get_uuid() -> String:
-	return _uuid
-
-
-## Gets the name
-func get_name() -> String:
-	return _name
-
-
-## Gets the classname of this EngineComponent
-func get_self_classname() -> String:
-	return _self_class_name
-
-
-## Gets the settings manager
-func get_settings_manager() -> SettingsManager:
-	return _settings_manager
-
-
-## Gets the class tree
-func get_class_tree() -> Array[String]:
-	return _class_tree.duplicate()
+## Calls a method on the remote object.
+func rpc(p_method_name: String, p_args: Array = []) -> Promise:
+	return Network.send_command(_uuid, p_method_name, p_args)
 
 
 ## Always call this function when you want to delete this component. 
@@ -160,49 +176,47 @@ func delete_rpc() -> void:
 
 ## Deletes this component localy, with out contacting the server. Usefull when handling server side delete requests
 func delete() -> void:
-	delete_requested.emit()
+	delete_requested.emit(self)
 	print(_uuid, " Has had a delete request send. Currently has:", str(get_reference_count()), " refernces")
 
 
 ## Returns serialized version of this component
-func serialize() -> Dictionary:
-	var serialized_data: Dictionary = {}
-	
-	serialized_data.uuid = _uuid
-	serialized_data.name = _name
-	serialized_data.user_meta = get_all_user_meta()
-	
-	return serialized_data
+func serialize(p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> Dictionary:
+	return {
+		"name": _name,
+		"user_meta": get_all_user_meta(),
+	}.merged({}
+	if p_flags & Data.SerializationFlags.NO_UUID else {
+		"uuid": _uuid
+	})
 
 
 ## Loades this object from a serialized version
-func deserialize(p_serialized_data: Dictionary) -> void:
-	_name = p_serialized_data.get("name", "Unnamed EngineComponent")
-	name_changed.emit(_name)
-
-	_uuid = p_serialized_data.get("uuid", UUID_Util.v4())
+func deserialize(p_serialized_data: Dictionary, p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> void:
+	_set_name(type_convert(p_serialized_data.get("name", _name), TYPE_STRING), true)
 	
-	_user_meta = p_serialized_data.get("user_meta", {})
-	user_meta_changed.emit("user_meta", _user_meta)
+	if not p_flags & Data.SerializationFlags.NO_UUID:
+		_uuid = p_serialized_data.get("uuid", UUID.v4())
 	
-	var cid: int = type_convert(p_serialized_data.get("cid", -1), TYPE_INT)
-	if CIDManager.set_component_id_local(cid, self, true):
-		_cid = cid
+	_user_meta = type_convert(p_serialized_data.get("user_meta", _user_meta), TYPE_DICTIONARY)
 	
-	if not "uuid" in p_serialized_data:
-		print(_name, " No uuid found in serialized_data, making new one: ", _uuid)
+	#var cid: int = type_convert(p_serialized_data.get("cid", -1), TYPE_INT)
+	#if CIDManager.set_component_id_local(cid, self, true):
+		#_cid = cid
 
 
 ## Internal: Sets the name of this component
-func _set_name(p_name: String) -> void:
+func _set_name(p_name: String, p_no_signal: bool = false) -> void:
 	_name = p_name
-	name_changed.emit(_name)
+	
+	if not p_no_signal:
+		name_changed.emit(_name)
 
 
 ## Sets the self class name
-func _set_self_class(p_self_class_name: String) -> void:
-	_class_tree.append(p_self_class_name)
-	_self_class_name = p_self_class_name
+func _set_class_name(p_class_name: String) -> void:
+	_class_tree.append(p_class_name)
+	_class_name = p_class_name
 
 
 ## Internal: Sets user meta

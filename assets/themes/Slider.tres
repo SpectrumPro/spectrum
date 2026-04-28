@@ -1,0 +1,14 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://ci2nvibdyee1j"]
+
+[ext_resource type="Texture2D" uid="uid://xv7lbgip3582" path="res://assets/icons/Slider_handle_vertical.svg" id="1_sr1mc"]
+[ext_resource type="Texture2D" uid="uid://cpka6tnf55owy" path="res://assets/icons/SliderHandleDisabledVertical.svg" id="2_ocd3n"]
+[ext_resource type="Texture2D" uid="uid://do3e2bue24bsp" path="res://assets/icons/Slider_handle.svg" id="3_5go70"]
+[ext_resource type="Texture2D" uid="uid://ps8rdlbhgq8i" path="res://assets/icons/SliderHandleDisabled.svg" id="4_r25fs"]
+
+[resource]
+HSlider/icons/grabber = ExtResource("1_sr1mc")
+HSlider/icons/grabber_disabled = ExtResource("2_ocd3n")
+HSlider/icons/grabber_highlight = ExtResource("1_sr1mc")
+VSlider/icons/grabber = ExtResource("3_5go70")
+VSlider/icons/grabber_disabled = ExtResource("4_r25fs")
+VSlider/icons/grabber_highlight = ExtResource("3_5go70")

@@ -21,15 +21,15 @@ var _functions: Array[Function]
 
 
 ## init
-func _init(p_uuid: String = UUID_Util.v4(), p_name: String = _name) -> void:
-	super._init(p_uuid, p_name)
+func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
+	super._init(p_uuid, p_args)
 	
 	_set_name("FunctionGroup")
-	_set_self_class("FunctionGroup")
+	_set_class_name("FunctionGroup")
 	
-	_settings_manager.register_custom_panel("functions", preload("res://components/SettingsManagerCustomPanels/FixtureGroupFixtures.tscn"), "set_fixture_group")
+	_settings.register_custom_panel("functions", preload("res://components/SettingsManagerCustomPanels/FixtureGroupFixtures.tscn"), "set_fixture_group")
 	
-	_settings_manager.register_networked_callbacks({
+	_settings.register_networked_callbacks({
 		"on_functions_added": _add_functions,
 		"on_functions_removed": _remove_functions,
 		"on_functions_index_changed": _set_function_index,
@@ -87,7 +87,7 @@ func _add_function(p_function: Function, no_signal: bool = false) -> bool:
 	if p_function and p_function in _functions and p_function != self:
 		return false
 	
-	p_function.delete_requested.connect(_remove_function.bind(p_function))
+	p_function.delete_requested.connect(_remove_function)
 	_functions.append(p_function)
 
 	if not no_signal:
@@ -115,7 +115,7 @@ func _remove_function(p_function: Function, no_signal: bool = false) -> bool:
 		return false
 
 	_functions.erase(p_function)
-
+	p_function.delete_requested.disconnect(_remove_function)
 	if not no_signal:
 		functions_removed.emit([p_function])
 
@@ -149,20 +149,20 @@ func _set_function_index(p_function: Function, p_index: int) -> bool:
 
 
 ## Overide this function to serialize your object
-func serialize() -> Dictionary:
+func serialize(p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> Dictionary:
 	var function_uuids: Array[String]
 	
 	for function: Function in _functions:
 		function_uuids.append(function.uuid)
 	
-	return super.serialize().merged({
+	return super.serialize(p_flags).merged({
 		"functions": function_uuids,
 	})
 
 
 ## Overide this function to handle load requests
-func deserialize(p_serialized_data: Dictionary) -> void:
-	super.deserialize(p_serialized_data)
+func deserialize(p_serialized_data: Dictionary, p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> void:
+	super.deserialize(p_serialized_data, p_flags)
 	
 	var function_uuids: Array = type_convert(p_serialized_data.get("functions", []), TYPE_ARRAY)
 	

@@ -9,9 +9,6 @@ class_name CueList extends Function
 ## Emitted when the active cue is changed
 signal active_cue_changed(cue: Cue)
 
-## Emitted when a cues crossfade is finished
-signal cue_crossfade_finished(cue: Cue)
-
 ## Emitted when the global fade state is changed
 signal global_fade_state_changed(use_global_fade: bool)
 
@@ -70,23 +67,23 @@ var _allow_triggered_looping: bool = false
 
 
 ## init
-func _init(p_uuid: String = UUID_Util.v4(), p_name: String = _name) -> void:
-	super._init(p_uuid, p_name)
+func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
+	super._init(p_uuid, p_args)
 	
 	_set_name("CueList")
-	_set_self_class("CueList")
+	_set_class_name("CueList")
 	
-	_settings_manager.register_setting("allow_triggered_looping", Data.Type.BOOL, set_allow_triggered_looping, get_allow_triggered_looping, [triggered_looping_changed])
-	_settings_manager.register_setting("use_global_fade", Data.Type.BOOL, set_global_fade_state, get_global_fade_state, [global_fade_state_changed])
-	_settings_manager.register_setting("use_global_pre_wait", Data.Type.BOOL, set_global_pre_wait_state, get_global_pre_wait_state, [global_pre_wait_state_changed])
-	_settings_manager.register_setting("loop_mode", Data.Type.ENUM, set_loop_mode, get_loop_mode, [loop_mode_changed]).set_enum_dict(LoopMode)
+	_settings.register_setting("allow_triggered_looping", Data.Type.BOOL, set_allow_triggered_looping, get_allow_triggered_looping, [triggered_looping_changed])
+	_settings.register_setting("use_global_fade", Data.Type.BOOL, set_global_fade_state, get_global_fade_state, [global_fade_state_changed])
+	_settings.register_setting("use_global_pre_wait", Data.Type.BOOL, set_global_pre_wait_state, get_global_pre_wait_state, [global_pre_wait_state_changed])
+	_settings.register_setting("loop_mode", Data.Type.ENUM, set_loop_mode, get_loop_mode, [loop_mode_changed]).set_enum_dict(LoopMode)
 	
-	_settings_manager.register_control("go_previous", Data.Type.ACTION, go_previous)
-	_settings_manager.register_control("go_next", Data.Type.ACTION, go_next)
-	_settings_manager.register_control("global_fade_speed", Data.Type.FLOAT, set_global_fade_speed, get_global_fade_speed, [global_fade_changed]).set_min_max(0, INF)
-	_settings_manager.register_control("global_pre_wait_speed", Data.Type.FLOAT, set_global_pre_wait_speed, get_global_pre_wait_speed, [global_pre_wait_changed]).set_min_max(0, INF)
+	_settings.register_control("go_previous", Data.Type.ACTION, go_previous)
+	_settings.register_control("go_next", Data.Type.ACTION, go_next)
+	_settings.register_control("global_fade_speed", Data.Type.FLOAT, set_global_fade_speed, get_global_fade_speed, [global_fade_changed]).set_min_max(0, INF)
+	_settings.register_control("global_pre_wait_speed", Data.Type.FLOAT, set_global_pre_wait_speed, get_global_pre_wait_speed, [global_pre_wait_changed]).set_min_max(0, INF)
 	
-	_settings_manager.register_networked_callbacks({
+	_settings.register_networked_callbacks({
 		"on_active_cue_changed": _on_active_cue_changed,
 		"on_global_fade_state_changed": _set_global_fade_state,
 		"on_global_pre_wait_state_changed": set_global_pre_wait_state,
@@ -99,7 +96,28 @@ func _init(p_uuid: String = UUID_Util.v4(), p_name: String = _name) -> void:
 		"on_cue_order_changed": _set_cue_position,
 	})
 	
-	_settings_manager.set_callback_allow_deserialize("on_cues_added")
+	_settings.set_callback_allow_deserialize("on_cues_added")
+	
+	_settings.add_child_manager("Cues", ChildManager.new(
+		self,
+		create_cue,
+		add_cue,
+		Callable(),
+		remove_cue,
+		Callable(),
+		Callable(),
+		Callable(),
+		get_cues,
+		cues_added,
+		cues_removed,
+		EngineComponent,
+		Cue
+	))
+
+
+## Creates a new cue
+func create_cue() -> Promise:
+	return rpc("create_cue")
 
 
 ## Server: Adds a cue to the list
@@ -216,21 +234,21 @@ func delete() -> void:
 
 
 ## Saves this cue list to a Dictionary
-func serialize() -> Dictionary:
-	return super.serialize().merged({
+func serialize(p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> Dictionary:
+	return super.serialize(p_flags).merged({
 		"use_global_fade": _use_global_fade,
 		"use_global_pre_wait": _use_global_pre_wait,
 		"global_fade": _global_fade,
 		"global_pre_wait": _global_pre_wait,
 		"allow_triggered_looping": _allow_triggered_looping,
 		"loop_mode": _loop_mode,
-		"cues": Utils.seralise_component_array(_cues)
+		"cues": seralise_component_array(_cues)
 	})
 
 
 ## Loads this cue list from a Dictionary
-func deserialize(p_serialized_data: Dictionary) -> void:
-	super.deserialize(p_serialized_data)
+func deserialize(p_serialized_data: Dictionary, p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> void:
+	super.deserialize(p_serialized_data, p_flags)
 	
 	_use_global_fade = type_convert(p_serialized_data.get("use_global_fade", _use_global_fade), TYPE_BOOL)
 	_use_global_pre_wait = type_convert(p_serialized_data.get("use_global_pre_wait", _use_global_pre_wait), TYPE_BOOL)
@@ -239,7 +257,7 @@ func deserialize(p_serialized_data: Dictionary) -> void:
 	_allow_triggered_looping = type_convert(p_serialized_data.get("allow_triggered_looping", _allow_triggered_looping), TYPE_BOOL)
 	_loop_mode = type_convert(p_serialized_data.get("loop_mode", _loop_mode), TYPE_INT)
 	
-	_add_cues(Utils.deseralise_component_array(type_convert(p_serialized_data.get("cues", []), TYPE_ARRAY)))
+	_add_cues(deseralise_component_array(type_convert(p_serialized_data.get("cues", []), TYPE_ARRAY)))
 	
 	var active_cue: EngineComponent = ComponentDB.get_component(type_convert(p_serialized_data.get("active_cue_uuid", ""), TYPE_STRING))
 	
@@ -253,7 +271,7 @@ func _add_cue(p_cue: Cue, p_no_signal: bool = false) -> bool:
 		return false
 	
 	_cues.append(p_cue)
-	p_cue.delete_requested.connect(_remove_cue.bind(p_cue))
+	p_cue.delete_requested.connect(_remove_cue)
 	ComponentDB.register_component(p_cue)
 	
 	p_cue._set_cue_list(self)
@@ -283,7 +301,9 @@ func _remove_cue(p_cue: Cue, p_no_signal: bool = false) -> bool:
 		return false
 	 
 	_cues.erase(p_cue)
-	Network.deregister_network_object(p_cue.settings())
+	p_cue.delete_requested.disconnect(_remove_cue)
+	
+	Network.deregister_network_object(p_cue.get_settings())
 
 	if not p_no_signal:
 		cues_removed.emit([p_cue])

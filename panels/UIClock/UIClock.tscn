@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://8mfy3g85o3g5"]
 
-[ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://assets/styles/UIPanelBase.tres" id="1_r3wuq"]
+[ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://modules/Vertex/assets/styles/UIPanelBase.tres" id="1_r3wuq"]
 [ext_resource type="Script" uid="uid://dt5d0ib35v1w4" path="res://panels/UIClock/UIClock.gd" id="2_xjxwu"]
-[ext_resource type="FontFile" uid="uid://crlak6jhg5jy2" path="res://assets/font/RubikMonoOne-Regular.ttf" id="3_bm64l"]
+[ext_resource type="FontFile" uid="uid://crlak6jhg5jy2" path="res://modules/Vertex/assets/font/RubikMonoOne-Regular.ttf" id="3_bm64l"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2atlb"]
 font = ExtResource("3_bm64l")

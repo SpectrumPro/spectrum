@@ -2,8 +2,7 @@
 # This file is part of the Spectrum Lighting Engine, licensed under the GPL v3.0 or later.
 # See the LICENSE file for details.
 
-
-class_name UISetting extends UIPanel
+class_name UISettings extends UIPanel
 ## Settings Panel
 
 
@@ -18,15 +17,16 @@ enum Tab {InterfaceSettings, ServerSettings, NetworkManager, Shortcuts}
 
 
 ## init
-func _init() -> void:
-	super._init()
-	
+func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
+	super._init(p_uuid, p_args)
 	_set_class_name("UISettings")
 
 
 ## ready
 func _ready() -> void:
-	_interface_settings.set_manager(Interface.settings())
+	super._ready()
+	
+	_interface_settings.set_manager(Interface.get_settings())
 
 
 ## Switched to the given tab

@@ -80,25 +80,26 @@ var _font_color: Color = Color.WHITE
 
 
 ## init
-func _init() -> void:
-	super._init()
-	
+func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
+	super._init(p_uuid, p_args)
 	_set_class_name("UIClock")
 	
-	_settings_manager.register_setting("ShowYear", Data.Type.BOOL, set_show_year, get_show_year, [show_year_changed])
-	_settings_manager.register_setting("ShowMonth", Data.Type.BOOL, set_show_month, get_show_month, [show_month_changed])
-	_settings_manager.register_setting("ShowDay", Data.Type.BOOL, set_show_day, get_show_day, [show_day_changed])
-	_settings_manager.register_setting("ShowHour", Data.Type.BOOL, set_show_hour, get_show_hour, [show_hour_changed])
-	_settings_manager.register_setting("ShowMinute", Data.Type.BOOL, set_show_minute, get_show_minute, [show_minute_changed])
-	_settings_manager.register_setting("ShowSecond", Data.Type.BOOL, set_show_second, get_show_second, [show_second_changed])
-	_settings_manager.register_setting("ShowMillisecond", Data.Type.BOOL, set_show_millisecond, get_show_millisecond, [show_millisecond_changed])
+	_settings.register_setting("ShowYear", Data.Type.BOOL, set_show_year, get_show_year, [show_year_changed])
+	_settings.register_setting("ShowMonth", Data.Type.BOOL, set_show_month, get_show_month, [show_month_changed])
+	_settings.register_setting("ShowDay", Data.Type.BOOL, set_show_day, get_show_day, [show_day_changed])
+	_settings.register_setting("ShowHour", Data.Type.BOOL, set_show_hour, get_show_hour, [show_hour_changed])
+	_settings.register_setting("ShowMinute", Data.Type.BOOL, set_show_minute, get_show_minute, [show_minute_changed])
+	_settings.register_setting("ShowSecond", Data.Type.BOOL, set_show_second, get_show_second, [show_second_changed])
+	_settings.register_setting("ShowMillisecond", Data.Type.BOOL, set_show_millisecond, get_show_millisecond, [show_millisecond_changed])
 	
-	_settings_manager.register_setting("UseTwelveHour", Data.Type.BOOL, set_use_twelve_hour, get_use_twelve_hour, [use_twelve_hour_changed])
-	_settings_manager.register_setting("FontScaleMultiplier", Data.Type.FLOAT, set_font_scale_multiplier, get_font_scale_multiplier, [font_scale_multiplier_changed]).set_min_max(0.1, 5.0)
-	_settings_manager.register_setting("FontColor", Data.Type.COLOR, set_font_color, get_font_color, [font_color_changed])
+	_settings.register_setting("UseTwelveHour", Data.Type.BOOL, set_use_twelve_hour, get_use_twelve_hour, [use_twelve_hour_changed])
+	_settings.register_setting("FontScaleMultiplier", Data.Type.FLOAT, set_font_scale_multiplier, get_font_scale_multiplier, [font_scale_multiplier_changed]).set_min_max(0.1, 5.0)
+	_settings.register_setting("FontColor", Data.Type.COLOR, set_font_color, get_font_color, [font_color_changed])
 
 ## ready
 func _ready() -> void:
+	super._ready()
+	
 	label.label_settings = label.label_settings.duplicate()
 	
 	await get_tree().process_frame
@@ -279,8 +280,8 @@ func get_font_color() -> Color:
 
 
 ## Serializes this UIClock
-func serialize() -> Dictionary:
-	return super.serialize().merged({
+func serialize(p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> Dictionary:
+	return super.serialize(p_flags).merged({
 		"show_year": _show_year,
 		"show_month": _show_month,
 		"show_day": _show_day,
@@ -294,8 +295,8 @@ func serialize() -> Dictionary:
 
 
 ## Deserialize this UIClock
-func deserialize(p_serialized_data: Dictionary) -> void:
-	super.deserialize(p_serialized_data)
+func deserialize(p_serialized_data: Dictionary, p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> void:
+	super.deserialize(p_serialized_data, p_flags)
 	print("deser")
 	set_show_year(type_convert(p_serialized_data.get("show_year", _show_year), TYPE_BOOL), true)
 	set_show_month(type_convert(p_serialized_data.get("show_month", _show_month), TYPE_BOOL), true)

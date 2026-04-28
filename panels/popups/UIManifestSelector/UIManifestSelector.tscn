@@ -1,0 +1,138 @@
+[gd_scene load_steps=7 format=3 uid="uid://bcksw5esp2mib"]
+
+[ext_resource type="StyleBox" uid="uid://csle20exwqtti" path="res://modules/Vertex/assets/styles/PanelMenuBar.tres" id="1_adyyq"]
+[ext_resource type="Script" uid="uid://3shyid6t18bp" path="res://panels/popups/UIManifestSelector/UIManifestSelector.gd" id="2_lx18e"]
+[ext_resource type="Texture2D" uid="uid://70jvrxlq7sgl" path="res://modules/Vertex/assets/icons/Schema.svg" id="3_br15q"]
+[ext_resource type="Script" uid="uid://c6lkkp6akoipw" path="res://modules/Vertex/classes/TaggedLineEdit.gd" id="4_6yh07"]
+[ext_resource type="PackedScene" uid="uid://dfu5s8fjy0ex4" path="res://modules/Vertex/panels/UIPanel/EditControls/EditControls.tscn" id="5_orbug"]
+[ext_resource type="StyleBox" uid="uid://cftl4b5dnt57b" path="res://modules/Vertex/assets/styles/ResolveBoxNoBG.tres" id="6_2qeie"]
+
+[node name="UIManifestSelector" type="PanelContainer" node_paths=PackedStringArray("manifest_tree", "manufacturer_tree", "global_fixture_tree", "manufacturer_fixture_tree", "mode_tree", "manufacturer_tree_select_box", "fixture_tree_select_box", "search_bar")]
+custom_minimum_size = Vector2(0, 60)
+offset_right = 604.0
+offset_bottom = 60.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_styles/panel = ExtResource("1_adyyq")
+script = ExtResource("2_lx18e")
+manifest_tree = NodePath("VBoxContainer/IndexContainer/ManifestTree")
+manufacturer_tree = NodePath("VBoxContainer/IndexContainer/ManufacturerTree")
+global_fixture_tree = NodePath("VBoxContainer/IndexContainer/GlobalFixtureTree")
+manufacturer_fixture_tree = NodePath("VBoxContainer/IndexContainer/ManufacturerFixtureTree")
+mode_tree = NodePath("VBoxContainer/IndexContainer/ModeTree")
+manufacturer_tree_select_box = NodePath("VBoxContainer/IndexContainer/ManufacturerTree/ManufacturerTreeSelectBox")
+fixture_tree_select_box = NodePath("VBoxContainer/IndexContainer/GlobalFixtureTree/FixtureTreeSelectBox")
+search_bar = NodePath("VBoxContainer/HBoxContainer/ScrollContainer/LineEdit")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+icon = ExtResource("3_br15q")
+flat = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 3
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+placeholder_text = "Manifest Picker"
+keep_editing_on_text_submit = true
+select_all_on_focus = true
+script = ExtResource("4_6yh07")
+
+[node name="EditControls" parent="VBoxContainer/HBoxContainer" instance=ExtResource("5_orbug")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="IndexContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ManifestTree" type="Tree" parent="VBoxContainer/IndexContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
+hide_root = true
+select_mode = 1
+
+[node name="ManufacturerTree" type="Tree" parent="VBoxContainer/IndexContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
+hide_root = true
+select_mode = 1
+
+[node name="ManufacturerTreeSelectBox" type="Panel" parent="VBoxContainer/IndexContainer/ManufacturerTree"]
+visible = false
+modulate = Color(0, 0.5803922, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("6_2qeie")
+
+[node name="GlobalFixtureTree" type="Tree" parent="VBoxContainer/IndexContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
+hide_root = true
+select_mode = 1
+
+[node name="FixtureTreeSelectBox" type="Panel" parent="VBoxContainer/IndexContainer/GlobalFixtureTree"]
+visible = false
+modulate = Color(0, 0.5803922, 1, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("6_2qeie")
+
+[node name="ManufacturerFixtureTree" type="Tree" parent="VBoxContainer/IndexContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 2
+hide_root = true
+select_mode = 1
+
+[node name="ModeTree" type="Tree" parent="VBoxContainer/IndexContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
+hide_root = true
+select_mode = 1
+
+[connection signal="focus_entered" from="VBoxContainer/HBoxContainer/ScrollContainer/LineEdit" to="." method="_on_line_edit_focus_entered"]
+[connection signal="focus_exited" from="VBoxContainer/HBoxContainer/ScrollContainer/LineEdit" to="." method="_on_line_edit_focus_exited"]
+[connection signal="gui_input" from="VBoxContainer/HBoxContainer/ScrollContainer/LineEdit" to="." method="_on_line_edit_gui_input"]
+[connection signal="tag_removed" from="VBoxContainer/HBoxContainer/ScrollContainer/LineEdit" to="." method="_on_line_edit_tag_removed"]
+[connection signal="text_changed" from="VBoxContainer/HBoxContainer/ScrollContainer/LineEdit" to="." method="search_for"]
+[connection signal="text_submitted" from="VBoxContainer/HBoxContainer/ScrollContainer/LineEdit" to="." method="_on_line_edit_text_submitted"]
+[connection signal="item_activated" from="VBoxContainer/IndexContainer/ManifestTree" to="." method="_on_manifest_tree_item_activated"]
+[connection signal="item_activated" from="VBoxContainer/IndexContainer/ManufacturerTree" to="." method="_on_manufacturer_tree_item_activated"]
+[connection signal="item_activated" from="VBoxContainer/IndexContainer/GlobalFixtureTree" to="." method="_on_global_fixture_tree_item_activated"]
+[connection signal="item_activated" from="VBoxContainer/IndexContainer/ManufacturerFixtureTree" to="." method="_on_manufacturer_fixture_tree_item_activated"]
+[connection signal="item_activated" from="VBoxContainer/IndexContainer/ModeTree" to="." method="_on_mode_tree_item_activated"]

@@ -32,17 +32,17 @@ signal items_stop_changed(items: Array, stop: float)
 var _items: Array[ContainerItem]
 
 ## All fixtures stored as { Fixture: { zone: { parameter: ContainerItem } } }
-var _fixture: Dictionary[Fixture, Dictionary]
+var _fixtures: Dictionary[Fixture, Dictionary]
 
 
 ## init
-func _init(p_uuid: String = UUID_Util.v4(), p_name: String = _name) -> void:
-	super._init(p_uuid, p_name)
+func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
+	super._init(p_uuid, p_args)
 	
 	_set_name("DataContainer")
-	_set_self_class("DataContainer")
+	_set_class_name("DataContainer")
 	
-	_settings_manager.register_networked_callbacks({
+	_settings.register_networked_callbacks({
 		"on_items_stored": _store_items,
 		"on_items_erased": _erase_items,
 		"on_items_function_changed": _set_function,
@@ -51,6 +51,8 @@ func _init(p_uuid: String = UUID_Util.v4(), p_name: String = _name) -> void:
 		"on_items_start_changed": _set_start,
 		"on_items_stop_changed": _set_stop,
 	})
+	
+	_settings.set_callback_allow_deserialize("on_items_stored")
 
 
 ## Gets all the ContainerItems
@@ -58,14 +60,38 @@ func get_items() -> Array[ContainerItem]:
 	return _items.duplicate()
 
 
-## Gets all the fixture data
-func get_fixtures() -> Dictionary[Fixture, Dictionary]:
-	return _fixture.duplicate(true)
+## Returns all fixture in this DataContainer
+func get_fixtures() -> Array[Fixture]:
+	var result: Array[Fixture]
+	result.assign(_fixtures.keys())
+	
+	return result
 
 
-## Gets a list of all fixtures in this DataContainer
-func get_stored_fixtures() -> Array:
-	return _fixture.keys()
+## Returns all the data
+func get_data() -> Dictionary[Fixture, Dictionary]:
+	return _fixtures
+
+
+## Gets an item by fixture, zone, and parameter
+func get_item(p_fixture: Fixture, p_zone: String, p_parameter: String) -> ContainerItem:
+	if not _fixtures.has(p_fixture):
+		return null
+	
+	var container: ContainerItem = _fixtures.get(p_fixture, {}).get(p_zone, {}).get(p_parameter, null)
+
+	if not is_instance_valid(container):
+		return null
+	
+	return container
+
+
+## Gets all the data for a given fixture, stored as { zone: { parameter: ContainerItem } }
+func get_data_for(p_fixture: Fixture) -> Dictionary[String, Dictionary]:
+	var result: Dictionary[String, Dictionary]
+	result.assign(_fixtures.get(p_fixture, {}).duplicate(true))
+	
+	return result
 
 
 ## Stores data into this DataContainer
@@ -132,13 +158,13 @@ func delete() -> void:
 
 
 ## Serializes this Datacontainer and returnes it in a dictionary
-func serialize() -> Dictionary:
-	return super.serialize().merged(_serialize())
+func serialize(p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> Dictionary:
+	return super.serialize(p_flags).merged(_serialize())
 
 
 ## Loads this DataContainer from a dictonary
-func deserialize(p_serialized_data: Dictionary) -> void:
-	super.deserialize(p_serialized_data)
+func deserialize(p_serialized_data: Dictionary, p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> void:
+	super.deserialize(p_serialized_data, p_flags)
 	
 	_load(p_serialized_data)
 
@@ -149,10 +175,10 @@ func _store_item(p_item: ContainerItem, no_signal: bool = false) -> bool:
 		return false
 	
 	_items.append(p_item)
-	_fixture.get_or_add(p_item.get_fixture(), {}).get_or_add(p_item.get_zone(), {})[p_item.get_parameter()] = p_item
+	_fixtures.get_or_add(p_item.get_fixture(), {}).get_or_add(p_item.get_zone(), {})[p_item.get_parameter()] = p_item
 
 	ComponentDB.register_component(p_item)
-	p_item.delete_requested.connect(_erase_item.bind(p_item))
+	p_item.delete_requested.connect(_erase_item)
 
 	if not no_signal:
 		items_stored.emit([p_item])
@@ -179,7 +205,14 @@ func _erase_item(p_item: ContainerItem, no_signal: bool = false) -> bool:
 		return false
 	
 	_items.erase(p_item)
-	_fixture[p_item.get_fixture()][p_item.get_zone()].erase(p_item.get_parameter())
+	p_item.delete_requested.disconnect(_erase_item)
+	_fixtures[p_item.get_fixture()][p_item.get_zone()].erase(p_item.get_parameter())
+	
+	if not _fixtures[p_item.get_fixture()][p_item.get_zone()]:
+		_fixtures[p_item.get_fixture()].erase(p_item.get_zone())
+		
+		if not _fixtures[p_item.get_fixture()]:
+			_fixtures.erase(p_item.get_fixture())
 	
 	if not no_signal:
 		items_erased.emit([p_item])
@@ -268,10 +301,10 @@ func _set_stop(p_items: Array, p_stop: float) -> void:
 ## Serializes this DataContainer and returnes it in a dictionary
 func _serialize() -> Dictionary:
 	return {
-		"items": Utils.seralise_component_array(_items)
+		"items": seralise_component_array(_items)
 	}
 
 
 ## Called when this DataContainer is to be loaded from serialized data
 func _load(serialized_data: Dictionary) -> void:
-	_store_items(Utils.deseralise_component_array(type_convert(serialized_data.get("items", []), TYPE_ARRAY)))
+	_store_items(deseralise_component_array(type_convert(serialized_data.get("items", []), TYPE_ARRAY)))

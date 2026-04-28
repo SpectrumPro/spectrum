@@ -66,32 +66,32 @@ var _auto_stop: bool = true
 var _data_container: DataContainer = DataContainer.new()
 
 
-## Constructor
-func _init(p_uuid: String = UUID_Util.v4(), p_name: String = _name) -> void:
-	super._init(p_uuid, p_name)
+## init
+func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
+	super._init(p_uuid, p_args)
 	
 	_set_name("Function")
-	_set_self_class("Function")
+	_set_class_name("Function")
 	
-	_settings_manager.register_custom_panel("status_control", preload("res://components/SettingsManagerCustomPanels/FunctionStatusControls.tscn"), "set_function")
-	_settings_manager.register_setting("auto_start", Data.Type.BOOL, set_auto_start, get_auto_start, [auto_start_changed])
-	_settings_manager.register_setting("auto_stop", Data.Type.BOOL, set_auto_stop, get_auto_stop, [auto_stop_changed])
-	_settings_manager.register_setting("active_state", Data.Type.ENUM, set_active_state, get_active_state, [active_state_changed]).set_enum_dict(ActiveState)
-	_settings_manager.register_setting("transport_state", Data.Type.ENUM, set_transport_state, get_transport_state, [transport_state_changed]).set_enum_dict(TransportState)
-	_settings_manager.register_setting("priority_mode", Data.Type.ENUM, set_priority_mode_state, get_priority_mode_state, [priority_mode_state_changed]).set_enum_dict(PriorityMode)
+	_settings.register_custom_panel("status_control", preload("res://components/SettingsManagerCustomPanels/FunctionStatusControls.tscn"), "set_function")
+	_settings.register_setting("auto_start", Data.Type.BOOL, set_auto_start, get_auto_start, [auto_start_changed])
+	_settings.register_setting("auto_stop", Data.Type.BOOL, set_auto_stop, get_auto_stop, [auto_stop_changed])
+	_settings.register_setting("active_state", Data.Type.ENUM, set_active_state, get_active_state, [active_state_changed]).set_enum_dict(ActiveState)
+	_settings.register_setting("transport_state", Data.Type.ENUM, set_transport_state, get_transport_state, [transport_state_changed]).set_enum_dict(TransportState)
+	_settings.register_setting("priority_mode", Data.Type.ENUM, set_priority_mode_state, get_priority_mode_state, [priority_mode_state_changed]).set_enum_dict(PriorityMode)
 	
-	_settings_manager.register_control("intensity", Data.Type.FLOAT, set_intensity, get_intensity, [intensity_changed])
-	_settings_manager.register_control("on",		Data.Type.ACTION, on)
-	_settings_manager.register_control("off",		Data.Type.ACTION, off)
-	_settings_manager.register_control("toggle",	Data.Type.ACTION, toggle).action_mode_toggle()
-	_settings_manager.register_control("play",		Data.Type.ACTION, play)
-	_settings_manager.register_control("pause",		Data.Type.ACTION, pause)
-	_settings_manager.register_control("temp",		Data.Type.ACTION, full).action_mode_hold(blackout)
-	_settings_manager.register_control("flash",		Data.Type.ACTION, on).action_mode_hold(off)
-	_settings_manager.register_control("full",		Data.Type.ACTION, full)
-	_settings_manager.register_control("blackout",	Data.Type.ACTION, blackout)
+	_settings.register_control("intensity", Data.Type.FLOAT, set_intensity, get_intensity, [intensity_changed])
+	_settings.register_control("on",		Data.Type.ACTION, on)
+	_settings.register_control("off",		Data.Type.ACTION, off)
+	_settings.register_control("toggle",	Data.Type.ACTION, toggle).action_mode_toggle()
+	_settings.register_control("play",		Data.Type.ACTION, play)
+	_settings.register_control("pause",		Data.Type.ACTION, pause)
+	_settings.register_control("temp",		Data.Type.ACTION, full).action_mode_hold(blackout)
+	_settings.register_control("flash",		Data.Type.ACTION, on).action_mode_hold(off)
+	_settings.register_control("full",		Data.Type.ACTION, full)
+	_settings.register_control("blackout",	Data.Type.ACTION, blackout)
 	
-	_settings_manager.register_networked_callbacks({
+	_settings.register_networked_callbacks({
 		"on_intensity_changed": _set_intensity,
 		"on_active_state_changed": _set_active_state,
 		"on_transport_state_changed": _set_transport_state,
@@ -100,7 +100,7 @@ func _init(p_uuid: String = UUID_Util.v4(), p_name: String = _name) -> void:
 		"on_auto_stop_changed": _set_auto_stop,
 	})
 	
-	Network.register_network_object(_data_container.uuid(), _data_container.settings())
+	Network.register_network_object(_data_container.get_uuid(), _data_container.get_settings())
 
 
 ## Gets the ActiveState
@@ -214,8 +214,8 @@ func full() -> Promise:
 
 
 ## Returns serialized version of this component, change the mode to define if this object should be serialized for saving to disk, or for networking to clients
-func serialize() -> Dictionary:
-	return super.serialize().merged({
+func serialize(p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> Dictionary:
+	return super.serialize(p_flags).merged({
 		"priority_mode": _priority_mode,
 		"auto_start": _auto_start,
 		"auto_stop": _auto_stop
@@ -223,8 +223,8 @@ func serialize() -> Dictionary:
 
 
 ## Loades this object from a serialized version
-func deserialize(p_serialized_data: Dictionary) -> void:
-	super.deserialize(p_serialized_data)
+func deserialize(p_serialized_data: Dictionary, p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> void:
+	super.deserialize(p_serialized_data, p_flags)
 	
 	_set_priority_mode_state(type_convert(p_serialized_data.get("priority_mode", _priority_mode), TYPE_INT))
 	
@@ -243,7 +243,7 @@ func deserialize(p_serialized_data: Dictionary) -> void:
 
 ## Deletes this component localy, with out contacting the server. Usefull when handling server side delete requests
 func delete() -> void:
-	Network.deregister_network_object(_data_container.settings())
+	Network.deregister_network_object(_data_container.get_settings())
 	super.delete()
 
 

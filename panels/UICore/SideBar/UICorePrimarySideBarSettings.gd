@@ -67,8 +67,8 @@ func set_side_bar(p_side_bar: UICorePrimarySideBar) -> void:
 ## Adds a tab item
 func _add_tab_item(p_tab_item: UICorePrimarySideBar.TabItem) -> void:
 	_table_rows.map(table.add_row({
-		Column.TITLE: p_tab_item.settings().get_entry("title"),
-		Column.INDEX: p_tab_item.settings().get_entry("index"),
+		Column.TITLE: p_tab_item.get_settings().get_entry("title"),
+		Column.INDEX: p_tab_item.get_settings().get_entry("index"),
 	}), p_tab_item)
 
 
@@ -81,7 +81,7 @@ func _remove_tab_item(p_tab_item: UICorePrimarySideBar.TabItem) -> void:
 ## Called when an item is selected in the table
 func _update_selection() -> void:
 	if table.is_any_selected():
-		settings_manager_view.set_manager(_table_rows.left(table.get_selected_row()).settings())
+		settings_manager_view.set_manager(_table_rows.left(table.get_selected_row()).get_settings())
 	else:
 		settings_manager_view.reset()
 	
@@ -91,11 +91,11 @@ func _update_selection() -> void:
 
 ## Called when the add tab button is pressed
 func _on_create_tab_pressed() -> void:
-	Interface.prompt_panel_picker(self).then(func (p_panel_class: String):
+	Popups.PanelPicker(self).then(func (p_panel_class: String):
 		var panel: UIPanel = UIDB.instance_panel(p_panel_class)
 		var item: UICorePrimarySideBar.TabItem = _side_bar.create_tab(panel, _side_bar.get_next_empty_tab())
 		
-		Interface.prompt_data_input(self, Data.Type.STRING, panel.get_ui_name(), "Tab Name").then(func (p_name: String):
+		Popups.show_data_input(self, Data.Type.STRING, panel.get_ui_name(), "Tab Name").then(func (p_name: String):
 			item.set_title(p_name)
 		)
 	)

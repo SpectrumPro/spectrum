@@ -12,7 +12,7 @@ config_version=5
 
 config/name="SpectrumClient"
 config/description="The modular lighting system."
-config/version="v1.0.0-beta.3"
+config/version="v1.0.0-beta.4"
 run/main_scene="uid://d00fmrh7nbaua"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="SpectrumClient"
@@ -32,22 +32,28 @@ driver/enable_input=true
 
 [autoload]
 
-ClassList="*res://core/global/ClassList.gd"
-NetworkClassList="*res://core/global/NetworkClassList.gd"
+Log="*res://modules/Utils/global/Logger.gd"
+Data="*res://modules/Utils/global/Data.gd"
+ComponentClassList="*res://core/global/ClassList.gd"
+NetworkClassList="*res://modules/NetworkManager/global/NetworkClassList.gd"
+GlobalClassList="*res://modules/Utils/global/GlobalClassList.gd"
 ComponentDB="*res://core/global/ComponentDB.gd"
-UIDB="*res://scripts/global/UIDB.gd"
+NetworkDB="*res://modules/NetworkManager/global/NetworkDB.gd"
+GlobalDB="*res://modules/Utils/global/GlobalDB.gd"
+Network="*res://modules/NetworkManager/global/NetworkManager.gd"
+InputServer="*res://modules/Axis/global/Input.gd"
+Values="*res://global/Values.gd"
+UIDB="*res://modules/Vertex/global/UIDB.gd"
+Popups="*res://global/Popups.gd"
+Interface="*res://modules/Vertex/global/Interface.gd"
 Programmer="*res://core/global/Programmer.gd"
 FixtureLibrary="*res://core/global/FixtureLibrary.gd"
-Network="*res://core/global/NetworkManager.gd"
-ThemeManager="*res://scripts/global/ThemeManager.gd"
-Interface="*res://scripts/global/Interface.gd"
 CIDManager="*res://core/global/CIDManager.gd"
 Core="*res://core/engine/Engine.gd"
-Values="*res://scripts/global/Values.gd"
-InputServer="*res://scripts/global/Input.gd"
 
 [debug]
 
+settings/gdscript/always_track_call_stacks=true
 gdscript/warnings/unused_parameter=0
 gdscript/warnings/shadowed_variable=0
 gdscript/warnings/shadowed_variable_base_class=0
@@ -58,6 +64,7 @@ gdscript/warnings/integer_division=0
 gdscript/warnings/narrowing_conversion=0
 gdscript/warnings/confusable_local_declaration=0
 gdscript/warnings/confusable_capture_reassignment=0
+gdscript/warnings/native_method_override=0
 
 [display]
 
@@ -66,7 +73,7 @@ window/size/viewport_height=1080
 window/size/initial_position_type=4
 window/subwindows/embed_subwindows=false
 window/per_pixel_transparency/allowed=true
-window/vsync/vsync_mode=0
+window/vsync/vsync_mode=2
 window/ios/hide_home_indicator=false
 window/ios/hide_status_bar=false
 

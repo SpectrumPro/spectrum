@@ -42,20 +42,21 @@ var _show_panel_border: bool = true
 
 
 ## init
-func _init() -> void:
-	super._init()
-	
+func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
+	super._init(p_uuid, p_args)
 	_set_class_name("UIColorBlock")
 	
-	_settings_manager.register_setting("Color", Data.Type.COLOR, set_color, get_color, [color_changed])
-	_settings_manager.register_setting("BorderColor", Data.Type.COLOR, set_border_color, get_border_color, [border_color_changed])
-	_settings_manager.register_setting("BorderWidth", Data.Type.INT, set_border_width, get_border_width, [border_width_changed]).set_min_max(0, INF)
-	_settings_manager.register_setting("CornerRadius", Data.Type.INT, set_corner_radius, get_corner_radius, [corner_radius_changed]).set_min_max(0, INF)
-	_settings_manager.register_setting("ShowPanelBorder", Data.Type.BOOL, set_show_panel_border, get_show_panel_border, [show_panel_border_changed])
+	_settings.register_setting("Color", Data.Type.COLOR, set_color, get_color, [color_changed])
+	_settings.register_setting("BorderColor", Data.Type.COLOR, set_border_color, get_border_color, [border_color_changed])
+	_settings.register_setting("BorderWidth", Data.Type.INT, set_border_width, get_border_width, [border_width_changed]).set_min_max(0, INF)
+	_settings.register_setting("CornerRadius", Data.Type.INT, set_corner_radius, get_corner_radius, [corner_radius_changed]).set_min_max(0, INF)
+	_settings.register_setting("ShowPanelBorder", Data.Type.BOOL, set_show_panel_border, get_show_panel_border, [show_panel_border_changed])
 
 
 ## ready
 func _ready() -> void:
+	super._ready()
+	
 	_style_box = panel.get_theme_stylebox("panel").duplicate()
 	panel.add_theme_stylebox_override("panel", _style_box)
 
@@ -99,6 +100,8 @@ func set_corner_radius(p_corner_radius: int, p_no_signal: bool = false) -> void:
 ## Sets the show panel border state
 func set_show_panel_border(p_show_panel_border: bool, p_no_signal: bool = false) -> void:
 	_show_panel_border = p_show_panel_border
+	
+	@warning_ignore("incompatible_ternary")
 	add_theme_stylebox_override("panel", ThemeManager.StyleBoxes.UIPanelBase if _show_panel_border else StyleBoxEmpty.new())
 	
 	if not p_no_signal:
@@ -131,8 +134,8 @@ func get_show_panel_border() -> bool:
 
 
 ## Saves the current settings of this panel to a Dictionary
-func serialize() -> Dictionary:
-	return super.serialize().merged({
+func serialize(p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> Dictionary:
+	return super.serialize(p_flags).merged({
 		"color": var_to_str(_color),
 		"border_color": var_to_str(_border_color),
 		"border_width": _border_width,
@@ -142,8 +145,8 @@ func serialize() -> Dictionary:
 
 
 ## Loads the settings of this panel from a Dictionary
-func deserialize(p_serialized_data: Dictionary) -> void:
-	super.deserialize(p_serialized_data)
+func deserialize(p_serialized_data: Dictionary, p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> void:
+	super.deserialize(p_serialized_data, p_flags)
 	
 	set_color(type_convert(str_to_var(type_convert(p_serialized_data.get("color", ""), TYPE_STRING)), TYPE_COLOR), true)
 	set_border_color(type_convert(str_to_var(type_convert(p_serialized_data.get("border_color", ""), TYPE_STRING)), TYPE_COLOR), true)

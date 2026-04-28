@@ -1,21 +1,21 @@
 [gd_scene load_steps=25 format=3 uid="uid://d00fmrh7nbaua"]
 
-[ext_resource type="StyleBox" uid="uid://c248eat6flpbo" path="res://assets/styles/UIPanelImbed.tres" id="1_7kg0u"]
+[ext_resource type="StyleBox" uid="uid://c248eat6flpbo" path="res://modules/Vertex/assets/styles/UIPanelImbed.tres" id="1_7kg0u"]
 [ext_resource type="Script" uid="uid://cjbnp24htiy3i" path="res://panels/UICore/UICore.gd" id="1_febpr"]
-[ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://panels/UIPanel/PanelMenuBar.tscn" id="2_dciud"]
+[ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://modules/Vertex/panels/UIPanel/PanelMenuBar.tscn" id="2_dciud"]
 [ext_resource type="Script" uid="uid://cpdu3qjv70rxp" path="res://panels/UICore/SideBar/UICorePrimarySideBar.gd" id="2_hksc6"]
-[ext_resource type="Texture2D" uid="uid://vw0vs7dlct55" path="res://assets/icons/menu.svg" id="3_prxic"]
-[ext_resource type="Texture2D" uid="uid://rqf8w11gk6ud" path="res://assets/icons/Edit.svg" id="4_avgbi"]
-[ext_resource type="FontFile" uid="uid://crlak6jhg5jy2" path="res://assets/font/RubikMonoOne-Regular.ttf" id="5_kdrkr"]
-[ext_resource type="Texture2D" uid="uid://cbevvqqcn6jof" path="res://assets/icons/Dashboard.svg" id="6_g4gss"]
-[ext_resource type="Texture2D" uid="uid://bly6v8fqc5sdb" path="res://assets/icons/Panel.svg" id="7_s5yey"]
-[ext_resource type="StyleBox" uid="uid://btn6vaav0vau3" path="res://assets/styles/PanelMenuBarPopup.tres" id="8_x6rwm"]
+[ext_resource type="Texture2D" uid="uid://vw0vs7dlct55" path="res://modules/Vertex/assets/icons/menu.svg" id="3_prxic"]
+[ext_resource type="Texture2D" uid="uid://rqf8w11gk6ud" path="res://modules/Vertex/assets/icons/Edit.svg" id="4_avgbi"]
+[ext_resource type="FontFile" uid="uid://crlak6jhg5jy2" path="res://modules/Vertex/assets/font/RubikMonoOne-Regular.ttf" id="5_kdrkr"]
+[ext_resource type="Texture2D" uid="uid://cbevvqqcn6jof" path="res://modules/Vertex/assets/icons/Dashboard.svg" id="6_g4gss"]
+[ext_resource type="Texture2D" uid="uid://bly6v8fqc5sdb" path="res://modules/Vertex/assets/icons/Panel.svg" id="7_s5yey"]
+[ext_resource type="StyleBox" uid="uid://btn6vaav0vau3" path="res://modules/Vertex/assets/styles/PanelMenuBarPopup.tres" id="8_x6rwm"]
 [ext_resource type="Script" uid="uid://comuawwwqayh3" path="res://panels/UICore/UICoreResolveButtons.gd" id="9_h7bru"]
 [ext_resource type="Script" uid="uid://br6f2mp8wonk3" path="res://panels/UICore/UICorePanelTypeOption.gd" id="9_r218t"]
 [ext_resource type="Script" uid="uid://5twbcqrk7as1" path="res://panels/UICore/UICoreStatusBar.gd" id="10_00dbt"]
-[ext_resource type="Texture2D" uid="uid://cbwmiekm47cot" path="res://assets/icons/Action.svg" id="11_q5s34"]
-[ext_resource type="FontFile" uid="uid://cn86ussko5res" path="res://assets/font/IntelOneMono-VariableFont_wght.ttf" id="12_ucqqu"]
-[ext_resource type="LabelSettings" uid="uid://ci6veq1d2x5c4" path="res://assets/styles/DimText.tres" id="13_c1is7"]
+[ext_resource type="Texture2D" uid="uid://cbwmiekm47cot" path="res://modules/Vertex/assets/icons/Action.svg" id="11_q5s34"]
+[ext_resource type="FontFile" uid="uid://cn86ussko5res" path="res://modules/Vertex/assets/font/IntelOneMono-VariableFont_wght.ttf" id="12_ucqqu"]
+[ext_resource type="LabelSettings" uid="uid://ci6veq1d2x5c4" path="res://modules/Vertex/assets/styles/DimText.tres" id="13_c1is7"]
 [ext_resource type="Texture2D" uid="uid://bsbmpadvx8wi8" path="res://assets/logos/spectrum/dark_scaled/spectrum_dark-256x256.png" id="17_r218t"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aoeir"]
@@ -70,7 +70,7 @@ font_color = Color(0.789062, 0.789062, 0.789062, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bphhv"]
 bg_color = Color(0.09, 0.09, 0.09, 1)
 
-[node name="UICore" type="PanelContainer" node_paths=PackedStringArray("_side_bar", "_startup_bg", "_notice_container", "edit_controls", "menu_bar")]
+[node name="UICore" type="PanelContainer" node_paths=PackedStringArray("_side_bar", "_startup_bg", "_notice_container")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -81,14 +81,13 @@ script = ExtResource("1_febpr")
 _side_bar = NodePath("VBoxContainer/HBoxContainer/UICorePrimarySideBar")
 _startup_bg = NodePath("StartupBG")
 _notice_container = NodePath("NoticeContainer")
-edit_controls = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/EditControls")
-menu_bar = NodePath("VBoxContainer/PanelMenuBar")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="PanelMenuBar" parent="VBoxContainer" instance=ExtResource("2_dciud")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="0"]
@@ -253,7 +252,7 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 
-[node name="UICoreResolveButtons" type="PanelContainer" parent="VBoxContainer/HBoxContainer/MainContent/OverlayContainer" node_paths=PackedStringArray("_button_container")]
+[node name="UICoreResolveButtons" type="PanelContainer" parent="VBoxContainer/HBoxContainer/MainContent/OverlayContainer"]
 visible = false
 layout_mode = 1
 anchors_preset = 7
@@ -268,18 +267,17 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = ExtResource("8_x6rwm")
 script = ExtResource("9_h7bru")
-_button_container = NodePath("HBoxContainer")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/MainContent/OverlayContainer/UICoreResolveButtons"]
+[node name="ResolveButtonContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/MainContent/OverlayContainer/UICoreResolveButtons"]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="UICoreStatusBar" type="PanelContainer" parent="VBoxContainer" node_paths=PackedStringArray("_version_label", "_info_label", "_resolve_button_container")]
+[node name="UICoreStatusBar" type="PanelContainer" parent="VBoxContainer" node_paths=PackedStringArray("_version_label", "_resolve_button_container")]
 custom_minimum_size = Vector2(0, 61)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_pj23w")
 script = ExtResource("10_00dbt")
 _version_label = NodePath("HBoxContainer/VersionLabel")
-_info_label = NodePath("HBoxContainer/PanelContainer/HBoxContainer/Label")
 _resolve_button_container = NodePath("../HBoxContainer/MainContent/OverlayContainer/UICoreResolveButtons")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/UICoreStatusBar"]

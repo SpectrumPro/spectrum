@@ -6,7 +6,7 @@
 font_size = 9
 font_color = Color(0.581033, 0.581033, 0.581033, 1)
 
-[node name="PlaybackColumn" type="PanelContainer" node_paths=PackedStringArray("title_button", "button1", "button2", "button3", "button4", "button5", "button6", "slider")]
+[node name="PlaybackColumn" type="PanelContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -17,14 +17,6 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_l3b1e")
-title_button = NodePath("VBoxContainer/Title")
-button1 = NodePath("VBoxContainer/Button")
-button2 = NodePath("VBoxContainer/Button2")
-button3 = NodePath("VBoxContainer/Button3")
-button4 = NodePath("VBoxContainer/Button4")
-button5 = NodePath("VBoxContainer/Button5")
-button6 = NodePath("VBoxContainer/Button6")
-slider = NodePath("VBoxContainer/VSlider")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2

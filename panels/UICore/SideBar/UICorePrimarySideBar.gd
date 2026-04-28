@@ -87,37 +87,36 @@ var _button_group: ButtonGroup = ButtonGroup.new()
 var _use_scroll: bool = false
 
 ## The SettingsManager for this UICorePrimarySideBar
-var _settings_manager: SettingsManager = SettingsManager.new()
+var _settings: SettingsManager = SettingsManager.new()
 
 
 ## Init
 func _init() -> void:
-	_settings_manager.set_owner(self)
-	_settings_manager.set_inheritance_array(["UICorePrimarySideBar"])
+	_settings.set_owner(self)
+	_settings.set_inheritance_array(["UICorePrimarySideBar"])
 	
-	_settings_manager.register_setting("use_scroll", Data.Type.BOOL, set_use_scroll, get_use_scroll, [use_scroll_changed])\
+	_settings.register_setting("use_scroll", Data.Type.BOOL, set_use_scroll, get_use_scroll, [use_scroll_changed])\
 	.display("UICorePrimarySideBar", 1)
 	
-	_settings_manager.register_custom_panel("tabs", load("res://panels/UICore/SideBar/UICorePrimarySideBarSettings.tscn"), "set_side_bar")\
+	_settings.register_custom_panel("tabs", load("res://panels/UICore/SideBar/UICorePrimarySideBarSettings.tscn"), "set_side_bar")\
 	.display("UICorePrimarySideBar", 2)
 
 
 ## Ready
 func _ready() -> void:
 	_load_default_buttons()
-	
 	create_tab(UIDB.instance_panel(UIDesk), 0).set_title("Desk")
 	
 	_tab_button_container.add_theme_constant_override("separation", button_separation)
-	_main_menu = Interface.get_window_popup(Interface.WindowPopup.MAIN_MENU, self)
+	_main_menu = Interface.get_window_popup(UIMainMenu, self)
 	_main_menu.visibility_changed.connect(func ():
 		_menu_button.set_pressed_no_signal(_main_menu.visible)
 	)
 
 
 ## Gets the SettingsManager
-func settings() -> SettingsManager:
-	return _settings_manager
+func get_settings() -> SettingsManager:
+	return _settings
 
 
 ## Creates a new tab in an empty spot
@@ -154,18 +153,28 @@ func set_tab_panel(p_panel: UIPanel, p_tab: TabItem) -> void:
 		_tab_control_container.remove_child(p_tab.get_panel())
 		p_tab.get_panel().queue_redraw()
 	
-	_overlay_container.add_child(p_panel.detatch_menu_bar())
 	_tab_control_container.add_child(p_panel)
-	
-	p_panel.get_menu_bar().size.x = menu_bar_default_size
-	p_panel.get_menu_bar().set_anchors_and_offsets_preset(Control.PRESET_CENTER_TOP, Control.PRESET_MODE_KEEP_WIDTH)
-	p_panel.get_menu_bar().set_visible(false)
 	p_tab._set_panel(p_panel)
 	
 	if p_tab == _current_tab:
 		p_panel.set_visible(true)
 	else:
 		p_panel.set_visible(false)
+	
+	if not p_panel.is_node_ready():
+		await p_panel.ready
+	
+	var menu_bar: PanelMenuBar = p_panel.detatch_menu_bar()
+	
+	if is_instance_valid(menu_bar):
+		_overlay_container.add_child(menu_bar)
+		p_panel.get_menu_bar().size.x = menu_bar_default_size
+		p_panel.get_menu_bar().set_anchors_and_offsets_preset(Control.PRESET_CENTER_TOP, Control.PRESET_MODE_KEEP_WIDTH)
+		p_panel.get_menu_bar().set_visible(false)
+	else:
+		print(p_panel, " does not have valid PanelMenuBar")
+		print(p_panel.get_path)
+		p_panel.modulate = Color.RED
 
 
 ## Sets the tab index
@@ -327,7 +336,7 @@ func deserialize(p_saved_data: Dictionary) -> void:
 		
 		var title: String = type_convert(tabs[tab_id].get("title", ""), TYPE_STRING)
 		var serialized_panel: Dictionary = type_convert(tabs[tab_id].get("panel", ""), TYPE_DICTIONARY)
-		var panel_class: String = serialized_panel.get("class")
+		var panel_class: String = serialized_panel.get("class_name")
 		
 		var tab_id_int: int = int(tab_id)
 		var tab_item: TabItem
@@ -399,7 +408,7 @@ func _on_edit_toggled(p_toggled_on: bool) -> void:
 
 ## Called when the main menu button is toggled
 func _on_menu_toggled(p_toggled_on: bool) -> void:
-	Interface.set_popup_visable(Interface.WindowPopup.MAIN_MENU, self, p_toggled_on)
+	Interface.set_popup_visable(UIMainMenu, self, p_toggled_on)
 
 
 ## Called for each GUI input on the edit button
@@ -452,7 +461,7 @@ class TabItem extends RefCounted:
 	var _bound_set_index_callable: Callable = Callable()
 	
 	## SettingsManager for this TabItem
-	var _settings_manager: SettingsManager = SettingsManager.new()
+	var _settings: SettingsManager = SettingsManager.new()
 	
 	
 	## Init
@@ -461,16 +470,16 @@ class TabItem extends RefCounted:
 		_label = p_label
 		_index = p_index
 		
-		_settings_manager.set_owner(self)
-		_settings_manager.set_inheritance_array(["TabItem"])
-		_settings_manager.register_setting("title", Data.Type.STRING, set_title, get_title, [title_changed])
-		_settings_manager.register_setting("panel", Data.Type.UIPANEL, set_panel, get_panel, [panel_changed])
-		_settings_manager.register_setting("index", Data.Type.INT, set_index, get_index, [index_changed]).set_min_max(0, 65535)
+		_settings.set_owner(self)
+		_settings.set_inheritance_array(["TabItem"])
+		_settings.register_setting("title", Data.Type.STRING, set_title, get_title, [title_changed])
+		_settings.register_setting("panel", Data.Type.PACKEDSCENE, set_panel, get_panel, [panel_changed]).set_sub_type(Data.Sub.Type.PACKEDSCENE_UIPANEL)
+		_settings.register_setting("index", Data.Type.INT, set_index, get_index, [index_changed]).set_min_max(0, 65535)
 	
 	
 	## Gets the SettingsManager
-	func settings() -> SettingsManager:
-		return _settings_manager
+	func get_settings() -> SettingsManager:
+		return _settings
 	
 	
 	## Sets the title
@@ -501,6 +510,7 @@ class TabItem extends RefCounted:
 	func set_button(p_button: Button) -> void:
 		if is_instance_valid(_button):
 			_button.set_self_modulate(ThemeManager.Colors.UICorePrimarySideBarDisabledTabModulate)
+			_button.gui_input.disconnect(_on_button_gui_input)
 			
 			if _bound_switch_callable.is_valid() and _button.pressed.is_connected(_bound_switch_callable):
 				_button.pressed.disconnect(_bound_switch_callable)
@@ -509,6 +519,7 @@ class TabItem extends RefCounted:
 		
 		if is_instance_valid(_button):
 			_button.set_self_modulate(ThemeManager.Colors.UICorePrimarySideBarTabModulate)
+			_button.gui_input.connect(_on_button_gui_input)
 			
 			if _bound_switch_callable.is_valid() and not _button.pressed.is_connected(_bound_switch_callable):
 				_button.pressed.connect(_bound_switch_callable)
@@ -592,183 +603,13 @@ class TabItem extends RefCounted:
 		
 		if _bound_set_index_callable and request_index_change.is_connected(_bound_set_index_callable):
 			request_index_change.disconnect(_bound_set_index_callable)
-
-
-
-#
-
-
-#
-
-#
-### The PanelTypeOption menu
-#@export var _panel_type_option: PanelContainer
-#
-#
-
-#
-### RefMap for TabID: UIPanel
-#var _tab_controls: RefMap = RefMap.new()
-#
-### RefMap for UIPanel: PanelMenuBar
-#var _menu_bars: RefMap = RefMap.new()
-#
-### The current tab number
-#var _current_tab: int = 0
-#
-### The current visable tabs control node
-#var _current_visable_panel: UIPanel
-#
-
-#
-
-
-#
-#
-
-#
-#
-### Changes to a tab
-#func change_to_tab(p_tab_id: int) -> bool:
-	#if p_tab_id == _current_tab or p_tab_id > len(_tab_buttons):
-		#return false
-	#
-	#if _tab_controls.has_left(p_tab_id):
-		#if _current_visable_panel:
-			#Interface.fade_and_hide(_current_visable_panel)
-			#Interface.fade_and_hide(_menu_bars.left(_current_visable_panel))
-		#
-		#Interface.fade_and_hide(_panel_type_option)
-		#_current_visable_panel = _tab_controls.left(p_tab_id)
-		#Interface.show_and_fade(_current_visable_panel)
-		#
-		#if _current_visable_panel.get_edit_mode():
-			#Interface.show_and_fade(_menu_bars.left(_current_visable_panel))
-		#
-		#_edit_button.disabled = false
-		#_edit_button.set_pressed_no_signal(_current_visable_panel.get_edit_mode())
-		#
-		#_tab_buttons[p_tab_id].set_pressed_no_signal(true)
-	#
-	#else:
-		#if _current_visable_panel:
-			#Interface.fade_and_hide(_current_visable_panel)
-			#Interface.fade_and_hide(_menu_bars.left(_current_visable_panel))
-		#
-		#Interface.show_and_fade(_panel_type_option)
-		#
-		#_current_visable_panel = null
-		#_edit_button.disabled = true
-		#
-		#_tab_buttons[p_tab_id].set_pressed_no_signal(true)
-	#
-	#_current_tab = p_tab_id
-	#return true
-#
-#
-
-#
-#
-### Creates a custom panel tab
-#func create_custom(p_panel_class: String) -> UIPanel:
-	#if not UIDB.has_panel(p_panel_class) or _tab_controls.has_left(_current_tab):
-		#return null
-	#
-	#var new_panel: UIPanel = UIDB.instance_panel(p_panel_class)
-	#
-	#set_panel(new_panel, _current_tab)
-	#return new_panel
-#
-#
-### Sets the UIPanel on the current tab
-#func set_panel(p_panel: UIPanel, p_tab: int) -> void:
-	#if _tab_controls.has_left(p_tab):
-		#_tab_controls.left(p_tab).queue_free()
-	#
-	#p_panel.set_menu_bar_visible(false)
-	#
-	#var menu_bar: PanelMenuBar = p_panel.detatch_menu_bar()
-	#_menu_bars.map(p_panel, menu_bar)
-	#
-	#_overlay_container.add_child(menu_bar)
-
-	#
-	#_tab_controls.map(p_tab, p_panel)
-	#_tab_control_container.add_child(p_panel)
-	#
-	#_tab_buttons[p_tab].get_child(0).set_text(default_tab_name.replace("#", str(p_tab)))
-	#_tab_buttons[p_tab].self_modulate = tab_button_modulate
-	#
-	#_current_visable_panel = p_panel
-	#_current_visable_panel.hide()
-	#Interface.show_and_fade(_current_visable_panel)
-	#Interface.fade_and_hide(_panel_type_option)
-	#_edit_button.disabled = false
-#
-#
-### Gets the current tab
-#func get_current_tab() -> int:
-	#return _current_tab
-#
-#
-### Sets the edit mode state on the current selected tab
-#func set_tab_edit_mode(p_edit_mode: bool) -> bool:
-	#if not _current_visable_panel:
-		#return false
-	#
-	#if p_edit_mode:
-		#Interface.show_and_fade(_menu_bars.left(_current_visable_panel))
-	#else:
-		#Interface.fade_and_hide(_menu_bars.left(_current_visable_panel))
-	#
-	#_current_visable_panel.set_edit_mode(p_edit_mode)
-	#return true
-#
-#
-### Sets the name of a tab
-#func set_tab_name(p_tab_id: int, p_tab_name: String) -> bool:
-	#if p_tab_id > len(_tab_buttons) - 1:
-		#return false
-	#
-	#_tab_buttons[p_tab_id].get_child(0).text = p_tab_name
-	#return true
-#
-#
-### Resets this to the default state
-#func reset() -> void:
-	#for tab: UIPanel in _tab_controls.get_right():
-		#tab.queue_free()
-	#
-	#for tab_button: Button in _tab_buttons:
-		#tab_button.queue_free()
-	#
-	#_current_tab = 0
-	#_tab_buttons.clear()
-	#_tab_controls.clear()
-	#_current_visable_panel = null
-	#_button_group = ButtonGroup.new()
-#
-#
-
-#
-#
-
-#
-#
-### Called when the AddCustom button is pressed
-#func _on_add_custom_pressed() -> void:
-	#var current_tab: int = _current_tab
-	#Interface.prompt_panel_picker(self).then(func (p_panel_class: String):
-		#set_panel(UIDB.instance_panel(p_panel_class), current_tab)
-	#)
-#
-#
-### Called when the MenuButton is toggled
-#func _on_menu_toggled(toggled_on: bool) -> void:
-	#Interface.set_popup_visable(Interface.WindowPopup.MAIN_MENU, self, toggled_on)
-#
-#
-### Called for each GUI input on the edit button
-#func _on_edit_gui_input(event: InputEvent) -> void:
-	#if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.is_pressed():
-		#Interface.prompt_settings_module(self, _settings_manager.get_entry("tabs"))
+	
+	
+	## Called for each GUI input on the button
+	func _on_button_gui_input(p_event: InputEvent) -> void:
+		if p_event is InputEventMouseButton and p_event.is_pressed():
+			p_event = p_event as InputEventMouseButton
+			
+			match p_event.button_index:
+				MOUSE_BUTTON_RIGHT:
+					Popups.show_settings_manager(_button, _settings)

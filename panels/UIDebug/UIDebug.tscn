@@ -1,19 +1,19 @@
 [gd_scene load_steps=10 format=3 uid="uid://dqatkkghk5b2q"]
 
-[ext_resource type="Theme" uid="uid://cyua45ur0ijqo" path="res://assets/Main.theme" id="1_g10eh"]
-[ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://assets/styles/UIPanelBase.tres" id="2_gdvvh"]
+[ext_resource type="Theme" uid="uid://cyua45ur0ijqo" path="res://modules/Vertex/assets/themes/Main.theme" id="1_g10eh"]
+[ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://modules/Vertex/assets/styles/UIPanelBase.tres" id="2_gdvvh"]
 [ext_resource type="Script" uid="uid://bshfmstayckth" path="res://panels/UIDebug/UIDebug.gd" id="3_stwxr"]
-[ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://panels/UIPanel/PanelMenuBar.tscn" id="4_04ogp"]
-[ext_resource type="Texture2D" uid="uid://chva73v2q1246" path="res://assets/icons/Bug.svg" id="5_5xvlq"]
-[ext_resource type="Texture2D" uid="uid://dlikb8or3xepr" path="res://assets/icons/Reset.svg" id="6_fgsol"]
-[ext_resource type="Texture2D" uid="uid://qporw0h5fc8b" path="res://assets/icons/Stop.svg" id="7_q0gbw"]
-[ext_resource type="Texture2D" uid="uid://bjpa56jg5lki7" path="res://assets/icons/Skull.svg" id="8_q38qm"]
+[ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://modules/Vertex/panels/UIPanel/PanelMenuBar.tscn" id="4_04ogp"]
+[ext_resource type="Texture2D" uid="uid://chva73v2q1246" path="res://modules/Vertex/assets/icons/Bug.svg" id="5_5xvlq"]
+[ext_resource type="Texture2D" uid="uid://dlikb8or3xepr" path="res://modules/Vertex/assets/icons/Reset.svg" id="6_fgsol"]
+[ext_resource type="Texture2D" uid="uid://qporw0h5fc8b" path="res://modules/Vertex/assets/icons/Stop.svg" id="7_q0gbw"]
+[ext_resource type="Texture2D" uid="uid://bjpa56jg5lki7" path="res://modules/Vertex/assets/icons/Skull.svg" id="8_q38qm"]
 
 [sub_resource type="SystemFont" id="SystemFont_fhcgp"]
 font_names = PackedStringArray("Open Sans")
 font_weight = 925
 
-[node name="UIDebug" type="PanelContainer" node_paths=PackedStringArray("message_for", "message_method", "message_args", "local_remote_option", "edit_controls", "menu_bar")]
+[node name="UIDebug" type="PanelContainer" node_paths=PackedStringArray("message_for", "message_method", "message_args", "local_remote_option")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -28,13 +28,12 @@ message_for = NodePath("VBoxContainer/PanelContainer2/ScrollContainer/HBoxContai
 message_method = NodePath("VBoxContainer/PanelContainer2/ScrollContainer/HBoxContainer/Call/HBoxContainer/Method")
 message_args = NodePath("VBoxContainer/PanelContainer2/ScrollContainer/HBoxContainer/Args/HBoxContainer/Args")
 local_remote_option = NodePath("VBoxContainer/PanelContainer2/ScrollContainer/HBoxContainer/LocalRemoteOption")
-edit_controls = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/EditControls")
-menu_bar = NodePath("VBoxContainer/PanelMenuBar")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
 [node name="PanelMenuBar" parent="VBoxContainer" instance=ExtResource("4_04ogp")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="0"]
@@ -145,6 +144,48 @@ layout_mode = 2
 disabled = true
 text = "Get Serialized Component Local"
 
+[node name="PromptParameterListCombined" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+text = "Prompt Parameter List Combined
+"
+
+[node name="PromptParameterListZone" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+text = "Prompt Parameter List Zone
+"
+
+[node name="PromptParameterListZoneParameter" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+text = "Prompt Parameter List Zone Parameter"
+
+[node name="PromptParameterListParameter" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+text = "Prompt Parameter List Parameter"
+
+[node name="PromptParameterListFunction" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+text = "Prompt Parameter List Function"
+
+[node name="ObjectSelector" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+text = "Prompt ObjectPicker"
+
+[node name="ObjectSelector_gbc_index" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+text = "Prompt ObjectPicker_gbc_index"
+
+[node name="ObjectSelector_gbc_object" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+text = "Prompt ObjectPicker_gbc_object"
+
+[node name="ObjectSelector_gbc_class" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+text = "Prompt ObjectPicker_gbc_class"
+
+[node name="ObjectSelector_class" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+text = "Prompt ObjectPicker_class"
+
 [node name="Output" type="CodeEdit" parent="VBoxContainer/PanelContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -244,6 +285,16 @@ text = "Send"
 [connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer/DumpFixtureData" to="." method="_on_dump_fixture_data_pressed"]
 [connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer/GetSerializedComponentRemote" to="." method="_on_get_serialized_component_pressed"]
 [connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer/GetSerializedComponentLocal" to="." method="_on_get_serialized_component_local_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer/PromptParameterListCombined" to="." method="_on_prompt_parameter_list_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer/PromptParameterListZone" to="." method="_on_prompt_parameter_list_zone_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer/PromptParameterListZoneParameter" to="." method="_on_prompt_parameter_list_zone_parameter_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer/PromptParameterListParameter" to="." method="_on_prompt_parameter_list_parameter_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer/PromptParameterListFunction" to="." method="_on_prompt_parameter_list_function_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer/ObjectSelector" to="." method="_on_object_picker_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer/ObjectSelector_gbc_index" to="." method="_on_object_selector_gbc_index_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer/ObjectSelector_gbc_object" to="." method="_on_object_selector_gbc_object_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer/ObjectSelector_gbc_class" to="." method="_on_object_selector_gbc_class_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer/ObjectSelector_class" to="." method="_on_object_picker_class_pressed"]
 [connection signal="pressed" from="VBoxContainer/PanelContainer2/ScrollContainer/HBoxContainer/SendMessage" to="." method="_on_send_message_to_server_pressed"]
 
 [editable path="VBoxContainer/PanelMenuBar"]

@@ -1,22 +1,22 @@
 [gd_scene load_steps=21 format=3 uid="uid://dnyj8vnwwbi2v"]
 
-[ext_resource type="Theme" uid="uid://cyua45ur0ijqo" path="res://assets/Main.theme" id="1_8omv0"]
-[ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://assets/styles/UIPanelBase.tres" id="2_y0ly3"]
+[ext_resource type="Theme" uid="uid://cyua45ur0ijqo" path="res://modules/Vertex/assets/themes/Main.theme" id="1_8omv0"]
+[ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://modules/Vertex/assets/styles/UIPanelBase.tres" id="2_y0ly3"]
 [ext_resource type="Script" uid="uid://ckvl7eb5awy56" path="res://panels/UIProgrammer/UIProgrammer.gd" id="3_sp6ey"]
-[ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://panels/UIPanel/PanelMenuBar.tscn" id="4_rdv1j"]
-[ext_resource type="Texture2D" uid="uid://dt0khkr0ltw70" path="res://assets/icons/Programmer.svg" id="5_fc45e"]
-[ext_resource type="Texture2D" uid="uid://c1cl6qetwg8st" path="res://assets/icons/Arrow_back.svg" id="6_sp6ey"]
-[ext_resource type="Texture2D" uid="uid://dlikb8or3xepr" path="res://assets/icons/Reset.svg" id="6_xrr4a"]
-[ext_resource type="StyleBox" uid="uid://csle20exwqtti" path="res://assets/styles/PanelMenuBar.tres" id="7_7jywt"]
-[ext_resource type="Texture2D" uid="uid://kkblmodueva1" path="res://assets/icons/Arrow_foward.svg" id="7_rdv1j"]
-[ext_resource type="Texture2D" uid="uid://bc0acgx0we044" path="res://assets/icons/Zone.svg" id="8_fc45e"]
-[ext_resource type="Texture2D" uid="uid://cfdxexemm7766" path="res://assets/icons/RandomMode.svg" id="9_xrr4a"]
-[ext_resource type="FontFile" uid="uid://crlak6jhg5jy2" path="res://assets/font/RubikMonoOne-Regular.ttf" id="10_ikse1"]
-[ext_resource type="Texture2D" uid="uid://crxgau8v7k3yh" path="res://assets/icons/PlayAlt.svg" id="12_ikse1"]
-[ext_resource type="Texture2D" uid="uid://bf4227ei83gh1" path="res://assets/icons/play.svg" id="13_qpens"]
-[ext_resource type="Texture2D" uid="uid://huxujb0ev1gk" path="res://assets/icons/Loop.svg" id="14_qpens"]
-[ext_resource type="Texture2D" uid="uid://3r1jb0q1v7ri" path="res://assets/icons/AdvancedTime.svg" id="15_qwc1o"]
-[ext_resource type="Texture2D" uid="uid://ctlp20jtv727k" path="res://assets/icons/Store.svg" id="16_qpens"]
+[ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://modules/Vertex/panels/UIPanel/PanelMenuBar.tscn" id="4_rdv1j"]
+[ext_resource type="Texture2D" uid="uid://dt0khkr0ltw70" path="res://modules/Vertex/assets/icons/Programmer.svg" id="5_fc45e"]
+[ext_resource type="Texture2D" uid="uid://c1cl6qetwg8st" path="res://modules/Vertex/assets/icons/Arrow_back.svg" id="6_sp6ey"]
+[ext_resource type="Texture2D" uid="uid://dlikb8or3xepr" path="res://modules/Vertex/assets/icons/Reset.svg" id="6_xrr4a"]
+[ext_resource type="StyleBox" uid="uid://csle20exwqtti" path="res://modules/Vertex/assets/styles/PanelMenuBar.tres" id="7_7jywt"]
+[ext_resource type="Texture2D" uid="uid://kkblmodueva1" path="res://modules/Vertex/assets/icons/Arrow_foward.svg" id="7_rdv1j"]
+[ext_resource type="Texture2D" uid="uid://bc0acgx0we044" path="res://modules/Vertex/assets/icons/Zone.svg" id="8_fc45e"]
+[ext_resource type="Texture2D" uid="uid://cfdxexemm7766" path="res://modules/Vertex/assets/icons/RandomMode.svg" id="9_xrr4a"]
+[ext_resource type="FontFile" uid="uid://crlak6jhg5jy2" path="res://modules/Vertex/assets/font/RubikMonoOne-Regular.ttf" id="10_ikse1"]
+[ext_resource type="Texture2D" uid="uid://crxgau8v7k3yh" path="res://modules/Vertex/assets/icons/PlayAlt.svg" id="12_ikse1"]
+[ext_resource type="Texture2D" uid="uid://bf4227ei83gh1" path="res://modules/Vertex/assets/icons/play.svg" id="13_qpens"]
+[ext_resource type="Texture2D" uid="uid://huxujb0ev1gk" path="res://modules/Vertex/assets/icons/Loop.svg" id="14_qpens"]
+[ext_resource type="Texture2D" uid="uid://3r1jb0q1v7ri" path="res://modules/Vertex/assets/icons/AdvancedTime.svg" id="15_qwc1o"]
+[ext_resource type="Texture2D" uid="uid://ctlp20jtv727k" path="res://modules/Vertex/assets/icons/Store.svg" id="16_qpens"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fc45e"]
 bg_color = Color(0.12941177, 0.12941177, 0.12941177, 1)
@@ -38,7 +38,7 @@ font_color = Color(0.15, 0.15, 0.15, 1)
 [sub_resource type="ButtonGroup" id="ButtonGroup_qwc1o"]
 allow_unpress = true
 
-[node name="UIProgrammer" type="PanelContainer" node_paths=PackedStringArray("tab_button_container", "layer_button_container", "controler_container", "zone_select", "random_mode", "template_placeholder", "page_select_option", "prev_page_button", "next_page_button", "edit_controls", "menu_bar")]
+[node name="UIProgrammer" type="PanelContainer" node_paths=PackedStringArray("tab_button_container", "layer_button_container", "controler_container", "zone_select", "random_mode", "template_placeholder", "page_select_option", "prev_page_button", "next_page_button")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -56,13 +56,12 @@ template_placeholder = NodePath("VBoxContainer/ScrollContainer/HBoxContainer/Tem
 page_select_option = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/PageButtons/HBoxContainer/PageSelect")
 prev_page_button = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/PageButtons/HBoxContainer/PageBack")
 next_page_button = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/PageButtons/HBoxContainer/PageFowards")
-edit_controls = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/EditControls")
-menu_bar = NodePath("VBoxContainer/PanelMenuBar")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
 [node name="PanelMenuBar" parent="VBoxContainer" instance=ExtResource("4_rdv1j")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="0"]

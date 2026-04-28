@@ -24,21 +24,21 @@ var _previous_note: String = ""
 
 
 ## init
-func _init(p_uuid: String = UUID_Util.v4(), p_name: String = _name) -> void:
-	super._init(p_uuid, p_name)
+func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
+	super._init(p_uuid, p_args)
 	
 	_set_name("DMXOutput")
-	_set_self_class("DMXOutput")
+	_set_class_name("DMXOutput")
 	
-	_settings_manager.register_custom_panel("connection_status_panel", preload("res://components/SettingsManagerCustomPanels/DMXOutputStatusDisplay.tscn"), "set_output")
-	_settings_manager.register_setting("auto_start", Data.Type.BOOL, set_auto_start, get_auto_start, [auto_start_changed])
+	_settings.register_custom_panel("connection_status_panel", preload("res://components/SettingsManagerCustomPanels/DMXOutputStatusDisplay.tscn"), "set_output")
+	_settings.register_setting("auto_start", Data.Type.BOOL, set_auto_start, get_auto_start, [auto_start_changed])
 	
-	_settings_manager.register_control("start", Data.Type.ACTION, start)
-	_settings_manager.register_control("stop", Data.Type.ACTION, stop)
+	_settings.register_control("start", Data.Type.ACTION, start)
+	_settings.register_control("stop", Data.Type.ACTION, stop)
 	
-	_settings_manager.register_status("connection_status", Data.Type.BOOL, get_connection_state, [connection_state_changed])
+	_settings.register_status("connection_status", Data.Type.BOOL, get_connection_state, [connection_state_changed])
 	
-	_settings_manager.register_networked_callbacks({
+	_settings.register_networked_callbacks({
 		"on_connection_state_changed": _on_connection_state_changed,
 		"on_auto_start_changed": _set_auto_start,
 	})

@@ -25,6 +25,9 @@ enum Columns {IDX, QID, NAME, FADE_TIME, PRE_WAIT, TRIGGER_MODE}
 ## The FunctionPlaybackControls
 @export var function_playback_controls: FunctionPlaybackControls
 
+## The AddCue Button
+@export var add_cue_button: Button
+
 ## The Delete Button
 @export var delete_button: Button
 
@@ -59,19 +62,20 @@ var _column_config: Dictionary[Columns, Data.Type] = {
 
 
 ## init
-func _init() -> void:
-	super._init()
-	
+func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
+	super._init(p_uuid, p_args)
 	_set_class_name("UICueSheet")
 
 
 ## ready
 func _ready() -> void:
+	super._ready()
+	
 	for column_name: String in Columns.keys():
 		var column: Columns = Columns[column_name]
 		table.add_column(column_name.capitalize(), _column_config[column])
 	
-	_settings_manager.require("Table", table.settings())
+	_settings.require("Table", table.get_settings())
 
 
 ## Sets the CueList
@@ -86,6 +90,7 @@ func set_cue_list(p_cue_list: CueList) -> void:
 	
 	previous_button.set_disabled(not is_valid)
 	next_button.set_disabled(not is_valid)
+	add_cue_button.set_disabled(not is_valid)
 	delete_button.set_disabled(true)
 	
 	_cues.clear()
@@ -103,16 +108,16 @@ func get_cue_list() -> CueList:
 
 
 ## Serializes this UICueSheet
-func serialize() -> Dictionary:
-	return super.serialize().merged({
+func serialize(p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> Dictionary:
+	return super.serialize(p_flags).merged({
 		"cue_list": component_button.get_component_uuid(),
 		"table": table.serialize()
 	})
 
 
 ## Deserializes this UICueSheet
-func deserialize(p_serialized_data: Dictionary) -> void:
-	super.deserialize(p_serialized_data)
+func deserialize(p_serialized_data: Dictionary, p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> void:
+	super.deserialize(p_serialized_data, p_flags)
 	
 	component_button.look_for(type_convert(p_serialized_data.get("cue_list"), TYPE_STRING))
 	table.deserialize(type_convert(p_serialized_data.get("table"), TYPE_DICTIONARY))
@@ -124,7 +129,7 @@ func _add_cues(p_cues: Array) -> void:
 		if _cues.has_left(cue):
 			continue
 		
-		var manager: SettingsManager = cue.settings()
+		var manager: SettingsManager = cue.get_settings()
 		_cues.map(cue, table.add_row({
 			Columns.IDX: manager.get_entry("position"),
 			Columns.QID: manager.get_entry("qid"),
@@ -190,6 +195,16 @@ func _on_go_pressed() -> void:
 	_cue_list.seek_to(cue)
 
 
+## Called when the AddCue button is pressed
+func _on_add_cue_pressed() -> void:
+	_cue_list.create_cue().then(func (p_cue: Cue):
+		if not is_instance_valid(p_cue):
+			return
+		
+		Popups.USettingsModule(self, p_cue.get_settings().get_entry("name"))
+	)
+
+
 ## Called when then DeleteCue button is pressed
 func _on_delete_cue_pressed() -> void:
-	Interface.prompt_delete_components(self, _get_selected_cues())
+	Popups.confirm_delete_components(self, _get_selected_cues())

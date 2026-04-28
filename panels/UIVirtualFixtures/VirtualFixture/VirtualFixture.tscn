@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://cen3hxenplnih"]
 
-[ext_resource type="Theme" uid="uid://cyua45ur0ijqo" path="res://assets/Main.theme" id="1_2lnhr"]
+[ext_resource type="Theme" uid="uid://cyua45ur0ijqo" path="res://modules/Vertex/assets/themes/Main.theme" id="1_2lnhr"]
 [ext_resource type="Script" uid="uid://qk7akjhtmnuh" path="res://panels/UIVirtualFixtures/VirtualFixture/VirtualFixture.gd" id="1_4gf5r"]
 [ext_resource type="Texture2D" uid="uid://yfy2h17ke5eh" path="res://assets/fixtures/spot/Color.svg" id="1_4nodw"]
 [ext_resource type="Texture2D" uid="uid://b3cp4ytbffprv" path="res://assets/fixtures/spot/Highlight.svg" id="2_7idh8"]
-[ext_resource type="Texture2D" uid="uid://dt03j1pkxerpg" path="res://assets/icons/Exclamation.svg" id="5_fu3gp"]
+[ext_resource type="Texture2D" uid="uid://dt03j1pkxerpg" path="res://modules/Vertex/assets/icons/Exclamation.svg" id="5_fu3gp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4g343"]
 bg_color = Color(0.270588, 0.270588, 0.270588, 1)

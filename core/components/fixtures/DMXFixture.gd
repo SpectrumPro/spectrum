@@ -44,24 +44,24 @@ var _parameter_subscriptions: Dictionary[String, Dictionary]
 
 
 ## init
-func _init(p_uuid: String = UUID_Util.v4(), p_name: String = _name) -> void:
-	super._init(p_uuid, p_name)
+func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
+	super._init(p_uuid, p_args)
 	
 	_set_name("DMXFixture")
-	_set_self_class("DMXFixture")
+	_set_class_name("DMXFixture")
 	
-	_settings_manager.register_setting("channel", Data.Type.INT, set_channel, get_channel, [channel_changed]).set_min_max(1, 512)
-	_settings_manager.register_setting("universe", Data.Type.ENGINECOMPONENT, set_universe, get_universe, [universe_changed]).set_class_filter(Universe)
-	_settings_manager.register_setting("manifest", Data.Type.FIXTUREMANIFEST, set_manifest, get_manifest, [manifest_changed])
-	_settings_manager.register_status("mode", Data.Type.STRING, get_mode, [mode_changed])
+	_settings.register_setting("channel", Data.Type.INT, set_channel, get_channel, [channel_changed]).set_min_max(1, 512)
+	_settings.register_setting("universe", Data.Type.OBJECT, set_universe, get_universe, [universe_changed]).set_class_filter(EngineComponent, Universe)
+	_settings.register_setting("manifest", Data.Type.OBJECT, set_manifest, get_manifest, [manifest_changed]).set_class_filter(EngineComponent, FixtureManifest)
+	_settings.register_status("mode", Data.Type.STRING, get_mode, [mode_changed])
 	
-	_settings_manager.register_networked_callbacks({
+	_settings.register_networked_callbacks({
 		"on_channel_changed": _set_channel,
 		"on_universe_changed": _set_universe,
 		"on_manifest_changed": _set_manifest,
 	})
 	
-	_settings_manager.set_callback_allow_unresolved("on_manifest_changed")
+	_settings.set_callback_allow_unresolved("on_manifest_changed")
 
 
 ## Gets the channel
@@ -97,7 +97,7 @@ func set_universe(p_universe: Universe) -> Promise:
 ## Sets the FixtureManifest
 func set_manifest(p_manifest: Variant, p_mode: String) -> Promise:
 	if p_manifest is FixtureManifest:
-		p_manifest = p_manifest.uuid()
+		p_manifest = p_manifest.get_uuid()
 	
 	return rpc("set_manifest", [type_convert(p_manifest, TYPE_STRING), p_mode])
 
@@ -113,17 +113,34 @@ func get_all_values() -> Dictionary:
 
 
 ## Gets all the parameters and there category from a zone
+func get_parameter_category(p_zone: String, p_parameter: String) -> String:
+	if not is_instance_valid(_manifest):
+		return ""
+	
+	return _manifest.get_categorys(_mode, p_zone).get(p_parameter, "")
+
+
+## Gets all the parameters and there category from a zone
 func get_parameter_categories(p_zone: String) -> Dictionary:
+	if not is_instance_valid(_manifest):
+		return {}
+	
 	return _manifest.get_categorys(_mode, p_zone)
 
 
 ## Gets all the parameter functions
 func get_parameter_functions(p_zone: String, p_parameter: String) -> Array:
+	if not is_instance_valid(_manifest):
+		return []
+	
 	return _manifest.get_parameter_functions(_mode, p_zone, p_parameter)
 
 
 ## Gets all the parameter functions
 func get_function_control_type(p_zone: String, p_parameter: String, p_function: String) -> ControlType:
+	if not is_instance_valid(_manifest):
+		return ControlType.VALUE
+	
 	return _manifest.function_control_type(_mode, p_zone, p_parameter, p_function)
 
 
@@ -187,6 +204,22 @@ func get_zones() -> Array[String]:
 		return []
 	
 	return _manifest.get_zones(_mode)
+
+
+## Gets all the parameters
+func get_parameters(p_zone: String) -> Array[String]:
+	if not is_instance_valid(_manifest):
+		return []
+	
+	return _manifest.get_parameters(_mode, p_zone)
+
+
+## Returns an uuid defining the type of this fixture or device. two fixtures of the same type should have the same type id
+func get_type_id() -> String:
+	if not is_instance_valid(_manifest):
+		return ""
+	
+	return _manifest.get_uuid()
 
 
 ## Checks if this DMXFixture has any overrides
@@ -332,15 +365,15 @@ func _erase_all_overrides() -> void:
 
 
 ## Saves this DMXFixture to a dictonary
-func serialize() -> Dictionary:
-	return super.serialize().merged({
+func serialize(p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> Dictionary:
+	return super.serialize(p_flags).merged({
 		 "channel": _channel
 	})
 
 
 ## Loads this DMXFixture from a dictonary
-func deserialize(p_serialized_data: Dictionary) -> void:
-	super.deserialize(p_serialized_data)
+func deserialize(p_serialized_data: Dictionary, p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> void:
+	super.deserialize(p_serialized_data, p_flags)
 	
 	_channel = type_convert(p_serialized_data.get("channel"), TYPE_INT)
 	_set_manifest(type_convert(p_serialized_data.get("manifest_uuid"), TYPE_STRING), type_convert(p_serialized_data.get("mode", ""), TYPE_STRING), true)

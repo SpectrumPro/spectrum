@@ -56,7 +56,7 @@ func _add_fixtures(p_fixtures: Array[FixtureGroupItem]) -> void:
 			return
 		
 		var item: TreeItem = _root.create_child()
-		item.set_text(0, fixture.name())
+		item.set_text(0, fixture.get_name())
 		
 		_fixture_tree_items.map(fixture, item)
 
@@ -76,7 +76,7 @@ func _remove_fixtures(p_fixtures: Array[Fixture]) -> void:
 
 ## Called when the Add Button is pressed
 func _on_add_pressed() -> void:
-	Interface.prompt_object_picker(self, EngineComponent, "Fixture").then(func (p_fixture: Fixture):
+	Popups.ObjectSelector(self, EngineComponent, "Fixture").then(func (p_fixture: Fixture):
 		_fixture_group.add_fixture(p_fixture)
 	)
 

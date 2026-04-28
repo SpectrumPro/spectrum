@@ -20,17 +20,17 @@ class_name UICore extends UIPanel
 var _notices: RefMap = RefMap.new()
 
 
-## Init
-func _init() -> void:
-	super._init()
-	
+## init
+func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
+	super._init(p_uuid, p_args)
 	_set_class_name("UICore")
 
 
 ## Ready
 func _ready() -> void:
-	_settings_manager.require("side_bar_settings", _side_bar.settings())
+	super._ready()
 	
+	_settings.require("side_bar_settings", _side_bar.get_settings())
 	_startup_bg.show()
 	
 	if get_parent() is UIWindow:
@@ -39,16 +39,16 @@ func _ready() -> void:
 	await get_tree().create_timer(0.5).timeout
 	Interface.fade_property(_startup_bg, "modulate", Color.TRANSPARENT, _startup_bg.hide, 0.3)
 	
-	for notice: StartUpNotice in Interface.config().startup_notices:
+	for notice: StartUpNotice in Interface.Config.startup_notices:
 		add_startup_notice(notice)
 
 
 ## Displays a StartUpNotice
 func add_startup_notice(p_notice: StartUpNotice) -> void:
-	if not is_instance_valid(p_notice) or _notices.has_left(p_notice) or Interface.config().can_show_notice(p_notice.get_notice_id()):
+	if not is_instance_valid(p_notice) or _notices.has_left(p_notice) or Interface.Config.can_show_notice(p_notice.get_notice_id()):
 		return
 	
-	var notice_container: StartUpNoticeContainer = preload("res://panels/UICore/StartUpNoticeContainer.tscn").instantiate()
+	var notice_container: StartUpNoticeContainer = preload("res://modules/Vertex/components/StartUpNoticeContainer/StartUpNoticeContainer.tscn").instantiate()
 	
 	notice_container.set_notice(p_notice)
 	notice_container.closing.connect(func (): _notices.erase_left(p_notice))
@@ -58,15 +58,15 @@ func add_startup_notice(p_notice: StartUpNotice) -> void:
 
 
 ## Saves all the tabs
-func serialize() -> Dictionary:
-	return super.serialize().merged({
+func serialize(p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> Dictionary:
+	return super.serialize(p_flags).merged({
 		"tabs": _side_bar.serialize(),
 	})
 
 
 ## Loads all the tabs
-func deserialize(p_serialized_data: Dictionary) -> void:
-	super.deserialize(p_serialized_data)
+func deserialize(p_serialized_data: Dictionary, p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> void:
+	super.deserialize(p_serialized_data, p_flags)
 	
 	var tabs: Dictionary = type_convert(p_serialized_data.get("tabs", {}), TYPE_DICTIONARY)
 	_side_bar.deserialize(tabs)

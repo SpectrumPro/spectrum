@@ -1,17 +1,17 @@
 [gd_scene load_steps=16 format=3 uid="uid://dpkn0u6ocbxrj"]
 
 [ext_resource type="Script" uid="uid://dhq837k46p1tr" path="res://panels/UIConstellationManager/UIConstellationManager.gd" id="1_sakur"]
-[ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://assets/styles/UIPanelBase.tres" id="1_w5m1w"]
-[ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://panels/UIPanel/PanelMenuBar.tscn" id="3_nrpeh"]
+[ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://modules/Vertex/assets/styles/UIPanelBase.tres" id="1_w5m1w"]
+[ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://modules/Vertex/panels/UIPanel/PanelMenuBar.tscn" id="3_nrpeh"]
 [ext_resource type="Texture2D" uid="uid://bl7nw5rh753wr" path="res://assets/icons/Network.svg" id="4_tdbwv"]
-[ext_resource type="Texture2D" uid="uid://c5afb1q842kn7" path="res://assets/icons/Power.svg" id="5_djvka"]
-[ext_resource type="FontFile" uid="uid://crlak6jhg5jy2" path="res://assets/font/RubikMonoOne-Regular.ttf" id="5_nrpeh"]
+[ext_resource type="Texture2D" uid="uid://c5afb1q842kn7" path="res://modules/Vertex/assets/icons/Power.svg" id="5_djvka"]
+[ext_resource type="FontFile" uid="uid://crlak6jhg5jy2" path="res://modules/Vertex/assets/font/RubikMonoOne-Regular.ttf" id="5_nrpeh"]
 [ext_resource type="Script" uid="uid://jwlrnaii5r5d" path="res://panels/UIConstellationManager/NodesTab.gd" id="6_tdpwf"]
-[ext_resource type="PackedScene" uid="uid://bf3cbsyaotnnq" path="res://components/Table/Table.tscn" id="7_d2yxy"]
+[ext_resource type="PackedScene" uid="uid://bf3cbsyaotnnq" path="res://modules/Vertex/components/Table/Table.tscn" id="7_d2yxy"]
 [ext_resource type="Script" uid="uid://bytxihk5rrmj7" path="res://panels/UIConstellationManager/SessionsTab.gd" id="8_d2yxy"]
-[ext_resource type="Texture2D" uid="uid://ddo26yd8qpx5r" path="res://assets/icons/Refresh.svg" id="9_tkm7n"]
+[ext_resource type="Texture2D" uid="uid://ddo26yd8qpx5r" path="res://modules/Vertex/assets/icons/Refresh.svg" id="9_tkm7n"]
 [ext_resource type="Script" uid="uid://cuhjehnbicvx1" path="res://panels/UIConstellationManager/ConfigTab.gd" id="11_d86vn"]
-[ext_resource type="PackedScene" uid="uid://kjup3yrjifr5" path="res://components/SettingsManagerView/SettingsManagerView.tscn" id="12_dvlfc"]
+[ext_resource type="PackedScene" uid="uid://kjup3yrjifr5" path="res://modules/Vertex/components/SettingsManagerView/SettingsManagerView.tscn" id="12_dvlfc"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_nrpeh"]
 
@@ -23,7 +23,7 @@ spacing_bottom = -5
 font = SubResource("FontVariation_djvka")
 font_size = 27
 
-[node name="UIConstellationManager" type="PanelContainer" node_paths=PackedStringArray("status_label", "power_button", "nodes_tab", "session_tab", "edit_controls", "menu_bar")]
+[node name="UIConstellationManager" type="PanelContainer" node_paths=PackedStringArray("status_label", "power_button", "nodes_tab", "session_tab")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -35,13 +35,12 @@ status_label = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContaine
 power_button = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer3/PowerButton")
 nodes_tab = NodePath("VBoxContainer/HBoxContainer/NodesTab")
 session_tab = NodePath("VBoxContainer/HBoxContainer/SessionsTab")
-edit_controls = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/EditControls")
-menu_bar = NodePath("VBoxContainer/PanelMenuBar")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
 [node name="PanelMenuBar" parent="VBoxContainer" instance=ExtResource("3_nrpeh")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="0"]
@@ -232,7 +231,6 @@ size_flags_vertical = 3
 [connection signal="toggled" from="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer2/HBoxContainer/SessionsTabButton" to="VBoxContainer/HBoxContainer/SessionsTab" method="set_visible"]
 [connection signal="toggled" from="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer2/HBoxContainer/ConfigTabButton" to="VBoxContainer/HBoxContainer/ConfigTab" method="set_visible"]
 [connection signal="toggled" from="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer3/PowerButton" to="." method="_on_power_button_toggled"]
-[connection signal="selection_changed" from="VBoxContainer/HBoxContainer/NodesTab/HBoxContainer/VBoxContainer/Table" to="VBoxContainer/HBoxContainer/NodesTab" method="_on_table_selection_changed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/NodesTab/HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer/PanelContainer/HBoxContainer/Reload" to="VBoxContainer/HBoxContainer/NodesTab" method="_on_reload_pressed"]
 [connection signal="selection_changed" from="VBoxContainer/HBoxContainer/SessionsTab/VBoxContainer/Table" to="VBoxContainer/HBoxContainer/SessionsTab" method="_on_table_selection_changed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/SessionsTab/VBoxContainer/PanelContainer/HBoxContainer/PanelContainer/HBoxContainer/CreateSessionButton" to="VBoxContainer/HBoxContainer/SessionsTab" method="_on_create_session_button_pressed"]

@@ -1,8 +1,8 @@
-# Copyright (c) 2025 Liam Sherwin. All rights reserved.
+# Copyright (c) 2026 Liam Sherwin. All rights reserved.
 # This file is part of the Spectrum Lighting Engine, licensed under the GPL v3.0 or later.
 # See the LICENSE file for details.
 
-class_name CoreEngine extends Node
+class_name CoreEngine extends CoreGlobal
 ## The client side engine that powers Spectrum
 
 
@@ -31,9 +31,6 @@ var _current_file_name: String = ""
 ## The EngineConfig
 var _config: EngineConfig
 
-## The SettingsManager for CoreEngine
-var _settings_manager: SettingsManager = SettingsManager.new()
-
 
 ## Internal engine config options
 class EngineConfig extends Object:
@@ -51,10 +48,10 @@ class EngineConfig extends Object:
 			"object": (FixtureLibrary),
 			"name": "FixtureLibrary"
 		},
-		{
-			"object": (CIDManager),
-			"name": "CIDManager"
-		},
+		#{
+			#"object": (CIDManager),
+			#"name": "CIDManager"
+		#},
 	]
 	
 	## Root classes are the primary classes that will be seralized and loaded 
@@ -69,19 +66,22 @@ class EngineConfig extends Object:
 
 ## Init
 func _init() -> void:
+	super._init()
+	_set_class_name("CoreEngine")
+	
 	OS.set_low_processor_usage_mode(false)
 	Details.print_startup_detils()
 	
-	_settings_manager.set_owner(self)
-	_settings_manager.set_inheritance_array(["CoreEngine"])
-	_settings_manager.register_networked_callbacks({
+	_settings.set_owner(self)
+	_settings.set_inheritance_array(["CoreEngine"])
+	_settings.register_networked_callbacks({
 		"on_components_added": _add_components,
 		"on_components_removed": _remove_components,
 		"on_resetting": _reset,
 		"on_file_name_changed": _set_file_name,
 	})
 	
-	_settings_manager.set_callback_allow_deserialize("on_components_added")
+	_settings.set_callback_allow_deserialize("on_components_added")
 
 
 ## Init
@@ -89,19 +89,18 @@ func _ready() -> void:
 	_config = EngineConfig.new()
 	
 	Network.start_all()
+	var local_node: ConstellationNode = Network.get_active_handler_by_name("Constellation").get_local_node()
 	
-	(Network.get_active_handler_by_name("Constellation").get_local_node() as ConstellationNode).connected_to_session_master.connect(_load_from_server)
+	local_node.connected_to_session_master.connect(_load_from_server)
+	local_node.name_changed.connect(Log.set_instance_name)
+	
+	Log.set_instance_name(local_node.get_node_name())
 	_add_auto_network_classes.call_deferred()
 
 
 ## Gets the SettingsManager
-func settings() -> SettingsManager:
-	return _settings_manager
-
-
-## Returns a serialized copy of the engine from the server
-func serialize() -> Promise: 
-	return Network.send_command("engine", "serialize")
+func get_settings() -> SettingsManager:
+	return _settings
 
 
 ## Saves this file to disk on the server
@@ -243,7 +242,7 @@ func _remove_components(p_components: Array, p_no_signal: bool = false) -> void:
 ## Adds all objects from _config.network_objects to the Network
 func _add_auto_network_classes() -> void:
 	for config: Dictionary in _config.network_objects:
-		Network.register_network_object(config.name, config.object.settings())
+		Network.register_network_object(config.name, config.object.get_settings())
 
 
 ## Requests the current state from the server and loads it localy
@@ -269,10 +268,10 @@ func _load_from(serialized_data: Dictionary) -> void:
 			var classname: String = type_convert(serialized_component.get("class_name", ""), TYPE_STRING)
 
 			# Check if the components class name is a valid class type in the engine
-			if not ClassList.has_class(classname):
+			if not ComponentClassList.has_class(classname):
 				continue
 			
-			var new_component: EngineComponent = ClassList.get_class_script(serialized_component.class_name).new(component_uuid)
+			var new_component: EngineComponent = ComponentClassList.get_class_script(serialized_component.class_name).new(component_uuid)
 			new_component.deserialize(serialized_component)
 			
 			if _add_component(new_component, true):
@@ -290,7 +289,6 @@ func _set_file_name(p_file_name: String) -> void:
 
 ## Internal: Resets this engine to its default state
 func _reset():
-	print("Performing Engine Reset!")
 	_set_file_name("")
 	resetting.emit()  
 	

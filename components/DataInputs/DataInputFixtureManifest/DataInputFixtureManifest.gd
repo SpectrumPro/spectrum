@@ -12,7 +12,8 @@ var _button: Button
 
 ## Ready
 func _ready() -> void:
-	_data_type = Data.Type.FIXTUREMANIFEST
+	_data_type = Data.Type.OBJECT
+	_sub_type = Data.Sub.Type.OBJECT_FIXTUREMANIFEST
 	_button = $HBox/Button
 	_label = $HBox/Label
 	_outline = $HBox/Button/Outline
@@ -22,7 +23,7 @@ func _ready() -> void:
 ## Called when the orignal value is changed
 func _module_value_changed(p_value: Variant, ...p_args) -> void:
 	if p_value is FixtureManifest:
-		_button.set_text(p_value.name())
+		_button.set_text(p_value.get_name())
 		_button.add_theme_color_override("font_color", ThemeManager.Colors.FontColor)
 	else:
 		_button.set_text("null")
@@ -41,6 +42,6 @@ func _set_editable(p_editable: bool) -> void:
 
 ## Called when the button is pressed
 func _on_button_pressed() -> void:
-	Interface.prompt_manifest_picker(self).then(func (p_manifest: String, p_mode: String):
-		set_value(p_manifest, p_manifest)
+	Popups.ManifestPicker(self).then(func (p_manifest: String, p_mode: String):
+		set_value(p_manifest, p_mode)
 	)

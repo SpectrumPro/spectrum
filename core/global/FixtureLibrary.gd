@@ -2,7 +2,7 @@
 # This file is part of the Spectrum Lighting Engine, licensed under the GPL v3.0 or later.
 # See the LICENSE file for details.
 
-class_name CoreFixtureLibrary extends Node
+class_name CoreFixtureLibrary extends CoreGlobal
 ## The main fixture library used to manage fixture manifests
 
 
@@ -22,24 +22,17 @@ var _manifest_requests: Dictionary
 ## Loaded state
 var _is_loaded: bool = false
 
-## The SettingsManager
-var _settings_manager: SettingsManager = SettingsManager.new()
 
+## init
+func _init(p_uuid: String = "", ...p_args: Array[Variant]) -> void:
+	super._init(p_uuid, p_args)
+	_set_class_name("CoreComponentDB")
 
-## Init
-func _init() -> void:
-	_settings_manager.set_owner(self)
-	_settings_manager.set_inheritance_array(["CoreFixtureLibrary"])
 
 
 ## Ready
 func _ready() -> void:
 	Core.synchronizing.connect(_synchronize)
-
-
-## Gets the SettingsManager
-func settings() -> SettingsManager:
-	return _settings_manager
 
 
 ## Creates a new fixture from a manifest
@@ -113,8 +106,8 @@ func _reset() -> void:
 ## Called when a manifest is received from the server
 func _on_get_manifest_received(p_manifest: FixtureManifest) -> void:
 	if p_manifest:
-		_loaded_manifests[p_manifest.uuid()] = p_manifest
-		for promise: Promise in _manifest_requests.get(p_manifest.uuid(), []):
+		_loaded_manifests[p_manifest.get_uuid()] = p_manifest
+		for promise: Promise in _manifest_requests.get(p_manifest.get_uuid(), []):
 			promise.resolve([p_manifest])
 		
-		_manifest_requests.erase(p_manifest.uuid)
+		_manifest_requests.erase(p_manifest.get_uuid())

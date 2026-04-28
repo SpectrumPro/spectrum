@@ -1,11 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://dhp8aa07tyxbf"]
+[gd_scene load_steps=9 format=3 uid="uid://dhp8aa07tyxbf"]
 
-[ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://assets/styles/UIPanelBase.tres" id="1_vgwxr"]
+[ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://modules/Vertex/assets/styles/UIPanelBase.tres" id="1_vgwxr"]
 [ext_resource type="Script" uid="uid://bltvgq1jnaqgt" path="res://panels/UIColorPicker/UIColorPicker.gd" id="2_ogrry"]
-[ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://panels/UIPanel/PanelMenuBar.tscn" id="3_g582g"]
-[ext_resource type="Texture2D" uid="uid://clt2djtbul2kf" path="res://assets/icons/ColorPalett.svg" id="4_ara1c"]
+[ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://modules/Vertex/panels/UIPanel/PanelMenuBar.tscn" id="3_g582g"]
+[ext_resource type="Texture2D" uid="uid://clt2djtbul2kf" path="res://modules/Vertex/assets/icons/ColorPalett.svg" id="4_ara1c"]
 [ext_resource type="Texture2D" uid="uid://2p7ffb5yq0hx" path="res://assets/asset_scripts/color_picker.png" id="6_3j0ua"]
-[ext_resource type="Texture2D" uid="uid://b7q628ocmror7" path="res://assets/icons/Crosshair.svg" id="7_b53g6"]
+[ext_resource type="Texture2D" uid="uid://b7q628ocmror7" path="res://modules/Vertex/assets/icons/Crosshair.svg" id="7_b53g6"]
+[ext_resource type="Theme" uid="uid://ci2nvibdyee1j" path="res://assets/themes/Slider.tres" id="7_vgwxr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7y88r"]
 corner_radius_top_left = 5
@@ -13,7 +14,7 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[node name="UIColorPicker" type="PanelContainer" node_paths=PackedStringArray("_pad", "_crosshair", "_value_slider", "_mix_mode", "slider_container", "edit_controls", "menu_bar")]
+[node name="UIColorPicker" type="PanelContainer" node_paths=PackedStringArray("_pad", "_crosshair", "_value_slider", "_mix_mode", "slider_container")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -24,25 +25,25 @@ script = ExtResource("2_ogrry")
 _pad = NodePath("VBoxContainer/HBoxContainer/Picker/HBoxContainer/PanelContainer/Pad")
 _crosshair = NodePath("VBoxContainer/HBoxContainer/Picker/HBoxContainer/PanelContainer/Pad/Crosshair")
 _value_slider = NodePath("VBoxContainer/HBoxContainer/Picker/HBoxContainer/SliderContainer/VBoxContainer/PadValueSlider")
-_mix_mode = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/PanelContainer/MixMode")
+_mix_mode = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/PanelContainer/MixMode")
 slider_container = NodePath("VBoxContainer/HBoxContainer/Picker/HBoxContainer/SliderContainer")
-edit_controls = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/EditControls")
-menu_bar = NodePath("VBoxContainer/PanelMenuBar")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
 [node name="PanelMenuBar" parent="VBoxContainer" instance=ExtResource("3_g582g")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="0"]
 text = "ColorPicker"
 icon = ExtResource("4_ara1c")
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="2"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer" index="0"]
 layout_mode = 2
+size_flags_horizontal = 10
 
-[node name="MixMode" type="OptionButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer/PanelContainer"]
+[node name="MixMode" type="OptionButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/PanelContainer"]
 layout_mode = 2
 selected = 0
 item_count = 2
@@ -98,6 +99,7 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3
+theme = ExtResource("7_vgwxr")
 max_value = 1.0
 step = 0.001
 value = 1.0

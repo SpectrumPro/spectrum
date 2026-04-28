@@ -61,13 +61,12 @@ var _aera_indicator_target: Rect2 = Rect2()
 var _used_mouse_select: bool = false
 
 
-## Init
-func _init() -> void:
-	super._init()
-	
+## init
+func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
+	super._init(p_uuid, p_args)
 	_set_class_name("UIDesk")
 	
-	_settings_manager.register_setting("GridSize", Data.Type.ENUM, set_grid_size, get_grid_size, [grid_size_changed]).set_enum_dict(GridSize)
+	_settings.register_setting("GridSize", Data.Type.ENUM, set_grid_size, get_grid_size, [grid_size_changed]).set_enum_dict(GridSize)
 
 
 ## Process
@@ -183,21 +182,21 @@ func get_grid_size() -> GridSize:
 
 
 ## Returns a dictionary containing all panels, their positions, sizes, and settings
-func serialize() -> Dictionary:
+func serialize(p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> Dictionary:
 	var items: Array = []
 	
 	for desk_item_container: UIDeskItemContainer in _items:
 		items.append(desk_item_container.serialize())
 	
-	return super.serialize().merged({
+	return super.serialize(p_flags).merged({
 		"items": items,
 		"grid_size": _grid_size
 	})
 
 
 ## Loads all items in this desk from a saved dictionary
-func deserialize(p_serialized_data: Dictionary) -> void:
-	super.deserialize(p_serialized_data)
+func deserialize(p_serialized_data: Dictionary, p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> void:
+	super.deserialize(p_serialized_data, p_flags)
 	
 	var items: Array = type_convert(p_serialized_data.get("items", []), TYPE_ARRAY)
 	
@@ -206,7 +205,7 @@ func deserialize(p_serialized_data: Dictionary) -> void:
 			continue
 		
 		var serialized_panel: Dictionary = type_convert(serialized_container.get("serialized_panel", []), TYPE_DICTIONARY)
-		var panel_class: String = type_convert(serialized_panel.get("class", []), TYPE_STRING)
+		var panel_class: String = type_convert(serialized_panel.get("class_name", []), TYPE_STRING)
 		
 		var panel_anchor_left: float = type_convert(serialized_container.get("anchor_left"), TYPE_FLOAT)
 		var panel_anchor_right: float = type_convert(serialized_container.get("anchor_right"), TYPE_FLOAT)
@@ -292,7 +291,7 @@ func _get_preset_area_size(p_position: Vector2) -> Rect2i:
 
 ## Called when the add button is pressed
 func _on_add_pressed() -> void:
-	Interface.prompt_panel_picker(self).then(func (p_panel_class: String):
+	Popups.PanelPicker(self).then(func (p_panel_class: String):
 		add_panel(UIDB.instance_panel(p_panel_class))
 	)
 
@@ -378,7 +377,7 @@ func _on_container_gui_input(p_event: InputEvent) -> void:
 			else:
 				var area_rect: Rect2i = _get_preset_area_size(p_event.position)
 				
-				Interface.prompt_panel_picker(self).then(func (p_panel_class: String):
+				Popups.PanelSelector(self).then(func (p_panel_class: String):
 					add_panel(UIDB.instance_panel(p_panel_class), area_rect.position, area_rect.size)
 				)
 	
@@ -390,7 +389,7 @@ func _on_container_gui_input(p_event: InputEvent) -> void:
 func _on_select_box_released() -> void:
 	var rect: Rect2 = _select_box.get_selection()
 	
-	Interface.prompt_panel_picker(self).then(func (p_panel_class: String):
+	Popups.PanelSelector(self).then(func (p_panel_class: String):
 		add_panel(UIDB.instance_panel(p_panel_class), rect.position.snapped(_snapping_distance), rect.size.snapped(_snapping_distance))
 	)
 	

@@ -29,14 +29,14 @@ signal trigger_down(row: int, column: int)
 var _triggers: Dictionary[int, Dictionary]
 
 
-## Ready
-func _init(p_uuid: String = UUID_Util.v4(), p_name: String = _name) -> void:
-	super._init(p_uuid, p_name)
+## init
+func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
+	super._init(p_uuid, p_args)
 	
 	_set_name("TriggerBlock")
-	_set_self_class("TriggerBlock")
+	_set_class_name("TriggerBlock")
 		
-	_settings_manager.register_networked_callbacks({
+	_settings.register_networked_callbacks({
 		"on_trigger_added": _add_trigger,
 		"on_trigger_removed": _remove_trigger,
 		"on_column_reset": _reset_column,
@@ -82,7 +82,7 @@ func get_triggers() -> Dictionary[int, Dictionary]:
 
 
 ## Overide this function to serialize your object
-func serialize() -> Dictionary:
+func serialize(p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> Dictionary:
 	var triggers: Dictionary[int, Dictionary]
 	
 	for row: int in _triggers:
@@ -96,14 +96,14 @@ func serialize() -> Dictionary:
 				"id": _triggers[row][column].id
 			}
 	
-	return super.serialize().merged({
+	return super.serialize(p_flags).merged({
 		"triggers": triggers
 	})
 
 
 ## Overide this function to handle load requests
-func deserialize(p_serialized_data: Dictionary) -> void:
-	super.deserialize(p_serialized_data)
+func deserialize(p_serialized_data: Dictionary, p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> void:
+	super.deserialize(p_serialized_data, p_flags)
 	
 	var triggers: Dictionary = type_convert(p_serialized_data.get("triggers", {}), TYPE_DICTIONARY)
 	

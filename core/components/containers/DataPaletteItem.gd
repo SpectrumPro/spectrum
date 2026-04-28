@@ -10,15 +10,21 @@ class_name DataPaletteItem extends DataContainer
 var position: Vector2i = Vector2i.ZERO
 
 
+## init
+func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
+	super._init(p_uuid, p_args)
+	_set_class_name("DataPaletteItem")
+
+
 ## Serializes this scene and returnes it in a dictionary
-func serialize() -> Dictionary:
-	return super.serialize().merged({
+func serialize(p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> Dictionary:
+	return super.serialize(p_flags).merged({
 		"position": var_to_str(position)
 	})
 
 
 ## Called when this scene is to be loaded from serialized data
-func deserialize(p_serialized_data: Dictionary) -> void:
-	super.deserialize(p_serialized_data)
+func deserialize(p_serialized_data: Dictionary, p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> void:
+	super.deserialize(p_serialized_data, p_flags)
 	
 	position = type_convert(str_to_var(p_serialized_data.get("position")), TYPE_VECTOR2)

@@ -1,16 +1,18 @@
-[gd_scene load_steps=10 format=3 uid="uid://crkkr3uvy6hvc"]
+[gd_scene load_steps=11 format=3 uid="uid://crkkr3uvy6hvc"]
 
-[ext_resource type="Theme" uid="uid://cyua45ur0ijqo" path="res://assets/Main.theme" id="1_sc08c"]
-[ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://assets/styles/UIPanelBase.tres" id="2_43xcs"]
+[ext_resource type="Theme" uid="uid://cyua45ur0ijqo" path="res://modules/Vertex/assets/themes/Main.theme" id="1_sc08c"]
+[ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://modules/Vertex/assets/styles/UIPanelBase.tres" id="2_43xcs"]
 [ext_resource type="Script" uid="uid://bs7wdwuqtm3s5" path="res://panels/UIFixtureGroups/UIFixtureGroups.gd" id="3_gyjuj"]
-[ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://panels/UIPanel/PanelMenuBar.tscn" id="4_em10j"]
+[ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://modules/Vertex/panels/UIPanel/PanelMenuBar.tscn" id="4_em10j"]
 [ext_resource type="Texture2D" uid="uid://bs16qw34pxxr4" path="res://assets/icons/FixtureGroup.svg" id="5_7ac3b"]
-[ext_resource type="Texture2D" uid="uid://dqr6mygroiluf" path="res://assets/icons/NewPanel.svg" id="6_610ut"]
-[ext_resource type="Texture2D" uid="uid://dfrrs2dnvlvsu" path="res://assets/icons/Delete.svg" id="7_0856o"]
-[ext_resource type="Texture2D" uid="uid://cuvwwbojtcpg6" path="res://assets/icons/Duplicate.svg" id="8_vjvpo"]
-[ext_resource type="PackedScene" uid="uid://7prnynnrdn4n" path="res://components/ComponentManagerView/ComponentManagerView.tscn" id="9_1kh4h"]
+[ext_resource type="Texture2D" uid="uid://dqr6mygroiluf" path="res://modules/Vertex/assets/icons/NewPanel.svg" id="6_610ut"]
+[ext_resource type="Texture2D" uid="uid://dfrrs2dnvlvsu" path="res://modules/Vertex/assets/icons/Delete.svg" id="7_0856o"]
+[ext_resource type="Texture2D" uid="uid://cuvwwbojtcpg6" path="res://modules/Vertex/assets/icons/Duplicate.svg" id="8_vjvpo"]
+[ext_resource type="PackedScene" uid="uid://7prnynnrdn4n" path="res://modules/Vertex/components/ComponentManagerView/ComponentManagerView.tscn" id="9_1kh4h"]
 
-[node name="UIFixtureGroups" type="PanelContainer" node_paths=PackedStringArray("edit_controls", "menu_bar")]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7ac3b"]
+
+[node name="UIFixtureGroups" type="PanelContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -21,13 +23,12 @@ size_flags_vertical = 3
 theme = ExtResource("1_sc08c")
 theme_override_styles/panel = ExtResource("2_43xcs")
 script = ExtResource("3_gyjuj")
-edit_controls = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/EditControls")
-menu_bar = NodePath("VBoxContainer/PanelMenuBar")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
 [node name="PanelMenuBar" parent="VBoxContainer" instance=ExtResource("4_em10j")]
+unique_name_in_owner = true
 layout_mode = 2
 
 [node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="0"]
@@ -41,33 +42,29 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="NewComponent" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/PanelContainer/HBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 text = "New"
 icon = ExtResource("6_610ut")
 
 [node name="DeleteComponent" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/PanelContainer/HBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 text = "Delete"
 icon = ExtResource("7_0856o")
 
 [node name="DuplicateComponent" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/PanelContainer/HBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 text = "Duplicate"
 icon = ExtResource("8_vjvpo")
 
-[node name="ComponentManagerView" parent="VBoxContainer" node_paths=PackedStringArray("new_button", "delete_button", "duplicate_button") instance=ExtResource("9_1kh4h")]
+[node name="ComponentManagerView" parent="VBoxContainer" instance=ExtResource("9_1kh4h")]
+unique_name_in_owner = true
 layout_mode = 2
-classname = "FixtureGroup"
-table_column_names = Array[String](["name"])
-new_button = NodePath("../PanelMenuBar/HBoxContainer/ScrollContainer/PanelContainer/HBoxContainer/NewComponent")
-delete_button = NodePath("../PanelMenuBar/HBoxContainer/ScrollContainer/PanelContainer/HBoxContainer/DeleteComponent")
-duplicate_button = NodePath("../PanelMenuBar/HBoxContainer/ScrollContainer/PanelContainer/HBoxContainer/DuplicateComponent")
-
-[node name="PanelContainer" parent="VBoxContainer/ComponentManagerView/VBoxContainer" index="1"]
-visible = false
+theme_override_styles/panel = SubResource("StyleBoxEmpty_7ac3b")
 
 [editable path="VBoxContainer/PanelMenuBar"]
-[editable path="VBoxContainer/ComponentManagerView"]

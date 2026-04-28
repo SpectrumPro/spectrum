@@ -1,12 +1,12 @@
 [gd_scene load_steps=12 format=3 uid="uid://hjk7172e7mh6"]
 
-[ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://assets/styles/UIPanelBase.tres" id="1_6ktpd"]
+[ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://modules/Vertex/assets/styles/UIPanelBase.tres" id="1_6ktpd"]
 [ext_resource type="Script" uid="uid://ceqwpa2u1i4hs" path="res://components/SettingsManagerCustomPanels/FunctionStatusControls.gd" id="2_poxp7"]
-[ext_resource type="Texture2D" uid="uid://di4kcfvxdcwid" path="res://assets/icons/Disable.svg" id="3_squ4h"]
-[ext_resource type="Texture2D" uid="uid://7c52i0tfttky" path="res://assets/icons/Enable.svg" id="4_fd0ag"]
-[ext_resource type="Texture2D" uid="uid://crxgau8v7k3yh" path="res://assets/icons/PlayAlt.svg" id="5_lbmmo"]
-[ext_resource type="Texture2D" uid="uid://bo1c5m22h21gd" path="res://assets/icons/pause.svg" id="6_1yuk4"]
-[ext_resource type="Texture2D" uid="uid://bf4227ei83gh1" path="res://assets/icons/play.svg" id="7_bqjh6"]
+[ext_resource type="Texture2D" uid="uid://di4kcfvxdcwid" path="res://modules/Vertex/assets/icons/Disable.svg" id="3_squ4h"]
+[ext_resource type="Texture2D" uid="uid://7c52i0tfttky" path="res://modules/Vertex/assets/icons/Enable.svg" id="4_fd0ag"]
+[ext_resource type="Texture2D" uid="uid://crxgau8v7k3yh" path="res://modules/Vertex/assets/icons/PlayAlt.svg" id="5_lbmmo"]
+[ext_resource type="Texture2D" uid="uid://bo1c5m22h21gd" path="res://modules/Vertex/assets/icons/pause.svg" id="6_1yuk4"]
+[ext_resource type="Texture2D" uid="uid://bf4227ei83gh1" path="res://modules/Vertex/assets/icons/play.svg" id="7_bqjh6"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_sxfuk"]
 

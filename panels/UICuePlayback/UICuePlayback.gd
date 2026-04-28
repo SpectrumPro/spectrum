@@ -50,9 +50,8 @@ var _signal_connections: SignalGroup = SignalGroup.new([], {
 
 
 ## init
-func _init() -> void:
-	super._init()
-	
+func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
+	super._init(p_uuid, p_args)
 	_set_class_name("UICuePlayback")
 
 
@@ -188,7 +187,7 @@ func _on_cue_item_clicked(p_cue_item: CueItem) -> void:
 
 ## Called when a CueItem is right clicked
 func _on_cue_item_right_clicked(p_cue_item: CueItem) -> void:
-	Interface.prompt_component_settings(self, _cues.right(p_cue_item))
+	Popups.ComponentSettings(self, _cues.right(p_cue_item))
 
 
 ## Called when a CueItem is double clicked
@@ -222,15 +221,15 @@ func _on_stop_pressed() -> void:
 
 
 ## Saves this into a dict
-func serialize() -> Dictionary:
-	return super.serialize().merged({
+func serialize(p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> Dictionary:
+	return super.serialize(p_flags).merged({
 		"cue_list": component_button.get_component_uuid()
 	})
 
 
 ## Loads this from a dict
-func deserialize(p_serialized_data: Dictionary) -> void:
-	super.deserialize(p_serialized_data)
+func deserialize(p_serialized_data: Dictionary, p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> void:
+	super.deserialize(p_serialized_data, p_flags)
 	
 	component_button.look_for(type_convert(p_serialized_data.get("cue_list", ""), TYPE_STRING))
 

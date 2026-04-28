@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cfrvydwbfduet"]
 
 [ext_resource type="Script" uid="uid://b3v12eodc4twb" path="res://panels/UIColorBlock/UIColorBlock.gd" id="1_7guwk"]
-[ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://assets/styles/UIPanelBase.tres" id="1_r6y6h"]
+[ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://modules/Vertex/assets/styles/UIPanelBase.tres" id="1_r6y6h"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jtr56"]
 bg_color = Color(1, 1, 1, 1)

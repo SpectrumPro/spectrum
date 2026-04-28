@@ -41,14 +41,15 @@ var _status_colors: Dictionary[NetworkHandler.NetworkState, Color] = {
 
 
 ## init
-func _init() -> void:
-	super._init()
-	
+func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
+	super._init(p_uuid, p_args)
 	_set_class_name("UIConstellationManager")
 
 
 ## Ready
 func _ready() -> void:
+	super._ready()
+	
 	_constellation = Network.get_active_handler_by_name("Constellation")
 	_constellation_signals.connect_object(_constellation)
 	

@@ -21,13 +21,13 @@ var _position: Vector3 = Vector3.ZERO
 
 
 ## init
-func _init(p_uuid: String = UUID_Util.v4(), p_name: String = _name) -> void:
-	super._init(p_uuid, p_name)
+func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
+	super._init(p_uuid, p_args)
 	
 	_set_name("FixtureGroupItem")
-	_set_self_class("FixtureGroupItem")
+	_set_class_name("FixtureGroupItem")
 	
-	_settings_manager.register_networked_callbacks({
+	_settings.register_networked_callbacks({
 		"on_fixture_changed": _set_fixture,
 		"on_position_changed": _set_position,
 	})
@@ -62,16 +62,16 @@ func get_position() -> Vector3: return _position
 
 
 ## Saves this component into a dict
-func serialize() -> Dictionary:
-	return super.serialize().merged({
+func serialize(p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> Dictionary:
+	return super.serialize(p_flags).merged({
 		"fixture": _fixture.uuid,
 		"position": var_to_str(_position)
 	})
 
 
 ## Loads this component from a dict
-func deserialize(p_serialized_data: Dictionary) -> void:
-	super.deserialize(p_serialized_data)
+func deserialize(p_serialized_data: Dictionary, p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> void:
+	super.deserialize(p_serialized_data, p_flags)
 	
 	if p_serialized_data.get("fixture") is String and ComponentDB.get_component(p_serialized_data.fixture) is Fixture:
 		_set_fixture(ComponentDB.get_component(p_serialized_data.fixture))

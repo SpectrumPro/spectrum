@@ -18,20 +18,20 @@ var _fixtures: Dictionary[Fixture, FixtureGroupItem] = {}
 
 
 ## init
-func _init(p_uuid: String = UUID_Util.v4(), p_name: String = _name) -> void:
-	super._init(p_uuid, p_name)
+func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
+	super._init(p_uuid, p_args)
 	
 	_set_name("FixtureGroup")
-	_set_self_class("FixtureGroup")
+	_set_class_name("FixtureGroup")
 	
-	_settings_manager.register_custom_panel("Fixtures", preload("res://components/SettingsManagerCustomPanels/FixtureGroupFixtures.tscn"), "set_fixture_group")
+	_settings.register_custom_panel("Fixtures", preload("res://components/SettingsManagerCustomPanels/FixtureGroupFixtures.tscn"), "set_fixture_group")
 	
-	_settings_manager.register_networked_callbacks({
+	_settings.register_networked_callbacks({
 		"on_fixtures_added": _add_group_items,
 		"on_fixtures_removed": _remove_fixtures,
 	})
 	
-	_settings_manager.set_callback_allow_deserialize("on_fixtures_added")
+	_settings.set_callback_allow_deserialize("on_fixtures_added")
 
 
 ## Gets all the fixtures
@@ -89,20 +89,20 @@ func delete() -> void:
 
 
 ## Saves this FixtureGroup into a dictionary
-func serialize() -> Dictionary:
-	var serialized_data: Dictionary = {
-		"fixtures": {}
-	}
+func serialize(p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> Dictionary:
+	var seralized_fixtures: Dictionary[String, Dictionary]
 	
 	for fixture: Fixture in _fixtures:
-		serialized_data.fixtures[fixture.uuid] = _fixtures[fixture].serialize()
+		seralized_fixtures.fixtures[fixture.uuid] = _fixtures[fixture].serialize()
 	
-	return super.serialize().merged(serialized_data)
+	return super.serialize(p_flags).merged({
+		"fixtures": seralized_fixtures
+	})
 
 
 ## Loads this FixtureGroup from serialized data
-func deserialize(p_serialized_data: Dictionary) -> void:
-	super.deserialize(p_serialized_data)
+func deserialize(p_serialized_data: Dictionary, p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> void:
+	super.deserialize(p_serialized_data, p_flags)
 	
 	if p_serialized_data.get("fixtures") is Dictionary: 
 		var fixtures: Dictionary = p_serialized_data.fixtures
@@ -139,7 +139,7 @@ func _add_group_item(group_item: FixtureGroupItem, no_signal: bool = false) -> b
 	
 	_fixtures[group_item.get_fixture()] = group_item
 	
-	group_item.get_fixture().delete_requested.connect(_remove_fixture.bind(group_item.get_fixture()), CONNECT_ONE_SHOT)
+	group_item.get_fixture().delete_requested.connect(_remove_fixture)
 	ComponentDB.register_component(group_item)
 	
 	if not no_signal:
@@ -167,6 +167,8 @@ func _remove_fixture(fixture: Fixture, no_signal: bool = false) -> bool:
 	
 	_fixtures[fixture].delete()
 	_fixtures.erase(fixture)
+	
+	fixture.delete_requested.disconnect(_remove_fixture)
 	
 	if not no_signal:
 		fixtures_removed.emit([fixture])

@@ -24,7 +24,7 @@ enum Columns {NAME, MEMBER_COUNT, MASTER}
 var _column_config: Dictionary[int, Dictionary] = {
 	Columns.NAME: {"type": Data.Type.STRING},
 	Columns.MEMBER_COUNT: {"type": Data.Type.INT},
-	Columns.MASTER: {"type": Data.Type.NETWORKNODE},
+	Columns.MASTER: {"type": Data.Type.OBJECT},
 }
 
 ## The Constellation network instance
@@ -54,9 +54,9 @@ func _ready() -> void:
 func add_session(p_session: ConstellationSession) -> void:
 	_session_connections.connect_object(p_session, true)
 	_session_rows.map(p_session, _table.add_row({
-		Columns.NAME: p_session.settings_manager.get_entry("Name"),
-		Columns.MEMBER_COUNT: p_session.settings_manager.get_entry("MemberCount"),
-		Columns.MASTER: p_session.settings_manager.get_entry("Master"),
+		Columns.NAME: p_session.get_settings().get_entry("Name"),
+		Columns.MEMBER_COUNT: p_session.get_settings().get_entry("MemberCount"),
+		Columns.MASTER: p_session.get_settings().get_entry("Master"),
 	}))
 
 
@@ -81,17 +81,14 @@ func reset() -> void:
 
 ## Called when the create session button is pressed
 func _on_create_session_button_pressed() -> void:
-	Interface.prompt_data_input(self, Data.Type.STRING, "NewSession", "Session Name").then(func (p_name: String):
+	Popups.show_data_input(self, Data.Type.STRING, "NewSession", "Session Name").then(func (p_name: String):
 		_constellation.create_session(p_name)
 	)
 
 
 ## Called when the LeaveSession button is pressed
 func _on_leave_session_button_pressed() -> void:
-	if _constellation.get_local_node().get_session().get_number_of_nodes() == 1:
-		Interface.prompt_popup_dialog(self).preset(UIPopupDialog.Preset.CONFIRM, "Leave Session?").then(_constellation.leave_session)
-	else:
-		_constellation.leave_session()
+	Popups.PopupDialog(self).preset(UIPopupDialog.Preset.CONFIRM, "Leave Session?").then(_constellation.leave_session)
 
 
 ## Called when the JoinSession button is pressed

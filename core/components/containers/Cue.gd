@@ -55,20 +55,20 @@ var _cue_list: CueList
 
 
 ## init
-func _init(p_uuid: String = UUID_Util.v4(), p_name: String = _name) -> void:
-	super._init(p_uuid, p_name)
+func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
+	super._init(p_uuid, p_args)
 	
 	_set_name("Cue")
-	_set_self_class("Cue")
+	_set_class_name("Cue")
 	
-	_settings_manager.register_setting("position", Data.Type.INT, set_position, get_position, [position_changed]).set_min_max(0, INF)
-	_settings_manager.register_setting("qid", Data.Type.STRING, set_qid, get_qid, [qid_changed])
-	_settings_manager.register_setting("trigger_mode", Data.Type.ENUM, set_trigger_mode, get_trigger_mode, [trigger_mode_changed]).set_enum_dict(TriggerMode)
-	_settings_manager.register_setting("tracking_mode", Data.Type.ENUM, set_tracking_mode, get_tracking_mode, [tracking_mode_changed]).set_enum_dict(TrackingMode)
-	_settings_manager.register_control("fade_time", Data.Type.FLOAT, set_fade_time, get_fade_time, [fade_time_changed]).set_min_max(0, INF)
-	_settings_manager.register_control("pre_wait", Data.Type.FLOAT, set_pre_wait, get_pre_wait, [pre_wait_time_changed]).set_min_max(0, INF)
+	_settings.register_setting("position", Data.Type.INT, set_position, get_position, [position_changed]).set_min_max(0, INF)
+	_settings.register_setting("qid", Data.Type.STRING, set_qid, get_qid, [qid_changed])
+	_settings.register_setting("trigger_mode", Data.Type.ENUM, set_trigger_mode, get_trigger_mode, [trigger_mode_changed]).set_enum_dict(TriggerMode)
+	_settings.register_setting("tracking_mode", Data.Type.ENUM, set_tracking_mode, get_tracking_mode, [tracking_mode_changed]).set_enum_dict(TrackingMode)
+	_settings.register_control("fade_time", Data.Type.FLOAT, set_fade_time, get_fade_time, [fade_time_changed]).set_min_max(0, INF)
+	_settings.register_control("pre_wait", Data.Type.FLOAT, set_pre_wait, get_pre_wait, [pre_wait_time_changed]).set_min_max(0, INF)
 	
-	_settings_manager.register_networked_callbacks({
+	_settings.register_networked_callbacks({
 		"on_qid_changed": _set_qid,
 		"on_fade_time_changed": _set_fade_time,
 		"on_pre_wait_time_changed": _set_pre_wait,
@@ -194,8 +194,8 @@ func _set_cue_list(p_cue_list: CueList) -> void:
 
 
 ## Returnes a serialized copy of this cue
-func serialize() -> Dictionary:
-	return super.serialize().merged({
+func serialize(p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> Dictionary:
+	return super.serialize(p_flags).merged({
 		"qid": _qid,
 		"fade_time": _fade_time,
 		"pre_wait": _pre_wait,
@@ -205,8 +205,8 @@ func serialize() -> Dictionary:
 
 
 ## Loads this Cue from a dictionary
-func deserialize(p_serialized_data: Dictionary) -> void:
-	super.deserialize(p_serialized_data)
+func deserialize(p_serialized_data: Dictionary, p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> void:
+	super.deserialize(p_serialized_data, p_flags)
 	
 	_qid = type_convert(p_serialized_data.get("qid", _qid), TYPE_STRING)
 	_fade_time = type_convert(p_serialized_data.get("fade_time", _fade_time), TYPE_FLOAT)

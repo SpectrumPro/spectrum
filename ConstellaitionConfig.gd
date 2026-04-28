@@ -1,6 +1,6 @@
 static var config: Dictionary = {
 	## Defines a custom callable to call when logging infomation
-	"custom_loging_method": Callable(),
+	"custom_loging_method": Log.info,
 	
 	## Defines a custom callable to call when logging infomation verbosely
 	"custom_loging_method_verbose": Callable(),
@@ -21,7 +21,7 @@ static var config: Dictionary = {
 	"user_config_file_name": "constellation.conf",
 	
 	## NodeID of the local node
-	"node_id": UUID_Util.v4(),
+	"node_id": UUID.v4(),
 	
 	## Node name of the local node
 	"node_name": "Spectrum Client",
@@ -33,5 +33,8 @@ static var config: Dictionary = {
 	"session_auto_rejoin": true,
 	
 	## True if this node should auto create a session once online, asuming previous session is is null and the node is not already in a session
-	"auto_create_session": false
+	"auto_create_ession": false,
+	
+	## The CoreClassListDB for all NetworkItems
+	"network_item_class_db": NetworkClassList
 }

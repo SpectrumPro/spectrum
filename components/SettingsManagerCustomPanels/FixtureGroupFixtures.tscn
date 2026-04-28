@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://cjrfroxmneel1"]
 
 [ext_resource type="Script" uid="uid://d266aph0mkd2o" path="res://components/SettingsManagerCustomPanels/FixtureGroupFixtures.gd" id="1_7hh60"]
-[ext_resource type="Texture2D" uid="uid://bbennjke0ioen" path="res://assets/icons/Add.svg" id="2_xsoim"]
-[ext_resource type="Texture2D" uid="uid://dfrrs2dnvlvsu" path="res://assets/icons/Delete.svg" id="3_yjx4v"]
-[ext_resource type="Texture2D" uid="uid://cawxywwrt8wr5" path="res://assets/icons/Arrow_upward.svg" id="4_yjx4v"]
-[ext_resource type="Texture2D" uid="uid://cv0titm4w4jp6" path="res://assets/icons/Arrow_downward.svg" id="5_pgicq"]
+[ext_resource type="Texture2D" uid="uid://bbennjke0ioen" path="res://modules/Vertex/assets/icons/Add.svg" id="2_xsoim"]
+[ext_resource type="Texture2D" uid="uid://dfrrs2dnvlvsu" path="res://modules/Vertex/assets/icons/Delete.svg" id="3_yjx4v"]
+[ext_resource type="Texture2D" uid="uid://cawxywwrt8wr5" path="res://modules/Vertex/assets/icons/Arrow_upward.svg" id="4_yjx4v"]
+[ext_resource type="Texture2D" uid="uid://cv0titm4w4jp6" path="res://modules/Vertex/assets/icons/Arrow_downward.svg" id="5_pgicq"]
 
 [node name="FixtureGroupFixtures" type="PanelContainer" node_paths=PackedStringArray("_tree", "_remove_button", "_move_up_button", "_move_down_button")]
 anchors_preset = 15

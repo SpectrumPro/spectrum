@@ -46,14 +46,14 @@ var _show_value_slider: bool = true
 
 
 ## init
-func _init() -> void:
-	super._init()
+func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
+	super._init(p_uuid, p_args)
 	
 	_set_class_name("UIColorPicker")
+	_settings.register_setting("ShowValueSlider", Data.Type.BOOL, set_show_value_slider, get_show_value_slider, [show_value_slider_changed])
+	
 	Values.connect_to_selection_value("selected_fixtures", _on_selected_fixture_changed)
 	_on_selected_fixture_changed(Values.get_selection_value("selected_fixtures"))
-	
-	_settings_manager.register_setting("ShowValueSlider", Data.Type.BOOL, set_show_value_slider, get_show_value_slider, [show_value_slider_changed])
 
 
 ## Shows or hides the value slider
@@ -71,15 +71,15 @@ func get_show_value_slider() -> bool:
 
 
 ## Serializes this UIColorPicker
-func serialize() -> Dictionary:
-	return super.serialize().merged({
+func serialize(p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> Dictionary:
+	return super.serialize(p_flags).merged({
 		"show_value_slider": _show_value_slider
 	})
 
 
 ## Deserializes this UIColorPicker
-func deserialize(p_serialized_data: Dictionary) -> void:
-	super.deserialize(p_serialized_data)
+func deserialize(p_serialized_data: Dictionary, p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> void:
+	super.deserialize(p_serialized_data, p_flags)
 	
 	set_show_value_slider(type_convert(p_serialized_data.get("show_value_slider", _show_value_slider), TYPE_BOOL), true)
 

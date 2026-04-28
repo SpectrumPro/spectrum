@@ -42,14 +42,15 @@ const max_zoom: float = 5
 
 
 ## init
-func _init() -> void:
-	super._init()
-	
+func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
+	super._init(p_uuid, p_args)
 	_set_class_name("UIVirtualFixtures")
 
 
 ## ready
 func _ready() -> void:
+	super._ready()
+	
 	dummy_scroll.get_h_scroll_bar().value_changed.connect(real_scroll.set_h_scroll)
 	dummy_scroll.get_v_scroll_bar().value_changed.connect(real_scroll.set_v_scroll)
 	
@@ -79,7 +80,7 @@ func _zoom_out() -> void:
 ## Sets edit mode state
 func _edit_mode_toggled(p_edit_mode: bool) -> void:
 	fixture_container.set_edit_mode(_edit_mode)
-	$TitleBar/HBoxContainer/EditControls/HBoxContainer/Edit.button_pressed = _edit_mode
+	get_edit_controls().edit_button.button_pressed = _edit_mode
 	$GridAlignSize.hide()
 
 
@@ -117,18 +118,18 @@ func _on_grid_align_pressed() -> void:
 
 
 ## Saves this VirtualFixture layout into a dict
-func serialize() -> Dictionary:
-	return super.serialize().merged({
-	"fixture_group": fixture_container.fixture_group.uuid(),
+func serialize(p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> Dictionary:
+	return super.serialize(p_flags).merged({
+		"fixture_group": component_button.get_component_uuid(),
 		"scroll_h": real_scroll.scroll_horizontal,
 		"scroll_v": real_scroll.scroll_vertical,
 		"zoom": fixture_container.scale.x
-	} if fixture_container.fixture_group else {})
+	})
 
 
 ## Loads this VirtualFixture layout from a dict
-func deserialize(p_serialized_data: Dictionary) -> void:
-	super.deserialize(p_serialized_data)
+func deserialize(p_serialized_data: Dictionary, p_flags: Data.SerializationFlags = Data.SerializationFlags.NONE) -> void:
+	super.deserialize(p_serialized_data, p_flags)
 	
 	var group_uuid: String = type_convert(p_serialized_data.get("fixture_group", ""), TYPE_STRING)
 	var zoom: int = type_convert(p_serialized_data.get("zoom", fixture_container.scale.x), TYPE_INT)

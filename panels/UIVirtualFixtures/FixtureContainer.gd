@@ -92,10 +92,6 @@ func set_fixture_group(p_fixture_group: FixtureGroup) -> void:
 		fixture_group.fixtures_added.connect(_on_fixture_group_fixtures_added)
 		fixture_group.fixtures_removed.connect(_on_fixture_group_fixtures_removed)
 		
-		for group_item: FixtureGroupItem in _group_item_signal_connections:
-			var connections: Dictionary = _group_item_signal_connections[group_item]
-			
-		
 		for fixture: Fixture in fixture_group.get_fixtures():
 			var group_item: FixtureGroupItem = fixture_group.get_group_item_for(fixture)
 			_group_item_signal_connections[group_item] = {
@@ -118,7 +114,7 @@ func add_fixture(fixture: Fixture, set_vf_selected: bool = true, at_position: Ve
 	if _virtual_fixtures.has_left(fixture):
 		return
 	
-	var vf_uuid: String = UUID_Util.v4()
+	var vf_uuid: String = UUID.v4()
 	var new_vf: VirtualFixture = load("uid://cen3hxenplnih").instantiate()
 	
 	new_vf.set_fixture(fixture)
@@ -388,7 +384,7 @@ func _update_selection_box() -> void:
 #region UI Callbacks
 ## Called when the add fixtures button is pressed
 func _on_add_fixtures_pressed() -> void: 
-	Interface.prompt_object_picker(self, EngineComponent, "DMXFixture")
+	Popups.ObjectSelector(self, EngineComponent, "DMXFixture")
 
 
 ## Called when the remove fixtures button is pressed
@@ -402,8 +398,8 @@ func _on_remove_fixtures_pressed() -> void:
 
 
 ## Called when fixtures are selected in the object picker to be added
-func _on_object_picker_objects_selected(objects: Array) -> void:
-	_add_fixtures(objects)
+func _on_object_picker_objects_selected(component: EngineComponent) -> void:
+	_add_fixtures([component])
 
 
 func _on_import_pressed() -> void:
@@ -450,7 +446,7 @@ func _on_gui_input(event: InputEvent) -> void:
 				
 			MOUSE_BUTTON_RIGHT:
 				if event.is_released() and _edit_mode:
-					Interface.show_object_picker(ObjectPicker.SelectMode.Multi, _on_object_picker_objects_selected, "Fixture")
+					Popups.ObjectSelector(self, EngineComponent, Fixture).then(_on_object_picker_objects_selected)
 
 
 ## Called when the align button is pressed
@@ -507,10 +503,4 @@ func _on_de_select_random_pressed() -> void:
 	
 	Values.set_selection_value("selected_fixtures", selected)
 
-
-func _on_fixture_group_name_pressed() -> void:
-	Interface.show_object_picker(ObjectPicker.SelectMode.Single, func (objects: Array):
-		if objects[0] is FixtureGroup:
-			set_fixture_group(objects[0])
-	, "FixtureGroup")
 #endregion
