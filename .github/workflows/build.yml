@@ -34,9 +34,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
         with:
-          lfs: true
           fetch-depth: 0
-          ref: ${{ env.IS_RELEASE == 'true' && 'master' || 'dev' }} 
+          ref: ${{ env.IS_RELEASE == 'true' && 'master' || 'dev' }}
+          submodules: 'true'
 
       - name: Compute build version
         id: version
