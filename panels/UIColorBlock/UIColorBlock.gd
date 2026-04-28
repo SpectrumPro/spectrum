@@ -100,6 +100,8 @@ func set_corner_radius(p_corner_radius: int, p_no_signal: bool = false) -> void:
 ## Sets the show panel border state
 func set_show_panel_border(p_show_panel_border: bool, p_no_signal: bool = false) -> void:
 	_show_panel_border = p_show_panel_border
+	
+	@warning_ignore("incompatible_ternary")
 	add_theme_stylebox_override("panel", ThemeManager.StyleBoxes.UIPanelBase if _show_panel_border else StyleBoxEmpty.new())
 	
 	if not p_no_signal:
