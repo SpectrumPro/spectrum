@@ -422,8 +422,9 @@ func _update_page_buttons() -> void:
 
 	for index in range(0, get_page_count()):
 		page_select_option.add_item(str(index))
-
-	page_select_option.select(_current_page)
+	
+	if page_select_option.get_item_count() > _current_page:
+		page_select_option.select(_current_page)
 
 
 ## Updates the override hilight on the zone select button
