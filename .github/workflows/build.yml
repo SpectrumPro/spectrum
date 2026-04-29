@@ -76,7 +76,7 @@ jobs:
 
       - name: Rename Archives
         run: |
-          cd ${{ steps.export.outputs.archive_directory }}
+          cd ${{ steps.export.outputs.build_directory }}
           mv linux.x86_64.zip SpectrumClient.x86_64.linux.${{ steps.version.outputs.VERSION }}.zip
           mv windows.x86_64.zip SpectrumClient.x86_64.windows.${{ steps.version.outputs.VERSION }}.zip
           mv macOS.universal.zip SpectrumClient.universal.macOS.${{ steps.version.outputs.VERSION }}.zip
