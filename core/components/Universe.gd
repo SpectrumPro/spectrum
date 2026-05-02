@@ -291,7 +291,7 @@ func _remove_fixtures(p_fixtures: Array, p_no_signal: bool = false, p_delete: bo
 ## Called when this universe is to be deleted, see [method EngineComponent.delete]
 func delete() -> void:
 	_remove_outputs(_outputs.values(), false, true)
-	_remove_fixtures(_fixtures.values(), false, true)
+	_remove_fixtures(_fixtures.values(), false, false)
 	
 	super.delete()
 
