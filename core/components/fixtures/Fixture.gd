@@ -46,11 +46,11 @@ func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
 	_set_name("Fixture")
 	
 	_settings.register_networked_callbacks({
-		"on_parameter_changed": _set_parameter,
-		"on_parameter_erased": _erase_parameter,
-		"on_override_changed": _set_override,
-		"on_override_erased": _erase_override,
-		"on_all_override_removed": _erase_all_overrides,
+		"parameter_changed": _set_parameter,
+		"parameter_erased": _erase_parameter,
+		"override_changed": _set_override,
+		"override_erased": _erase_override,
+		"all_override_removed": _erase_all_overrides,
 	})
 
 

@@ -69,11 +69,11 @@ func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
 	_settings.register_control("PreWait", Data.Type.FLOAT, set_pre_wait, get_pre_wait, [pre_wait_time_changed]).set_min_max(0, INF)
 	
 	_settings.register_networked_callbacks({
-		"on_qid_changed": _set_qid,
-		"on_fade_time_changed": _set_fade_time,
-		"on_pre_wait_time_changed": _set_pre_wait,
-		"on_trigger_mode_changed": _set_trigger_mode,
-		"on_tracking_mode_changed": _set_tracking_mode,
+		"qid_changed": _set_qid,
+		"fade_time_changed": _set_fade_time,
+		"pre_wait_time_changed": _set_pre_wait,
+		"trigger_mode_changed": _set_trigger_mode,
+		"tracking_mode_changed": _set_tracking_mode,
 	})
 
 

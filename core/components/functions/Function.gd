@@ -92,12 +92,12 @@ func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
 	_settings.register_control("Blackout",	Data.Type.ACTION, blackout)
 	
 	_settings.register_networked_callbacks({
-		"on_intensity_changed": _set_intensity,
-		"on_active_state_changed": _set_active_state,
-		"on_transport_state_changed": _set_transport_state,
-		"on_priority_mode_state_changed": _set_priority_mode_state,
-		"on_auto_start_changed": _set_auto_start,
-		"on_auto_stop_changed": _set_auto_stop,
+		"intensity_changed": _set_intensity,
+		"active_state_changed": _set_active_state,
+		"transport_state_changed": _set_transport_state,
+		"priority_mode_state_changed": _set_priority_mode_state,
+		"auto_start_changed": _set_auto_start,
+		"auto_stop_changed": _set_auto_stop,
 	})
 	
 	Network.register_network_object(_data_container.get_uuid(), _data_container.get_settings())

@@ -41,9 +41,9 @@ func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
 	_settings.register_setting("UniverseNumber", Data.Type.INT, set_universe_number, get_universe_number, [universe_number_changed])
 	
 	_settings.register_networked_callbacks({
-		"on_ip_changed": _set_ip,
-		"on_broadcast_state_changed": _set_use_broadcast,
-		"on_universe_number_changed": _set_universe_number,
+		"ip_changed": _set_ip,
+		"broadcast_state_changed": _set_use_broadcast,
+		"universe_number_changed": _set_universe_number,
 	})
 
 

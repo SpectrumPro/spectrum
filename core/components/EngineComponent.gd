@@ -60,10 +60,10 @@ func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
 	#.display("EngineComponent", 1)
 	
 	_settings.register_networked_callbacks({
-		"on_name_changed": _set_name,
-		"on_delete_requested": delete,
-		"on_user_meta_changed": _set_user_meta,
-		"on_user_meta_deleted": _delete_user_meta
+		"name_changed": _set_name,
+		"delete_requested": delete,
+		"user_meta_changed": _set_user_meta,
+		"user_meta_deleted": _delete_user_meta
 	})
 	
 	print_verbose("I am: ", get_name(), " | ", get_uuid())

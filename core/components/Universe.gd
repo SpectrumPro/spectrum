@@ -37,14 +37,14 @@ func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
 	_set_class_name("Universe")
 	
 	_settings.register_networked_callbacks({
-		"on_fixtures_added": _add_fixtures,
-		"on_fixtures_removed": _remove_fixtures,
-		"on_outputs_added": _add_outputs,
-		"on_outputs_removed": _remove_outputs,
+		"fixtures_added": _add_fixtures,
+		"fixtures_removed": _remove_fixtures,
+		"outputs_added": _add_outputs,
+		"outputs_removed": _remove_outputs,
 	})
 	
-	_settings.set_callback_allow_deserialize("on_outputs_added")
-	_settings.set_callback_allow_deserialize("on_fixtures_added")
+	_settings.set_callback_allow_deserialize("outputs_added")
+	_settings.set_callback_allow_deserialize("fixtures_added")
 	
 	_settings.add_child_manager("Outputs", ChildManager.new(
 		self,
@@ -90,7 +90,7 @@ func add_output(p_output: DMXOutput) -> Promise:
 
 
 ## Adds mutiple outputs to this univere at once
-func add_outputs(p_outputs: Array[DMXOutput]) -> Promise: 
+func add_outputs(p_outputs: Array) -> Promise: 
 	return rpc("add_outputs", [p_outputs])
 
 
@@ -100,7 +100,7 @@ func remove_output(p_output: DMXOutput) -> Promise:
 
 
 ## Removes mutiple outputs from this universe
-func remove_outputs(p_outputs: Array[DMXOutput]) -> Promise: 
+func remove_outputs(p_outputs: Array) -> Promise: 
 	return rpc("remove_outputs", [p_outputs])
 
 
@@ -110,7 +110,7 @@ func add_fixture(p_fixture: DMXFixture, p_channel: int = -1) -> Promise:
 
 
 ## Adds mutiple fixtures to this universe
-func add_fixtures(p_fixtures: Array[DMXFixture]) -> Promise: 
+func add_fixtures(p_fixtures: Array) -> Promise: 
 	return rpc("add_fixtures", [p_fixtures])
 
 
@@ -120,7 +120,7 @@ func remove_fixture(p_fixture: DMXFixture) -> Promise:
 
 
 ## Removes mutiple fixtures from this universe
-func remove_fixtures(p_fixtures: Array[DMXFixture]) -> Promise: 
+func remove_fixtures(p_fixtures: Array) -> Promise: 
 	return rpc("remove_fixtures", [p_fixtures])
 
 
@@ -191,7 +191,7 @@ func _remove_output(p_output: DMXOutput, p_no_signal: bool = false, p_delete: bo
 	if not p_output in _outputs.values():
 		return false
 	
-	_outputs.erase(p_output.uuid)
+	_outputs.erase(p_output.get_uuid())
 	p_output.delete_requested.disconnect(_remove_output)
 	
 	if not p_no_signal:
@@ -326,12 +326,12 @@ func deserialize(p_serialized_data: Dictionary, p_flags: Data.SerializationFlags
 
 	for fixture_channel: String in p_serialized_data.get("fixtures", []):
 		for fixture_uuid: String in p_serialized_data.fixtures[fixture_channel]:
-			var fixture: EngineComponent = ComponentDB.get_component(fixture_uuid)
+			ComponentDB.request_component(fixture_uuid, func(p_fixture: Fixture):
+				if p_fixture is DMXFixture:
+					_add_fixture(p_fixture, -1, true)
+					just_added_fixtures.append(p_fixture)
+			)
 
-			if fixture is DMXFixture:
-				_add_fixture(fixture, -1, true)
-				just_added_fixtures.append(fixture)
-	
 	for output_uuid: String in p_serialized_data.get("outputs", {}).keys():
 		var classname: String = p_serialized_data.outputs[output_uuid].get("class_name", "")
 		if ComponentClassList.has_class(classname, "DMXOutput"):

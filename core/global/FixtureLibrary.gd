@@ -105,9 +105,13 @@ func _reset() -> void:
 
 ## Called when a manifest is received from the server
 func _on_get_manifest_received(p_manifest: FixtureManifest) -> void:
-	if p_manifest:
-		_loaded_manifests[p_manifest.get_uuid()] = p_manifest
-		for promise: Promise in _manifest_requests.get(p_manifest.get_uuid(), []):
-			promise.resolve([p_manifest])
-		
-		_manifest_requests.erase(p_manifest.get_uuid())
+	if not is_instance_valid(p_manifest):
+		return
+	
+	_loaded_manifests[p_manifest.get_uuid()] = p_manifest
+	ComponentDB.register_component(p_manifest)
+	
+	for promise: Promise in _manifest_requests.get(p_manifest.get_uuid(), []):
+		promise.resolve([p_manifest])
+	
+	_manifest_requests.erase(p_manifest.get_uuid())

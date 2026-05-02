@@ -30,9 +30,9 @@ func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
 	_settings.register_custom_panel("functions", preload("res://components/SettingsManagerCustomPanels/FixtureGroupFixtures.tscn"), "set_fixture_group")
 	
 	_settings.register_networked_callbacks({
-		"on_functions_added": _add_functions,
-		"on_functions_removed": _remove_functions,
-		"on_functions_index_changed": _set_function_index,
+		"functions_added": _add_functions,
+		"functions_removed": _remove_functions,
+		"functions_index_changed": _set_function_index,
 	})
 
 

@@ -84,19 +84,19 @@ func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
 	_settings.register_control("GlobalPreWaitSpeed", Data.Type.FLOAT, set_global_pre_wait_speed, get_global_pre_wait_speed, [global_pre_wait_changed]).set_min_max(0, INF)
 	
 	_settings.register_networked_callbacks({
-		"on_active_cue_changed": _on_active_cue_changed,
-		"on_global_fade_state_changed": _set_global_fade_state,
-		"on_global_pre_wait_state_changed": set_global_pre_wait_state,
-		"on_global_fade_changed": _set_global_fade_speed,
-		"on_global_pre_wait_changed": _set_global_pre_wait_speed,
-		"on_triggered_looping_changed": _set_allow_triggered_looping,
-		"on_loop_mode_changed": _set_loop_mode,
-		"on_cues_added": _add_cues,
-		"on_cues_removed": _remove_cues,
-		"on_cue_order_changed": _set_cue_position,
+		"active_cue_changed": _on_active_cue_changed,
+		"global_fade_state_changed": _set_global_fade_state,
+		"global_pre_wait_state_changed": set_global_pre_wait_state,
+		"global_fade_changed": _set_global_fade_speed,
+		"global_pre_wait_changed": _set_global_pre_wait_speed,
+		"triggered_looping_changed": _set_allow_triggered_looping,
+		"loop_mode_changed": _set_loop_mode,
+		"cues_added": _add_cues,
+		"cues_removed": _remove_cues,
+		"cue_order_changed": _set_cue_position,
 	})
 	
-	_settings.set_callback_allow_deserialize("on_cues_added")
+	_settings.set_callback_allow_deserialize("cues_added")
 	
 	_settings.add_child_manager("Cues", ChildManager.new(
 		self,

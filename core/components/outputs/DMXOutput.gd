@@ -39,8 +39,8 @@ func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
 	_settings.register_status("ConnectionStatus", Data.Type.BOOL, get_connection_state, [connection_state_changed])
 	
 	_settings.register_networked_callbacks({
-		"on_connection_state_changed": _on_connection_state_changed,
-		"on_auto_start_changed": _set_auto_start,
+		"connection_state_changed": _on_connection_state_changed,
+		"auto_start_changed": _set_auto_start,
 	})
 
 

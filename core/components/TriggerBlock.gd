@@ -37,12 +37,12 @@ func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
 	_set_class_name("TriggerBlock")
 		
 	_settings.register_networked_callbacks({
-		"on_trigger_added": _add_trigger,
-		"on_trigger_removed": _remove_trigger,
-		"on_column_reset": _reset_column,
-		"on_trigger_name_changed": _rename_trigger,
-		"on_trigger_up": _call_trigger_up,
-		"on_trigger_down": _call_trigger_down,
+		"trigger_added": _add_trigger,
+		"trigger_removed": _remove_trigger,
+		"column_reset": _reset_column,
+		"trigger_name_changed": _rename_trigger,
+		"trigger_up": _call_trigger_up,
+		"trigger_down": _call_trigger_down,
 	})
 
 
