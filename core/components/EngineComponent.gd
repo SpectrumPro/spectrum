@@ -177,7 +177,7 @@ func delete_rpc() -> void:
 ## Deletes this component localy, with out contacting the server. Usefull when handling server side delete requests
 func delete() -> void:
 	delete_requested.emit(self)
-	print(_uuid, " Has had a delete request send. Currently has:", str(get_reference_count()), " refernces")
+	print(_uuid, " \"", _name, "\" Has had a delete request send. Currently has:", str(get_reference_count()), " refernces")
 
 
 ## Returns serialized version of this component
@@ -234,4 +234,4 @@ func _delete_user_meta(p_key: String) -> void:
 ## Debug function to tell if this component is freed from memory
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_PREDELETE:
-		print("\"", self._name, "\" Is being freed, uuid: ", self._uuid)
+		print("\"", _name, "\" Is being freed, uuid: ", self._uuid)
