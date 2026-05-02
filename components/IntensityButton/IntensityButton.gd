@@ -74,7 +74,7 @@ func _on_intensity_changed(p_intensity: float) -> void:
 
 
 ## Called when the function is to be deleted
-func _on_delete_requested() -> void:
+func _on_delete_requested(_p_function: Function) -> void:
 	set_function(null)
 
 

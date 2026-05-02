@@ -167,7 +167,7 @@ func _get_selected_cues() -> Array[Cue]:
 
 
 ## Called when the CueList is to be deleted
-func _on_delete_requested() -> void:
+func _on_delete_requested(_p_cue_list: CueList) -> void:
 	set_cue_list(null)
 
 

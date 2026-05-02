@@ -176,7 +176,7 @@ func _on_transport_state_changed(p_transport_state: Function.TransportState) -> 
 
 
 ## Called when the cuelist is to be deleted
-func _on_delete_requested() -> void:
+func _on_delete_requested(_p_cue_list: CueList) -> void:
 	set_cue_list(null)
 
 
