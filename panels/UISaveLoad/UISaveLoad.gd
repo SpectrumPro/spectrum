@@ -41,7 +41,7 @@ var _files: Array[Dictionary]
 ## init
 func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
 	super._init(p_uuid, p_args)
-	_set_class_name("UICommandPalette")
+	_set_class_name("UISaveLoad")
 
 
 ## ready
@@ -157,9 +157,9 @@ func _on_open_pressed() -> void:
 	if selected:
 		var file_name: String = selected.get_text(0)
 		
-		Interface.prompt_popup_dialog(self).preset(UIPopupDialog.Preset.CONFIRM, "Confirm Open? Unsaved changes will be lost!").then(func ():
+		Popups.PopupDialog(self).preset(UIPopupDialog.Preset.CONFIRM, "Confirm Open? Unsaved changes will be lost!").then(func ():
 			if int(_files[selected.get_index()].version) != Details.schema_version:
-				Interface.prompt_popup_dialog(self).preset(UIPopupDialog.Preset.CONFIRM, "Confirm Open? Unsaved changes will be lost!").then(func ():
+				Popups.PopupDialog(self).preset(UIPopupDialog.Preset.CONFIRM, "Confirm Open? Unsaved changes will be lost!").then(func ():
 					Core.reset_and_load(file_name)
 				)
 			else:
