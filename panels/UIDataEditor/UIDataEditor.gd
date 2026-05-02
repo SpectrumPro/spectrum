@@ -147,6 +147,7 @@ func _set_container(p_container: DataContainer) -> void:
 	
 	_rows.clear()
 	_columns.clear()
+	_fixture_rows.clear()
 	
 	table.add_column("Fixture", Data.Type.STRING)
 	table.add_column("CID", Data.Type.INT)
