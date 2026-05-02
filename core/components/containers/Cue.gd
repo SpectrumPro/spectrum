@@ -51,7 +51,7 @@ var _tracking_mode: TrackingMode = TrackingMode.TRACKING
 var _position: int = -1
 
 ## The CueList that contains this cue
-var _cue_list: CueList
+var _cue_list: WeakRef
 
 
 ## init
@@ -104,7 +104,7 @@ func set_tracking_mode(p_tracking_mode: TrackingMode) -> Promise:
 
 ## Sets the position of this cue
 func set_position(p_position: int) -> Promise:
-	return _cue_list.set_cue_position(self, p_position)
+	return _cue_list.get_ref().set_cue_position(self, p_position)
  
 
 ## Returns the QID
@@ -190,7 +190,7 @@ func _set_position(p_position: int) -> void:
 
 ## Sets the cuelist this Cue belongs to
 func _set_cue_list(p_cue_list: CueList) -> void:
-	_cue_list = p_cue_list
+	_cue_list = weakref(p_cue_list)
 
 
 ## Returnes a serialized copy of this cue
