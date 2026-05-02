@@ -76,10 +76,10 @@ jobs:
 
       - name: Rename Archives
         run: |
-          cd ${{ steps.export.outputs.archive_directory }}
-          mv linux.x86_64.zip SpectrumClient.x86_64.linux.${{ steps.version.outputs.VERSION }}.zip
-          mv windows.x86_64.zip SpectrumClient.x86_64.windows.${{ steps.version.outputs.VERSION }}.zip
-          mv macOS.universal.zip SpectrumClient.universal.macOS.${{ steps.version.outputs.VERSION }}.zip
+          cd ${{ steps.export.outputs.build_directory }}
+          mv linux.x86_64/linux.x86_64.zip SpectrumClient.x86_64.linux.${{ steps.version.outputs.VERSION }}.zip
+          mv windows.x86_64/windows.x86_64.zip SpectrumClient.x86_64.windows.${{ steps.version.outputs.VERSION }}.zip
+          mv macOS.universal/macOS.universal.zip SpectrumClient.universal.macOS.${{ steps.version.outputs.VERSION }}.zip
 
       - name: Tag current commit for Latest Dev Build
         if: env.IS_RELEASE != 'true'
@@ -104,7 +104,7 @@ jobs:
           allowUpdates: true
           removeArtifacts: true
           replacesArtifacts: true
-          artifacts: ${{ steps.export.outputs.archive_directory }}/*
+          artifacts: ${{ steps.export.outputs.build_directory }}/*
 
       - name: Create git tag
         if: env.IS_RELEASE == 'true'
@@ -120,4 +120,4 @@ jobs:
           tag: ${{ steps.version.outputs.VERSION }}
           name: ${{ steps.version.outputs.VERSION }}
           generateReleaseNotes: true
-          artifacts: ${{ steps.export.outputs.archive_directory }}/*
+          artifacts: ${{ steps.export.outputs.build_directory }}/*
