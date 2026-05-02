@@ -243,7 +243,7 @@ func deserialize(p_serialized_data: Dictionary, p_flags: Data.SerializationFlags
 
 ## Deletes this component localy, with out contacting the server. Usefull when handling server side delete requests
 func delete() -> void:
-	Network.deregister_network_object(_data_container.get_settings())
+	_data_container.delete()
 	super.delete()
 
 
