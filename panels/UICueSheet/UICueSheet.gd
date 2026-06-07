@@ -47,7 +47,6 @@ var _cue_list_connection: SignalGroup = SignalGroup.new([
 ],{
 	"cues_added": _add_cues,
 	"cues_removed": _remove_cues,
-	"cue_order_changed": _set_cue_position,
 })
 
 ## Config for each column
@@ -75,6 +74,7 @@ func _ready() -> void:
 		var column: Columns = Columns[column_name]
 		table.add_column(column_name.capitalize(), _column_config[column])
 	
+	table.set_column_sort(table.get_column(Columns.IDX))
 	_settings.require("Table", table.get_settings())
 
 
@@ -148,12 +148,6 @@ func _remove_cues(p_cues: Array) -> void:
 		
 		table.remove_row(_cues.left(cue))
 		_cues.erase_left(cue)
-
-
-## Sets the position of a cue in the list
-func _set_cue_position(p_cue: Cue, p_position: int) -> void:
-	if _cues.has_left(p_cue):
-		_cues.left(p_cue).set_position(p_position)
 
 
 ## Gets the selected cues
