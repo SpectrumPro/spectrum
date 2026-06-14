@@ -43,5 +43,5 @@ func _set_editable(p_editable: bool) -> void:
 ## Called when the button is pressed
 func _on_button_pressed() -> void:
 	Popups.ManifestSelector(self).then(func (p_manifest: String, p_mode: String):
-		set_value(p_manifest, p_mode)
+		set_value([[p_manifest, p_mode]])
 	)
