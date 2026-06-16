@@ -6,8 +6,8 @@ class_name UIFunctions extends UIPanel
 ## GUI element for managing Functions
 
 
-## The ComponentManagerView
-@onready var _component_manager: ComponentManagerView = %ComponentManagerView
+## The ChildManagerView
+@onready var _component_manager: ChildManagerView = %ChildManagerView
 
 
 ## init

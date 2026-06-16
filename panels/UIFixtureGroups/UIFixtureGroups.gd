@@ -6,8 +6,8 @@ class_name UIFixtureGroups extends UIPanel
 ## GUI element for managing FixtureGroups
 
 
-## The ComponentManagerView
-@onready var _component_manager: ComponentManagerView = %ComponentManagerView
+## The ChildManagerView
+@onready var _component_manager: ChildManagerView = %ChildManagerView
 
 
 ## init

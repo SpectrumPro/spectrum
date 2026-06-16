@@ -612,4 +612,4 @@ class TabItem extends RefCounted:
 			
 			match p_event.button_index:
 				MOUSE_BUTTON_RIGHT:
-					Popups.show_settings_manager(_button, _settings)
+					Popups.USettingsManager(_button, _settings)

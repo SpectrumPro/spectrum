@@ -6,8 +6,8 @@ class_name UIUniverses extends UIPanel
 ## GUI element for managing universes
 
 
-## The ComponentManagerView
-@onready var _component_manager: ComponentManagerView = %ComponentManagerView
+## The ChildManagerView
+@onready var _component_manager: ChildManagerView = %ChildManagerView
 
 
 ## init

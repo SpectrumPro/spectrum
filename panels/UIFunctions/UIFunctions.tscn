@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cxh7su68my38i" path="res://assets/icons/Function.svg" id="4_gywq0"]
 [ext_resource type="Texture2D" uid="uid://dqr6mygroiluf" path="res://modules/Vertex/assets/icons/NewPanel.svg" id="5_ij3w5"]
 [ext_resource type="Texture2D" uid="uid://dfrrs2dnvlvsu" path="res://modules/Vertex/assets/icons/Delete.svg" id="7_mx5jm"]
-[ext_resource type="PackedScene" uid="uid://7prnynnrdn4n" path="res://modules/Vertex/components/ComponentManagerView/ComponentManagerView.tscn" id="8_f8x5k"]
+[ext_resource type="PackedScene" uid="uid://7prnynnrdn4n" path="res://modules/Vertex/components/ChildManagerView/ChildManagerView.tscn" id="8_f8x5k"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gywq0"]
 
@@ -58,7 +58,7 @@ layout_mode = 2
 text = "Duplicate"
 icon = ExtResource("4_0odo6")
 
-[node name="ComponentManagerView" parent="VBoxContainer" instance=ExtResource("8_f8x5k")]
+[node name="ChildManagerView" parent="VBoxContainer" instance=ExtResource("8_f8x5k")]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_gywq0")

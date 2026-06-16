@@ -9,8 +9,8 @@ class_name UICorePrimarySideBarSettings extends Control
 ## The table
 @export var table: Table
 
-## The SettingsManagerView
-@export var settings_manager_view: SettingsManagerView
+## The SettingsManagerBlockView
+@export var settings_manager_view: SettingsManagerBlockView
 
 ## The OpenTabButton
 @export var open_tab_button: Button

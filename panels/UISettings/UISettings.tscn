@@ -3,7 +3,7 @@
 [ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://modules/Vertex/assets/styles/UIPanelBase.tres" id="1_axtmf"]
 [ext_resource type="Script" uid="uid://b758cm002fxcw" path="res://panels/UISettings/UISettings.gd" id="2_axtmf"]
 [ext_resource type="PackedScene" uid="uid://dr0kfolsg46yu" path="res://modules/Vertex/panels/UIPanel/PanelMenuBar.tscn" id="3_axtmf"]
-[ext_resource type="PackedScene" uid="uid://kjup3yrjifr5" path="res://modules/Vertex/components/SettingsManagerView/SettingsManagerView.tscn" id="4_c2tg1"]
+[ext_resource type="PackedScene" uid="uid://kjup3yrjifr5" path="res://modules/Vertex/components/SettingsManagerBlockView/SettingsManagerBlockView.tscn" id="4_c2tg1"]
 [ext_resource type="Texture2D" uid="uid://c6xnsmttojanx" path="res://modules/Vertex/assets/icons/Settings.svg" id="4_f3m7m"]
 [ext_resource type="PackedScene" uid="uid://dpkn0u6ocbxrj" path="res://modules/UIConstellationManager/panels/UIConstellationManager.tscn" id="9_c2tg1"]
 

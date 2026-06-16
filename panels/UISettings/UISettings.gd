@@ -9,8 +9,8 @@ class_name UISettings extends UIPanel
 ## Container for tab buttons
 @export var _tab_button_container: HBoxContainer
 
-## The SettingsManagerView for Interface settings
-@export var _interface_settings: SettingsManagerView
+## The SettingsManagerBlockView for Interface settings
+@export var _interface_settings: SettingsManagerBlockView
 
 ## Enum for each tab
 enum Tab {InterfaceSettings, ServerSettings, NetworkManager, Shortcuts}
