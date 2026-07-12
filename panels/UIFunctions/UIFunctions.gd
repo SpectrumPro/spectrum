@@ -23,4 +23,5 @@ func _ready() -> void:
 	_component_manager.set_new_button(%NewComponent)
 	_component_manager.set_delete_button(%DeleteComponent)
 	_component_manager.set_duplicate_button(%DuplicateComponent)
+	_component_manager.set_view_mode_button(%ViewModeButton)
 	_component_manager.mode_gbc_index("EngineComponent", "Function")
