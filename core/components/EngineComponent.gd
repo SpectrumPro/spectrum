@@ -59,6 +59,9 @@ func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
 	#_settings.register_setting("CID", Data.Type.CID, CIDManager.set_component_id.bind(self), cid, [cid_changed])\
 	#.display("EngineComponent", 1)
 	
+	_settings.add_primary_module("Name")
+	_settings.set_sort_module("Name")
+	
 	_settings.register_networked_callbacks({
 		"name_changed": _set_name,
 		"delete_requested": delete,
