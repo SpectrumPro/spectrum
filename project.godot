@@ -87,8 +87,6 @@ project/assembly_name="Spectrum Client"
 
 [editor]
 
-movie_writer/movie_file="/Users/liam/Documents/Repos/SpectrumPro/Spectrum/record.avi"
-movie_writer/fps=30
 naming/scene_name_casing=1
 naming/script_name_casing=1
 
