@@ -65,8 +65,8 @@ jobs:
         id: export
         uses: firebelley/godot-export@v7.0.0
         with:
-          godot_executable_download_url: https://github.com/not-my-username/godot/releases/download/4.5.2-so_reusraddr/godot.linuxbsd.editor.x86_64.zip
-          godot_export_templates_download_url: https://github.com/not-my-username/godot/releases/download/4.5.2-so_reusraddr/4.5.2.stablereuseaddr.zip
+          godot_executable_download_url: https://github.com/not-my-username/godot/releases/download/v4.7.1-so_reuseaddr/godot.linuxbsd.editor.x86_64.zip
+          godot_export_templates_download_url: https://github.com/not-my-username/godot/releases/download/v4.7.1-so_reuseaddr/4.7.1.stablereuseaddr.zip
           relative_project_path: ./
           archive_output: false 
           cache: true

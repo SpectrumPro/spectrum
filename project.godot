@@ -8,6 +8,10 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="SpectrumClient"
@@ -17,9 +21,9 @@ run/main_scene="uid://d00fmrh7nbaua"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="SpectrumClient"
 config/auto_accept_quit=false
-config/features=PackedStringArray("4.5")
+config/features=PackedStringArray("4.7")
 boot_splash/bg_color=Color(0.0901961, 0.0901961, 0.0901961, 1)
-boot_splash/fullsize=false
+boot_splash/stretch_mode=0
 boot_splash/image="uid://bsbmpadvx8wi8"
 config/icon="uid://b25mctiamjbwy"
 config/macos_native_icon="res://assets/logos/spectrum/spectrum_dark.icns"
