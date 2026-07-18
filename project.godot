@@ -16,7 +16,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 config/name="SpectrumClient"
 config/description="The modular lighting system."
-config/version="v1.0.0-beta.4"
+config/version="v1.0.0-beta.5"
 run/main_scene="uid://d00fmrh7nbaua"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="SpectrumClient"
