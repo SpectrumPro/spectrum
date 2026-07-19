@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dqr6mygroiluf" path="res://modules/Vertex/assets/icons/NewPanel.svg" id="6_610ut"]
 [ext_resource type="Texture2D" uid="uid://dfrrs2dnvlvsu" path="res://modules/Vertex/assets/icons/Delete.svg" id="7_0856o"]
 [ext_resource type="Texture2D" uid="uid://cuvwwbojtcpg6" path="res://modules/Vertex/assets/icons/Duplicate.svg" id="8_vjvpo"]
-[ext_resource type="PackedScene" uid="uid://7prnynnrdn4n" path="res://modules/Vertex/components/ComponentManagerView/ComponentManagerView.tscn" id="9_1kh4h"]
+[ext_resource type="PackedScene" uid="uid://7prnynnrdn4n" path="res://modules/Vertex/components/ChildManagerView/ChildManagerView.tscn" id="9_1kh4h"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7ac3b"]
 
@@ -35,34 +35,47 @@ layout_mode = 2
 text = "FixtureGroups"
 icon = ExtResource("5_7ac3b")
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer" index="0"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer" index="0"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/PanelContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="NewComponent" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/PanelContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="NewComponent" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 text = "New"
 icon = ExtResource("6_610ut")
 
-[node name="DeleteComponent" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/PanelContainer/HBoxContainer"]
+[node name="DeleteComponent" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 text = "Delete"
 icon = ExtResource("7_0856o")
 
-[node name="DuplicateComponent" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/PanelContainer/HBoxContainer"]
+[node name="DuplicateComponent" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 text = "Duplicate"
 icon = ExtResource("8_vjvpo")
 
-[node name="ComponentManagerView" parent="VBoxContainer" instance=ExtResource("9_1kh4h")]
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer2"]
+layout_mode = 2
+
+[node name="ViewModeButton" type="OptionButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer2/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ChildManagerView" parent="VBoxContainer" instance=ExtResource("9_1kh4h")]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_7ac3b")

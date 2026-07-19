@@ -147,6 +147,7 @@ func _set_container(p_container: DataContainer) -> void:
 	
 	_rows.clear()
 	_columns.clear()
+	_fixture_rows.clear()
 	
 	table.add_column("Fixture", Data.Type.STRING)
 	table.add_column("CID", Data.Type.INT)
@@ -255,7 +256,7 @@ func _get_items_from_table_selection(p_selection: Dictionary[Table.Row, Array], 
 
 
 ## Called when the function is to be deleted
-func _on_function_delete_requested() -> void:
+func _on_function_delete_requested(_p_function: Function) -> void:
 	set_function(null)
 
 

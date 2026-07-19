@@ -27,11 +27,11 @@ func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
 	_settings.register_custom_panel("Fixtures", preload("res://components/SettingsManagerCustomPanels/FixtureGroupFixtures.tscn"), "set_fixture_group")
 	
 	_settings.register_networked_callbacks({
-		"on_fixtures_added": _add_group_items,
-		"on_fixtures_removed": _remove_fixtures,
+		"fixtures_added": _add_group_items,
+		"fixtures_removed": _remove_fixtures,
 	})
 	
-	_settings.set_callback_allow_deserialize("on_fixtures_added")
+	_settings.set_callback_allow_deserialize("fixtures_added")
 
 
 ## Gets all the fixtures

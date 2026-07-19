@@ -15,7 +15,7 @@ class_name ComponentIDManager extends Node
 ### Network callbacks for the server
 #var network_config: Dictionary = {
 	#"callbacks": {
-		#"on_componend_id_changed": set_component_id_local
+		#"componend_id_changed": set_component_id_local
 	#}
 #}
 #

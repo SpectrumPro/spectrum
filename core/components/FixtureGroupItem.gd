@@ -28,8 +28,8 @@ func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
 	_set_class_name("FixtureGroupItem")
 	
 	_settings.register_networked_callbacks({
-		"on_fixture_changed": _set_fixture,
-		"on_position_changed": _set_position,
+		"fixture_changed": _set_fixture,
+		"position_changed": _set_position,
 	})
 
 

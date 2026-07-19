@@ -52,7 +52,6 @@ func _ready() -> void:
 		"FixtureGroupItem",
 		"DataContainer",
 		"DataPaletteItem",
-		"FixtureManifest",
 		"ContainerItem"
 	]
 	

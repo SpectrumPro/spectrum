@@ -31,8 +31,8 @@ enum Columns {IDX, QID, NAME, FADE_TIME, PRE_WAIT, TRIGGER_MODE}
 ## The Delete Button
 @export var delete_button: Button
 
-## The Table
-@export var table: Table
+## The Table2
+@export var table: Table2
 
 
 ## The current CueList
@@ -47,18 +47,10 @@ var _cue_list_connection: SignalGroup = SignalGroup.new([
 ],{
 	"cues_added": _add_cues,
 	"cues_removed": _remove_cues,
-	"cue_order_changed": _set_cue_position,
 })
 
-## Config for each column
-var _column_config: Dictionary[Columns, Data.Type] = {
-	Columns.IDX: Data.Type.INT,
-	Columns.QID: Data.Type.STRING,
-	Columns.NAME: Data.Type.STRING,
-	Columns.FADE_TIME: Data.Type.FLOAT,
-	Columns.PRE_WAIT: Data.Type.FLOAT,
-	Columns.TRIGGER_MODE: Data.Type.ENUM,
-}
+## Stores all columns
+var _columns: Array[Table2.Column]
 
 
 ## init
@@ -72,10 +64,11 @@ func _ready() -> void:
 	super._ready()
 	
 	for column_name: String in Columns.keys():
-		var column: Columns = Columns[column_name]
-		table.add_column(column_name.capitalize(), _column_config[column])
+		_columns.append(
+			table.create_column().set_title(column_name.capitalize())
+		)
 	
-	_settings.require("Table", table.get_settings())
+	table.set_sort_column(_columns[Columns.IDX])
 
 
 ## Sets the CueList
@@ -94,7 +87,7 @@ func set_cue_list(p_cue_list: CueList) -> void:
 	delete_button.set_disabled(true)
 	
 	_cues.clear()
-	table.clear()
+	table.clear_data()
 	
 	if not is_valid:
 		return
@@ -130,13 +123,13 @@ func _add_cues(p_cues: Array) -> void:
 			continue
 		
 		var manager: SettingsManager = cue.get_settings()
-		_cues.map(cue, table.add_row({
-			Columns.IDX: manager.get_entry("Position"),
-			Columns.QID: manager.get_entry("QID"),
-			Columns.NAME: manager.get_entry("Name"),
-			Columns.FADE_TIME: manager.get_entry("FadeTime"),
-			Columns.PRE_WAIT: manager.get_entry("PreWait"),
-			Columns.TRIGGER_MODE: manager.get_entry("TriggerMode"),
+		_cues.map(cue, table.create_row().load_data({
+			_columns[Columns.IDX]:			manager.get_entry("Position"),
+			_columns[Columns.QID]:			manager.get_entry("QID"),
+			_columns[Columns.NAME]:			manager.get_entry("Name"),
+			_columns[Columns.FADE_TIME]:	manager.get_entry("FadeTime"),
+			_columns[Columns.PRE_WAIT]:		manager.get_entry("PreWait"),
+			_columns[Columns.TRIGGER_MODE]:	manager.get_entry("TriggerMode"),
 		}))
 
 
@@ -150,24 +143,18 @@ func _remove_cues(p_cues: Array) -> void:
 		_cues.erase_left(cue)
 
 
-## Sets the position of a cue in the list
-func _set_cue_position(p_cue: Cue, p_position: int) -> void:
-	if _cues.has_left(p_cue):
-		_cues.left(p_cue).set_position(p_position)
-
-
 ## Gets the selected cues
 func _get_selected_cues() -> Array[Cue]:
 	var selected_cues: Array[Cue]
 	
-	for row: Table.Row in table.get_selected_rows():
+	for row: Table2.Row in table.get_selected_rows():
 		selected_cues.append(_cues.right(row))
 	
 	return selected_cues
 
 
 ## Called when the CueList is to be deleted
-func _on_delete_requested() -> void:
+func _on_delete_requested(_p_cue_list: CueList) -> void:
 	set_cue_list(null)
 
 
@@ -181,7 +168,7 @@ func _on_next_pressed() -> void:
 	_cue_list.go_next()
 
 
-## Called when the selection is changed on the Table
+## Called when the selection is changed on the Table2
 func _on_table_selection_changed() -> void:
 	var is_selected: bool = table.is_any_selected()
 	
@@ -191,7 +178,7 @@ func _on_table_selection_changed() -> void:
 
 ## Called when the go button is pressed
 func _on_go_pressed() -> void:
-	var cue: Cue = _cues.right(table.get_selected_row())
+	var cue: Cue = _cues.right(table.get_last_selected().get_row())
 	_cue_list.seek_to(cue)
 
 
@@ -201,7 +188,7 @@ func _on_add_cue_pressed() -> void:
 		if not is_instance_valid(p_cue):
 			return
 		
-		Popups.USettingsModule(self, p_cue.get_settings().get_entry("name"))
+		Popups.USettingsModule(self, p_cue.get_settings().get_entry("Name"))
 	)
 
 

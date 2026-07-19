@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://dfrrs2dnvlvsu" path="res://modules/Vertex/assets/icons/Delete.svg" id="13_e2vsh"]
 [ext_resource type="Texture2D" uid="uid://ddo26yd8qpx5r" path="res://modules/Vertex/assets/icons/Refresh.svg" id="14_g48wy"]
 
-[node name="UISaveLoad" type="PanelContainer" node_paths=PackedStringArray("_tree", "_loading_label", "_file_action_buttons", "_current_file_name", "_save_button")]
+[node name="UISaveLoad" type="PanelContainer" node_paths=PackedStringArray("_tree", "_loading_label", "_current_file_name", "_save_button")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -26,7 +26,6 @@ theme_override_styles/panel = ExtResource("2_252qo")
 script = ExtResource("3_yqnd6")
 _tree = NodePath("VBoxContainer/Tree")
 _loading_label = NodePath("VBoxContainer/Tree/LoadingLabel")
-_file_action_buttons = [NodePath("VBoxContainer/BottomBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer2/FileActionButtons/Open"), NodePath("VBoxContainer/BottomBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer2/FileActionButtons/Rename"), NodePath("VBoxContainer/BottomBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer2/FileActionButtons/Delete")]
 _current_file_name = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer2/HBoxContainer/LineEdit")
 _save_button = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer/Save")
 
@@ -154,21 +153,18 @@ layout_mode = 2
 [node name="Open" type="Button" parent="VBoxContainer/BottomBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer2/FileActionButtons"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-disabled = true
 text = "Open"
 icon = ExtResource("11_08ept")
 
 [node name="Rename" type="Button" parent="VBoxContainer/BottomBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer2/FileActionButtons"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-disabled = true
 text = "Rename"
 icon = ExtResource("12_cy36i")
 
 [node name="Delete" type="Button" parent="VBoxContainer/BottomBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer2/FileActionButtons"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-disabled = true
 text = "Delete"
 icon = ExtResource("13_e2vsh")
 

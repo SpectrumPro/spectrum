@@ -75,13 +75,13 @@ func _init() -> void:
 	_settings.set_owner(self)
 	_settings.set_inheritance_array(["CoreEngine"])
 	_settings.register_networked_callbacks({
-		"on_components_added": _add_components,
-		"on_components_removed": _remove_components,
-		"on_resetting": _reset,
-		"on_file_name_changed": _set_file_name,
+		"components_added": _add_components,
+		"components_removed": _remove_components,
+		"resetting": _reset,
+		"file_name_changed": _set_file_name,
 	})
 	
-	_settings.set_callback_allow_deserialize("on_components_added")
+	_settings.set_callback_allow_deserialize("components_added")
 
 
 ## Init
@@ -164,7 +164,7 @@ func add_component(p_component: EngineComponent) -> Promise:
 
 
 ## Server: Adds mutiple componets to this engine at once
-func add_components(p_components: Array[EngineComponent]) -> Promise: 
+func add_components(p_components: Array) -> Promise: 
 	return Network.send_command("engine", "add_components", [p_components])
 
 
@@ -174,25 +174,21 @@ func remove_component(p_component: EngineComponent) -> Promise:
 
 
 ## Server: Removes mutiple components at once
-func remove_components(p_components: Array[EngineComponent]) -> Promise: 
+func remove_components(p_components: Array) -> Promise: 
 	return Network.send_command("engine", "remove_components", [p_components])
 
 
 ## Internal: Adds a new component to this engine
 func _add_component(p_component: EngineComponent, p_no_signal: bool = false) -> bool:
-	
-	# Check if this component is not already apart of this engine
-	if not ComponentDB.has_component(p_component):
-		ComponentDB.register_component(p_component)
-		
-		if not p_no_signal:
-			components_added.emit([p_component])
-		
-		return true
-		
-	else:
-		print("Component: ", p_component.uuid, " is already in this engine")
+	if ComponentDB.has_component(p_component, false):
 		return false
+	
+	ComponentDB.register_component(p_component)
+	
+	if not p_no_signal:
+		components_added.emit([p_component])
+	
+	return true
 
 
 ## Internal: Adds mutiple components to this engine at once
@@ -212,19 +208,15 @@ func _add_components(p_components: Array, p_no_signal: bool = false) -> Array[En
 
 ## Internal: Removes a universe from this engine
 func _remove_component(p_component: EngineComponent, p_no_signal: bool = false) -> bool:
-	# Check if this universe is part of this engine
-	if ComponentDB.has_component(p_component):
-		ComponentDB.deregister_component(p_component)
-		
-		if not p_no_signal:
-			components_removed.emit([p_component])
-		
-		return true
-		
-	# If not return false
-	else:
-		print("Component: ", p_component.uuid, " is not part of this engine")
+	if not ComponentDB.has_component(p_component, false):
 		return false
+	
+	ComponentDB.deregister_component(p_component)
+	
+	if not p_no_signal:
+		components_removed.emit([p_component])
+	
+	return true
 
 
 ## Internal: Removes mutiple universes at once from this engine

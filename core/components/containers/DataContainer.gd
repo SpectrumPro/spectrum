@@ -43,16 +43,16 @@ func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
 	_set_class_name("DataContainer")
 	
 	_settings.register_networked_callbacks({
-		"on_items_stored": _store_items,
-		"on_items_erased": _erase_items,
-		"on_items_function_changed": _set_function,
-		"on_items_value_changed": _set_value,
-		"on_items_can_fade_changed": _set_can_fade,
-		"on_items_start_changed": _set_start,
-		"on_items_stop_changed": _set_stop,
+		"items_stored": _store_items,
+		"items_erased": _erase_items,
+		"items_function_changed": _set_function,
+		"items_value_changed": _set_value,
+		"items_can_fade_changed": _set_can_fade,
+		"items_start_changed": _set_start,
+		"items_stop_changed": _set_stop,
 	})
 	
-	_settings.set_callback_allow_deserialize("on_items_stored")
+	_settings.set_callback_allow_deserialize("items_stored")
 
 
 ## Gets all the ContainerItems
@@ -151,7 +151,7 @@ func set_stop(p_items: Array, p_stop: float) -> Promise:
 
 ## Handles delete requests
 func delete() -> void:
-	for item: ContainerItem in _items:
+	for item: ContainerItem in _items.duplicate():
 		item.delete()
 	
 	super.delete()
@@ -205,6 +205,8 @@ func _erase_item(p_item: ContainerItem, no_signal: bool = false) -> bool:
 		return false
 	
 	_items.erase(p_item)
+	ComponentDB.deregister_component(p_item)
+	
 	p_item.delete_requested.disconnect(_erase_item)
 	_fixtures[p_item.get_fixture()][p_item.get_zone()].erase(p_item.get_parameter())
 	

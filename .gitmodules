@@ -13,3 +13,6 @@
 [submodule "modules/Axis"]
 	path = modules/Axis
 	url = https://github.com/spectrumpro/axis
+[submodule "modules/UIConstellationManager"]
+	path = modules/UIConstellationManager
+	url = https://github.com/SpectrumPro/uiconstellationmanager
