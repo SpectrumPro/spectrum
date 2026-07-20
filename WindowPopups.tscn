@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ds42t8h4nusm4"]
+[gd_scene format=3 uid="uid://ds42t8h4nusm4"]
 
 [ext_resource type="PackedScene" uid="uid://bojo5mnmadf4j" path="res://modules/Vertex/panels/popups/UIPanelSelector/UIPanelSelector.tscn" id="1_e0vty"]
 [ext_resource type="PackedScene" uid="uid://cgkb6rh0joakn" path="res://modules/Vertex/panels/UIPanelSettings/UIPanelSettings.tscn" id="2_m68sf"]
@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://g5qrmeqkxr26" path="res://modules/Vertex/panels/UISettingsManager/UISettingsManager.tscn" id="15_mx2hk"]
 [ext_resource type="PackedScene" uid="uid://cth1gcyw48lub" path="res://modules/Vertex/panels/UIChildManager/UIChildManager.tscn" id="16_cxd05"]
 
-[node name="WindowPopups" type="Control"]
+[node name="WindowPopups" type="Control" unique_id=577217792]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -26,7 +26,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="UIPanelSelector" parent="." instance=ExtResource("1_e0vty")]
+[node name="UIPanelSelector" parent="." unique_id=1651956319 instance=ExtResource("1_e0vty")]
 visible = false
 layout_mode = 1
 offset_left = -343.0
@@ -35,7 +35,7 @@ offset_right = 343.0
 offset_bottom = 188.0
 display_mode = 1
 
-[node name="UIPanelSettings" parent="." instance=ExtResource("2_m68sf")]
+[node name="UIPanelSettings" parent="." unique_id=2026996362 instance=ExtResource("2_m68sf")]
 visible = false
 layout_mode = 1
 offset_left = 462.0
@@ -44,7 +44,7 @@ offset_right = -462.0
 offset_bottom = -233.0
 display_mode = 1
 
-[node name="UIMainMenu" parent="." instance=ExtResource("3_3r4oo")]
+[node name="UIMainMenu" parent="." unique_id=990309193 instance=ExtResource("3_3r4oo")]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -60,7 +60,7 @@ grow_horizontal = 2
 grow_vertical = 2
 display_mode = 1
 
-[node name="UISettings" parent="." instance=ExtResource("4_u85oq")]
+[node name="UISettings" parent="." unique_id=1958163103 instance=ExtResource("4_u85oq")]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -74,7 +74,7 @@ offset_right = 512.0
 offset_bottom = 315.0
 display_mode = 1
 
-[node name="UISaveLoad" parent="." node_paths=PackedStringArray("_file_action_buttons") instance=ExtResource("5_aq3lt")]
+[node name="UISaveLoad" parent="." unique_id=1977176211 instance=ExtResource("5_aq3lt")]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -86,10 +86,9 @@ offset_left = -473.0
 offset_top = -262.0
 offset_right = 473.0
 offset_bottom = 262.0
-_file_action_buttons = []
 display_mode = 1
 
-[node name="UICommandPalette" parent="." instance=ExtResource("6_5wuys")]
+[node name="UICommandPalette" parent="." unique_id=1684619248 instance=ExtResource("6_5wuys")]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -104,7 +103,7 @@ offset_bottom = 188.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="UIObjectSelector" parent="." instance=ExtResource("7_l8vcs")]
+[node name="UIObjectSelector" parent="." unique_id=1974914698 instance=ExtResource("7_l8vcs")]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -120,7 +119,7 @@ grow_horizontal = 2
 grow_vertical = 2
 display_mode = 1
 
-[node name="UIPopupSettingsModule" parent="." instance=ExtResource("8_fdaae")]
+[node name="UIPopupSettingsModule" parent="." unique_id=152702364 instance=ExtResource("8_fdaae")]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -136,7 +135,7 @@ grow_horizontal = 2
 grow_vertical = 2
 display_mode = 1
 
-[node name="UIWindowManager" parent="." instance=ExtResource("9_if4f4")]
+[node name="UIWindowManager" parent="." unique_id=1616334464 instance=ExtResource("9_if4f4")]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -150,7 +149,7 @@ offset_right = 462.0
 offset_bottom = 246.0
 display_mode = 1
 
-[node name="UIWindowID" parent="." instance=ExtResource("10_0h5oi")]
+[node name="UIWindowID" parent="." unique_id=211688528 instance=ExtResource("10_0h5oi")]
 visible = false
 layout_mode = 1
 offset_left = -264.0
@@ -159,7 +158,7 @@ offset_right = 264.0
 offset_bottom = 128.0
 display_mode = 1
 
-[node name="UIManifestSelector" parent="." instance=ExtResource("11_jcwaf")]
+[node name="UIManifestSelector" parent="." unique_id=971759888 instance=ExtResource("11_jcwaf")]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -175,7 +174,7 @@ grow_horizontal = 2
 grow_vertical = 2
 display_mode = 1
 
-[node name="UINetworkSelector" parent="." instance=ExtResource("12_jcqk3")]
+[node name="UINetworkSelector" parent="." unique_id=1396825325 instance=ExtResource("12_jcqk3")]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -189,7 +188,7 @@ offset_right = 167.0
 offset_bottom = 186.0
 display_mode = 1
 
-[node name="UIParameterList" parent="." instance=ExtResource("14_rie3b")]
+[node name="UIParameterList" parent="." unique_id=1637242004 instance=ExtResource("14_rie3b")]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -205,7 +204,7 @@ grow_horizontal = 2
 grow_vertical = 2
 display_mode = 1
 
-[node name="UISettingsManager" parent="." instance=ExtResource("15_mx2hk")]
+[node name="UISettingsManager" parent="." unique_id=2120099567 instance=ExtResource("15_mx2hk")]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -219,7 +218,7 @@ offset_right = 438.0
 offset_bottom = 251.0
 display_mode = 1
 
-[node name="UIChildManager" parent="." instance=ExtResource("16_cxd05")]
+[node name="UIChildManager" parent="." unique_id=795030340 instance=ExtResource("16_cxd05")]
 visible = false
 layout_mode = 1
 anchors_preset = 8

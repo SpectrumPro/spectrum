@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dqatkkghk5b2q"]
+[gd_scene format=3 uid="uid://dqatkkghk5b2q"]
 
 [ext_resource type="Theme" uid="uid://cyua45ur0ijqo" path="res://modules/Vertex/assets/themes/Main.theme" id="1_g10eh"]
 [ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://modules/Vertex/assets/styles/UIPanelBase.tres" id="2_gdvvh"]
@@ -13,7 +13,7 @@
 font_names = PackedStringArray("Open Sans")
 font_weight = 925
 
-[node name="UIDebug" type="PanelContainer" node_paths=PackedStringArray("message_for", "message_method", "message_args", "local_remote_option")]
+[node name="UIDebug" type="PanelContainer" unique_id=403813684 node_paths=PackedStringArray("message_for", "message_method", "message_args", "local_remote_option")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -29,25 +29,25 @@ message_method = NodePath("VBoxContainer/PanelContainer2/ScrollContainer/HBoxCon
 message_args = NodePath("VBoxContainer/PanelContainer2/ScrollContainer/HBoxContainer/Args/HBoxContainer/Args")
 local_remote_option = NodePath("VBoxContainer/PanelContainer2/ScrollContainer/HBoxContainer/LocalRemoteOption")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1670304262]
 layout_mode = 2
 
-[node name="PanelMenuBar" parent="VBoxContainer" instance=ExtResource("4_04ogp")]
+[node name="PanelMenuBar" parent="VBoxContainer" unique_id=655991090 instance=ExtResource("4_04ogp")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="0"]
+[node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" parent_id_path=PackedInt32Array(655991090, 1200457394) index="0" unique_id=495491944]
 text = "Debug"
 icon = ExtResource("5_5xvlq")
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer" index="0"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer" parent_id_path=PackedInt32Array(655991090, 1637369951) index="0" unique_id=921682040]
 layout_mode = 2
 size_flags_horizontal = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/PanelContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/PanelContainer" unique_id=733400497]
 layout_mode = 2
 
-[node name="Reset" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/PanelContainer/HBoxContainer"]
+[node name="Reset" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/PanelContainer/HBoxContainer" unique_id=1688355043]
 layout_mode = 2
 size_flags_horizontal = 10
 tooltip_text = "Resets the server and all clients to there default state"
@@ -55,7 +55,7 @@ disabled = true
 text = "Reset Server"
 icon = ExtResource("6_fgsol")
 
-[node name="Stop" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/PanelContainer/HBoxContainer"]
+[node name="Stop" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/PanelContainer/HBoxContainer" unique_id=1413427846]
 layout_mode = 2
 size_flags_horizontal = 8
 tooltip_text = "Stops the server"
@@ -63,7 +63,7 @@ disabled = true
 text = "Stop Server"
 icon = ExtResource("7_q0gbw")
 
-[node name="Crash" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/PanelContainer/HBoxContainer"]
+[node name="Crash" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/PanelContainer/HBoxContainer" unique_id=2145857360]
 layout_mode = 2
 size_flags_horizontal = 8
 tooltip_text = "CRASH THE SERVER"
@@ -84,182 +84,182 @@ disabled = true
 text = "CRASH SERVER"
 icon = ExtResource("8_q38qm")
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer" unique_id=2019169854]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer" unique_id=1842422975]
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/PanelContainer/HBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/PanelContainer/HBoxContainer" unique_id=877644139]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="GridContainer" type="GridContainer" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer"]
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer" unique_id=1898018993]
 layout_mode = 2
 size_flags_horizontal = 3
 columns = 3
 
-[node name="DumpNetworkedObjects" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer"]
+[node name="DumpNetworkedObjects" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer" unique_id=1945449374]
 layout_mode = 2
 size_flags_horizontal = 3
 disabled = true
 text = "Dump Networked Objects"
 
-[node name="GetUniqueId" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer"]
+[node name="GetUniqueId" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer" unique_id=1667698720]
 layout_mode = 2
 size_flags_horizontal = 3
 disabled = true
 text = "OS.get_unique_id()"
 
-[node name="ListFunctions" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer"]
+[node name="ListFunctions" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer" unique_id=50817465]
 layout_mode = 2
 size_flags_horizontal = 3
 disabled = true
 text = "List Functions"
 
-[node name="GetComponentUUID" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer"]
+[node name="GetComponentUUID" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer" unique_id=648370161]
 layout_mode = 2
 size_flags_horizontal = 3
 disabled = true
 text = "Get Component UUID"
 
-[node name="ChangeName" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer"]
+[node name="ChangeName" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer" unique_id=35841407]
 layout_mode = 2
 disabled = true
 text = "Change Component Name"
 
-[node name="DumpFixtureData" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer"]
+[node name="DumpFixtureData" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer" unique_id=1298205807]
 layout_mode = 2
 disabled = true
 text = "Dump Fxture Data"
 
-[node name="GetSerializedComponentRemote" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer"]
+[node name="GetSerializedComponentRemote" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer" unique_id=1048034977]
 layout_mode = 2
 disabled = true
 text = "Get Serialized Component Remote"
 
-[node name="GetSerializedComponentLocal" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer"]
+[node name="GetSerializedComponentLocal" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer" unique_id=990092204]
 layout_mode = 2
 disabled = true
 text = "Get Serialized Component Local"
 
-[node name="PromptParameterListCombined" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer"]
+[node name="PromptParameterListCombined" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer" unique_id=1735335397]
 layout_mode = 2
 text = "Prompt Parameter List Combined
 "
 
-[node name="PromptParameterListZone" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer"]
+[node name="PromptParameterListZone" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer" unique_id=427162884]
 layout_mode = 2
 text = "Prompt Parameter List Zone
 "
 
-[node name="PromptParameterListZoneParameter" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer"]
+[node name="PromptParameterListZoneParameter" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer" unique_id=1922697562]
 layout_mode = 2
 text = "Prompt Parameter List Zone Parameter"
 
-[node name="PromptParameterListParameter" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer"]
+[node name="PromptParameterListParameter" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer" unique_id=260863438]
 layout_mode = 2
 text = "Prompt Parameter List Parameter"
 
-[node name="PromptParameterListFunction" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer"]
+[node name="PromptParameterListFunction" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer" unique_id=679417735]
 layout_mode = 2
 text = "Prompt Parameter List Function"
 
-[node name="ObjectSelector" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer"]
+[node name="ObjectSelector" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer" unique_id=1135252626]
 layout_mode = 2
 text = "Prompt ObjectPicker"
 
-[node name="ObjectSelector_gbc_index" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer"]
+[node name="ObjectSelector_gbc_index" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer" unique_id=1257335980]
 layout_mode = 2
 text = "Prompt ObjectPicker_gbc_index"
 
-[node name="ObjectSelector_gbc_object" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer"]
+[node name="ObjectSelector_gbc_object" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer" unique_id=1179389083]
 layout_mode = 2
 text = "Prompt ObjectPicker_gbc_object"
 
-[node name="ObjectSelector_gbc_class" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer"]
+[node name="ObjectSelector_gbc_class" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer" unique_id=102717030]
 layout_mode = 2
 text = "Prompt ObjectPicker_gbc_class"
 
-[node name="ObjectSelector_class" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer"]
+[node name="ObjectSelector_class" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer/ScrollContainer/GridContainer" unique_id=549227713]
 layout_mode = 2
 text = "Prompt ObjectPicker_class"
 
-[node name="Output" type="CodeEdit" parent="VBoxContainer/PanelContainer/HBoxContainer"]
+[node name="Output" type="CodeEdit" parent="VBoxContainer/PanelContainer/HBoxContainer" unique_id=772936095]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer"]
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer" unique_id=973404473]
 custom_minimum_size = Vector2(0, 59.43)
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/PanelContainer2"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/PanelContainer2" unique_id=1503929688]
 layout_mode = 2
 horizontal_scroll_mode = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer2/ScrollContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer2/ScrollContainer" unique_id=684901805]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/PanelContainer2/ScrollContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer2/ScrollContainer/HBoxContainer" unique_id=1736557251]
 layout_mode = 2
 text = "Send Command:"
 
-[node name="For" type="PanelContainer" parent="VBoxContainer/PanelContainer2/ScrollContainer/HBoxContainer"]
+[node name="For" type="PanelContainer" parent="VBoxContainer/PanelContainer2/ScrollContainer/HBoxContainer" unique_id=227660169]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer2/ScrollContainer/HBoxContainer/For"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer2/ScrollContainer/HBoxContainer/For" unique_id=1318816388]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/PanelContainer2/ScrollContainer/HBoxContainer/For/HBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer2/ScrollContainer/HBoxContainer/For/HBoxContainer" unique_id=1727724218]
 layout_mode = 2
 text = "For:"
 
-[node name="For" type="LineEdit" parent="VBoxContainer/PanelContainer2/ScrollContainer/HBoxContainer/For/HBoxContainer"]
+[node name="For" type="LineEdit" parent="VBoxContainer/PanelContainer2/ScrollContainer/HBoxContainer/For/HBoxContainer" unique_id=1843359440]
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "UUID"
 expand_to_text_length = true
 
-[node name="Call" type="PanelContainer" parent="VBoxContainer/PanelContainer2/ScrollContainer/HBoxContainer"]
+[node name="Call" type="PanelContainer" parent="VBoxContainer/PanelContainer2/ScrollContainer/HBoxContainer" unique_id=751809607]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer2/ScrollContainer/HBoxContainer/Call"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer2/ScrollContainer/HBoxContainer/Call" unique_id=1291102152]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/PanelContainer2/ScrollContainer/HBoxContainer/Call/HBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer2/ScrollContainer/HBoxContainer/Call/HBoxContainer" unique_id=1194899782]
 layout_mode = 2
 text = "Call:"
 
-[node name="Method" type="LineEdit" parent="VBoxContainer/PanelContainer2/ScrollContainer/HBoxContainer/Call/HBoxContainer"]
+[node name="Method" type="LineEdit" parent="VBoxContainer/PanelContainer2/ScrollContainer/HBoxContainer/Call/HBoxContainer" unique_id=734424464]
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Method"
 expand_to_text_length = true
 
-[node name="Args" type="PanelContainer" parent="VBoxContainer/PanelContainer2/ScrollContainer/HBoxContainer"]
+[node name="Args" type="PanelContainer" parent="VBoxContainer/PanelContainer2/ScrollContainer/HBoxContainer" unique_id=1801569751]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer2/ScrollContainer/HBoxContainer/Args"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer2/ScrollContainer/HBoxContainer/Args" unique_id=1690773266]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/PanelContainer2/ScrollContainer/HBoxContainer/Args/HBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer2/ScrollContainer/HBoxContainer/Args/HBoxContainer" unique_id=279348977]
 layout_mode = 2
 text = "Args:"
 
-[node name="Args" type="LineEdit" parent="VBoxContainer/PanelContainer2/ScrollContainer/HBoxContainer/Args/HBoxContainer"]
+[node name="Args" type="LineEdit" parent="VBoxContainer/PanelContainer2/ScrollContainer/HBoxContainer/Args/HBoxContainer" unique_id=2070124738]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "[]"
 placeholder_text = "Args: Array"
 expand_to_text_length = true
 
-[node name="LocalRemoteOption" type="OptionButton" parent="VBoxContainer/PanelContainer2/ScrollContainer/HBoxContainer"]
+[node name="LocalRemoteOption" type="OptionButton" parent="VBoxContainer/PanelContainer2/ScrollContainer/HBoxContainer" unique_id=137426861]
 layout_mode = 2
 selected = 0
 item_count = 2
@@ -268,7 +268,7 @@ popup/item_0/id = 0
 popup/item_1/text = "Local"
 popup/item_1/id = 1
 
-[node name="SendMessage" type="Button" parent="VBoxContainer/PanelContainer2/ScrollContainer/HBoxContainer"]
+[node name="SendMessage" type="Button" parent="VBoxContainer/PanelContainer2/ScrollContainer/HBoxContainer" unique_id=1378263334]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Send"

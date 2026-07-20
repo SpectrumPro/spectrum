@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c3ri0p6vmbv6v"]
+[gd_scene format=3 uid="uid://c3ri0p6vmbv6v"]
 
 [ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://modules/Vertex/assets/styles/UIPanelBase.tres" id="1_axtmf"]
 [ext_resource type="Script" uid="uid://b758cm002fxcw" path="res://panels/UISettings/UISettings.gd" id="2_axtmf"]
@@ -9,7 +9,7 @@
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_i7um0"]
 
-[node name="UISettings" type="PanelContainer" node_paths=PackedStringArray("_tab_button_container", "_interface_settings")]
+[node name="UISettings" type="PanelContainer" unique_id=2081477223 node_paths=PackedStringArray("_tab_button_container", "_interface_settings")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -22,38 +22,38 @@ script = ExtResource("2_axtmf")
 _tab_button_container = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer")
 _interface_settings = NodePath("VBoxContainer/HBoxContainer/InterfaceSettings")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1224412374]
 layout_mode = 2
 
-[node name="PanelMenuBar" parent="VBoxContainer" instance=ExtResource("3_axtmf")]
+[node name="PanelMenuBar" parent="VBoxContainer" unique_id=188382702 instance=ExtResource("3_axtmf")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="0"]
+[node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" parent_id_path=PackedInt32Array(188382702, 1200457394) index="0" unique_id=495491944]
 text = "Settings"
 icon = ExtResource("4_f3m7m")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer" index="0"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer" parent_id_path=PackedInt32Array(188382702, 1637369951) index="0" unique_id=1064422462]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer" unique_id=97159734]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer" unique_id=455953371]
 layout_mode = 2
 
-[node name="InterfaceSettingsTabButton" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer"]
+[node name="InterfaceSettingsTabButton" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer" unique_id=1577419578]
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 toggle_mode = true
 button_group = SubResource("ButtonGroup_i7um0")
 text = "Interface Settings"
 
-[node name="ServerSettingsTabButton" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer"]
+[node name="ServerSettingsTabButton" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer" unique_id=661304411]
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 disabled = true
@@ -61,7 +61,7 @@ toggle_mode = true
 button_group = SubResource("ButtonGroup_i7um0")
 text = "Server Settings"
 
-[node name="NetworkManagerTabButton" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer"]
+[node name="NetworkManagerTabButton" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer" unique_id=1265627540]
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 toggle_mode = true
@@ -69,7 +69,7 @@ button_pressed = true
 button_group = SubResource("ButtonGroup_i7um0")
 text = "Network Manager"
 
-[node name="ShortcutsTabButton" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer"]
+[node name="ShortcutsTabButton" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer" unique_id=598081372]
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 disabled = true
@@ -77,16 +77,16 @@ toggle_mode = true
 button_group = SubResource("ButtonGroup_i7um0")
 text = "Input Actions"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=261634857]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="InterfaceSettings" parent="VBoxContainer/HBoxContainer" instance=ExtResource("4_c2tg1")]
+[node name="InterfaceSettings" parent="VBoxContainer/HBoxContainer" unique_id=1599309796 instance=ExtResource("4_c2tg1")]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="UIConstellationManager" parent="VBoxContainer/HBoxContainer" instance=ExtResource("9_c2tg1")]
+[node name="UIConstellationManager" parent="VBoxContainer/HBoxContainer" unique_id=1924879322 instance=ExtResource("9_c2tg1")]
 layout_mode = 2
 size_flags_horizontal = 3
 

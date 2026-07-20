@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://clead72nsry6n"]
+[gd_scene format=3 uid="uid://clead72nsry6n"]
 
 [ext_resource type="Script" uid="uid://b7iwdp5jp3soi" path="res://panels/UIPlaybacks/UIPlaybackColumn.gd" id="1_l3b1e"]
 
@@ -6,7 +6,7 @@
 font_size = 9
 font_color = Color(0.581033, 0.581033, 0.581033, 1)
 
-[node name="PlaybackColumn" type="PanelContainer"]
+[node name="PlaybackColumn" type="PanelContainer" unique_id=1698921151]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -18,10 +18,10 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_l3b1e")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1611745695]
 layout_mode = 2
 
-[node name="Title" type="Button" parent="VBoxContainer"]
+[node name="Title" type="Button" parent="VBoxContainer" unique_id=1049806943]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.533037, 0.533037, 0.533037, 1)
 theme_override_font_sizes/font_size = 11
@@ -30,7 +30,7 @@ text = "Empty"
 flat = true
 text_overrun_behavior = 1
 
-[node name="Button" type="Button" parent="VBoxContainer"]
+[node name="Button" type="Button" parent="VBoxContainer" unique_id=925704663]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
@@ -38,7 +38,7 @@ disabled = true
 text_overrun_behavior = 1
 clip_text = true
 
-[node name="ID" type="Label" parent="VBoxContainer/Button"]
+[node name="ID" type="Label" parent="VBoxContainer/Button" unique_id=1492469807]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -51,14 +51,14 @@ grow_vertical = 0
 text = "0.1"
 label_settings = SubResource("LabelSettings_ldd5c")
 
-[node name="Button2" type="Button" parent="VBoxContainer"]
+[node name="Button2" type="Button" parent="VBoxContainer" unique_id=160470935]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 disabled = true
 clip_text = true
 
-[node name="ID" type="Label" parent="VBoxContainer/Button2"]
+[node name="ID" type="Label" parent="VBoxContainer/Button2" unique_id=1410210447]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -71,17 +71,17 @@ grow_vertical = 0
 text = "1.1"
 label_settings = SubResource("LabelSettings_ldd5c")
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer" unique_id=254908172]
 layout_mode = 2
 
-[node name="Button3" type="Button" parent="VBoxContainer"]
+[node name="Button3" type="Button" parent="VBoxContainer" unique_id=165034521]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 disabled = true
 clip_text = true
 
-[node name="ID" type="Label" parent="VBoxContainer/Button3"]
+[node name="ID" type="Label" parent="VBoxContainer/Button3" unique_id=379282880]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -94,7 +94,7 @@ grow_vertical = 0
 text = "2.1"
 label_settings = SubResource("LabelSettings_ldd5c")
 
-[node name="VSlider" type="VSlider" parent="VBoxContainer"]
+[node name="VSlider" type="VSlider" parent="VBoxContainer" unique_id=1762173304]
 layout_mode = 2
 size_flags_horizontal = 1
 size_flags_vertical = 3
@@ -102,7 +102,7 @@ max_value = 1.0
 step = 0.001
 editable = false
 
-[node name="ID" type="Label" parent="VBoxContainer/VSlider"]
+[node name="ID" type="Label" parent="VBoxContainer/VSlider" unique_id=1309649110]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -115,14 +115,14 @@ grow_vertical = 0
 text = "3.1"
 label_settings = SubResource("LabelSettings_ldd5c")
 
-[node name="Button4" type="Button" parent="VBoxContainer"]
+[node name="Button4" type="Button" parent="VBoxContainer" unique_id=1290492470]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 disabled = true
 clip_text = true
 
-[node name="ID" type="Label" parent="VBoxContainer/Button4"]
+[node name="ID" type="Label" parent="VBoxContainer/Button4" unique_id=917589296]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -135,17 +135,17 @@ grow_vertical = 0
 text = "4.1"
 label_settings = SubResource("LabelSettings_ldd5c")
 
-[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer" unique_id=1325107245]
 layout_mode = 2
 
-[node name="Button5" type="Button" parent="VBoxContainer"]
+[node name="Button5" type="Button" parent="VBoxContainer" unique_id=1824453539]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 disabled = true
 clip_text = true
 
-[node name="ID" type="Label" parent="VBoxContainer/Button5"]
+[node name="ID" type="Label" parent="VBoxContainer/Button5" unique_id=1978942259]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -158,14 +158,14 @@ grow_vertical = 0
 text = "5.1"
 label_settings = SubResource("LabelSettings_ldd5c")
 
-[node name="Button6" type="Button" parent="VBoxContainer"]
+[node name="Button6" type="Button" parent="VBoxContainer" unique_id=956652078]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 disabled = true
 clip_text = true
 
-[node name="ID" type="Label" parent="VBoxContainer/Button6"]
+[node name="ID" type="Label" parent="VBoxContainer/Button6" unique_id=966928835]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cen3hxenplnih"]
+[gd_scene format=3 uid="uid://cen3hxenplnih"]
 
 [ext_resource type="Theme" uid="uid://cyua45ur0ijqo" path="res://modules/Vertex/assets/themes/Main.theme" id="1_2lnhr"]
 [ext_resource type="Script" uid="uid://qk7akjhtmnuh" path="res://panels/UIVirtualFixtures/VirtualFixture/VirtualFixture.gd" id="1_4gf5r"]
@@ -25,7 +25,7 @@ font_size = 10
 outline_size = 3
 outline_color = Color(0, 0, 0, 1)
 
-[node name="VirtualFixture" type="Control"]
+[node name="VirtualFixture" type="Control" unique_id=115760155]
 layout_mode = 3
 anchor_left = 0.000520833
 anchor_right = 0.0265625
@@ -34,7 +34,7 @@ theme = ExtResource("1_2lnhr")
 script = ExtResource("1_4gf5r")
 metadata/_edit_use_anchors_ = true
 
-[node name="Color" type="TextureRect" parent="."]
+[node name="Color" type="TextureRect" parent="." unique_id=1940771427]
 modulate = Color(0, 0, 0, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -45,7 +45,7 @@ grow_vertical = 2
 texture = ExtResource("1_4nodw")
 expand_mode = 1
 
-[node name="Highlight" type="TextureRect" parent="."]
+[node name="Highlight" type="TextureRect" parent="." unique_id=806043195]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -56,7 +56,7 @@ grow_vertical = 2
 texture = ExtResource("2_7idh8")
 expand_mode = 1
 
-[node name="Override" type="PanelContainer" parent="."]
+[node name="Override" type="PanelContainer" parent="." unique_id=2144722967]
 visible = false
 layout_mode = 1
 anchors_preset = 3
@@ -70,12 +70,12 @@ grow_horizontal = 0
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_4g343")
 
-[node name="TextureRect" type="TextureRect" parent="Override"]
+[node name="TextureRect" type="TextureRect" parent="Override" unique_id=1187705426]
 layout_mode = 2
 texture = ExtResource("5_fu3gp")
 expand_mode = 2
 
-[node name="UUID" type="Label" parent="."]
+[node name="UUID" type="Label" parent="." unique_id=1315988965]
 visible = false
 layout_mode = 1
 anchors_preset = 7
@@ -91,7 +91,7 @@ grow_vertical = 0
 text = "UUID"
 label_settings = SubResource("LabelSettings_k51wo")
 
-[node name="Name" type="Label" parent="."]
+[node name="Name" type="Label" parent="." unique_id=590063128]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://hjk7172e7mh6"]
+[gd_scene format=3 uid="uid://hjk7172e7mh6"]
 
 [ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://modules/Vertex/assets/styles/UIPanelBase.tres" id="1_6ktpd"]
 [ext_resource type="Script" uid="uid://ceqwpa2u1i4hs" path="res://components/SettingsManagerCustomPanels/FunctionStatusControls.gd" id="2_poxp7"]
@@ -16,7 +16,7 @@
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_jdll4"]
 
-[node name="FunctionStatusControls" type="PanelContainer" node_paths=PackedStringArray("_disable_button", "_enable_button", "_backwards_button", "_pause_button", "_forwards_button")]
+[node name="FunctionStatusControls" type="PanelContainer" unique_id=2129183686 node_paths=PackedStringArray("_disable_button", "_enable_button", "_backwards_button", "_pause_button", "_forwards_button")]
 offset_right = 354.0
 offset_bottom = 94.0
 theme_override_styles/panel = ExtResource("1_6ktpd")
@@ -27,13 +27,13 @@ _backwards_button = NodePath("VBoxContainer/HBoxContainer2/Backwards")
 _pause_button = NodePath("VBoxContainer/HBoxContainer2/Pause")
 _forwards_button = NodePath("VBoxContainer/HBoxContainer2/Forwards")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=87585205]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=729907773]
 layout_mode = 2
 
-[node name="Disable" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="Disable" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=141175181]
 layout_mode = 2
 size_flags_horizontal = 3
 toggle_mode = true
@@ -41,7 +41,7 @@ button_group = SubResource("ButtonGroup_sxfuk")
 text = "Disable"
 icon = ExtResource("3_squ4h")
 
-[node name="Enable" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="Enable" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1722312311]
 layout_mode = 2
 size_flags_horizontal = 3
 toggle_mode = true
@@ -49,10 +49,10 @@ button_group = SubResource("ButtonGroup_sxfuk")
 text = "Enable"
 icon = ExtResource("4_fd0ag")
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer" unique_id=1727035449]
 layout_mode = 2
 
-[node name="Backwards" type="Button" parent="VBoxContainer/HBoxContainer2"]
+[node name="Backwards" type="Button" parent="VBoxContainer/HBoxContainer2" unique_id=1508704462]
 layout_mode = 2
 size_flags_horizontal = 3
 toggle_mode = true
@@ -60,7 +60,7 @@ button_group = SubResource("ButtonGroup_njtyn")
 text = "Backwards"
 icon = ExtResource("5_lbmmo")
 
-[node name="Pause" type="Button" parent="VBoxContainer/HBoxContainer2"]
+[node name="Pause" type="Button" parent="VBoxContainer/HBoxContainer2" unique_id=202641678]
 layout_mode = 2
 size_flags_horizontal = 3
 toggle_mode = true
@@ -68,7 +68,7 @@ button_group = SubResource("ButtonGroup_76tio")
 text = "Pause"
 icon = ExtResource("6_1yuk4")
 
-[node name="Forwards" type="Button" parent="VBoxContainer/HBoxContainer2"]
+[node name="Forwards" type="Button" parent="VBoxContainer/HBoxContainer2" unique_id=853179685]
 layout_mode = 2
 size_flags_horizontal = 3
 toggle_mode = true

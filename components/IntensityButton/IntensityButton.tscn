@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://c30mlwfrsxbcl"]
+[gd_scene format=3 uid="uid://c30mlwfrsxbcl"]
 
 [ext_resource type="Theme" uid="uid://cyua45ur0ijqo" path="res://modules/Vertex/assets/themes/Main.theme" id="1_hvov7"]
 [ext_resource type="Texture2D" uid="uid://c8wnnqs5lxs4j" path="res://modules/Vertex/assets/icons/Brightness.svg" id="1_x0k6q"]
@@ -11,7 +11,7 @@ bg_color = Color(0, 0.513726, 1, 0.364706)
 corner_radius_top_left = 4
 corner_radius_bottom_left = 4
 
-[node name="IntensityButton" type="Button" node_paths=PackedStringArray("progress_bar", "button_icon")]
+[node name="IntensityButton" type="Button" unique_id=1900451362 node_paths=PackedStringArray("progress_bar", "button_icon")]
 custom_minimum_size = Vector2(40, 38)
 mouse_default_cursor_shape = 10
 theme = ExtResource("1_hvov7")
@@ -20,7 +20,7 @@ script = ExtResource("2_5y0g3")
 progress_bar = NodePath("ProgressBar")
 button_icon = NodePath("Icon")
 
-[node name="ProgressBar" type="ProgressBar" parent="."]
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=1400308002]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -33,7 +33,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_jdfeq")
 max_value = 1.0
 show_percentage = false
 
-[node name="Icon" type="TextureRect" parent="."]
+[node name="Icon" type="TextureRect" parent="." unique_id=308246634]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

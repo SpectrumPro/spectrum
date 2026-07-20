@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://d0naqdd3py4jm"]
+[gd_scene format=3 uid="uid://d0naqdd3py4jm"]
 
 [ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://modules/Vertex/assets/styles/UIPanelBase.tres" id="1_542aj"]
 [ext_resource type="Script" uid="uid://d1auarm8gwi8i" path="res://panels/popups/UIMainMenu/UIMainMenu.gd" id="1_dbhe3"]
@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://dyd2xybu6duv4" path="res://modules/Vertex/assets/icons/NewWindow.svg" id="13_ljneo"]
 [ext_resource type="Texture2D" uid="uid://beoapfaav6t6" path="res://modules/Vertex/assets/icons/Move.svg" id="14_7ow35"]
 
-[node name="UIMainMenu" type="PanelContainer" node_paths=PackedStringArray("all_settings_button", "network_manager_settings_button", "external_input_settings_button", "window_manager_button", "new_window_button", "move_window_button", "save_load_button", "save_file_button", "load_file_button")]
+[node name="UIMainMenu" type="PanelContainer" unique_id=1514126101 node_paths=PackedStringArray("all_settings_button", "network_manager_settings_button", "external_input_settings_button", "window_manager_button", "new_window_button", "move_window_button", "save_load_button", "save_file_button", "load_file_button")]
 offset_right = 468.0
 offset_bottom = 342.0
 theme_override_styles/panel = ExtResource("1_542aj")
@@ -29,31 +29,31 @@ save_load_button = NodePath("VBoxContainer/VBoxContainer2/VBoxContainer/PanelCon
 save_file_button = NodePath("VBoxContainer/VBoxContainer2/VBoxContainer2/PanelContainer2/SaveLoadContainer/SaveFile")
 load_file_button = NodePath("VBoxContainer/VBoxContainer2/VBoxContainer2/PanelContainer2/SaveLoadContainer/LoadFile")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=451923777]
 layout_mode = 2
 
-[node name="PanelMenuBar" parent="VBoxContainer" instance=ExtResource("3_4mlm5")]
+[node name="PanelMenuBar" parent="VBoxContainer" unique_id=211806218 instance=ExtResource("3_4mlm5")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="0"]
+[node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" parent_id_path=PackedInt32Array(211806218, 1200457394) index="0" unique_id=495491944]
 text = "Main Menu"
 icon = ExtResource("4_8hqmw")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer" unique_id=1808298553]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer2"]
+[node name="VBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer2" unique_id=1889552673]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/VBoxContainer2/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/VBoxContainer2/VBoxContainer" unique_id=1553492657]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="AllSettings" type="Button" parent="VBoxContainer/VBoxContainer2/VBoxContainer/PanelContainer"]
+[node name="AllSettings" type="Button" parent="VBoxContainer/VBoxContainer2/VBoxContainer/PanelContainer" unique_id=1391711421]
 custom_minimum_size = Vector2(140, 80)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -62,12 +62,12 @@ text = "Settings"
 icon = ExtResource("4_26f48")
 autowrap_mode = 2
 
-[node name="PanelContainer3" type="PanelContainer" parent="VBoxContainer/VBoxContainer2/VBoxContainer"]
+[node name="PanelContainer3" type="PanelContainer" parent="VBoxContainer/VBoxContainer2/VBoxContainer" unique_id=1683128867]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="WindowManager" type="Button" parent="VBoxContainer/VBoxContainer2/VBoxContainer/PanelContainer3"]
+[node name="WindowManager" type="Button" parent="VBoxContainer/VBoxContainer2/VBoxContainer/PanelContainer3" unique_id=1370007750]
 custom_minimum_size = Vector2(140, 80)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -76,12 +76,12 @@ text = "Window Manager"
 icon = ExtResource("6_6svl8")
 autowrap_mode = 2
 
-[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/VBoxContainer2/VBoxContainer"]
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/VBoxContainer2/VBoxContainer" unique_id=872003832]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="SaveLoad" type="Button" parent="VBoxContainer/VBoxContainer2/VBoxContainer/PanelContainer2"]
+[node name="SaveLoad" type="Button" parent="VBoxContainer/VBoxContainer2/VBoxContainer/PanelContainer2" unique_id=756674712]
 custom_minimum_size = Vector2(140, 80)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -90,21 +90,21 @@ text = "Save Load"
 icon = ExtResource("5_ypbqr")
 autowrap_mode = 2
 
-[node name="VBoxContainer2" type="HBoxContainer" parent="VBoxContainer/VBoxContainer2"]
+[node name="VBoxContainer2" type="HBoxContainer" parent="VBoxContainer/VBoxContainer2" unique_id=1571805681]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/VBoxContainer2/VBoxContainer2"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/VBoxContainer2/VBoxContainer2" unique_id=1015757676]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="SettingsContainer" type="VBoxContainer" parent="VBoxContainer/VBoxContainer2/VBoxContainer2/PanelContainer"]
+[node name="SettingsContainer" type="VBoxContainer" parent="VBoxContainer/VBoxContainer2/VBoxContainer2/PanelContainer" unique_id=315421631]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="NetworkManagerSettings" type="Button" parent="VBoxContainer/VBoxContainer2/VBoxContainer2/PanelContainer/SettingsContainer"]
+[node name="NetworkManagerSettings" type="Button" parent="VBoxContainer/VBoxContainer2/VBoxContainer2/PanelContainer/SettingsContainer" unique_id=1123248574]
 custom_minimum_size = Vector2(140, 80)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -113,7 +113,7 @@ text = "Network Manager"
 icon = ExtResource("5_788k0")
 autowrap_mode = 2
 
-[node name="ExternalInputSettings" type="Button" parent="VBoxContainer/VBoxContainer2/VBoxContainer2/PanelContainer/SettingsContainer"]
+[node name="ExternalInputSettings" type="Button" parent="VBoxContainer/VBoxContainer2/VBoxContainer2/PanelContainer/SettingsContainer" unique_id=1244227736]
 custom_minimum_size = Vector2(140, 80)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -122,16 +122,16 @@ text = "External Input"
 icon = ExtResource("7_g302c")
 autowrap_mode = 2
 
-[node name="PanelContainer3" type="PanelContainer" parent="VBoxContainer/VBoxContainer2/VBoxContainer2"]
+[node name="PanelContainer3" type="PanelContainer" parent="VBoxContainer/VBoxContainer2/VBoxContainer2" unique_id=103330726]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="WindowManagerContainer" type="VBoxContainer" parent="VBoxContainer/VBoxContainer2/VBoxContainer2/PanelContainer3"]
+[node name="WindowManagerContainer" type="VBoxContainer" parent="VBoxContainer/VBoxContainer2/VBoxContainer2/PanelContainer3" unique_id=1196722908]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="NewWindow" type="Button" parent="VBoxContainer/VBoxContainer2/VBoxContainer2/PanelContainer3/WindowManagerContainer"]
+[node name="NewWindow" type="Button" parent="VBoxContainer/VBoxContainer2/VBoxContainer2/PanelContainer3/WindowManagerContainer" unique_id=736752281]
 custom_minimum_size = Vector2(140, 80)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -140,7 +140,7 @@ text = "New Window"
 icon = ExtResource("13_ljneo")
 autowrap_mode = 2
 
-[node name="SetDisplayMode" type="Button" parent="VBoxContainer/VBoxContainer2/VBoxContainer2/PanelContainer3/WindowManagerContainer"]
+[node name="SetDisplayMode" type="Button" parent="VBoxContainer/VBoxContainer2/VBoxContainer2/PanelContainer3/WindowManagerContainer" unique_id=1223094628]
 custom_minimum_size = Vector2(140, 80)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -149,16 +149,16 @@ text = "Display Mode"
 icon = ExtResource("14_7ow35")
 autowrap_mode = 2
 
-[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/VBoxContainer2/VBoxContainer2"]
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/VBoxContainer2/VBoxContainer2" unique_id=1904886877]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="SaveLoadContainer" type="VBoxContainer" parent="VBoxContainer/VBoxContainer2/VBoxContainer2/PanelContainer2"]
+[node name="SaveLoadContainer" type="VBoxContainer" parent="VBoxContainer/VBoxContainer2/VBoxContainer2/PanelContainer2" unique_id=1350343069]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="SaveFile" type="Button" parent="VBoxContainer/VBoxContainer2/VBoxContainer2/PanelContainer2/SaveLoadContainer"]
+[node name="SaveFile" type="Button" parent="VBoxContainer/VBoxContainer2/VBoxContainer2/PanelContainer2/SaveLoadContainer" unique_id=438668138]
 custom_minimum_size = Vector2(140, 80)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -167,7 +167,7 @@ text = "Save File"
 icon = ExtResource("10_dtvuq")
 autowrap_mode = 2
 
-[node name="LoadFile" type="Button" parent="VBoxContainer/VBoxContainer2/VBoxContainer2/PanelContainer2/SaveLoadContainer"]
+[node name="LoadFile" type="Button" parent="VBoxContainer/VBoxContainer2/VBoxContainer2/PanelContainer2/SaveLoadContainer" unique_id=483587302]
 custom_minimum_size = Vector2(140, 80)
 layout_mode = 2
 size_flags_horizontal = 3

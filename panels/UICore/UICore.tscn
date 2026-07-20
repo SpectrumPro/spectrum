@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://d00fmrh7nbaua"]
+[gd_scene format=3 uid="uid://d00fmrh7nbaua"]
 
 [ext_resource type="StyleBox" uid="uid://c248eat6flpbo" path="res://modules/Vertex/assets/styles/UIPanelImbed.tres" id="1_7kg0u"]
 [ext_resource type="Script" uid="uid://cjbnp24htiy3i" path="res://panels/UICore/UICore.gd" id="1_febpr"]
@@ -70,7 +70,7 @@ font_color = Color(0.789062, 0.789062, 0.789062, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bphhv"]
 bg_color = Color(0.09, 0.09, 0.09, 1)
 
-[node name="UICore" type="PanelContainer" node_paths=PackedStringArray("_side_bar", "_startup_bg", "_notice_container")]
+[node name="UICore" type="PanelContainer" unique_id=93327748 node_paths=PackedStringArray("_side_bar", "_startup_bg", "_notice_container")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -82,26 +82,26 @@ _side_bar = NodePath("VBoxContainer/HBoxContainer/UICorePrimarySideBar")
 _startup_bg = NodePath("StartupBG")
 _notice_container = NodePath("NoticeContainer")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1800480364]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PanelMenuBar" parent="VBoxContainer" instance=ExtResource("2_dciud")]
+[node name="PanelMenuBar" parent="VBoxContainer" unique_id=1262816054 instance=ExtResource("2_dciud")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="0"]
+[node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" parent_id_path=PackedInt32Array(1262816054, 1200457394) index="0" unique_id=495491944]
 text = "UICore"
 icon = ExtResource("7_s5yey")
 
-[node name="EditControls" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="2"]
+[node name="EditControls" parent="VBoxContainer/PanelMenuBar/HBoxContainer" parent_id_path=PackedInt32Array(1262816054, 1200457394) index="2" unique_id=1876457925]
 show_settings = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=821003326]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="UICorePrimarySideBar" type="PanelContainer" parent="VBoxContainer/HBoxContainer" node_paths=PackedStringArray("_tab_button_container", "_menu_button", "_tab_control_container", "_overlay_container", "_tab_button_scroll", "_edit_button", "_ui_core")]
+[node name="UICorePrimarySideBar" type="PanelContainer" parent="VBoxContainer/HBoxContainer" unique_id=2123849577 node_paths=PackedStringArray("_tab_button_container", "_menu_button", "_tab_control_container", "_overlay_container", "_tab_button_scroll", "_edit_button", "_ui_core")]
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_aoeir")
@@ -114,47 +114,47 @@ _tab_button_scroll = NodePath("VBoxContainer/ScrollContainer")
 _edit_button = NodePath("VBoxContainer/Edit")
 _ui_core = NodePath("../../..")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/UICorePrimarySideBar"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/UICorePrimarySideBar" unique_id=744135157]
 layout_mode = 2
 
-[node name="Menu" type="Button" parent="VBoxContainer/HBoxContainer/UICorePrimarySideBar/VBoxContainer"]
+[node name="Menu" type="Button" parent="VBoxContainer/HBoxContainer/UICorePrimarySideBar/VBoxContainer" unique_id=1562453311]
 layout_mode = 2
 size_flags_horizontal = 4
 toggle_mode = true
 icon = ExtResource("3_prxic")
 
-[node name="Control" type="Control" parent="VBoxContainer/HBoxContainer/UICorePrimarySideBar/VBoxContainer"]
+[node name="Control" type="Control" parent="VBoxContainer/HBoxContainer/UICorePrimarySideBar/VBoxContainer" unique_id=1597510829]
 custom_minimum_size = Vector2(0, 4.77)
 layout_mode = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/UICorePrimarySideBar/VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/UICorePrimarySideBar/VBoxContainer" unique_id=196708485]
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
 
-[node name="TabButtonContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/UICorePrimarySideBar/VBoxContainer/ScrollContainer"]
+[node name="TabButtonContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/UICorePrimarySideBar/VBoxContainer/ScrollContainer" unique_id=350030150]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 4
 
-[node name="Control2" type="Control" parent="VBoxContainer/HBoxContainer/UICorePrimarySideBar/VBoxContainer"]
+[node name="Control2" type="Control" parent="VBoxContainer/HBoxContainer/UICorePrimarySideBar/VBoxContainer" unique_id=2100343695]
 custom_minimum_size = Vector2(0, 4.77)
 layout_mode = 2
 
-[node name="Edit" type="Button" parent="VBoxContainer/HBoxContainer/UICorePrimarySideBar/VBoxContainer"]
+[node name="Edit" type="Button" parent="VBoxContainer/HBoxContainer/UICorePrimarySideBar/VBoxContainer" unique_id=1044728748]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 toggle_mode = true
 icon = ExtResource("4_avgbi")
 
-[node name="MainContent" type="Control" parent="VBoxContainer/HBoxContainer"]
+[node name="MainContent" type="Control" parent="VBoxContainer/HBoxContainer" unique_id=286844312]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/MainContent"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/MainContent" unique_id=110390808]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -171,7 +171,7 @@ size_flags_horizontal = 4
 text = "SPECTRUM"
 label_settings = SubResource("LabelSettings_tdt00")
 
-[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/HBoxContainer/MainContent"]
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/HBoxContainer/MainContent" unique_id=1434968264]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -179,15 +179,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VSplitContainer" type="VSplitContainer" parent="VBoxContainer/HBoxContainer/MainContent/HSplitContainer"]
+[node name="VSplitContainer" type="VSplitContainer" parent="VBoxContainer/HBoxContainer/MainContent/HSplitContainer" unique_id=1750029435]
 layout_mode = 2
 
-[node name="TabControlContainer" type="Control" parent="VBoxContainer/HBoxContainer/MainContent/HSplitContainer/VSplitContainer"]
+[node name="TabControlContainer" type="Control" parent="VBoxContainer/HBoxContainer/MainContent/HSplitContainer/VSplitContainer" unique_id=740768993]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="OverlayContainer" type="Control" parent="VBoxContainer/HBoxContainer/MainContent"]
+[node name="OverlayContainer" type="Control" parent="VBoxContainer/HBoxContainer/MainContent" unique_id=375754022]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -200,7 +200,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="UICorePanelTypeOption" type="PanelContainer" parent="VBoxContainer/HBoxContainer/MainContent/OverlayContainer" node_paths=PackedStringArray("add_desk_button", "add_custom_button", "side_bar")]
+[node name="UICorePanelTypeOption" type="PanelContainer" parent="VBoxContainer/HBoxContainer/MainContent/OverlayContainer" unique_id=1651868015 node_paths=PackedStringArray("add_desk_button", "add_custom_button", "side_bar")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -221,10 +221,10 @@ add_desk_button = NodePath("HBoxContainer/AddDesk")
 add_custom_button = NodePath("HBoxContainer/AddCustom")
 side_bar = NodePath("../../../UICorePrimarySideBar")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/MainContent/OverlayContainer/UICorePanelTypeOption"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/MainContent/OverlayContainer/UICorePanelTypeOption" unique_id=362870969]
 layout_mode = 2
 
-[node name="AddDesk" type="Button" parent="VBoxContainer/HBoxContainer/MainContent/OverlayContainer/UICorePanelTypeOption/HBoxContainer"]
+[node name="AddDesk" type="Button" parent="VBoxContainer/HBoxContainer/MainContent/OverlayContainer/UICorePanelTypeOption/HBoxContainer" unique_id=2070983535]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 theme_override_colors/icon_normal_color = Color(0.753984, 0.753984, 0.753984, 1)
@@ -238,7 +238,7 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 
-[node name="AddCustom" type="Button" parent="VBoxContainer/HBoxContainer/MainContent/OverlayContainer/UICorePanelTypeOption/HBoxContainer"]
+[node name="AddCustom" type="Button" parent="VBoxContainer/HBoxContainer/MainContent/OverlayContainer/UICorePanelTypeOption/HBoxContainer" unique_id=1744494834]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 theme_override_colors/icon_normal_color = Color(0.753984, 0.753984, 0.753984, 1)
@@ -252,7 +252,7 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 
-[node name="UICoreResolveButtons" type="PanelContainer" parent="VBoxContainer/HBoxContainer/MainContent/OverlayContainer"]
+[node name="UICoreResolveButtons" type="PanelContainer" parent="VBoxContainer/HBoxContainer/MainContent/OverlayContainer" unique_id=437732840]
 visible = false
 layout_mode = 1
 anchors_preset = 7
@@ -268,11 +268,11 @@ grow_vertical = 0
 theme_override_styles/panel = ExtResource("8_x6rwm")
 script = ExtResource("9_h7bru")
 
-[node name="ResolveButtonContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/MainContent/OverlayContainer/UICoreResolveButtons"]
+[node name="ResolveButtonContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/MainContent/OverlayContainer/UICoreResolveButtons" unique_id=1019212450]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="UICoreStatusBar" type="PanelContainer" parent="VBoxContainer" node_paths=PackedStringArray("_version_label", "_resolve_button_container")]
+[node name="UICoreStatusBar" type="PanelContainer" parent="VBoxContainer" unique_id=890602949 node_paths=PackedStringArray("_version_label", "_resolve_button_container")]
 custom_minimum_size = Vector2(0, 61)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_pj23w")
@@ -280,58 +280,58 @@ script = ExtResource("10_00dbt")
 _version_label = NodePath("HBoxContainer/VersionLabel")
 _resolve_button_container = NodePath("../HBoxContainer/MainContent/OverlayContainer/UICoreResolveButtons")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/UICoreStatusBar"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/UICoreStatusBar" unique_id=828097083]
 layout_mode = 2
 
-[node name="VersionLabel" type="Label" parent="VBoxContainer/UICoreStatusBar/HBoxContainer"]
+[node name="VersionLabel" type="Label" parent="VBoxContainer/UICoreStatusBar/HBoxContainer" unique_id=2002982747]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "Version"
 label_settings = ExtResource("13_c1is7")
 
-[node name="QuickAccessContainer" type="HBoxContainer" parent="VBoxContainer/UICoreStatusBar/HBoxContainer"]
+[node name="QuickAccessContainer" type="HBoxContainer" parent="VBoxContainer/UICoreStatusBar/HBoxContainer" unique_id=612189744]
 layout_mode = 2
 theme_override_constants/separation = 6
 
-[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/UICoreStatusBar/HBoxContainer"]
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/UICoreStatusBar/HBoxContainer" unique_id=868375658]
 layout_mode = 2
 size_flags_horizontal = 6
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/UICoreStatusBar/HBoxContainer/PanelContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/UICoreStatusBar/HBoxContainer/PanelContainer2" unique_id=993273182]
 layout_mode = 2
 
-[node name="ActionButton" type="Button" parent="VBoxContainer/UICoreStatusBar/HBoxContainer/PanelContainer2/HBoxContainer"]
+[node name="ActionButton" type="Button" parent="VBoxContainer/UICoreStatusBar/HBoxContainer/PanelContainer2/HBoxContainer" unique_id=791742514]
 layout_mode = 2
 toggle_mode = true
 icon = ExtResource("11_q5s34")
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/UICoreStatusBar/HBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/UICoreStatusBar/HBoxContainer" unique_id=173060073]
 custom_minimum_size = Vector2(700, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
 mouse_default_cursor_shape = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/UICoreStatusBar/HBoxContainer/PanelContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/UICoreStatusBar/HBoxContainer/PanelContainer" unique_id=1723780186]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/UICoreStatusBar/HBoxContainer/PanelContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/UICoreStatusBar/HBoxContainer/PanelContainer/HBoxContainer" unique_id=1116361576]
 layout_mode = 2
 label_settings = SubResource("LabelSettings_7y6be")
 
-[node name="NoticeContainer" type="Control" parent="."]
+[node name="NoticeContainer" type="Control" parent="." unique_id=519275049]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="StartupBG" type="PanelContainer" parent="."]
+[node name="StartupBG" type="PanelContainer" parent="." unique_id=770967409]
 visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_bphhv")
 
-[node name="Control" type="Control" parent="StartupBG"]
+[node name="Control" type="Control" parent="StartupBG" unique_id=115642421]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="StartupBG/Control"]
+[node name="TextureRect" type="TextureRect" parent="StartupBG/Control" unique_id=1660700675]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

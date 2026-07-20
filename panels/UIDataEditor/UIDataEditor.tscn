@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bk280hh4f1sbc"]
+[gd_scene format=3 uid="uid://bk280hh4f1sbc"]
 
 [ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://modules/Vertex/assets/styles/UIPanelBase.tres" id="1_pxtb2"]
 [ext_resource type="Script" uid="uid://dtpmr3p1f8vf0" path="res://panels/UIDataEditor/UIDataEditor.gd" id="2_lbtkl"]
@@ -19,7 +19,7 @@
 font_size = 11
 font_color = Color(0.529067, 0.529067, 0.529067, 1)
 
-[node name="UIDataEditor" type="PanelContainer" node_paths=PackedStringArray("table", "component_button", "add_items_button", "remove_items_button", "view_layer_option")]
+[node name="UIDataEditor" type="PanelContainer" unique_id=1421147137 node_paths=PackedStringArray("table", "component_button", "add_items_button", "remove_items_button", "view_layer_option")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -33,14 +33,14 @@ add_items_button = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollCont
 remove_items_button = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer2/HBoxContainer/RemoveItem")
 view_layer_option = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/ViewLayer")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1283415938]
 layout_mode = 2
 
-[node name="PanelMenuBar" parent="VBoxContainer" instance=ExtResource("3_66500")]
+[node name="PanelMenuBar" parent="VBoxContainer" unique_id=1853717797 instance=ExtResource("3_66500")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="0"]
+[node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" parent_id_path=PackedInt32Array(1853717797, 1200457394) index="0" unique_id=495491944]
 text = "DataEditor"
 icon = ExtResource("4_yj1cb")
 class_filter = ExtResource("5_t58bb")
@@ -48,44 +48,44 @@ base_class = ExtResource("6_144fo")
 enable_resolve_mode = true
 enabled = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer" index="0"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer" parent_id_path=PackedInt32Array(1853717797, 1637369951) index="0" unique_id=1803123286]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer"]
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer" unique_id=1294072961]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer2" unique_id=1873455698]
 layout_mode = 2
 
-[node name="AddItem" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer2/HBoxContainer"]
+[node name="AddItem" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer2/HBoxContainer" unique_id=1698540930]
 layout_mode = 2
 disabled = true
 text = "Add Items"
 icon = ExtResource("6_v023y")
 
-[node name="RemoveItem" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer2/HBoxContainer"]
+[node name="RemoveItem" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer2/HBoxContainer" unique_id=876754301]
 layout_mode = 2
 disabled = true
 text = "Remove Items"
 icon = ExtResource("7_0ny1a")
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer" unique_id=1968674453]
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 3
 
-[node name="ViewLayer" type="OptionButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer"]
+[node name="ViewLayer" type="OptionButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer" unique_id=901127410]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 disabled = true
 
-[node name="Table" parent="VBoxContainer" instance=ExtResource("9_t58bb")]
+[node name="Table" parent="VBoxContainer" unique_id=2126629625 instance=ExtResource("9_t58bb")]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="TimeLine" type="PanelContainer" parent="VBoxContainer" node_paths=PackedStringArray("_start_spin_box", "_stop_spin_box", "_value_spin_box", "_can_fade_button", "_data_editor", "_time_line_container", "_line", "_start_handle", "_stop_handle")]
+[node name="TimeLine" type="PanelContainer" parent="VBoxContainer" unique_id=1985851536 node_paths=PackedStringArray("_start_spin_box", "_stop_spin_box", "_value_spin_box", "_can_fade_button", "_data_editor", "_time_line_container", "_line", "_start_handle", "_stop_handle")]
 visible = false
 custom_minimum_size = Vector2(0, 77.92)
 layout_mode = 2
@@ -100,76 +100,76 @@ _line = NodePath("HBoxContainer/PanelContainer/Templates/Line2D")
 _start_handle = NodePath("HBoxContainer/PanelContainer/Templates/StartHandle")
 _stop_handle = NodePath("HBoxContainer/PanelContainer/Templates/StopHandle")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TimeLine"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TimeLine" unique_id=97230017]
 layout_mode = 2
 
-[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/TimeLine/HBoxContainer"]
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/TimeLine/HBoxContainer" unique_id=577232640]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer2" unique_id=1563606994]
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer2/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer2/VBoxContainer" unique_id=1727933659]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer" unique_id=2133067816]
 layout_mode = 2
 text = "Start: "
 
-[node name="Start" type="SpinBox" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer"]
+[node name="Start" type="SpinBox" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer" unique_id=1119888675]
 layout_mode = 2
 size_flags_horizontal = 10
 max_value = 1.0
 step = 0.001
 select_all_on_focus = true
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer2/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer2/VBoxContainer" unique_id=779958215]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2"]
+[node name="Label" type="Label" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2" unique_id=457302116]
 layout_mode = 2
 text = "Stop: "
 
-[node name="Stop" type="SpinBox" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2"]
+[node name="Stop" type="SpinBox" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer2/VBoxContainer/HBoxContainer2" unique_id=1602442168]
 layout_mode = 2
 size_flags_horizontal = 10
 max_value = 1.0
 step = 0.001
 select_all_on_focus = true
 
-[node name="PanelContainer4" type="PanelContainer" parent="VBoxContainer/TimeLine/HBoxContainer"]
+[node name="PanelContainer4" type="PanelContainer" parent="VBoxContainer/TimeLine/HBoxContainer" unique_id=762851218]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer4"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer4" unique_id=1134345879]
 layout_mode = 2
 
-[node name="Presets" type="Button" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer4/VBoxContainer"]
+[node name="Presets" type="Button" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer4/VBoxContainer" unique_id=1481317526]
 layout_mode = 2
 tooltip_text = "Presets"
 icon = ExtResource("10_wsg5a")
 
-[node name="ToggleGrid" type="Button" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer4/VBoxContainer"]
+[node name="ToggleGrid" type="Button" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer4/VBoxContainer" unique_id=1424555970]
 layout_mode = 2
 tooltip_text = "Toggle Grid"
 toggle_mode = true
 button_pressed = true
 icon = ExtResource("11_fafqp")
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/TimeLine/HBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/TimeLine/HBoxContainer" unique_id=146395160]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Templates" type="Control" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer"]
+[node name="Templates" type="Control" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer" unique_id=566615964]
 visible = false
 layout_mode = 2
 
-[node name="Line2D" type="Line2D" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer/Templates"]
+[node name="Line2D" type="Line2D" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer/Templates" unique_id=525771605]
 position = Vector2(0, -6)
 width = 3.0
 default_color = Color(0, 0.311883, 0.577555, 1)
 
-[node name="StartHandle" type="TextureRect" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer/Templates"]
+[node name="StartHandle" type="TextureRect" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer/Templates" unique_id=401643214]
 modulate = Color(0, 0.556863, 1, 1)
 layout_mode = 0
 offset_right = 14.0
@@ -178,7 +178,7 @@ grow_vertical = 0
 texture = ExtResource("12_ovyrj")
 expand_mode = 1
 
-[node name="Capture" type="Control" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer/Templates/StartHandle"]
+[node name="Capture" type="Control" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer/Templates/StartHandle" unique_id=1837159459]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -193,7 +193,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_default_cursor_shape = 13
 
-[node name="StopHandle" type="TextureRect" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer/Templates"]
+[node name="StopHandle" type="TextureRect" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer/Templates" unique_id=880570519]
 modulate = Color(0, 0.556863, 1, 1)
 layout_mode = 1
 offset_right = 14.0
@@ -202,7 +202,7 @@ texture = ExtResource("12_ovyrj")
 expand_mode = 1
 flip_v = true
 
-[node name="Capture" type="Control" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer/Templates/StopHandle"]
+[node name="Capture" type="Control" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer/Templates/StopHandle" unique_id=377424394]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -217,52 +217,52 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_default_cursor_shape = 13
 
-[node name="Label" type="Label" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer" unique_id=1025901507]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 text = "0%"
 label_settings = SubResource("LabelSettings_jpmer")
 
-[node name="Label2" type="Label" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer"]
+[node name="Label2" type="Label" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer" unique_id=1318331073]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 text = "100%"
 label_settings = SubResource("LabelSettings_jpmer")
 
-[node name="Grid" type="Control" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer"]
+[node name="Grid" type="Control" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer" unique_id=883480962]
 layout_mode = 2
 script = ExtResource("13_ubmdu")
 
-[node name="TimeLineContainer" type="Control" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer"]
+[node name="TimeLineContainer" type="Control" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer" unique_id=342794664]
 layout_mode = 2
 
-[node name="PanelContainer3" type="PanelContainer" parent="VBoxContainer/TimeLine/HBoxContainer"]
+[node name="PanelContainer3" type="PanelContainer" parent="VBoxContainer/TimeLine/HBoxContainer" unique_id=712473532]
 layout_mode = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer3"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer3" unique_id=737647608]
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer3/VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer3/VBoxContainer2" unique_id=818226272]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer3/VBoxContainer2/HBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer3/VBoxContainer2/HBoxContainer" unique_id=1748635710]
 layout_mode = 2
 text = "Value: "
 
-[node name="Value" type="SpinBox" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer3/VBoxContainer2/HBoxContainer"]
+[node name="Value" type="SpinBox" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer3/VBoxContainer2/HBoxContainer" unique_id=902831224]
 layout_mode = 2
 size_flags_horizontal = 10
 max_value = 1.0
 step = 0.001
 select_all_on_focus = true
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer3/VBoxContainer2"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer3/VBoxContainer2" unique_id=1230910404]
 layout_mode = 2
 
-[node name="CanFade" type="CheckButton" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer3/VBoxContainer2/HBoxContainer2"]
+[node name="CanFade" type="CheckButton" parent="VBoxContainer/TimeLine/HBoxContainer/PanelContainer3/VBoxContainer2/HBoxContainer2" unique_id=768216620]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Can Fade"
