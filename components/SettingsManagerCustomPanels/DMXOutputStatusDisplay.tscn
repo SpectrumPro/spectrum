@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://cx2fhdc52ft54"]
+[gd_scene format=3 uid="uid://cx2fhdc52ft54"]
 
 [ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://modules/Vertex/assets/styles/UIPanelBase.tres" id="1_l6ycl"]
 [ext_resource type="Script" uid="uid://cobayumnfokx0" path="res://components/SettingsManagerCustomPanels/DmxOutputStatusDisplay.gd" id="1_oxcgw"]
 [ext_resource type="FontFile" uid="uid://crlak6jhg5jy2" path="res://modules/Vertex/assets/font/RubikMonoOne-Regular.ttf" id="3_0klvm"]
 
-[node name="DmxOutputStatusDisplay" type="PanelContainer" node_paths=PackedStringArray("status_label")]
+[node name="DmxOutputStatusDisplay" type="PanelContainer" unique_id=1959580125 node_paths=PackedStringArray("status_label")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -16,7 +16,7 @@ theme_override_styles/panel = ExtResource("1_l6ycl")
 script = ExtResource("1_oxcgw")
 status_label = NodePath("ConnectionState")
 
-[node name="ConnectionState" type="Label" parent="."]
+[node name="ConnectionState" type="Label" parent="." unique_id=1865952408]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("3_0klvm")

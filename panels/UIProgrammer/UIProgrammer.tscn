@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dnyj8vnwwbi2v"]
+[gd_scene format=3 uid="uid://dnyj8vnwwbi2v"]
 
 [ext_resource type="Theme" uid="uid://cyua45ur0ijqo" path="res://modules/Vertex/assets/themes/Main.theme" id="1_8omv0"]
 [ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://modules/Vertex/assets/styles/UIPanelBase.tres" id="2_y0ly3"]
@@ -38,7 +38,7 @@ font_color = Color(0.15, 0.15, 0.15, 1)
 [sub_resource type="ButtonGroup" id="ButtonGroup_qwc1o"]
 allow_unpress = true
 
-[node name="UIProgrammer" type="PanelContainer" node_paths=PackedStringArray("tab_button_container", "layer_button_container", "controler_container", "zone_select", "random_mode", "template_placeholder", "page_select_option", "prev_page_button", "next_page_button")]
+[node name="UIProgrammer" type="PanelContainer" unique_id=1489224782 node_paths=PackedStringArray("tab_button_container", "layer_button_container", "controler_container", "zone_select", "random_mode", "template_placeholder", "page_select_option", "prev_page_button", "next_page_button")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -57,29 +57,29 @@ page_select_option = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/PageButt
 prev_page_button = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/PageButtons/HBoxContainer/PageBack")
 next_page_button = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/PageButtons/HBoxContainer/PageFowards")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=981673564]
 layout_mode = 2
 
-[node name="PanelMenuBar" parent="VBoxContainer" instance=ExtResource("4_rdv1j")]
+[node name="PanelMenuBar" parent="VBoxContainer" unique_id=607464338 instance=ExtResource("4_rdv1j")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="0"]
+[node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" parent_id_path=PackedInt32Array(607464338, 1200457394) index="0" unique_id=495491944]
 text = "Programmer"
 icon = ExtResource("5_fc45e")
 
-[node name="PageButtons" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="1"]
+[node name="PageButtons" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer" parent_id_path=PackedInt32Array(607464338, 1200457394) index="1" unique_id=559552589]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/PageButtons"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/PageButtons" unique_id=1653938804]
 layout_mode = 2
 
-[node name="PageBack" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/PageButtons/HBoxContainer"]
+[node name="PageBack" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/PageButtons/HBoxContainer" unique_id=1773761682]
 layout_mode = 2
 disabled = true
 icon = ExtResource("6_sp6ey")
 
-[node name="PageSelect" type="OptionButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer/PageButtons/HBoxContainer"]
+[node name="PageSelect" type="OptionButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer/PageButtons/HBoxContainer" unique_id=1448248185]
 custom_minimum_size = Vector2(51, 0)
 layout_mode = 2
 selected = 0
@@ -87,24 +87,24 @@ item_count = 1
 popup/item_0/text = "0"
 popup/item_0/id = 0
 
-[node name="PageFowards" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/PageButtons/HBoxContainer"]
+[node name="PageFowards" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/PageButtons/HBoxContainer" unique_id=1174136467]
 layout_mode = 2
 icon = ExtResource("7_rdv1j")
 
-[node name="TabButtons" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer" index="0"]
+[node name="TabButtons" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer" parent_id_path=PackedInt32Array(607464338, 1637369951) index="0" unique_id=114064805]
 layout_mode = 2
 size_flags_horizontal = 6
 
-[node name="TabButtonContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/TabButtons"]
+[node name="TabButtonContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/TabButtons" unique_id=1530441785]
 layout_mode = 2
 
-[node name="ViewButtons" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="3"]
+[node name="ViewButtons" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer" parent_id_path=PackedInt32Array(607464338, 1200457394) index="3" unique_id=631749358]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ViewButtons"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ViewButtons" unique_id=1395805102]
 layout_mode = 2
 
-[node name="ZoneSelect" type="OptionButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ViewButtons/HBoxContainer"]
+[node name="ZoneSelect" type="OptionButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ViewButtons/HBoxContainer" unique_id=1394620674]
 custom_minimum_size = Vector2(93, 0)
 layout_mode = 2
 size_flags_horizontal = 10
@@ -118,7 +118,7 @@ popup/item_0/icon = ExtResource("8_fc45e")
 popup/item_0/id = 0
 popup/item_0/separator = true
 
-[node name="ValueMode" type="OptionButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ViewButtons/HBoxContainer"]
+[node name="ValueMode" type="OptionButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ViewButtons/HBoxContainer" unique_id=716400488]
 visible = false
 custom_minimum_size = Vector2(137, 0)
 layout_mode = 2
@@ -135,81 +135,81 @@ popup/item_1/text = "Relative"
 popup/item_1/icon = ExtResource("9_xrr4a")
 popup/item_1/id = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer" unique_id=1638801094]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer" unique_id=540139577]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="TemplatePlaceholder" type="PanelContainer" parent="VBoxContainer/ScrollContainer/HBoxContainer"]
+[node name="TemplatePlaceholder" type="PanelContainer" parent="VBoxContainer/ScrollContainer/HBoxContainer" unique_id=1377470677]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_fc45e")
 
-[node name="Label" type="Label" parent="VBoxContainer/ScrollContainer/HBoxContainer/TemplatePlaceholder"]
+[node name="Label" type="Label" parent="VBoxContainer/ScrollContainer/HBoxContainer/TemplatePlaceholder" unique_id=575396195]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "1"
 label_settings = SubResource("LabelSettings_3huj7")
 
-[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer"]
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer" unique_id=1433992602]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("7_7jywt")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer2" unique_id=1297456126]
 layout_mode = 2
 
-[node name="LayerControls" type="PanelContainer" parent="VBoxContainer/PanelContainer2/HBoxContainer"]
+[node name="LayerControls" type="PanelContainer" parent="VBoxContainer/PanelContainer2/HBoxContainer" unique_id=738988866]
 visible = false
 layout_mode = 2
 
-[node name="LayerButtonContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer2/HBoxContainer/LayerControls"]
+[node name="LayerButtonContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer2/HBoxContainer/LayerControls" unique_id=1423890017]
 layout_mode = 2
 
-[node name="TransportControls" type="PanelContainer" parent="VBoxContainer/PanelContainer2/HBoxContainer"]
+[node name="TransportControls" type="PanelContainer" parent="VBoxContainer/PanelContainer2/HBoxContainer" unique_id=1258820960]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer2/HBoxContainer/TransportControls"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer2/HBoxContainer/TransportControls" unique_id=1160826453]
 layout_mode = 2
 
-[node name="PlayBackwards" type="Button" parent="VBoxContainer/PanelContainer2/HBoxContainer/TransportControls/HBoxContainer"]
+[node name="PlayBackwards" type="Button" parent="VBoxContainer/PanelContainer2/HBoxContainer/TransportControls/HBoxContainer" unique_id=1065557200]
 layout_mode = 2
 toggle_mode = true
 button_group = SubResource("ButtonGroup_qwc1o")
 icon = ExtResource("12_ikse1")
 
-[node name="PlayFowards" type="Button" parent="VBoxContainer/PanelContainer2/HBoxContainer/TransportControls/HBoxContainer"]
+[node name="PlayFowards" type="Button" parent="VBoxContainer/PanelContainer2/HBoxContainer/TransportControls/HBoxContainer" unique_id=1191372520]
 layout_mode = 2
 toggle_mode = true
 button_group = SubResource("ButtonGroup_qwc1o")
 icon = ExtResource("13_qpens")
 
-[node name="Loop" type="Button" parent="VBoxContainer/PanelContainer2/HBoxContainer/TransportControls/HBoxContainer"]
+[node name="Loop" type="Button" parent="VBoxContainer/PanelContainer2/HBoxContainer/TransportControls/HBoxContainer" unique_id=1460154275]
 layout_mode = 2
 toggle_mode = true
 icon = ExtResource("14_qpens")
 
-[node name="SetSpeed" type="Button" parent="VBoxContainer/PanelContainer2/HBoxContainer/TransportControls/HBoxContainer"]
+[node name="SetSpeed" type="Button" parent="VBoxContainer/PanelContainer2/HBoxContainer/TransportControls/HBoxContainer" unique_id=944126133]
 layout_mode = 2
 icon = ExtResource("15_qwc1o")
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelContainer2/HBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelContainer2/HBoxContainer" unique_id=1372290822]
 layout_mode = 2
 size_flags_horizontal = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer2/HBoxContainer/PanelContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer2/HBoxContainer/PanelContainer" unique_id=1022538595]
 layout_mode = 2
 
-[node name="Store" type="Button" parent="VBoxContainer/PanelContainer2/HBoxContainer/PanelContainer/HBoxContainer"]
+[node name="Store" type="Button" parent="VBoxContainer/PanelContainer2/HBoxContainer/PanelContainer/HBoxContainer" unique_id=472055298]
 layout_mode = 2
 icon = ExtResource("16_qpens")
 
-[node name="Clear" type="Button" parent="VBoxContainer/PanelContainer2/HBoxContainer/PanelContainer/HBoxContainer"]
+[node name="Clear" type="Button" parent="VBoxContainer/PanelContainer2/HBoxContainer/PanelContainer/HBoxContainer" unique_id=1426860809]
 layout_mode = 2
 icon = ExtResource("6_xrr4a")
 

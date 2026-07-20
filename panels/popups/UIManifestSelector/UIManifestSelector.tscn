@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bcksw5esp2mib"]
+[gd_scene format=3 uid="uid://bcksw5esp2mib"]
 
 [ext_resource type="StyleBox" uid="uid://csle20exwqtti" path="res://modules/Vertex/assets/styles/PanelMenuBar.tres" id="1_adyyq"]
 [ext_resource type="Script" uid="uid://3shyid6t18bp" path="res://panels/popups/UIManifestSelector/UIManifestSelector.gd" id="2_lx18e"]
@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dfu5s8fjy0ex4" path="res://modules/Vertex/panels/UIPanel/EditControls/EditControls.tscn" id="5_orbug"]
 [ext_resource type="StyleBox" uid="uid://cftl4b5dnt57b" path="res://modules/Vertex/assets/styles/ResolveBoxNoBG.tres" id="6_2qeie"]
 
-[node name="UIManifestSelector" type="PanelContainer" node_paths=PackedStringArray("manifest_tree", "manufacturer_tree", "global_fixture_tree", "manufacturer_fixture_tree", "mode_tree", "manufacturer_tree_select_box", "fixture_tree_select_box", "search_bar")]
+[node name="UIManifestSelector" type="PanelContainer" unique_id=299126852 node_paths=PackedStringArray("manifest_tree", "manufacturer_tree", "global_fixture_tree", "manufacturer_fixture_tree", "mode_tree", "manufacturer_tree_select_box", "fixture_tree_select_box", "search_bar")]
 custom_minimum_size = Vector2(0, 60)
 offset_right = 604.0
 offset_bottom = 60.0
@@ -24,24 +24,24 @@ manufacturer_tree_select_box = NodePath("VBoxContainer/IndexContainer/Manufactur
 fixture_tree_select_box = NodePath("VBoxContainer/IndexContainer/GlobalFixtureTree/FixtureTreeSelectBox")
 search_bar = NodePath("VBoxContainer/HBoxContainer/ScrollContainer/LineEdit")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=320851576]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1421377515]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=2028931399]
 layout_mode = 2
 icon = ExtResource("3_br15q")
 flat = true
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer" unique_id=671591530]
 layout_mode = 2
 size_flags_horizontal = 3
 horizontal_scroll_mode = 3
 vertical_scroll_mode = 3
 
-[node name="LineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer/ScrollContainer"]
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer/ScrollContainer" unique_id=91274920]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
@@ -50,18 +50,18 @@ keep_editing_on_text_submit = true
 select_all_on_focus = true
 script = ExtResource("4_6yh07")
 
-[node name="EditControls" parent="VBoxContainer/HBoxContainer" instance=ExtResource("5_orbug")]
+[node name="EditControls" parent="VBoxContainer/HBoxContainer" unique_id=965854806 instance=ExtResource("5_orbug")]
 unique_name_in_owner = true
 layout_mode = 2
 show_edit = false
 show_settings = false
 show_close = true
 
-[node name="IndexContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="IndexContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1942902089]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ManifestTree" type="Tree" parent="VBoxContainer/IndexContainer"]
+[node name="ManifestTree" type="Tree" parent="VBoxContainer/IndexContainer" unique_id=669470018]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -69,7 +69,7 @@ columns = 2
 hide_root = true
 select_mode = 1
 
-[node name="ManufacturerTree" type="Tree" parent="VBoxContainer/IndexContainer"]
+[node name="ManufacturerTree" type="Tree" parent="VBoxContainer/IndexContainer" unique_id=268126868]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
@@ -78,7 +78,7 @@ columns = 2
 hide_root = true
 select_mode = 1
 
-[node name="ManufacturerTreeSelectBox" type="Panel" parent="VBoxContainer/IndexContainer/ManufacturerTree"]
+[node name="ManufacturerTreeSelectBox" type="Panel" parent="VBoxContainer/IndexContainer/ManufacturerTree" unique_id=478119504]
 visible = false
 modulate = Color(0, 0.5803922, 1, 1)
 layout_mode = 1
@@ -90,7 +90,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("6_2qeie")
 
-[node name="GlobalFixtureTree" type="Tree" parent="VBoxContainer/IndexContainer"]
+[node name="GlobalFixtureTree" type="Tree" parent="VBoxContainer/IndexContainer" unique_id=1836009708]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
@@ -99,7 +99,7 @@ columns = 2
 hide_root = true
 select_mode = 1
 
-[node name="FixtureTreeSelectBox" type="Panel" parent="VBoxContainer/IndexContainer/GlobalFixtureTree"]
+[node name="FixtureTreeSelectBox" type="Panel" parent="VBoxContainer/IndexContainer/GlobalFixtureTree" unique_id=2002751088]
 visible = false
 modulate = Color(0, 0.5803922, 1, 1)
 layout_mode = 1
@@ -111,7 +111,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = ExtResource("6_2qeie")
 
-[node name="ManufacturerFixtureTree" type="Tree" parent="VBoxContainer/IndexContainer"]
+[node name="ManufacturerFixtureTree" type="Tree" parent="VBoxContainer/IndexContainer" unique_id=1688957348]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
@@ -119,7 +119,7 @@ columns = 2
 hide_root = true
 select_mode = 1
 
-[node name="ModeTree" type="Tree" parent="VBoxContainer/IndexContainer"]
+[node name="ModeTree" type="Tree" parent="VBoxContainer/IndexContainer" unique_id=204163553]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cawcd1x6kkihy"]
+[gd_scene format=3 uid="uid://cawcd1x6kkihy"]
 
 [ext_resource type="Script" uid="uid://b4lpvcf5mgeyv" path="res://panels/UICore/SideBar/UICorePrimarySideBarSettings.gd" id="1_67xso"]
 [ext_resource type="PackedScene" uid="uid://kjup3yrjifr5" path="res://modules/Vertex/components/SettingsManagerBlockView/SettingsManagerBlockView.tscn" id="1_hx8ak"]
@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dhhbjjtkgbfl0" path="res://modules/Vertex/assets/icons/FileOpen.svg" id="4_cpjgq"]
 [ext_resource type="Texture2D" uid="uid://dfrrs2dnvlvsu" path="res://modules/Vertex/assets/icons/Delete.svg" id="5_us6l3"]
 
-[node name="UICorePrimarySideBarSettings" type="PanelContainer" node_paths=PackedStringArray("table", "settings_manager_view", "open_tab_button", "delete_tab_button")]
+[node name="UICorePrimarySideBarSettings" type="PanelContainer" unique_id=509475524 node_paths=PackedStringArray("table", "settings_manager_view", "open_tab_button", "delete_tab_button")]
 custom_minimum_size = Vector2(0, 350)
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,45 +23,46 @@ settings_manager_view = NodePath("VBoxContainer/HSplitContainer/SettingsManagerV
 open_tab_button = NodePath("VBoxContainer/PanelContainer/PanelContainer/HBoxContainer/OpenTab")
 delete_tab_button = NodePath("VBoxContainer/PanelContainer/PanelContainer/HBoxContainer/DeleteTab")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=180706477]
 layout_mode = 2
 
-[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer"]
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer" unique_id=1315225341]
 layout_mode = 2
 size_flags_vertical = 3
+split_offsets = PackedInt32Array(-105)
 split_offset = -105
 
-[node name="Table" parent="VBoxContainer/HSplitContainer" instance=ExtResource("2_vrj4d")]
+[node name="Table" parent="VBoxContainer/HSplitContainer" unique_id=79932536 instance=ExtResource("2_vrj4d")]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="SettingsManagerView" parent="VBoxContainer/HSplitContainer" instance=ExtResource("1_hx8ak")]
+[node name="SettingsManagerView" parent="VBoxContainer/HSplitContainer" unique_id=1055541343 instance=ExtResource("1_hx8ak")]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer" unique_id=1786143766]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("2_lkmdf")
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelContainer" unique_id=1109118860]
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/PanelContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/PanelContainer" unique_id=1089655781]
 layout_mode = 2
 
-[node name="CreateTab" type="Button" parent="VBoxContainer/PanelContainer/PanelContainer/HBoxContainer"]
+[node name="CreateTab" type="Button" parent="VBoxContainer/PanelContainer/PanelContainer/HBoxContainer" unique_id=2094473475]
 layout_mode = 2
 text = "Create Tab"
 icon = ExtResource("3_7nj6a")
 
-[node name="OpenTab" type="Button" parent="VBoxContainer/PanelContainer/PanelContainer/HBoxContainer"]
+[node name="OpenTab" type="Button" parent="VBoxContainer/PanelContainer/PanelContainer/HBoxContainer" unique_id=256052808]
 layout_mode = 2
 disabled = true
 text = "OpenTab"
 icon = ExtResource("4_cpjgq")
 
-[node name="DeleteTab" type="Button" parent="VBoxContainer/PanelContainer/PanelContainer/HBoxContainer"]
+[node name="DeleteTab" type="Button" parent="VBoxContainer/PanelContainer/PanelContainer/HBoxContainer" unique_id=820627845]
 layout_mode = 2
 disabled = true
 text = "Delete Tab"

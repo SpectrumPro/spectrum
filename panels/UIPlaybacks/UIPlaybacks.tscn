@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://baortk0rwrhup"]
+[gd_scene format=3 uid="uid://baortk0rwrhup"]
 
 [ext_resource type="Theme" uid="uid://cyua45ur0ijqo" path="res://modules/Vertex/assets/themes/Main.theme" id="1_fpd1u"]
 [ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://modules/Vertex/assets/styles/UIPanelBase.tres" id="2_rmybk"]
@@ -11,7 +11,7 @@
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_ahq5b"]
 
-[node name="UIPlaybacks" type="PanelContainer"]
+[node name="UIPlaybacks" type="PanelContainer" unique_id=1119865893]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -23,55 +23,55 @@ theme = ExtResource("1_fpd1u")
 theme_override_styles/panel = ExtResource("2_rmybk")
 script = ExtResource("3_rij1d")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=22297946]
 layout_mode = 2
 
-[node name="PanelMenuBar" parent="VBoxContainer" instance=ExtResource("4_5ou05")]
+[node name="PanelMenuBar" parent="VBoxContainer" unique_id=1748389216 instance=ExtResource("4_5ou05")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="0"]
+[node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" parent_id_path=PackedInt32Array(1748389216, 1200457394) index="0" unique_id=495491944]
 text = "Playbacks"
 icon = ExtResource("5_vrrkr")
 
-[node name="Mode" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="1"]
+[node name="Mode" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer" parent_id_path=PackedInt32Array(1748389216, 1200457394) index="1" unique_id=1392546257]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/Mode"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/Mode" unique_id=1974615311]
 layout_mode = 2
 
-[node name="Asign" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/Mode/HBoxContainer"]
+[node name="Asign" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/Mode/HBoxContainer" unique_id=1805281044]
 layout_mode = 2
 toggle_mode = true
 button_pressed = true
 button_group = SubResource("ButtonGroup_ahq5b")
 icon = ExtResource("6_os0li")
 
-[node name="Delete" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/Mode/HBoxContainer"]
+[node name="Delete" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/Mode/HBoxContainer" unique_id=255464471]
 layout_mode = 2
 toggle_mode = true
 button_group = SubResource("ButtonGroup_ahq5b")
 icon = ExtResource("7_l4k0t")
 
-[node name="Edit" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/Mode/HBoxContainer"]
+[node name="Edit" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/Mode/HBoxContainer" unique_id=1001017058]
 layout_mode = 2
 toggle_mode = true
 button_group = SubResource("ButtonGroup_ahq5b")
 icon = ExtResource("8_5a8nk")
 
-[node name="EditControls" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="3"]
+[node name="EditControls" parent="VBoxContainer/PanelMenuBar/HBoxContainer" parent_id_path=PackedInt32Array(1748389216, 1200457394) index="3" unique_id=1876457925]
 show_edit = true
 show_settings = true
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer" unique_id=1706728258]
 layout_mode = 2
 size_flags_vertical = 3
 vertical_scroll_mode = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer" unique_id=397462141]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3

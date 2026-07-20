@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cebqk3au5iwx0"]
+[gd_scene format=3 uid="uid://cebqk3au5iwx0"]
 
 [ext_resource type="Script" uid="uid://cj6rjtd8yhtck" path="res://panels/UIDesk/DeskItemContainer.gd" id="1_u1i3e"]
 [ext_resource type="Texture2D" uid="uid://bi6l77hvjlekh" path="res://modules/Vertex/assets/icons/Resize.svg" id="2_gw62f"]
@@ -25,9 +25,9 @@ corner_radius_bottom_left = 5
 [sub_resource type="LabelSettings" id="LabelSettings_burcd"]
 font = ExtResource("3_70702")
 
-[node name="DeskItemContainer" type="Control" node_paths=PackedStringArray("_label_node", "_background", "_handles_container")]
-clip_contents = true
+[node name="DeskItemContainer" type="Control" unique_id=755027490 node_paths=PackedStringArray("_label_node", "_background", "_handles_container")]
 custom_minimum_size = Vector2(20, 20)
+clip_contents = true
 layout_mode = 3
 anchors_preset = 0
 offset_right = 160.0
@@ -39,7 +39,7 @@ _label_node = NodePath("Handles/PanelContainer/Label")
 _background = NodePath("Handles/Background")
 _handles_container = NodePath("Handles")
 
-[node name="Handles" type="Control" parent="."]
+[node name="Handles" type="Control" parent="." unique_id=1644186540]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -47,7 +47,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Background" type="Panel" parent="Handles"]
+[node name="Background" type="Panel" parent="Handles" unique_id=225963240]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -57,7 +57,7 @@ grow_vertical = 2
 mouse_default_cursor_shape = 6
 theme_override_styles/panel = SubResource("StyleBoxFlat_q375a")
 
-[node name="Handle" type="TextureRect" parent="Handles"]
+[node name="Handle" type="TextureRect" parent="Handles" unique_id=1740910587]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -71,7 +71,7 @@ grow_vertical = 0
 texture = ExtResource("2_gw62f")
 expand_mode = 1
 
-[node name="PanelContainer" type="PanelContainer" parent="Handles"]
+[node name="PanelContainer" type="PanelContainer" parent="Handles" unique_id=974296661]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -87,7 +87,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_h550r")
 
-[node name="Label" type="Label" parent="Handles/PanelContainer"]
+[node name="Label" type="Label" parent="Handles/PanelContainer" unique_id=1640843169]
 layout_mode = 2
 text = "W:0 H:0
 X:0 Y:0"

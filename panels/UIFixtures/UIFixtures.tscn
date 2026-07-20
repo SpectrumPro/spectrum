@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dut26fusowr8i"]
+[gd_scene format=3 uid="uid://dut26fusowr8i"]
 
 [ext_resource type="Theme" uid="uid://cyua45ur0ijqo" path="res://modules/Vertex/assets/themes/Main.theme" id="1_egktx"]
 [ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://modules/Vertex/assets/styles/UIPanelBase.tres" id="2_wpgpr"]
@@ -12,7 +12,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sf6va"]
 
-[node name="UIFixtures" type="PanelContainer"]
+[node name="UIFixtures" type="PanelContainer" unique_id=2076801745]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -24,58 +24,58 @@ theme = ExtResource("1_egktx")
 theme_override_styles/panel = ExtResource("2_wpgpr")
 script = ExtResource("3_ti08j")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=473533593]
 layout_mode = 2
 
-[node name="PanelMenuBar" parent="VBoxContainer" instance=ExtResource("4_4ox1a")]
+[node name="PanelMenuBar" parent="VBoxContainer" unique_id=1290934879 instance=ExtResource("4_4ox1a")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="0"]
+[node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" parent_id_path=PackedInt32Array(1290934879, 1200457394) index="0" unique_id=495491944]
 text = "Fixtures"
 icon = ExtResource("5_sf6va")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer" index="0"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer" parent_id_path=PackedInt32Array(1290934879, 1637369951) index="0" unique_id=1891730252]
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer" unique_id=762501826]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer" unique_id=283531916]
 layout_mode = 2
 
-[node name="NewComponent" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer"]
+[node name="NewComponent" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer" unique_id=602546302]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 text = "New"
 icon = ExtResource("5_8ppod")
 
-[node name="DeleteComponent" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer"]
+[node name="DeleteComponent" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer" unique_id=1722515895]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 text = "Delete"
 icon = ExtResource("6_rpcjh")
 
-[node name="DuplicateComponent" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer"]
+[node name="DuplicateComponent" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer/HBoxContainer" unique_id=460133675]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 text = "Duplicate"
 icon = ExtResource("7_xqphx")
 
-[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer"]
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer" unique_id=1288323677]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer2" unique_id=1290274373]
 layout_mode = 2
 
-[node name="ViewModeButton" type="OptionButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer2/HBoxContainer"]
+[node name="ViewModeButton" type="OptionButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/PanelContainer2/HBoxContainer" unique_id=471904078]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="ChildManagerView" parent="VBoxContainer" instance=ExtResource("8_sypgw")]
+[node name="ChildManagerView" parent="VBoxContainer" unique_id=239952886 instance=ExtResource("8_sypgw")]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_sf6va")

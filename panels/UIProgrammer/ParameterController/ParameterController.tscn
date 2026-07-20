@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bfk7wccmsndfr"]
+[gd_scene format=3 uid="uid://bfk7wccmsndfr"]
 
 [ext_resource type="Theme" uid="uid://cyua45ur0ijqo" path="res://modules/Vertex/assets/themes/Main.theme" id="1_7me6c"]
 [ext_resource type="StyleBox" uid="uid://bxwylw4uk8cyk" path="res://modules/Vertex/assets/styles/ClassSettingsBG.tres" id="2_56yd5"]
@@ -33,7 +33,7 @@ corner_radius_bottom_left = 5
 font = ExtResource("4_33gbp")
 font_size = 26
 
-[node name="ParameterController" type="PanelContainer" node_paths=PackedStringArray("_function_list", "_slider", "_title_button", "_title_bar", "_value_label", "_preset_container")]
+[node name="ParameterController" type="PanelContainer" unique_id=1892705358 node_paths=PackedStringArray("_function_list", "_slider", "_title_button", "_title_bar", "_value_label", "_preset_container")]
 custom_minimum_size = Vector2(219, 0)
 offset_right = 402.0
 offset_bottom = 319.0
@@ -49,21 +49,21 @@ _title_bar = NodePath("VBoxContainer/TitleBar")
 _value_label = NodePath("VBoxContainer/TitleBar/HBoxContainer/PanelContainer/Value")
 _preset_container = NodePath("VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/PanelContainer/ScrollContainer/PresetContainer")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1912124392]
 layout_mode = 2
 
-[node name="TitleBar" type="PanelContainer" parent="VBoxContainer"]
+[node name="TitleBar" type="PanelContainer" parent="VBoxContainer" unique_id=1167580653]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_sjuwc")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TitleBar"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TitleBar" unique_id=302281411]
 layout_mode = 2
 
-[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/TitleBar/HBoxContainer"]
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/TitleBar/HBoxContainer" unique_id=2075171846]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_3ced7")
 
-[node name="TitleButton" type="Button" parent="VBoxContainer/TitleBar/HBoxContainer/PanelContainer2"]
+[node name="TitleButton" type="Button" parent="VBoxContainer/TitleBar/HBoxContainer/PanelContainer2" unique_id=1040262313]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Dimmer"
@@ -71,27 +71,27 @@ flat = true
 alignment = 0
 icon_alignment = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/TitleBar/HBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/TitleBar/HBoxContainer" unique_id=1047906664]
 layout_mode = 2
 size_flags_horizontal = 10
 theme_override_styles/panel = SubResource("StyleBoxFlat_3ced7")
 
-[node name="Value" type="Label" parent="VBoxContainer/TitleBar/HBoxContainer/PanelContainer"]
+[node name="Value" type="Label" parent="VBoxContainer/TitleBar/HBoxContainer/PanelContainer" unique_id=1402689857]
 layout_mode = 2
 size_flags_horizontal = 10
 mouse_filter = 0
 text = "100%"
 label_settings = SubResource("LabelSettings_qnt7p")
 
-[node name="PanelContainer3" type="PanelContainer" parent="VBoxContainer"]
+[node name="PanelContainer3" type="PanelContainer" parent="VBoxContainer" unique_id=1741789827]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer3"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer3" unique_id=955342217]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VSlider" type="VSlider" parent="VBoxContainer/PanelContainer3/HBoxContainer"]
+[node name="VSlider" type="VSlider" parent="VBoxContainer/PanelContainer3/HBoxContainer" unique_id=210054960]
 custom_minimum_size = Vector2(84, 0)
 layout_mode = 2
 size_flags_horizontal = 1
@@ -103,42 +103,42 @@ value = 1.0
 tick_count = 20
 ticks_on_borders = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer3/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer3/HBoxContainer" unique_id=1487247991]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer" unique_id=1038358779]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/PanelContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/PanelContainer" unique_id=949732435]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PresetContainer" type="GridContainer" parent="VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/PanelContainer/ScrollContainer"]
+[node name="PresetContainer" type="GridContainer" parent="VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/PanelContainer/ScrollContainer" unique_id=1849767219]
 layout_mode = 2
 size_flags_horizontal = 3
 columns = 5
 
-[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer"]
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer" unique_id=117081084]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/PanelContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/PanelContainer2" unique_id=1511578777]
 layout_mode = 2
 
-[node name="Erace" type="Button" parent="VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/PanelContainer2/HBoxContainer"]
+[node name="Erace" type="Button" parent="VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/PanelContainer2/HBoxContainer" unique_id=940153011]
 layout_mode = 2
 size_flags_horizontal = 0
 icon = ExtResource("4_ukk8e")
 
-[node name="Default" type="Button" parent="VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/PanelContainer2/HBoxContainer"]
+[node name="Default" type="Button" parent="VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/PanelContainer2/HBoxContainer" unique_id=1633167376]
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_33gbp")
 text = "d"
 
-[node name="FunctionList" type="OptionButton" parent="VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/PanelContainer2/HBoxContainer"]
+[node name="FunctionList" type="OptionButton" parent="VBoxContainer/PanelContainer3/HBoxContainer/VBoxContainer/PanelContainer2/HBoxContainer" unique_id=927412346]
 layout_mode = 2
 size_flags_horizontal = 3
 text_overrun_behavior = 3

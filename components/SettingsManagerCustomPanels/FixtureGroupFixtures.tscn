@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cjrfroxmneel1"]
+[gd_scene format=3 uid="uid://cjrfroxmneel1"]
 
 [ext_resource type="Script" uid="uid://d266aph0mkd2o" path="res://components/SettingsManagerCustomPanels/FixtureGroupFixtures.gd" id="1_7hh60"]
 [ext_resource type="Texture2D" uid="uid://bbennjke0ioen" path="res://modules/Vertex/assets/icons/Add.svg" id="2_xsoim"]
@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cawxywwrt8wr5" path="res://modules/Vertex/assets/icons/Arrow_upward.svg" id="4_yjx4v"]
 [ext_resource type="Texture2D" uid="uid://cv0titm4w4jp6" path="res://modules/Vertex/assets/icons/Arrow_downward.svg" id="5_pgicq"]
 
-[node name="FixtureGroupFixtures" type="PanelContainer" node_paths=PackedStringArray("_tree", "_remove_button", "_move_up_button", "_move_down_button")]
+[node name="FixtureGroupFixtures" type="PanelContainer" unique_id=1738123837 node_paths=PackedStringArray("_tree", "_remove_button", "_move_up_button", "_move_down_button")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -18,41 +18,41 @@ _remove_button = NodePath("VBoxContainer/PanelContainer/HBoxContainer/Remove")
 _move_up_button = NodePath("VBoxContainer/PanelContainer/HBoxContainer/MoveUp")
 _move_down_button = NodePath("VBoxContainer/PanelContainer/HBoxContainer/MoveDown")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1637751196]
 layout_mode = 2
 
-[node name="Tree" type="Tree" parent="VBoxContainer"]
+[node name="Tree" type="Tree" parent="VBoxContainer" unique_id=1991710276]
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 size_flags_vertical = 3
 hide_root = true
 select_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer" unique_id=1377555676]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer" unique_id=277159668]
 layout_mode = 2
 
-[node name="Add" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer"]
+[node name="Add" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer" unique_id=147616211]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Add"
 icon = ExtResource("2_xsoim")
 
-[node name="Remove" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer"]
+[node name="Remove" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer" unique_id=414471764]
 layout_mode = 2
 size_flags_horizontal = 3
 disabled = true
 text = "Remove"
 icon = ExtResource("3_yjx4v")
 
-[node name="MoveUp" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer"]
+[node name="MoveUp" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer" unique_id=1958490621]
 layout_mode = 2
 disabled = true
 icon = ExtResource("4_yjx4v")
 
-[node name="MoveDown" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer"]
+[node name="MoveDown" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer" unique_id=37015057]
 layout_mode = 2
 disabled = true
 icon = ExtResource("5_pgicq")

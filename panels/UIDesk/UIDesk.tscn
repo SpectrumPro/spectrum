@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bsxgp5g0jmyke"]
+[gd_scene format=3 uid="uid://bsxgp5g0jmyke"]
 
 [ext_resource type="Theme" uid="uid://cyua45ur0ijqo" path="res://modules/Vertex/assets/themes/Main.theme" id="1_vopyx"]
 [ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://modules/Vertex/assets/styles/UIPanelBase.tres" id="2_63t2f"]
@@ -41,7 +41,7 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
-[node name="UIDesk" type="PanelContainer" node_paths=PackedStringArray("disable_on_deselect", "_select_box", "_container_node", "_area_indicator")]
+[node name="UIDesk" type="PanelContainer" unique_id=726466003 node_paths=PackedStringArray("disable_on_deselect", "_select_box", "_container_node", "_area_indicator")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -57,10 +57,10 @@ _select_box = NodePath("VBoxContainer/PanelContainer2/Container/SelectBox")
 _container_node = NodePath("VBoxContainer/PanelContainer2/Container")
 _area_indicator = NodePath("VBoxContainer/PanelContainer2/Container/AeraIndicator")
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=1185086691]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Control"]
+[node name="Label" type="Label" parent="Control" unique_id=932071585]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -77,71 +77,71 @@ size_flags_horizontal = 4
 text = "SPECTRUM"
 label_settings = SubResource("LabelSettings_i61ds")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1828054548]
 layout_mode = 2
 
-[node name="PanelMenuBar" parent="VBoxContainer" instance=ExtResource("5_63t2f")]
+[node name="PanelMenuBar" parent="VBoxContainer" unique_id=1545691271 instance=ExtResource("5_63t2f")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="0"]
+[node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" parent_id_path=PackedInt32Array(1545691271, 1200457394) index="0" unique_id=495491944]
 text = "Desk"
 icon = ExtResource("6_u3w1e")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer" index="0"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer" parent_id_path=PackedInt32Array(1545691271, 1637369951) index="0" unique_id=1883149891]
 layout_mode = 2
 
-[node name="MainControls" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer"]
+[node name="MainControls" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer" unique_id=878163885]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/MainControls"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/MainControls" unique_id=1670985889]
 layout_mode = 2
 
-[node name="Add" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/MainControls/HBoxContainer"]
+[node name="Add" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/MainControls/HBoxContainer" unique_id=1463772490]
 layout_mode = 2
 icon = ExtResource("5_7kvcf")
 
-[node name="Delete" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/MainControls/HBoxContainer"]
+[node name="Delete" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/MainControls/HBoxContainer" unique_id=952772769]
 layout_mode = 2
 disabled = true
 shortcut = SubResource("Shortcut_5ty2n")
 icon = ExtResource("6_74a5n")
 
-[node name="Edit" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/MainControls/HBoxContainer"]
+[node name="Edit" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/MainControls/HBoxContainer" unique_id=1786878661]
 layout_mode = 2
 disabled = true
 icon = ExtResource("7_tirx7")
 
-[node name="Copy" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/MainControls/HBoxContainer"]
+[node name="Copy" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/MainControls/HBoxContainer" unique_id=945286292]
 layout_mode = 2
 disabled = true
 icon = ExtResource("8_eafht")
 
-[node name="LayerControls" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer"]
+[node name="LayerControls" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer" unique_id=1887424315]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/LayerControls"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/LayerControls" unique_id=720310641]
 layout_mode = 2
 
-[node name="MoveUp" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/LayerControls/HBoxContainer"]
+[node name="MoveUp" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/LayerControls/HBoxContainer" unique_id=805514821]
 layout_mode = 2
 disabled = true
 icon = ExtResource("9_i2hmx")
 
-[node name="MoveDown" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/LayerControls/HBoxContainer"]
+[node name="MoveDown" type="Button" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/HBoxContainer/LayerControls/HBoxContainer" unique_id=561548882]
 layout_mode = 2
 disabled = true
 icon = ExtResource("10_ol5uu")
 
-[node name="EditControls" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="2"]
+[node name="EditControls" parent="VBoxContainer/PanelMenuBar/HBoxContainer" parent_id_path=PackedInt32Array(1545691271, 1200457394) index="2" unique_id=1876457925]
 show_edit = true
 show_settings = true
 
-[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer"]
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer" unique_id=1861279383]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Container" type="Control" parent="VBoxContainer/PanelContainer2"]
+[node name="Container" type="Control" parent="VBoxContainer/PanelContainer2" unique_id=1935806246]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -151,7 +151,7 @@ grid_size = Vector2(80, 80)
 line_width = 2.28
 grid_mode = 1
 
-[node name="SelectBox" parent="VBoxContainer/PanelContainer2/Container" node_paths=PackedStringArray("event_control") instance=ExtResource("15_u3w1e")]
+[node name="SelectBox" parent="VBoxContainer/PanelContainer2/Container" unique_id=935202614 node_paths=PackedStringArray("event_control") instance=ExtResource("15_u3w1e")]
 visible = false
 layout_mode = 1
 size_flags_horizontal = 4
@@ -159,7 +159,7 @@ size_flags_vertical = 4
 mouse_filter = 2
 event_control = NodePath("..")
 
-[node name="AeraIndicator" type="Panel" parent="VBoxContainer/PanelContainer2/Container"]
+[node name="AeraIndicator" type="Panel" parent="VBoxContainer/PanelContainer2/Container" unique_id=2022778849]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

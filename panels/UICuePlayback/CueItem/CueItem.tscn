@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://owx4rxrtg50d"]
+[gd_scene format=3 uid="uid://owx4rxrtg50d"]
 
 [ext_resource type="Theme" uid="uid://cyua45ur0ijqo" path="res://modules/Vertex/assets/themes/Main.theme" id="1_t3b7b"]
 [ext_resource type="Texture2D" uid="uid://cxtdx7cj44nk" path="res://modules/Vertex/assets/icons/Touch.svg" id="1_yeptw"]
@@ -65,7 +65,7 @@ bg_color = Color(0, 0.513726, 1, 1)
 corner_radius_top_left = 4
 corner_radius_bottom_left = 4
 
-[node name="CueItem" type="PanelContainer" node_paths=PackedStringArray("status_bar", "name_label", "qid_label", "fade_time_label", "pre_wait_label", "trigger_mode_manual", "trigger_mode_after_last", "trigger_mode_with_last", "selection_outline")]
+[node name="CueItem" type="PanelContainer" unique_id=1560977392 node_paths=PackedStringArray("status_bar", "name_label", "qid_label", "fade_time_label", "pre_wait_label", "trigger_mode_manual", "trigger_mode_after_last", "trigger_mode_with_last", "selection_outline")]
 offset_right = 304.0
 offset_bottom = 100.0
 size_flags_horizontal = 3
@@ -82,133 +82,133 @@ trigger_mode_after_last = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/H
 trigger_mode_with_last = NodePath("VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer/VBoxContainer/WithLast")
 selection_outline = NodePath("Selected")
 
-[node name="StoreMode" type="Panel" parent="."]
+[node name="StoreMode" type="Panel" parent="." unique_id=810684901]
 visible = false
 layout_mode = 2
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_vgny8")
 
-[node name="Selected" type="Panel" parent="."]
+[node name="Selected" type="Panel" parent="." unique_id=864869357]
 visible = false
 layout_mode = 2
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_osi16")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=446992240]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=912267697]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=2000272375]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="CueName" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="CueName" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1800204216]
 layout_mode = 2
 mouse_filter = 1
 text = "Cue Name"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1031043971]
 layout_mode = 2
 size_flags_vertical = 10
 
-[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" unique_id=1932111308]
 custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 10
 mouse_filter = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer2" unique_id=2034696327]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer2/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer2/HBoxContainer" unique_id=452729437]
 modulate = Color(0.792157, 0.792157, 0.792157, 1)
 layout_mode = 2
 texture = ExtResource("3_u1n7c")
 
-[node name="CueNumber" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer2/HBoxContainer"]
+[node name="CueNumber" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer2/HBoxContainer" unique_id=1303593343]
 layout_mode = 2
 mouse_filter = 1
 text = "1.4"
 label_settings = SubResource("LabelSettings_odw3y")
 
-[node name="PanelContainer3" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="PanelContainer3" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" unique_id=1209737288]
 custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 mouse_filter = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer3"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer3" unique_id=1467290059]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer3/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer3/HBoxContainer" unique_id=1680013765]
 modulate = Color(0.792157, 0.792157, 0.792157, 1)
 layout_mode = 2
 texture = ExtResource("2_2p1lo")
 
-[node name="FadeTime" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer3/HBoxContainer"]
+[node name="FadeTime" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer3/HBoxContainer" unique_id=927673481]
 layout_mode = 2
 size_flags_horizontal = 10
 mouse_filter = 1
 text = "5.0"
 label_settings = SubResource("LabelSettings_i6drb")
 
-[node name="PanelContainer4" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="PanelContainer4" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" unique_id=2031081371]
 custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 mouse_filter = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer4"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer4" unique_id=1667810223]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer4/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer4/HBoxContainer" unique_id=1824678518]
 modulate = Color(0.791999, 0.791999, 0.791999, 1)
 layout_mode = 2
 texture = ExtResource("3_ns1ii")
 
-[node name="PreWait" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer4/HBoxContainer"]
+[node name="PreWait" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer4/HBoxContainer" unique_id=1140994815]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 1
 text = "1.5"
 label_settings = SubResource("LabelSettings_7f8dc")
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" unique_id=1381964540]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 10
 mouse_filter = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer" unique_id=1111880199]
 layout_mode = 2
 size_flags_vertical = 8
 alignment = 2
 
-[node name="Manual" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer/VBoxContainer"]
+[node name="Manual" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer/VBoxContainer" unique_id=1148138727]
 visible = false
 modulate = Color(0.792157, 0.792157, 0.792157, 1)
 layout_mode = 2
 size_flags_vertical = 4
 texture = ExtResource("1_yeptw")
 
-[node name="AfterLast" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer/VBoxContainer"]
+[node name="AfterLast" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer/VBoxContainer" unique_id=1263732093]
 visible = false
 modulate = Color(0.792157, 0.792157, 0.792157, 1)
 layout_mode = 2
 size_flags_vertical = 4
 texture = ExtResource("2_dbt18")
 
-[node name="WithLast" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer/VBoxContainer"]
+[node name="WithLast" type="TextureRect" parent="VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/PanelContainer/VBoxContainer" unique_id=509038125]
 visible = false
 modulate = Color(0.792157, 0.792157, 0.792157, 1)
 layout_mode = 2
 size_flags_vertical = 4
 texture = ExtResource("3_woprv")
 
-[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer"]
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer" unique_id=1293532219]
 layout_mode = 2
 size_flags_vertical = 8
 mouse_filter = 1

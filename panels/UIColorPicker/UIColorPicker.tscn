@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dhp8aa07tyxbf"]
+[gd_scene format=3 uid="uid://dhp8aa07tyxbf"]
 
 [ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://modules/Vertex/assets/styles/UIPanelBase.tres" id="1_vgwxr"]
 [ext_resource type="Script" uid="uid://bltvgq1jnaqgt" path="res://panels/UIColorPicker/UIColorPicker.gd" id="2_ogrry"]
@@ -14,7 +14,7 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[node name="UIColorPicker" type="PanelContainer" node_paths=PackedStringArray("_pad", "_crosshair", "_value_slider", "_mix_mode", "slider_container")]
+[node name="UIColorPicker" type="PanelContainer" unique_id=511210917 node_paths=PackedStringArray("_pad", "_crosshair", "_value_slider", "_mix_mode", "slider_container")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -28,22 +28,22 @@ _value_slider = NodePath("VBoxContainer/HBoxContainer/Picker/HBoxContainer/Slide
 _mix_mode = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/PanelContainer/MixMode")
 slider_container = NodePath("VBoxContainer/HBoxContainer/Picker/HBoxContainer/SliderContainer")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2031976859]
 layout_mode = 2
 
-[node name="PanelMenuBar" parent="VBoxContainer" instance=ExtResource("3_g582g")]
+[node name="PanelMenuBar" parent="VBoxContainer" unique_id=500993110 instance=ExtResource("3_g582g")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="0"]
+[node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" parent_id_path=PackedInt32Array(500993110, 1200457394) index="0" unique_id=495491944]
 text = "ColorPicker"
 icon = ExtResource("4_ara1c")
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer" index="0"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer" parent_id_path=PackedInt32Array(500993110, 1637369951) index="0" unique_id=1394334342]
 layout_mode = 2
 size_flags_horizontal = 10
 
-[node name="MixMode" type="OptionButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/PanelContainer"]
+[node name="MixMode" type="OptionButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer/PanelContainer" unique_id=1948251532]
 layout_mode = 2
 selected = 0
 item_count = 2
@@ -52,30 +52,30 @@ popup/item_0/id = 0
 popup/item_1/text = "Subtractive"
 popup/item_1/id = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1482759474]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Picker" type="PanelContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="Picker" type="PanelContainer" parent="VBoxContainer/HBoxContainer" unique_id=1084727714]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/Picker"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/Picker" unique_id=628351803]
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer/Picker/HBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer/Picker/HBoxContainer" unique_id=2031441061]
 clip_children = 1
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_7y88r")
 
-[node name="Pad" type="TextureRect" parent="VBoxContainer/HBoxContainer/Picker/HBoxContainer/PanelContainer"]
+[node name="Pad" type="TextureRect" parent="VBoxContainer/HBoxContainer/Picker/HBoxContainer/PanelContainer" unique_id=512381941]
 layout_mode = 2
 texture = ExtResource("6_3j0ua")
 expand_mode = 1
 
-[node name="Crosshair" type="TextureRect" parent="VBoxContainer/HBoxContainer/Picker/HBoxContainer/PanelContainer/Pad"]
+[node name="Crosshair" type="TextureRect" parent="VBoxContainer/HBoxContainer/Picker/HBoxContainer/PanelContainer/Pad" unique_id=224895660]
 modulate = Color(0.0475577, 0.0475576, 0.0475576, 1)
 layout_mode = 1
 offset_right = 24.0
@@ -83,19 +83,19 @@ offset_bottom = 24.0
 texture = ExtResource("7_b53g6")
 stretch_mode = 2
 
-[node name="SliderContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer/Picker/HBoxContainer"]
+[node name="SliderContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer/Picker/HBoxContainer" unique_id=1697436165]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/Picker/HBoxContainer/SliderContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/Picker/HBoxContainer/SliderContainer" unique_id=1917082474]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/Picker/HBoxContainer/SliderContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/Picker/HBoxContainer/SliderContainer/VBoxContainer" unique_id=159186450]
 layout_mode = 2
 text = "Value"
 horizontal_alignment = 1
 
-[node name="PadValueSlider" type="VSlider" parent="VBoxContainer/HBoxContainer/Picker/HBoxContainer/SliderContainer/VBoxContainer"]
+[node name="PadValueSlider" type="VSlider" parent="VBoxContainer/HBoxContainer/Picker/HBoxContainer/SliderContainer/VBoxContainer" unique_id=1563099955]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 3

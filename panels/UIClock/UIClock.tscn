@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://8mfy3g85o3g5"]
+[gd_scene format=3 uid="uid://8mfy3g85o3g5"]
 
 [ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://modules/Vertex/assets/styles/UIPanelBase.tres" id="1_r3wuq"]
 [ext_resource type="Script" uid="uid://dt5d0ib35v1w4" path="res://panels/UIClock/UIClock.gd" id="2_xjxwu"]
@@ -7,7 +7,7 @@
 [sub_resource type="LabelSettings" id="LabelSettings_2atlb"]
 font = ExtResource("3_bm64l")
 
-[node name="UIClock" type="PanelContainer" node_paths=PackedStringArray("label")]
+[node name="UIClock" type="PanelContainer" unique_id=63720452 node_paths=PackedStringArray("label")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -19,10 +19,10 @@ theme_override_styles/panel = ExtResource("1_r3wuq")
 script = ExtResource("2_xjxwu")
 label = NodePath("Control/Label")
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=1950394355]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Control"]
+[node name="Label" type="Label" parent="Control" unique_id=427039130]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

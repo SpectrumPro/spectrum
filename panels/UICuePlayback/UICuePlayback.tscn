@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cnqivpcpimlwc"]
+[gd_scene format=3 uid="uid://cnqivpcpimlwc"]
 
 [ext_resource type="Theme" uid="uid://cyua45ur0ijqo" path="res://modules/Vertex/assets/themes/Main.theme" id="1_rr313"]
 [ext_resource type="StyleBox" uid="uid://daxhx5qr5qdeu" path="res://modules/Vertex/assets/styles/UIPanelBase.tres" id="2_3fmy2"]
@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://c1cl6qetwg8st" path="res://modules/Vertex/assets/icons/Arrow_back.svg" id="11_5iwye"]
 [ext_resource type="Texture2D" uid="uid://kkblmodueva1" path="res://modules/Vertex/assets/icons/Arrow_foward.svg" id="12_dwiu4"]
 
-[node name="UICuePlayback" type="PanelContainer" node_paths=PackedStringArray("cue_container", "scroll_container", "component_button", "function_playback_controls", "go_button", "control_buttons")]
+[node name="UICuePlayback" type="PanelContainer" unique_id=1267354208 node_paths=PackedStringArray("cue_container", "scroll_container", "component_button", "function_playback_controls", "go_button", "control_buttons")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -28,14 +28,14 @@ function_playback_controls = NodePath("VBoxContainer/PanelMenuBar/HBoxContainer/
 go_button = NodePath("VBoxContainer/Controls/HBoxContainer/GoTo")
 control_buttons = [NodePath("VBoxContainer/Controls/HBoxContainer/Previous"), NodePath("VBoxContainer/Controls/HBoxContainer/Next")]
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=726604334]
 layout_mode = 2
 
-[node name="PanelMenuBar" parent="VBoxContainer" instance=ExtResource("4_rr313")]
+[node name="PanelMenuBar" parent="VBoxContainer" unique_id=1035189394 instance=ExtResource("4_rr313")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" index="0"]
+[node name="ComponentButton" parent="VBoxContainer/PanelMenuBar/HBoxContainer" parent_id_path=PackedInt32Array(1035189394, 1200457394) index="0" unique_id=495491944]
 text = "CuePlayback"
 icon = ExtResource("6_gheyh")
 class_filter = ExtResource("6_tf0hp")
@@ -43,44 +43,44 @@ base_class = ExtResource("7_1rgiu")
 enable_resolve_mode = true
 enabled = true
 
-[node name="FunctionPlaybackControls" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer" index="0" instance=ExtResource("7_kkuxk")]
+[node name="FunctionPlaybackControls" parent="VBoxContainer/PanelMenuBar/HBoxContainer/ScrollContainer" parent_id_path=PackedInt32Array(1035189394, 1637369951) index="0" unique_id=1850019497 instance=ExtResource("7_kkuxk")]
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/PanelContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer" unique_id=1847852561]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="CueContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/ScrollContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/PanelContainer" unique_id=886471119]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CueContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/ScrollContainer" unique_id=415788288]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Controls" type="PanelContainer" parent="VBoxContainer"]
+[node name="Controls" type="PanelContainer" parent="VBoxContainer" unique_id=2079588729]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 theme_override_styles/panel = ExtResource("4_iouh4")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Controls"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Controls" unique_id=80841165]
 layout_mode = 2
 
-[node name="Previous" type="Button" parent="VBoxContainer/Controls/HBoxContainer"]
+[node name="Previous" type="Button" parent="VBoxContainer/Controls/HBoxContainer" unique_id=1193709508]
 layout_mode = 2
 size_flags_horizontal = 3
 disabled = true
 icon = ExtResource("11_5iwye")
 icon_alignment = 1
 
-[node name="GoTo" type="Button" parent="VBoxContainer/Controls/HBoxContainer"]
+[node name="GoTo" type="Button" parent="VBoxContainer/Controls/HBoxContainer" unique_id=1346145615]
 layout_mode = 2
 size_flags_horizontal = 3
 disabled = true
 text = "GO"
 
-[node name="Next" type="Button" parent="VBoxContainer/Controls/HBoxContainer"]
+[node name="Next" type="Button" parent="VBoxContainer/Controls/HBoxContainer" unique_id=1548133817]
 layout_mode = 2
 size_flags_horizontal = 3
 disabled = true
