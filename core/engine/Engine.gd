@@ -72,8 +72,6 @@ func _init() -> void:
 	OS.set_low_processor_usage_mode(false)
 	Details.print_startup_detils()
 	
-	_settings.set_owner(self)
-	_settings.set_inheritance_array(["CoreEngine"])
 	_settings.register_networked_callbacks({
 		"components_added": _add_components,
 		"components_removed": _remove_components,
