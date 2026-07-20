@@ -16,24 +16,24 @@ const ICON_LOCATION: String = "res://assets/icons/"
 
 ## All user defined UIPanels
 static var panels: Dictionary[String, PackedScene] = {
-	"UIDesk":				load(_p("UIDesk")),
-	"UIFunctions":			load(_p("UIFunctions")),
-	"UIPlaybacks":			load(_p("UIPlaybacks")),
-	"UIUniverses":			load(_p("UIUniverses")),
-	"UIFixtures":			load(_p("UIFixtures")),
-	"UIFixtureGroups":		load(_p("UIFixtureGroups")),
-	"UISettings":			load(_p("UISettings")),
-	"UISaveLoad":			load(_p("UISaveLoad")),
-	"UICore":				load(_p("UICore")),
-	"UIDebug":				load(_p("UIDebug")),
-	"UIVirtualFixtures":	load(_p("UIVirtualFixtures")),
-	"UIProgrammer":			load(_p("UIProgrammer")),
-	"UIColorPicker":		load(_p("UIColorPicker")),
-	"UIClock":				load(_p("UIClock")),
-	"UICuePlayback":		load(_p("UICuePlayback")),
-	"UIColorBlock":			load(_p("UIColorBlock")),
-	"UICueSheet":			load(_p("UICueSheet")),
-	"UIDataEditor":			load(_p("UIDataEditor")),
+	"UIDesk":				load(_p(UIDesk)),
+	"UIFunctions":			load(_p(UIFunctions)),
+	"UIPlaybacks":			load(_p(UIPlaybacks)),
+	"UIUniverses":			load(_p(UIUniverses)),
+	"UIFixtures":			load(_p(UIFixtures)),
+	"UIFixtureGroups":		load(_p(UIFixtureGroups)),
+	"UISettings":			load(_p(UISettings)),
+	"UISaveLoad":			load(_p(UISaveLoad)),
+	"UICore":				load(_p(UICore)),
+	"UIDebug":				load(_p(UIDebug)),
+	"UIVirtualFixtures":	load(_p(UIVirtualFixtures)),
+	"UIProgrammer":			load(_p(UIProgrammer)),
+	"UIColorPicker":		load(_p(UIColorPicker)),
+	"UIClock":				load(_p(UIClock)),
+	"UICuePlayback":		load(_p(UICuePlayback)),
+	"UIColorBlock":			load(_p(UIColorBlock)),
+	"UICueSheet":			load(_p(UICueSheet)),
+	"UIDataEditor":			load(_p(UIDataEditor)),
 }
 
 ## All user defined UIPanels
@@ -45,8 +45,8 @@ static var components: Dictionary[String, PackedScene]
 ## All user defined UIPanels
 static var data_inputs: Dictionary[Data.Type, Variant] = {
 	Data.Type.OBJECT:			{
-		Data.Sub.Type.NULL:						load(CoreUIDB._d("DataInputObject")),
-		Data.Sub.Type.OBJECT_FIXTUREMANIFEST: 	load(_d("DataInputFixtureManifest")),
+		Data.Sub.Type.NULL:						load(CoreUIDB._d(DataInputObject)),
+		Data.Sub.Type.OBJECT_FIXTUREMANIFEST: 	load(_d(DataInputFixtureManifest)),
 	}
 }
 
@@ -115,23 +115,27 @@ static var config: Dictionary[String, Variant] = {
 
 
 ## Returns the file path of a UIPanel
-static func _p(p_panel_class: String) -> String:
-	return str(UI_PANEL_LOCATION, p_panel_class, "/", p_panel_class, ".tscn")
+static func _p(p_panel_script: Script) -> String:
+	var panel_class: String = p_panel_script.get_global_name()
+	return str(UI_PANEL_LOCATION, panel_class, "/", panel_class, ".tscn")
 
 
 ## Returns the file path of a UIPopup
-static func _u(p_popup_class: String) -> String:
-	return str(UI_POPUP_LOCATION, p_popup_class, "/", p_popup_class, ".tscn")
+static func _u(p_popup_script: Script) -> String:
+	var popup_class: String = p_popup_script.get_global_name()
+	return str(UI_POPUP_LOCATION, popup_class, "/", popup_class, ".tscn")
 
 
 ## Returns the file path of a UIComponent
-static func _c(p_component_class: String) -> String:
-	return str(UI_COMPONENT_LOCATION, p_component_class, "/", p_component_class, ".tscn")
+static func _c(p_component_script: Script) -> String:
+	var component_class: String = p_component_script.get_global_name()
+	return str(UI_COMPONENT_LOCATION, component_class, "/", component_class, ".tscn")
 
 
 ## Returns the file path of a DataInput
-static func _d(p_data_input_class: String) -> String:
-	return str(DATA_INPUT_LOCATION, p_data_input_class, "/", p_data_input_class, ".tscn")
+static func _d(p_data_input_script: Script) -> String:
+	var data_input_class: String = p_data_input_script.get_global_name()
+	return str(DATA_INPUT_LOCATION, data_input_class, "/", data_input_class, ".tscn")
 
 
 ## Returns the file path of a Icon
