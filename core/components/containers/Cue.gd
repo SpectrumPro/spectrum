@@ -68,6 +68,9 @@ func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
 	_settings.register_control("FadeTime", Data.Type.FLOAT, set_fade_time, get_fade_time, [fade_time_changed]).set_min_max(0, INF)
 	_settings.register_control("PreWait", Data.Type.FLOAT, set_pre_wait, get_pre_wait, [pre_wait_time_changed]).set_min_max(0, INF)
 	
+	_settings.add_primary_module("QID")
+	_settings.set_sort_module("Position")
+	
 	_settings.register_networked_callbacks({
 		"qid_changed": _set_qid,
 		"fade_time_changed": _set_fade_time,
