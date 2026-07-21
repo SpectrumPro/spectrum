@@ -55,6 +55,7 @@ func _init(p_uuid: String = UUID.v4(), ...p_args: Array[Variant]) -> void:
 	_settings.set_delete_signal(delete_requested)
 	
 	_settings.register_setting("Name", Data.Type.STRING, set_name, get_name, [name_changed])
+	_settings.register_status("Class", Data.Type.STRING, get_class_name)
 	
 	#_settings.register_setting("CID", Data.Type.CID, CIDManager.set_component_id.bind(self), cid, [cid_changed])\
 	#.display("EngineComponent", 1)
